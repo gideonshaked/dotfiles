@@ -1,0 +1,69 @@
+#!/bin/bash
+# A script to update all of my docker-compose files from a private repository and run docker-compose on them.
+
+echo "-----Updating compose files for phobos, deimos, and styx-----"
+
+# phobos server
+phobos_config () {
+    echo "---------------------------phobos----------------------------"
+    if [ ! -d "Docker-Composes" ]
+    then
+        echo "Cloning..."
+        git clone git@github.com:The-Kid-Gid/Docker-Composes.git
+        cd  Docker-Composes
+    else
+        cd Docker-Composes
+        echo "Pulling..."
+        git pull git@github.com:The-Kid-Gid/Docker-Composes.git
+    fi
+    cp phobos/docker-compose.yml ~/docker/docker-compose.yml
+    cp phobos/environment /etc/environment
+    cd ~/docker
+    echo "Running docker-compose..."
+    docker-compose up -d $@
+}
+
+# deimos server
+deimos_config () {
+    echo "---------------------------deimos----------------------------"
+    if [ ! -d "Docker-Composes" ]
+    then
+        echo "Cloning..."
+        git clone git@github.com:The-Kid-Gid/Docker-Composes.git
+        cd  Docker-Composes
+    else
+        cd Docker-Composes
+        echo "Pulling..."
+        git pull git@github.com:The-Kid-Gid/Docker-Composes.git
+    fi
+    cp deimos/docker-compose.yml ~/docker/docker-compose.yml
+    cp deimos/.env ~/docker/.env
+    cd ~/docker
+    echo "Running docker-compose..."
+    docker-compose up -d $@
+}
+
+# styx server
+styx_config () {
+    echo "----------------------------styx-----------------------------"
+    if [ ! -d "Docker-Composes" ]
+    then
+        echo "Cloning..."
+        git clone git@github.com:The-Kid-Gid/Docker-Composes.git
+        cd  Docker-Composes
+    else
+        cd Docker-Composes
+        echo "Pulling..."
+        git pull git@github.com:The-Kid-Gid/Docker-Composes.git
+    fi
+    cp styx/docker-compose.yml ~/docker/docker-compose.yml
+    cp styx/.env ~/docker/.env
+    cd ~/docker
+    echo "Running docker-compose..."
+    docker-compose up -d $@
+}
+
+# ssh into servers to run functions
+ssh administrator@phobos "$(typeset -f phobos_config); phobos_config"
+ssh pi@deimos "$(typeset -f deimos_config); deimos_config"
+ssh administrator@styx "$(typeset -f styx_config); styx_config"

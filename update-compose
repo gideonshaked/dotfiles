@@ -1,8 +1,6 @@
 #!/bin/bash
-# A script to update all of my docker-compose files from a private repository and run docker-compose on them.
+# A script to update my docker-compose files from a private repository and run docker-compose on them.
 
-echo "--------------------Updating compose file(s)--------------------"
-# 64 - length / 2
 # phobos server - needs a special function due to differences in configuration
 phobos_config () {
     echo "-----------------------------phobos-----------------------------"
@@ -37,19 +35,29 @@ standard_config () {
 }
 
 # ssh into servers to run functions
-for param in "$@"
-do
-    if [ "$param" == "phobos" ]; then
-        ssh administrator@phobos "$(typeset -f phobos_config); phobos_config"
+if [ "$@" == ""]; then
+    echo "---------------------Updating compose files---------------------"
+    echo "No arguments specified, so updating all"
+    ssh administrator@phobos "$(typeset -f phobos_config); phobos_config"
+    ssh pi@deimos "$(typeset -f standard_config); standard_config deimos"
+    ssh administrator@styx "$(typeset -f standard_config); standard_config styx"
 
-    elif [ "$param" == "deimos" ]; then
-        ssh pi@deimos "$(typeset -f standard_config); standard_config deimos"
+else
+    echo "--------------------Updating compose file(s)--------------------"
+    for param in "$@"
+    do
+        if [ "$param" == "phobos" ]; then
+            ssh administrator@phobos "$(typeset -f phobos_config); phobos_config"
 
-    elif [ "$param" == "styx" ]; then
-        ssh administrator@styx "$(typeset -f standard_config); standard_config styx"
+        elif [ "$param" == "deimos" ]; then
+            ssh pi@deimos "$(typeset -f standard_config); standard_config deimos"
 
-    else
-        echo "$param is not a valid server"
+        elif [ "$param" == "styx" ]; then
+            ssh administrator@styx "$(typeset -f standard_config); standard_config styx"
 
-    fi
-done
+        else
+            echo "$param is not a valid server"
+
+        fi
+    done
+fi

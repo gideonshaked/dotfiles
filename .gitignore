@@ -5,7 +5,6 @@
 !.gitignore
 !README.md
 !update-compose
-!radarr-extras
 
 # ...even if they are in subdirectories
 !*/

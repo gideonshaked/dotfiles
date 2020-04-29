@@ -1,7 +1,7 @@
 #!/bin/bash
 # A script to update all of my docker-compose files from a private repository and run docker-compose on them.
 
-echo "-----Updating compose files for phobos, deimos, and styx-----"
+echo "--------------------Updating compose files-------------------"
 
 # phobos server
 phobos_config () {
@@ -20,7 +20,7 @@ phobos_config () {
     cp phobos/environment /etc/environment
     cd ~/docker
     echo "Running docker-compose..."
-    docker-compose up -d $@
+    docker-compose up -d
 }
 
 # deimos server
@@ -40,7 +40,7 @@ deimos_config () {
     cp deimos/.env ~/docker/.env
     cd ~/docker
     echo "Running docker-compose..."
-    docker-compose up -d $@
+    docker-compose up -d
 }
 
 # styx server
@@ -60,10 +60,21 @@ styx_config () {
     cp styx/.env ~/docker/.env
     cd ~/docker
     echo "Running docker-compose..."
-    docker-compose up -d $@
+    docker-compose up -d
 }
 
 # ssh into servers to run functions
-ssh administrator@phobos "$(typeset -f phobos_config); phobos_config"
-ssh pi@deimos "$(typeset -f deimos_config); deimos_config"
-ssh administrator@styx "$(typeset -f styx_config); styx_config"
+if [ $1 == "phobos" ]
+then
+    ssh administrator@phobos "$(typeset -f phobos_config); phobos_config"
+elif [ $1 == "deimos"]
+then
+    ssh pi@deimos "$(typeset -f deimos_config); deimos_config"
+elif [ $1 == "styx"]
+then
+    ssh administrator@styx "$(typeset -f styx_config); styx_config"
+else
+    ssh administrator@phobos "$(typeset -f phobos_config); phobos_config"
+    ssh pi@deimos "$(typeset -f deimos_config); deimos_config"
+    ssh administrator@styx "$(typeset -f styx_config); styx_config"
+fi

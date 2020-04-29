@@ -17,7 +17,7 @@ phobos_config () {
 
 # standard server
 standard_config () {
-    padding_length="$(($((64-${#1}))/2))"
+    local padding_length="$(($((64-${#1}))/2))"
     for i in $(seq 1 $padding_length)
     do
         local padding+="-"

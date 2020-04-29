@@ -35,7 +35,7 @@ standard_config () {
 }
 
 # ssh into servers to run functions
-if [ "$@" == ""]; then
+if [ $# -eq 0 ]; then
     echo "---------------------Updating compose files---------------------"
     echo "No arguments specified, so updating all"
     ssh administrator@phobos "$(typeset -f phobos_config); phobos_config"

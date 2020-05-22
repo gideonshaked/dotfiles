@@ -12,8 +12,8 @@ This is a lighthearted script that you can use to rickroll yourself or your unwi
 
 To get started without downloading you can:
 
-    `curl -s -L https://raw.githubusercontent.com/The-Kid-Gid/Shell-Scripts/master/rickroll | bash`
+    curl -s -L https://raw.githubusercontent.com/The-Kid-Gid/Shell-Scripts/master/rickroll | bash
 
 Or use the alternative link:
 
-    `curl -s -L https://bit.ly/2TsPO5w | bash`
+    curl -s -L https://bit.ly/2TsPO5w | bash

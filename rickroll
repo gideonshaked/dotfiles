@@ -3,7 +3,7 @@
 # For even more fun put this on your friend's computer and set a cronjob ;).
 # You need to have firefox and xdotool installed on your computer for this to work.
 
-firefox --new-window https://www.youtube.com/watch?v=dQw4w9WgXcQ &
+firefox --new-tab https://www.youtube.com/watch?v=dQw4w9WgXcQ &
 
 sleep 5
 

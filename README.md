@@ -11,4 +11,4 @@ This is a script to update my docker-compose files from a private repository and
 This is a lighthearted script that you can use to rickroll yourself or your unwitting friends. It requires Xdotools and Mozilla Firefox to run.
 
 To get started without downloading you can:
-`curl -s -L https://raw.githubusercontent.com/The-Kid-Gid/Shell-Scripts/master/update-compose | bash`
+    `curl -s -L https://raw.githubusercontent.com/The-Kid-Gid/Shell-Scripts/master/update-compose | bash`

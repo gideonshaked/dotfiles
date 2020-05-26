@@ -44,6 +44,7 @@ if [ $# -eq 0 ]; then
 
 else
     echo "--------------------Updating compose file(s)--------------------"
+    declare -a invalid_servers
     for param in "$@"
     do
         if [ "$param" == "phobos" ]; then
@@ -56,8 +57,18 @@ else
             ssh administrator@styx "$(typeset -f standard_config); standard_config styx"
 
         else
-            echo "$param is not a valid server"
+            invalid_servers+=( "$param" )
 
         fi
     done
+
+    if [ "${#invalid_servers[@]}" > 0 ]; then
+        echo "----------------------------------------------------------------"
+        echo -n "The parameter(s) "
+        for invalid_server in "${invalid_servers[@]}"
+        do
+            echo -n "$invalid_server, "
+        done
+        echo "is/are invalid."
+    fi
 fi

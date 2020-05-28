@@ -25,7 +25,7 @@ standard_config () {
     echo "$padding$1$padding"
     cd Docker-Composes
     echo "Pulling..."
-    git pull git@github.com:The-Kid-Gid/Docker-Composes.git
+    git pull origin rewrite
     echo "Copying..."
     cp $1/docker-compose.yml ~/docker/docker-compose.yml
     cp $1/.env  ~/docker/.env
@@ -38,7 +38,7 @@ standard_config () {
 if [ $# -eq 0 ]; then
     echo "---------------------Updating compose files---------------------"
     echo "No arguments specified, so updating all"
-    ssh administrator@phobos "$(typeset -f phobos_config); phobos_config"
+    ssh administrator@phobos "$(typeset -f standard_config); standard_config phobos"
     ssh pi@deimos "$(typeset -f standard_config); standard_config deimos"
     ssh administrator@styx "$(typeset -f standard_config); standard_config styx"
 
@@ -48,7 +48,7 @@ else
     for param in "$@"
     do
         if [ "$param" == "phobos" ]; then
-            ssh administrator@phobos "$(typeset -f phobos_config); phobos_config"
+            ssh administrator@phobos "$(typeset -f standard_config); standard_config phobos"
 
         elif [ "$param" == "deimos" ]; then
             ssh pi@deimos "$(typeset -f standard_config); standard_config deimos"

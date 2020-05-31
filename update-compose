@@ -11,7 +11,7 @@ standard_config () {
     echo "$padding$1$padding"
     cd Docker-Composes
     echo "Pulling..."
-    git pull origin rewrite
+    git pull
     echo "Copying..."
     cp $1/docker-compose.yml ~/docker/docker-compose.yml
     cp $1/.env  ~/docker/.env
@@ -26,7 +26,6 @@ if [ $# -eq 0 ]; then
     echo "No arguments specified, so updating all"
     ssh administrator@phobos "$(typeset -f standard_config); standard_config phobos"
     ssh administrator@deimos "$(typeset -f standard_config); standard_config deimos"
-    ssh administrator@styx "$(typeset -f standard_config); standard_config styx"
 
 else
     echo "--------------------Updating compose file(s)--------------------"
@@ -39,22 +38,6 @@ else
         elif [ "$param" == "deimos" ]; then
             ssh administrator@deimos "$(typeset -f standard_config); standard_config deimos"
 
-        elif [ "$param" == "styx" ]; then
-            ssh administrator@styx "$(typeset -f standard_config); standard_config styx"
-
-        else
-            invalid_servers+=( "$param" )
-
         fi
     done
-
-    if [ "${#invalid_servers[@]}" > 0 ]; then
-        echo "----------------------------------------------------------------"
-        echo -n "The parameter(s) "
-        for invalid_server in "${invalid_servers[@]}"
-        do
-            echo -n "$invalid_server, "
-        done
-        echo "is/are invalid."
-    fi
 fi

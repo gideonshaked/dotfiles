@@ -21,13 +21,13 @@ standard_config () {
 }
 
 # ssh into servers to run functions
-if [ $# -eq 0 ]; then
+if [ $# -eq 0 ]; then # if there are no parameters passed, default to all valid servers
     echo "---------------------Updating compose files---------------------"
     echo "No arguments specified, so updating all"
     ssh administrator@phobos "$(typeset -f standard_config); standard_config phobos"
     ssh administrator@deimos "$(typeset -f standard_config); standard_config deimos"
 
-else
+else # otherwise, run on any valid servers passed
     echo "--------------------Updating compose file(s)--------------------"
     for param in "$@"
     do

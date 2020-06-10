@@ -29,7 +29,6 @@ if [ $# -eq 0 ]; then
 
 else
     echo "--------------------Updating compose file(s)--------------------"
-    declare -a invalid_servers
     for param in "$@"
     do
         if [ "$param" == "phobos" ]; then

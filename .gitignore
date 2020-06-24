@@ -5,7 +5,7 @@
 !.gitignore
 !README.md
 !LICENSE
-!update-compose
+!update-compose.sh
 
 # ...even if they are in subdirectories
 !*/

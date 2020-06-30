@@ -6,6 +6,7 @@
 !README.md
 !LICENSE
 !update-compose.sh
+!bitwarden-backup.sh
 
 # ...even if they are in subdirectories
 !*/

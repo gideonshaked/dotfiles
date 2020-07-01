@@ -8,7 +8,7 @@
 #   jq
 #
 # To decrypt:
-#   gpg --passphrase [Bitwarden master password] --batch --output export.tar.gz --decrypt export.tar.gz.gp
+#   gpg --passphrase [Bitwarden master password] --batch --output export.tar.gz --decrypt export.tar.gz.gpg
 #   tar zxvf export.tar.gz
 ###################################################################################################################
 

@@ -29,7 +29,6 @@ if [ -z "$rclone_remote" ]; then
 fi
 
 if [ -z "$rclone_path" ]; then
-#    read -rp "Rclone destination path: " rclone_path
     echo -en '\033[1mRclone destination path: \033[0m'
     read -r rclone_path    
 fi

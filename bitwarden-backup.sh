@@ -37,8 +37,12 @@ echo -en '\033[1mBitwarden master password: \033[0m'
 read -rs bw_password
 echo
 
+if ! BW_SESSION=$(bw unlock --raw "$bw_password"); then # If new Bitward session fails, exit
+    exit 1
+fi
+export BW_SESSION
+
 echo -e '\033[4mExecution\033[0m'
-export BW_SESSION=$(bw unlock --raw "$bw_password") # Create new Bitwarden session
 
 # Sync the remote copy of the vault with the local one
 echo -e '\033[1mSyncing local copy...\033[0m'

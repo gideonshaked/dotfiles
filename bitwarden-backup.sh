@@ -48,7 +48,7 @@ bw sync > /dev/null
 echo -e '\033[1mExporting vault...\033[0m'
 bw export "$bw_password" --format json --output "./export/bitwarden-backup.json" > /dev/null
 echo -e '\033[1mExporting attachments...\033[0m'
-bash <(bw list items | jq -r '.[] | select(.attachments != null) | . as $parent | .attachments[] | "bw get attachment \(.id) --itemid \($parent.id) --output \"./export/attachments/\($parent.id)/\(.fileName)\""') &> /dev/null
+bash <(bw list items | jq -r '.[] | select(.attachments != null) | . as $parent | .attachments[] | "bw get attachment \(.id) --itemid \($parent.id) --output \"./export/attachments/\($parent.id)/\(.fileName)\""') > /dev/null
 
 # Create an archive
 tar czf export.tar.gz export

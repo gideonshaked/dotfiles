@@ -10,10 +10,6 @@
 # Requirements:
 #   sqlite3
 #   rclone
-#
-# Decryption and extraction:
-#   gpg --output export.tar.gz --decrypt export.tar.gz.gpg
-#   tar zxvf export.tar.gz
 ###################################################################################################################
 
 #################### CONFIGURATION ####################

@@ -25,7 +25,7 @@ rclone_remote=personal-gdrive
 rclone_path=bitwarden-server-backup
 
 # The full path to the Bitwarden data directory
-bw_data=/home/administrator/bitwarden
+bw_data=/home/administrator/docker/bitwarden
 
 ################ END OF CONFIGURATION #################
 

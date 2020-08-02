@@ -7,6 +7,7 @@
 # Requirements:
 #   Bitwarden CLI (bw)
 #   jq
+#   rclone
 #
 # Decryption and extraction:
 #   gpg --output export.tar.gz --decrypt export.tar.gz.gpg

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ "$*" = "on" ]; then
+    sudo systemctl start ssh
+    sudo systemctl status ssh | grep Active
+
+elif [ "$*" = "off" ]; then
+    sudo systemctl stop ssh
+    sudo systemctl status ssh | grep Active
+else
+    sudo systemctl status ssh | grep Active
+fi

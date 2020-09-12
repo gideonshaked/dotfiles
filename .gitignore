@@ -9,6 +9,7 @@
 !bitwarden/bitwarden-backup.sh
 !bitwarden/bw-server-backup.sh
 !open
+!flip
 
 # ...even if they are in subdirectories
 !*/

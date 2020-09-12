@@ -7,6 +7,8 @@ if [ "$*" = "on" ]; then
 elif [ "$*" = "off" ]; then
     sudo systemctl stop ssh
     sudo systemctl status ssh | grep Active
-else
+elif [ -z "$*" ]; then
     sudo systemctl status ssh | grep Active
+else
+    echo "flip: unknown option -- $*"
 fi

@@ -3,13 +3,13 @@
 
 # But not these files...
 !.gitignore
-!README.md
 !LICENSE
 !update-compose.sh
 !bitwarden/bitwarden-backup.sh
 !bitwarden/bw-server-backup.sh
 !open
 !flip
+!run
 
 # ...even if they are in subdirectories
 !*/

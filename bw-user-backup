@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#
 ###################################################################################################################
 # This script backs up your Bitwarden data in encrypted form to the cloud storage provider of your choice.
 # It cannot operate non-interactively because it needs the Bitwarden master password.

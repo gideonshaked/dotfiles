@@ -2,14 +2,11 @@
 *
 
 # But not these files...
-!.gitignore
-!LICENSE
-!update-compose.sh
-!bitwarden/bitwarden-backup.sh
-!bitwarden/bw-server-backup.sh
-!open
-!flip
-!run
-
-# ...even if they are in subdirectories
-!*/
+!./LICENSE
+!./bw-user-backup
+!./run-cpp
+!./toggle-ssh
+!./bw-server-backup
+!./.gitignore
+!./deploy-compose
+!./open-silent

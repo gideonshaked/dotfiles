@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# Compile a C++ file using g++ and run it if compilation is successful.
+#
+
+g++ "$*"
+if [ $? -eq 0 ]; then
+    ./a.out
+    rm a.out
+fi

@@ -1,8 +1,0 @@
-#!/bin/bash
-# I should really use Make for this...
-
-g++ "$*"
-if [ $? -eq 0 ]; then
-    ./a.out
-    rm a.out
-fi

@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Toggle ssh server on or off. If no args are given ssh server status is displayed.
+#
 
 if [ "$*" = "on" ]; then
     sudo systemctl start ssh

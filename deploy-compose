@@ -1,5 +1,7 @@
 #!/bin/bash
-# A script to update my docker-compose files from a private repository and run docker-compose on them.
+#
+# Update my docker-compose files from a private repository and run docker-compose on them.
+#
 
 # standard server
 standard_config () {

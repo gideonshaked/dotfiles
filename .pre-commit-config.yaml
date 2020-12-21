@@ -22,3 +22,4 @@ repos:
     rev: master
     hooks:
       - id: beautysh
+        args: [--force-function-style, paronly]

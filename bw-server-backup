@@ -5,7 +5,7 @@
 # bitwarden-backup.sh because it backs up all users and does not need to be run interactively.
 #
 # Note that this script does not encrypt the backup because Bitwarden stores it already encrypted.
-# 
+#
 # This script is specific to my setup. It had to have some workarounds due to permissions issues and other things.
 # Please test it before you try it!
 #

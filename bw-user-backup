@@ -38,7 +38,7 @@ fi
 
 if [ -z "$rclone_path" ]; then
     echo -en '\033[1mRclone destination path: \033[0m'
-    read -r rclone_path    
+    read -r rclone_path
 fi
 
 echo -en '\033[1mBitwarden master password: \033[0m'
@@ -77,7 +77,7 @@ echo -en '\033[1mEncrypting...\033[0m '
 if [ -z "$gpg_key_id" ]; then # If there is no gpg key id in the config, use bw master password
     gpg --no-tty --batch --symmetric --passphrase "$bw_password" --cipher-algo AES256 export.tar.gz
 else
-    gpg --no-tty --batch --recipient "$gpg_key_id" --encrypt export.tar.gz 
+    gpg --no-tty --batch --recipient "$gpg_key_id" --encrypt export.tar.gz
 fi
 rm export.tar.gz
 echo 'done'

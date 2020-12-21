@@ -4,7 +4,7 @@
 #
 
 # standard server
-standard_config () {
+standard_config() {
     local padding_length="$(($((64-${#1}))/2))"
     for i in $(seq 1 $padding_length)
     do

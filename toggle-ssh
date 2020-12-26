@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Toggle ssh server on or off. If no args are given ssh server status is displayed.
 #

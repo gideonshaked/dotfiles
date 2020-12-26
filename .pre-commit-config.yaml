@@ -1,4 +1,9 @@
 repos:
+  - repo: https://github.com/lovesegfault/beautysh
+    rev: master
+    hooks:
+      - id: beautysh
+        args: [--force-function-style, paronly]
   - repo: https://github.com/psf/black
     rev: master
     hooks:
@@ -8,18 +13,19 @@ repos:
     rev: master
     hooks:
       - id: isort
-  - repo: https://gitlab.com/pycqa/flake8
+  - repo: https://github.com/life4/flakehell
     rev: master
     hooks:
-      - id: flake8
+      - id: flakehell
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: master
     hooks:
       - id: requirements-txt-fixer
       - id: check-executables-have-shebangs
       - id: check-toml
-  - repo: https://github.com/lovesegfault/beautysh
+      - id: check-yaml
+  - repo: https://github.com/pappasam/toml-sort
     rev: master
     hooks:
-      - id: beautysh
-        args: [--force-function-style, paronly]
+      - id: toml-sort
+        args: ["--in-place"]

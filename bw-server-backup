@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 ###################################################################################################################
 # Script to back up Bitwarden_rs db and attachments with rclone. Overall, this script should be preferred to

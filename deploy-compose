@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Update my docker-compose files from a private repository and run docker-compose on them.
 #

@@ -4,5 +4,5 @@
 # To install: git config --global alias.nuke !git-nuke
 #
 
-git branch -d "$1"
+git branch -D "$1"
 git push origin --delete "$1"

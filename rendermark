@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+"""
+Render a markdown file to the terminal using the rich library.
+There are a million terminal markdown renderers, but I like Rich the best.
+"""
+
+import argparse
+import sys
+
+from rich.console import Console
+from rich.markdown import Markdown
+
+
+def get_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="rendermark", description="Render markdown in the terminal using Rich.")
+
+    parser.add_argument(
+        "file", metavar="file", nargs="?", type=str, help="the path to the markdown file to be rendered"
+    )
+
+    return parser
+
+
+def show_markdown(filepath: str) -> None:
+    console = Console()
+    with open(filepath) as file:
+        markdown = Markdown(file.read())
+    console.print(markdown)
+
+
+if __name__ == "__main__":
+    parser = get_parser()
+    args = parser.parse_args()
+    if args.file is None:
+        parser.print_usage()
+        sys.exit(1)
+    show_markdown(args.file)

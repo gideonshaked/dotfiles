@@ -1,3 +1,4 @@
 bs4
 pre-commit
 requests
+rich

@@ -5,6 +5,7 @@ Data sourced from "https://github.com/javieraviles/covidAPI".
 """
 
 import argparse
+import os
 
 import requests
 from rich import print
@@ -12,9 +13,9 @@ from rich import print
 BASE_URL = "https://coronavirus-19-api.herokuapp.com/countries"
 
 
-def covid_stats(endpoint: str = "/World") -> dict:
+def covid_stats(country: str) -> dict:
     """Get covid stats from some API endpoint"""
-    resp = requests.get(BASE_URL + endpoint)
+    resp = requests.get(f"{BASE_URL}/{country}")
 
     if resp.text == "Country not found":
         return {"country": "Country not found"}
@@ -27,10 +28,12 @@ def show_covid_stats(stats: dict) -> None:
         print(f"[bold]{key}: [/bold]{val}", end="\n\n")
 
 
-def get_args() -> argparse.ArgumentParser:
+def get_args() -> argparse.Namespace:
     """Get args from CLI"""
     parser = argparse.ArgumentParser(
-        prog="covid-stats", description="Provide the current worldwide and countrywide Covid-19 statistics."
+        prog="covid-stats",
+        description="Provide the current worldwide and countrywide Covid-19 statistics.",
+        epilog="You can set the COVID_STATS_COUNTRY environment variable to set the default stats to something other than worldwide.",
     )
 
     parser.add_argument(
@@ -64,6 +67,6 @@ if __name__ == "__main__":
     if args.list_countries:
         show_countries()
     elif args.country is None:
-        show_covid_stats(covid_stats())
+        show_covid_stats(covid_stats(os.getenv("COVID_STATS_COUNTRY", default="World")))
     else:
-        show_covid_stats(covid_stats(f"/{args.country}"))
+        show_covid_stats(covid_stats(args.country))

@@ -1,28 +1,69 @@
 #!/usr/bin/env python3
 """
-Provide the current worldwide COVID-19 statistics.
-This data is being scraped from 'https://www.worldometers.info/coronavirus/'.
-
-Taken from https://github.com/TheAlgorithms/Python
+Provide the current worldwide and countrywide Covid-2019 statistics.
+Data sourced from "https://github.com/javieraviles/covidAPI".
 """
 
+import argparse
+
 import requests
-from bs4 import BeautifulSoup
+from rich import print
+
+BASE_URL = "https://coronavirus-19-api.herokuapp.com/countries"
 
 
-def world_covid19_stats(url: str = "https://www.worldometers.info/coronavirus") -> dict:
-    """
-    Return a dict of current worldwide COVID-19 statistics
-    """
-    soup = BeautifulSoup(requests.get(url).text, "html.parser")
-    keys = soup.findAll("h1")
-    values = soup.findAll("div", {"class": "maincounter-number"})
-    keys += soup.findAll("span", {"class": "panel-title"})
-    values += soup.findAll("div", {"class": "number-table-main"})
-    return {key.text.strip(): value.text.strip() for key, value in zip(keys, values)}
+def covid_stats(endpoint: str = "/World") -> dict:
+    """Get covid stats from some API endpoint"""
+    resp = requests.get(BASE_URL + endpoint)
+
+    if resp.text == "Country not found":
+        return {"country": "Country not found"}
+    return resp.json()
+
+
+def show_covid_stats(stats: dict) -> None:
+    """Pretty print stats"""
+    for key, val in stats.items():
+        print(f"[bold]{key}: [/bold]{val}", end="\n\n")
+
+
+def get_args() -> argparse.ArgumentParser:
+    """Get args from CLI"""
+    parser = argparse.ArgumentParser(
+        prog="covid-stats", description="Provide the current worldwide and countrywide Covid-19 statistics."
+    )
+
+    parser.add_argument(
+        "-c",
+        "--country",
+        metavar="country",
+        nargs="?",
+        type=str,
+        help="Show stats for specific country. By default worldwide stats are printed.",
+    )
+
+    parser.add_argument(
+        "--list-countries",
+        action="store_true",
+        help="List country names alphabetically.",
+    )
+
+    return parser.parse_args()
+
+
+def show_countries() -> None:
+    """Show list of countries available in API"""
+    print(
+        "World, USA, India, Brazil, Russia, UK, France, Turkey, Italy, Spain, Germany, Colombia, Argentina, Mexico, Poland, Iran, South Africa, Ukraine, Peru, Netherlands, Indonesia, Czechia, Romania, Belgium, Canada, Chile, Iraq, Bangladesh, Pakistan, Sweden, Philippines, Switzerland, Israel, Portugal, Morocco, Austria, Saudi Arabia, Serbia, Hungary, Jordan, Panama, Nepal, Japan, Georgia, Azerbaijan, UAE, Ecuador, Croatia, Bulgaria, Belarus, Lebanon, Slovakia, Dominican Republic, Denmark, Costa Rica, Bolivia, Armenia, Kazakhstan, Lithuania, Kuwait, Tunisia, Moldova, Egypt, Qatar, Palestine, Greece, Guatemala, Slovenia, Oman, Myanmar, Malaysia, Ireland, Ethiopia, Honduras, Venezuela, Bosnia and Herzegovina, Paraguay, Libya, Algeria, Kenya, Nigeria, Bahrain, North Macedonia, Kyrgyzstan, Uzbekistan, S. Korea, Albania, Singapore, Ghana, Norway, Afghanistan, Montenegro, El Salvador, Luxembourg, Sri Lanka, Latvia, Finland, Uganda, Estonia, Australia, Cameroon, Namibia, Cyprus, Zambia, Uruguay, Sudan, Ivory Coast, Senegal, Mozambique, DRC, Zimbabwe, Angola, Madagascar, French Polynesia, Botswana, Mauritania, Maldives, Guinea, French Guiana, Malta, Cuba, Jamaica, Tajikistan, Cabo Verde, Syria, Belize, Eswatini, Haiti, Thailand, Gabon, Rwanda, Réunion, Hong Kong, Guadeloupe, Andorra, Bahamas, Burkina Faso, Malawi, Mali, Trinidad and Tobago, Congo, Suriname, Guyana, Nicaragua, Martinique, Mayotte, Aruba, Djibouti, Iceland, Equatorial Guinea, CAR, Somalia, Curaçao, Lesotho, Togo, Gambia, Niger, South Sudan, Benin, Channel Islands, Gibraltar, Sierra Leone, San Marino, Guinea-Bissau, Chad, Liechtenstein, New Zealand, Yemen, Liberia, Sint Maarten, Vietnam, Eritrea, Mongolia, Comoros, Sao Tome and Principe, Saint Martin, Monaco, Turks and Caicos, Burundi, Taiwan, Papua New Guinea, Bhutan, Barbados, Diamond Princess, Faeroe Islands, Bermuda, Mauritius, Tanzania, Seychelles, Isle of Man, Cambodia, Saint Lucia, Cayman Islands, Caribbean Netherlands, St. Barth, Brunei, Antigua and Barbuda, St. Vincent Grenadines, Grenada, Dominica, British Virgin Islands, Fiji, Timor-Leste, Macao, Laos, New Caledonia, Saint Kitts and Nevis, Falkland Islands, Greenland, Vatican City, Solomon Islands, Saint Pierre Miquelon, Anguilla, Montserrat, Western Sahara, MS Zaandam, Marshall Islands, Wallis and Futuna, Samoa, Vanuatu, China"
+    )
 
 
 if __name__ == "__main__":
-    print("\033[1m" + "COVID-19 Status of the World" + "\033[0m\n")
-    for key, value in world_covid19_stats().items():
-        print(f"{key}\n{value}\n")
+    args = get_args()
+
+    if args.list_countries:
+        show_countries()
+    elif args.country is None:
+        show_covid_stats(covid_stats())
+    else:
+        show_covid_stats(covid_stats(f"/{args.country}"))

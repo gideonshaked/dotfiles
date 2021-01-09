@@ -24,8 +24,23 @@ def covid_stats(country: str) -> dict:
 
 def show_covid_stats(stats: dict) -> None:
     """Pretty print stats"""
+    pretty_keys = {
+        "country": "Country",
+        "cases": "Cases",
+        "todayCases": "Cases Today",
+        "deaths": "Deaths",
+        "todayDeaths": "Deaths Today",
+        "recovered": "Recovered",
+        "active": "Active",
+        "critical": "Critical",
+        "casesPerOneMillion": "Cases per Million",
+        "deathsPerOneMillion": "Deaths per Million",
+        "totalTests": "Total Tests",
+        "testsPerOneMillion": "Tests per Million",
+    }
+
     for key, val in stats.items():
-        print(f"[bold]{key}: [/bold]{val}", end="\n\n")
+        print(f"[bold]{pretty_keys[key]}: [/bold]{f'{val:,}' if type(val) is int else val}", end="\n\n")
 
 
 def get_args() -> argparse.Namespace:

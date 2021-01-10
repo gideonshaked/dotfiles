@@ -5,6 +5,7 @@ There are a million terminal markdown renderers, but I like Rich the best.
 """
 
 import argparse
+import os
 import sys
 
 from rich.console import Console
@@ -12,7 +13,11 @@ from rich.markdown import Markdown
 
 
 def get_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="rendermark", description="Render markdown in the terminal using Rich.")
+    parser = argparse.ArgumentParser(
+        prog="rendermark",
+        description="Render markdown in the terminal using Rich.",
+        epilog="Set RENDERMARK_DEFAULT_FILEPATH to set a default filepath value when none is passed.",
+    )
 
     parser.add_argument(
         "file", metavar="file", nargs="?", type=str, help="the path to the markdown file to be rendered"
@@ -28,10 +33,19 @@ def show_markdown(filepath: str) -> None:
     console.print(markdown)
 
 
+def check_env_var(filepath: str) -> str:
+    if filepath is None:
+        return os.getenv("RENDERMARK_DEFAULT_FILEPATH")
+    return filepath
+
+
 if __name__ == "__main__":
     parser = get_parser()
     args = parser.parse_args()
-    if args.file is None:
+    filepath = check_env_var(args.file)
+
+    if filepath is None:
         parser.print_usage()
         sys.exit(1)
-    show_markdown(args.file)
+
+    show_markdown(filepath)

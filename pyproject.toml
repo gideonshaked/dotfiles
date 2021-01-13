@@ -1,18 +1,6 @@
 [tool.black]
 line-length = 120
-exclude = '''
-/(
-    \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-)/
-'''
+exclude = "./.git"
 
 [tool.flakehell]
 max_line_length = 120

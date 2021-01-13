@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# Import extensions from vscode/extensions.txt to Vscode.
+# Vscode will not install any extensions not already installed.
+#
+
+input="vscode/extensions.txt"
+while IFS= read -r ext
+do
+    code --install-extension "$ext"
+done < "$input"

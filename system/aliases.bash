@@ -15,8 +15,6 @@ alias python='python3'
 
 alias wscli="java ~/git/wscli/src/wscli.java"
 
-alias open="open-silent"
-
 alias sloc="git ls-files \"*.py\" \"*.java\" \"*.sh\" \"*.bash\" \"*.ps1\" \"*.js\" | xargs wc -l"
 
 alias bd=". bd -si"

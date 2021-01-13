@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#
+# Export extensions from Vscode to vscode/extensions.txt.
+#
+
+code --list-extensions > vscode/extensions.txt

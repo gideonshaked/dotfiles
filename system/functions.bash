@@ -18,6 +18,10 @@ v() {
     code "$PROJECTS/$1"
 }
 
+open() {
+    nohup "$@" &>/dev/null &
+}
+
 # Add current conda env to jupyter notebook
 add2jupyter() {
     conda install -n "$CONDA_DEFAULT_ENV" ipykernel

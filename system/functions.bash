@@ -18,6 +18,7 @@ v() {
     code "$PROJECTS/$1"
 }
 
+# Open program silently and without making it dependent on an open terminal
 open() {
     nohup "$@" &>/dev/null &
 }

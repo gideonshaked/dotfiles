@@ -4,6 +4,11 @@ case $- in
       *) return;;
 esac
 
+# Allow local customizations in the ~/.bashrc_local_before file
+if [ -f "$HOME/.bashrc_local_before" ]; then
+    source "$HOME/.bashrc_local_before"
+fi
+
 source "$HOME/.settings.bash"
 
 source "$HOME/.functions.bash"
@@ -17,19 +22,7 @@ source "$HOME/.external.bash"
 source "$HOME/.prompt.bash"
 
 
-###### Do not touch ######
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/gideon/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/gideon/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/gideon/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/gideon/anaconda3/bin:$PATH"
-    fi
+# Allow local customizations in the ~/.bashrc_local_after file
+if [ -f "$HOME/.bashrc_local_after" ]; then
+    source "$HOME/.bashrc_local_after"
 fi
-unset __conda_setup
-# <<< conda initialize <<<

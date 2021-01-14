@@ -4,8 +4,15 @@
 # Vscode will not install any extensions not already installed.
 #
 
-input="vscode/extensions.txt"
+if ! command -v code &> /dev/null
+then
+    echo "Vscode could not be found."
+    exit
+fi
+
+
+extensions="vscode/extensions.txt"
 while IFS= read -r ext
 do
     code --install-extension "$ext"
-done < "$input"
+done < "$extensions"

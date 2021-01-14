@@ -1,0 +1,45 @@
+- defaults:
+    link:
+      relink: true
+      glob: true
+      create: true
+
+- clean: ["~"]
+
+- link:
+    ~/bin/: bin/*
+
+    ~/.gitconfig: git/gitconfig
+    ~/.gitalias.txt: git/gitalias/gitalias.txt
+
+    ~/.aliases.bash: system/aliases.bash
+    ~/.bash_profile: system/bash_profile
+    ~/.bashrc: system/bashrc
+    ~/.external.bash: system/external.bash
+    ~/.functions.bash: system/functions.bash
+    ~/.path.bash: system/path.bash
+    ~/.prompt.bash: system/prompt.bash
+    ~/.settings.bash: system/settings.bash
+    ~/.settings_default.bash: system/settings_default.bash
+
+    ~/.config/Code/User/settings.json:
+      if: command -v code &> /dev/null
+      path: vscode/settings.json
+
+- pip:
+    file: bin/requirements.txt
+    binary: $(which pip3)
+    user: false
+    stdout: true
+    stderr: true
+
+- shell:
+    - command: curl -fsSL https://starship.rs/install.sh | bash -s -- --force --bin-dir "$HOME/.local/bin"
+      stdout: true
+      stderr: true
+      description: Install Starship
+
+    - command: script/code-import-ext
+      stdout: true
+      stderr: true
+      description: Install VS Code extensions

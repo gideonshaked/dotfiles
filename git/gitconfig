@@ -1,0 +1,45 @@
+[user]
+	email = gideonshaked@gmail.com
+	name = The-Kid-Gid
+	signingkey = A36C849F06294BFC
+
+[include]
+	path = ~/.gitalias.txt
+
+[alias]
+	nuke = !git-nuke
+
+[commit]
+	gpgsign = true
+
+[pull]
+	ff = only
+
+[push]
+	default = upstream
+
+[color]
+	branch = auto
+	diff = auto
+	status = auto
+    showbranch = auto
+	ui = true
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+
+[color "status"]
+	added = green
+	changed = yellow
+	untracked = cyan
+
+[format]
+        pretty = '%C(yellow)%h%Creset %C(magenta)%cd%Creset %d %s'

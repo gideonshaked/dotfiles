@@ -5,7 +5,7 @@ Title pretty much says it all. Because [dotfiles are meant to be forked](https:/
 ## Install
 
 ```bash
-git clone https://github.com/The-Kid-Gid/dotfiles
+git clone --recursive https://github.com/The-Kid-Gid/dotfiles
 cd dotfiles
 ./install  # Can also run with --verbose
 ```

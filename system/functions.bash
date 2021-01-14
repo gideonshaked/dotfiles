@@ -22,6 +22,13 @@ open() {
     nohup "$@" &>/dev/null &
 }
 
+# Execute a command in a specific directory
+xin() {
+    (
+        cd "${1}" && shift && "${@}"
+    )
+}
+
 # Add current conda env to jupyter notebook
 add2jupyter() {
     conda install -n "$CONDA_DEFAULT_ENV" ipykernel

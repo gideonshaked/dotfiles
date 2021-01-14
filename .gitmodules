@@ -5,3 +5,6 @@
 [submodule "git/gitalias"]
 	path = git/gitalias
 	url = https://github.com/GitAlias/gitalias
+[submodule "dotbot-pip"]
+	path = dotbot-pip
+	url = https://github.com/sobolevn/dotbot-pip.git

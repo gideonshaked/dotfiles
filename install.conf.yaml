@@ -35,7 +35,7 @@
 
 - shell:
     - git submodule sync --recursive
-    - git update-submodules
+    - git submodule update --recursive
 
     - command: curl -fsSL https://starship.rs/install.sh | bash -s -- --force --bin-dir "$HOME/.local/bin"
       stdout: true

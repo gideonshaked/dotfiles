@@ -26,6 +26,8 @@
       if: command -v code &> /dev/null
       path: vscode/settings.json
 
+    ~/.config/starship.toml:
+
 - pip:
     file: bin/requirements.txt
     binary: $(which pip3)

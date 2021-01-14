@@ -2,7 +2,7 @@
 # Set path
 #
 
-path_prepend "/home/gideon/.local/bin:/home/gideon/bin"
+path_prepend "$HOME/.local/bin:$HOME/bin"
 
 path_append "/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin"
 

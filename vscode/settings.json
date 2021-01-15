@@ -49,6 +49,7 @@
     },
     "files.associations": {
         "bash_profile": "shellscript",
-        "bashrc": "shellscript"
+        "bashrc": "shellscript",
+        "install-starship": "shellscript"
     }
 }

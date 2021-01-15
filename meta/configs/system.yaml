@@ -1,0 +1,9 @@
+- link:
+    ~/.aliases.bash: system/aliases.bash
+    ~/.bash_profile: system/bash_profile
+    ~/.bashrc: system/bashrc
+    ~/.external.bash: system/external.bash
+    ~/.functions.bash: system/functions.bash
+    ~/.path.bash: system/path.bash
+    ~/.settings.bash: system/settings.bash
+    ~/.settings_default.bash: system/settings_default.bash

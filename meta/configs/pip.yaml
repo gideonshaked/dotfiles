@@ -1,0 +1,12 @@
+- defaults:
+    pip:
+      binary: $(which pip3)
+      user: false
+      stdout: true
+      stderr: true
+
+- pip:
+    file: bin/requirements.txt
+
+- pip:
+    file: manifest/tools-requirements.txt

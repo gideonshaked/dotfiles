@@ -1,0 +1,12 @@
+- defaults:
+    link:
+      relink: true
+      create: true
+      glob: true
+
+- clean: ["~"]
+
+- shell:
+    - git submodule sync --recursive
+    - git submodule update --recursive
+    - echo "HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"

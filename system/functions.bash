@@ -25,15 +25,18 @@ open() {
 
 # Execute a command in a specific directory
 xin() {
-    (
-        cd "${1}" && shift && "${@}"
-    )
+    cd "${1}" && shift && "${@}"
 }
 
 # Add current conda env to jupyter notebook
 add2jupyter() {
     conda install -n "$CONDA_DEFAULT_ENV" ipykernel
     python -m ipykernel install --user --name "$CONDA_DEFAULT_ENV" --display-name "Python ($CONDA_DEFAULT_ENV)"
+}
+
+# Update dotfiles
+dfu() {
+    cd "$PROJECTS/dotfiles" && git pull --ff-only && ./install
 }
 
 # Print current directory following symlinks

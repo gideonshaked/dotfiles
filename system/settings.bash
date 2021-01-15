@@ -6,7 +6,7 @@ export PROJECTS="$HOME/git"
 
 export MICRO_TRUECOLOR=1
 
-export EDITOR="/usr/local/bin/micro"
+export EDITOR="micro"
 
 export RENDERMARK_DEFAULT_FILEPATH="README.md"
 

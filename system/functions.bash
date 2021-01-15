@@ -36,7 +36,7 @@ add2jupyter() {
 
 # Update dotfiles
 dfu() {
-    cd "$PROJECTS/dotfiles" && git pull --ff-only && ./install
+    cd "$PROJECTS/dotfiles" && git pull --ff-only && ./install-profile "$(hostname)"
 }
 
 # Print current directory following symlinks

@@ -5,7 +5,7 @@
 [submodule "git/gitalias"]
 	path = git/gitalias
 	url = https://github.com/GitAlias/gitalias
-[submodule "dotbot-pip"]
+[submodule "plugins/dotbot-pip"]
 	path = plugins/dotbot-pip
 	url = https://github.com/sobolevn/dotbot-pip.git
 [submodule "plugins/dotbot-brew"]

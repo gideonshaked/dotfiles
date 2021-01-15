@@ -11,7 +11,7 @@ git clone --recursive https://github.com/The-Kid-Gid/dotfiles
 cd dotfiles
 ```
 
-Choose a profile to install. Each profile installs a certain list of configs, and each config corresponds to a certain topic (example: `git`, which symlinks `gitconfig` and `gitaliases.txt`).
+Choose a profile to install. Each [profile](https://github.com/The-Kid-Gid/dotfiles/tree/master/meta/profiles) installs a certain list of configs. [Each of the configs](https://github.com/The-Kid-Gid/dotfiles/tree/master/meta/configs) corresponds to a certain topic (example: `git`, which symlinks `gitconfig` and `gitaliases.txt`).
 
 ```bash
 ./install-profile <gideon-laptop, phobos, deimos>

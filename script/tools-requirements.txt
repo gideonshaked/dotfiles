@@ -1,0 +1,4 @@
+virtualenvwrapper
+thefuck
+nextinspace
+pre-commit

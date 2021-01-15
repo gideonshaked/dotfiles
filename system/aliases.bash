@@ -13,7 +13,7 @@ alias bwbackup='bw-user-backup'
 
 alias python='python3'
 
-alias wscli="java ~/git/wscli/src/wscli.java"
+alias wscli="java $HOME/.local/bin/wscli/src/wscli.java"
 
 alias sloc="git ls-files \"*.py\" \"*.java\" \"*.sh\" \"*.bash\" \"*.ps1\" \"*.js\" | xargs wc -l"
 

@@ -1,4 +1,4 @@
-virtualenvwrapper
-thefuck
 nextinspace
 pre-commit
+thefuck
+virtualenvwrapper

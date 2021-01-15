@@ -53,5 +53,6 @@
         "install-starship": "shellscript",
         "install-profile": "shellscript",
         "install-standalone": "shellscript"
-    }
+    },
+    "python.testing.promptToConfigure": false
 }

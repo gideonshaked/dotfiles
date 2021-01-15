@@ -51,6 +51,7 @@
         "bash_profile": "shellscript",
         "bashrc": "shellscript",
         "install-starship": "shellscript",
-        "install-profile": "shellscript"
+        "install-profile": "shellscript",
+        "install-standalone": "shellscript"
     }
 }

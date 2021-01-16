@@ -1,4 +1,4 @@
-# Dotfiles [![Lint](https://github.com/The-Kid-Gid/dotfiles/workflows/Lint/badge.svg)](https://github.com/The-Kid-Gid/dotfiles/actions?query=workflow%3ALint)
+# Dotfiles [![Test](https://github.com/The-Kid-Gid/dotfiles/workflows/Test/badge.svg)](https://github.com/The-Kid-Gid/dotfiles/actions?query=workflow%3ATest)
 
 Title pretty much says it all. Because [dotfiles are meant to be forked](https://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked), you can and should fork this repository for your own purposes. Do be warned that although these should be completely capable of working on most machines, they are not tested or guaranteed to do so. This repository uses [Dotbot](https://github.com/anishathalye/dotbot) to install itself.
 

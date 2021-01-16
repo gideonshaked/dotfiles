@@ -1,6 +1,8 @@
 # Dotfiles [![Test](https://github.com/The-Kid-Gid/dotfiles/workflows/Test/badge.svg)](https://github.com/The-Kid-Gid/dotfiles/actions?query=workflow%3ATest)
 
-Title pretty much says it all. Because [dotfiles are meant to be forked](https://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked), you can and should fork this repository for your own purposes. Do be warned that although these should be completely capable of working on most machines, they are not tested or guaranteed to do so. This repository uses [Dotbot](https://github.com/anishathalye/dotbot) to install itself.
+My personal dotfiles. In my opinion,  [dotfiles are NOT meant to be forked](https://www.anishathalye.com/2014/08/03/managing-your-dotfiles/#dotfiles-are-not-meant-to-be-forked). That being said, this repository contains lots of useful things ([functions](https://github.com/The-Kid-Gid/dotfiles/blob/master/system/functions.bash), [scripts](https://github.com/The-Kid-Gid/dotfiles/blob/master/bin/covid-stats), [gitconfig](https://github.com/The-Kid-Gid/dotfiles/blob/master/git/gitconfig)) that you can add to your personal setup. As such, I encourage anyone that thinks these dotfiles look useful to try to understand them first and then copy the parts that stand out to them.
+
+This repository uses [Dotbot](https://github.com/anishathalye/dotbot) for installation.
 
 ## Install
 

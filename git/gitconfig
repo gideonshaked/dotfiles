@@ -8,6 +8,7 @@
 
 [alias]
 	nuke = !git-nuke
+	tag = tag -s
 
 [commit]
 	gpgsign = true

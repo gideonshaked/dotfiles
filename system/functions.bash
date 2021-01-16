@@ -51,16 +51,6 @@ here() {
     echo "here -> $(readlink $HOME/.shell.here)"
 }
 
-# Print text using Rich library print function
-# Note that double quotes (") must be escaped
-printh() {
-    python3 - << EOF
-from rich import print
-print("$1")
-
-EOF
-}
-
 # Remove from PATH
 path_remove() {
     PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: "\$0 != \"$1\"" | sed 's/:$//')

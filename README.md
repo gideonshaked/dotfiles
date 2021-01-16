@@ -17,7 +17,7 @@ Choose a profile to install. Each [profile](https://github.com/The-Kid-Gid/dotfi
 ./install-profile <gideon-laptop, phobos, deimos>
 ```
 
-Or, you can install individual profiles.
+Or you can install individual configs.
 
 ```bash
 ./install-standalone <bin, brew, git, pip, starship, system, vscode>
@@ -31,3 +31,7 @@ Or, you can install individual profiles.
 - [`system/`](https://github.com/The-Kid-Gid/dotfiles/tree/master/system): Every bash file sourced by `.bashrc`.
 - [`vscode/`](https://github.com/The-Kid-Gid/dotfiles/tree/master/vscode): VS Code `settings.json` as well as an `extensions.txt` file that contains every VS Code extension I have installed. These are automatically installed when you run `./install`.
 - [`starship.toml`](https://github.com/The-Kid-Gid/dotfiles/blob/master/starship.toml): The configuration file for [Starship](https://starship.rs) prompt.
+
+## Credits
+
+These dotfiles were inspired by [Anish Athalye's](https://github.com/anishathalye) [dotfiles](https://github.com/anishathalye/dotfiles).

@@ -4,4 +4,5 @@ git
 pip
 starship
 system
+ssh
 vscode

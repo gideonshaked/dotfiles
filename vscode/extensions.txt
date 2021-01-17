@@ -2,6 +2,7 @@ aaron-bond.better-comments
 bungcip.better-toml
 DavidAnson.vscode-markdownlint
 DavidWang.ini-for-vscode
+ericadamski.carbon-now-sh
 kiteco.kite
 lextudio.restructuredtext
 luyizhi.vscode-jsonp

@@ -28,6 +28,11 @@ xin() {
     cd "${1}" && shift && "${@}"
 }
 
+# Update vscode extensions list
+upext(){
+    xin "$PROJECTS/dotfiles" "script/code-export-ext" && git commit -a -m "Update extensions list" && git push
+}
+
 # Add current conda env to jupyter notebook
 add2jupyter() {
     conda install -n "$CONDA_DEFAULT_ENV" ipykernel

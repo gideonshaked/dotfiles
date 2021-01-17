@@ -29,7 +29,7 @@ xin() {
 }
 
 # Update vscode extensions list
-upext(){
+upext() {
     xin "$PROJECTS/dotfiles" "script/code-export-ext" && git commit -a -m "Update extensions list" && git push
 }
 

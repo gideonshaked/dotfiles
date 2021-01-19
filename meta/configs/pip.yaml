@@ -4,5 +4,5 @@
       description: Install dependencies for scripts in ~/bin
 
     - command: pip3 install -r manifest/tools-requirements.txt
-    - stdout: true
-    - description: Install dev tools with Pip
+      stdout: true
+      description: Install dev tools with Pip

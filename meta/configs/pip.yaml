@@ -1,12 +1,8 @@
-- defaults:
-    pip:
-      binary: $(which pip3)
-      user: false
+- shell:
+    - command: pip3 install -r bin/requirements.txt
       stdout: true
-      stderr: true
+      description: Install dependencies for scripts in ~/bin
 
-- pip:
-    file: bin/requirements.txt
-
-- pip:
-    file: manifest/tools-requirements.txt
+    - command: pip3 install -r manifest/tools-requirements.txt
+    - stdout: true
+    - description: Install dev tools with Pip

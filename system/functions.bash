@@ -30,7 +30,7 @@ xin() {
 
 # Update vscode extensions list
 upext() {
-    xin "$PROJECTS/dotfiles" "script/code-export-ext" && git commit -a -m "Update extensions list" && git push
+    xin "$PROJECTS/dotfiles" ./script/code-export-ext && git reset > /dev/null && git stage "vscode/extensions.txt" > /dev/null && git commit -m "Update extensions list" && git push
 }
 
 # Add current conda env to jupyter notebook

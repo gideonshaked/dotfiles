@@ -1,5 +1,8 @@
 #
-# Starship prompt
+# Initiate Starship prompt if it exists on this system
 #
 
-eval "$(starship init bash)"
+if command -v starship &> /dev/null
+then
+    eval "$(starship init bash)"
+fi

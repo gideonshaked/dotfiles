@@ -1,3 +1,5 @@
-brew "starship"
+tap "austinjones/taps"
+
 brew "micro"
+brew "starship"
 brew "austinjones/taps/tab"

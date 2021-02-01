@@ -6,3 +6,7 @@ host phobos
     hostname gideonshaked.com
     port 2222
     IdentityFile ~/.ssh/id_rsa_phobos
+host raspi
+	hostname raspberrypi.local
+	port 22
+	IdentityFile ~/.ssh/id_rsa_raspberrypi

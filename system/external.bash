@@ -7,5 +7,5 @@ source "$HOME/.local/bin/virtualenvwrapper.sh"
 
 if command -v tab &> /dev/null
 then
-    source "/home/gideon/.local/share/tab/completion/tab.bash"
+    source "$HOME/.local/share/tab/completion/tab.bash"
 fi

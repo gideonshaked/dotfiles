@@ -54,5 +54,6 @@
         "install-profile": "shellscript",
         "install-standalone": "shellscript"
     },
-    "python.testing.promptToConfigure": false
+    "python.testing.promptToConfigure": false,
+    "python.pythonPath": "/usr/bin/python3"
 }

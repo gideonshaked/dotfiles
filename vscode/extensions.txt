@@ -1,5 +1,7 @@
 aaron-bond.better-comments
+bdavs.expect
 bungcip.better-toml
+coolbear.systemd-unit-file
 DavidAnson.vscode-markdownlint
 DavidWang.ini-for-vscode
 ericadamski.carbon-now-sh

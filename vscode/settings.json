@@ -41,7 +41,12 @@
     "jupyter.sendSelectionToInteractiveWindow": false,
     "jupyter.alwaysTrustNotebooks": true,
     "workbench.colorTheme": "Monokai Dimmed",
-    "workbench.editorAssociations": [],
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter-notebook",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
     "autoDocstring.docstringFormat": "sphinx",
     "editor.fontFamily": "\"Hack Nerd Font\"",
     "markdownlint.config": {

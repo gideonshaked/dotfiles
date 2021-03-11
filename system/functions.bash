@@ -39,6 +39,11 @@ add2jupyter() {
     python -m ipykernel install --user --name "$CONDA_DEFAULT_ENV" --display-name "Python ($CONDA_DEFAULT_ENV)"
 }
 
+# Create file and directories on path to file if none exist
+tp() {
+    mkdir -p "${1%/*}" && touch "$1"
+}
+
 # Update dotfiles
 dfu() {
     cd "$PROJECTS/dotfiles" && git pull --ff-only && ./install-profile "$(hostname)"

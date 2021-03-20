@@ -28,3 +28,5 @@ alias l='ls -CF'
 alias chmox="chmod +x"
 
 alias cb="xclip -selection c"
+
+alias bat="batcat"

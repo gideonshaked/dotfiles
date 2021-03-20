@@ -28,12 +28,6 @@ repos:
     rev: v2.0.0
     hooks:
       - id: codespell
-        # Should be with the "--skip" option but this seems to be broken
-        exclude: >
-          (?x)^(
-              .*\.svg|
-              .*\.cast
-          )$
   - repo: https://github.com/pappasam/toml-sort
     rev: v0.18.0
     hooks:

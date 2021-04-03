@@ -39,4 +39,4 @@ Or you can install individual configs.
 
 ## Credits
 
-These dotfiles were inspired by [Anish Athalye's](https://github.com/anishathalye) [dotfiles](https://github.com/anishathalye/dotfiles).
+These dotfiles were inspired by [Anish Athalye's dotfiles](https://github.com/anishathalye/dotfiles).

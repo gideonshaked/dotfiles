@@ -3,6 +3,9 @@
 	name = The-Kid-Gid
 	signingkey = A36C849F06294BFC
 
+[core]
+	attributesfile = ~/.gitattributes
+
 [include]
 	path = ~/.gitalias.txt
 
@@ -18,6 +21,12 @@
 
 [push]
 	default = upstream
+
+[diff "jupyternotebook"]
+	command = git-nbdiffdriver diff
+
+[merge "jupyternotebook"]
+	command = git-nbmergedriver merge %O %A %B %L %P
 
 [color]
 	branch = auto

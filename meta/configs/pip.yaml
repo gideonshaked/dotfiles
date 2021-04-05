@@ -1,8 +1,8 @@
 - shell:
-    - command: pip3 install -r bin/requirements.txt
+    - command: pip3 install --upgrade -r bin/requirements.txt
       stdout: true
       description: Install dependencies for scripts in ~/bin
 
-    - command: pip3 install -r manifest/tools-requirements.txt
+    - command: pip3 install --upgrade -r manifest/tools-requirements.txt
       stdout: true
       description: Install dev tools with Pip

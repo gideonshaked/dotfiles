@@ -1,3 +1,4 @@
+nbdime
 nextinspace
 pre-commit
 thefuck

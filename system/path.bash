@@ -2,7 +2,7 @@
 # Set path
 #
 
-path_prepend "$HOME/.local/bin:$HOME/bin"
+path_prepend "$HOME/bin:$HOME/.local/bin:"
 
 path_append "$HOME/.cargo/bin"
 

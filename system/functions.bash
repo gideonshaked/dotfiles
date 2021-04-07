@@ -18,6 +18,11 @@ v() {
     code "$PROJECTS/$1"
 }
 
+# List everything in the current directory with nice defaults
+d() {
+    du --human-readable --all --max-depth 1 $@ | sort --human-numeric-sort --reverse
+}
+
 # Open program silently and without making it dependent on an open terminal
 open() {
     nohup "$@" &>/dev/null &

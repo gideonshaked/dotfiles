@@ -8,3 +8,6 @@
 [submodule "plugins/dotbot-brew"]
 	path = plugins/dotbot-brew
 	url = https://github.com/d12frosted/dotbot-brew.git
+[submodule "git/git-fire"]
+	path = git/git-fire
+	url = https://github.com/qw3rtman/git-fire

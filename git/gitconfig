@@ -53,3 +53,9 @@
 
 [format]
     pretty = %C(yellow)%h%Creset %C(magenta)%cd%Creset %an <%ae> %C(cyan)%s%Creset%C(yellow)%d%Creset%n
+
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

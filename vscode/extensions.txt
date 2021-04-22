@@ -29,6 +29,7 @@ redhat.vscode-yaml
 sourcery.sourcery
 timonwong.shellcheck
 tomoki1207.pdf
+travisthetechie.write-good-linter
 VisualStudioExptTeam.vscodeintellicode
 vscjava.vscode-java-debug
 vscjava.vscode-java-dependency

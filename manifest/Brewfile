@@ -2,4 +2,5 @@ tap "austinjones/taps"
 
 brew "micro"
 brew "starship"
+brew "lsd"
 brew "austinjones/taps/tab"

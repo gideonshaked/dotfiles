@@ -11,7 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          mkdir -p ~/dotfiles-install-dir
-          HOME=~/dotfiles-install-dir
-      - run: ./install-profile phobos
+      - run: make test

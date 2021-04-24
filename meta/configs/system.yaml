@@ -7,3 +7,4 @@
     ~/.path.bash: system/path.bash
     ~/.settings.bash: system/settings.bash
     ~/.settings_default.bash: system/settings_default.bash
+    ~/.completions/: completions/*

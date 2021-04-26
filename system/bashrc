@@ -21,7 +21,10 @@ source "$HOME/.external.bash"
 
 source "$HOME/.prompt.bash"
 
-source "$HOME/.completions/*"
+# Custom completions
+for file in "$HOME"/.completions/*; do
+    source "$file"
+done
 
 # Allow local customizations in the ~/.bashrc_local_after file
 if [ -f "$HOME/.bashrc_local_after" ]; then

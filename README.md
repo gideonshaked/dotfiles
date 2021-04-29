@@ -30,6 +30,7 @@ Or you can install individual configs.
 
 ## Structure
 
+- [`aws/`](https://github.com/The-Kid-Gid/dotfiles/tree/master/aws): AWS config file.
 - [`bin/`](https://github.com/The-Kid-Gid/dotfiles/tree/master/bin): Contains some useful executables and is added to your `$PATH`.
 - [`completions/`](https://github.com/The-Kid-Gid/dotfiles/tree/master/completions): Has completion scripts for custom functions/scripts that are automatically sourced.
 - [`git/`](https://github.com/The-Kid-Gid/dotfiles/tree/master/git): Has `.gitconfig` as well as an alias file from [GitAlias/gitalias](https://github.com/GitAlias/gitalias) that is automatically included.

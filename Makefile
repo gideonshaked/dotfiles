@@ -1,4 +1,4 @@
-.PHONY: test clean lint
+.PHONY: test clean lint update-submodules
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -19,6 +19,10 @@ clean:
 ## Lint with pre-commit
 lint:
 	pre-commit run --all-files
+
+## Update all submodules to their latest versions
+update-submodules:
+	git submodule update --remote
 
 #################################################################################
 # Self Documenting Commands                                                     #

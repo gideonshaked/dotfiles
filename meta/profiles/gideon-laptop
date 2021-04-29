@@ -2,6 +2,7 @@ aws
 bin
 brew
 git
+jupyter
 pip
 starship
 system

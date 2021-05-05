@@ -34,6 +34,7 @@ main() {
     parse_args "$1"
 
     for server in "${SERVERS[@]}"; do
+        echo
         echo "----------${server}----------"
         run_cmds "$server"
     done

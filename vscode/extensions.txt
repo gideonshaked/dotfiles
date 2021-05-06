@@ -8,6 +8,7 @@ ericadamski.carbon-now-sh
 kiteco.kite
 lextudio.restructuredtext
 luyizhi.vscode-jsonp
+mads-hartmann.bash-ide-vscode
 ms-azuretools.vscode-docker
 ms-python.anaconda-extension-pack
 ms-python.python

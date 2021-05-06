@@ -1,10 +1,24 @@
 #!/usr/bin/env bash
 #
-# Import extensions from vscode/extensions.txt to Vscode.
+# Import extensions from vscode/extensions.txt to VS code.
 #
 
-extensions="vscode/extensions.txt"
-while IFS= read -r ext
-do
-    code --install-extension "$ext"
-done < "$extensions"
+not_installed_exts() {
+    local extensions=$(cat "vscode/extensions.txt")
+    local current_extensions=$(code --list-extensions)
+    extensions_not_installed=$(diff --new-line-format="" --unchanged-line-format="" <(echo "$current_extensions") <(echo "$extensions"))
+}
+
+install_exts() {
+    while IFS= read -r extension; do
+        code --install-extension "$extension"
+    done <<< "$1"
+}
+
+main() {
+    not_installed_exts
+
+    install_exts "$extensions_not_installed"
+}
+
+main

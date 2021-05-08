@@ -54,6 +54,16 @@ dfu() {
     cd "$PROJECTS/dotfiles" && git pull --ff-only && ./install-profile "$(hostname)"
 }
 
+# Apt update servers
+apt-servers() {
+    UPDATE="sudo apt-get update -y && sudo apt-get upgrade -y"
+    echo "-----phobos-----"
+    ssh administrator@phobos "$UPDATE"
+    echo
+    echo "-----deimos-----"
+    ssh administrator@deimos "$UPDATE"
+}
+
 # Remove from PATH
 path_remove() {
     PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: "\$0 != \"$1\"" | sed 's/:$//')

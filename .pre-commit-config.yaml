@@ -8,10 +8,10 @@ repos:
     rev: 5.8.0
     hooks:
       - id: isort
-  - repo: https://github.com/life4/flakehell
-    rev: v.0.8.0
+  - repo: https://github.com/pycqa/flake8
+    rev: 3.9.2
     hooks:
-      - id: flakehell
+      - id: flake8
   - repo: https://github.com/lovesegfault/beautysh
     rev: v6.1.0
     hooks:

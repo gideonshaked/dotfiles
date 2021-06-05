@@ -13,7 +13,7 @@
     ],
     "shellcheck.executablePath": "/usr/bin/shellcheck",
     "editor.formatOnSave": true,
-    "python.testing.pytestEnabled": true,
+    "python.testing.pytestEnabled": false,
     "terminal.integrated.shell.linux": "/bin/bash",
     "kite.showWelcomeNotificationOnStartup": false,
     "workbench.iconTheme": "material-icon-theme",

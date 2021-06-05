@@ -39,13 +39,18 @@ def check_env_var(filepath: str) -> str:
     return filepath
 
 
+def is_valid(filepath: str) -> bool:
+    if filepath is None:
+        return False
+    return os.path.isfile(filepath)
+
+
 if __name__ == "__main__":
     parser = get_parser()
     args = parser.parse_args()
     filepath = check_env_var(args.file)
 
-    if filepath is None:
-        parser.print_usage()
-        sys.exit(1)
-
-    show_markdown(filepath)
+    if is_valid(filepath):
+        show_markdown(filepath)
+    else:
+        sys.exit(f"""{parser.format_usage()}\nFilepath {filepath} not valid.""")

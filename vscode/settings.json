@@ -40,12 +40,9 @@
     "jupyter.sendSelectionToInteractiveWindow": false,
     "jupyter.alwaysTrustNotebooks": true,
     "workbench.colorTheme": "Monokai Dimmed",
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter-notebook",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
     "autoDocstring.docstringFormat": "sphinx",
     "editor.fontFamily": "\"Hack Nerd Font\"",
     "markdownlint.config": {

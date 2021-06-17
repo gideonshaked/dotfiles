@@ -27,7 +27,7 @@
     "settingsSync.ignoredExtensions": [
         "kiteco.kite"
     ],
-    "sourcery.token": "user_0RbjlgJ5nB_RWZeY6XviLGM9HWUc8CtHydbTrm9ddPsKP1hu1NKAuSMue8k",
+    "sourcery.token": "user_JorBhfdCuYHrsuGpN73C_S3HfJDyqp_JFyYqlPwTe0ds_c21Ixd6_tVtV1s",
     "java.refactor.renameFromFileExplorer": "preview",
     "C_Cpp.updateChannel": "Insiders",
     "[cpp]": {
@@ -61,5 +61,7 @@
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
-    }
+    },
+    "latex-workshop.view.pdf.viewer": "tab",
+    "redhat.telemetry.enabled": false
 }

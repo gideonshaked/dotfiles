@@ -4,6 +4,8 @@ bungcip.better-toml
 coolbear.systemd-unit-file
 DavidWang.ini-for-vscode
 ericadamski.carbon-now-sh
+ferhatgec.flascript
+James-Yu.latex-workshop
 kiteco.kite
 lextudio.restructuredtext
 luyizhi.vscode-jsonp
@@ -28,7 +30,6 @@ redhat.java
 redhat.vscode-yaml
 sourcery.sourcery
 timonwong.shellcheck
-tomoki1207.pdf
 travisthetechie.write-good-linter
 VisualStudioExptTeam.vscodeintellicode
 vscjava.vscode-java-debug

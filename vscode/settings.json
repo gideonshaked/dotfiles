@@ -57,5 +57,9 @@
     },
     "python.testing.promptToConfigure": false,
     "python.pythonPath": "/usr/bin/python3",
-    "docker.showStartPage": false
+    "docker.showStartPage": false,
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    }
 }

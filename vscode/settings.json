@@ -63,5 +63,8 @@
         "jupyter-notebook": "left"
     },
     "latex-workshop.view.pdf.viewer": "tab",
-    "redhat.telemetry.enabled": false
+    "redhat.telemetry.enabled": false,
+    "[latex]": {
+        "editor.defaultFormatter": "James-Yu.latex-workshop"
+    }
 }

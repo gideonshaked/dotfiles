@@ -66,5 +66,6 @@
     "redhat.telemetry.enabled": false,
     "[latex]": {
         "editor.defaultFormatter": "James-Yu.latex-workshop"
-    }
+    },
+    "python.defaultInterpreterPath": "/usr/bin/python3"
 }

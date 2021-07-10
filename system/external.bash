@@ -9,3 +9,5 @@ if command -v tab &> /dev/null
 then
     source "$HOME/.local/share/tab/completion/tab.bash"
 fi
+
+eval "$(rbenv init -)"

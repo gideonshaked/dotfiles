@@ -24,8 +24,10 @@ ms-vscode.cpptools
 ms-vscode.powershell
 myh.preview-vscode
 nickdemayo.vscode-json-editor
+nickfode.latex-formatter
 njpwerner.autodocstring
 PKief.material-icon-theme
+rashwell.tcl
 redhat.java
 redhat.vscode-yaml
 sourcery.sourcery

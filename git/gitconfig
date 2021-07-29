@@ -1,7 +1,7 @@
 [user]
 	email = gideonshaked@gmail.com
 	name = Gideon Shaked
-	signingkey = A36C849F06294BFC
+	signingKey = 67BF4105EF83A74A!
 
 [core]
 	attributesfile = ~/.gitattributes

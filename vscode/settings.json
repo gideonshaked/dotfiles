@@ -12,9 +12,8 @@
         "120"
     ],
     "shellcheck.executablePath": "/usr/bin/shellcheck",
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "python.testing.pytestEnabled": false,
-    "terminal.integrated.shell.linux": "/bin/bash",
     "kite.showWelcomeNotificationOnStartup": false,
     "workbench.iconTheme": "material-icon-theme",
     "material-icon-theme.folders.theme": "specific",

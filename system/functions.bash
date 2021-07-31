@@ -64,6 +64,16 @@ apt-servers() {
     ssh administrator@deimos "$UPDATE"
 }
 
+# Get proper word count from LaTeX doc
+WC() {
+    if [[ $# -eq 2 ]]; then
+        wc_opts="$2"
+    else
+        wc_opts="-w"
+    fi
+    detex "$1" | wc "$wc_opts"
+}
+
 # Remove from PATH
 path_remove() {
     PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: "\$0 != \"$1\"" | sed 's/:$//')

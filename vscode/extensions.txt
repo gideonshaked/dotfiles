@@ -1,4 +1,5 @@
 aaron-bond.better-comments
+asciidoctor.asciidoctor-vscode
 bdavs.expect
 bungcip.better-toml
 coolbear.systemd-unit-file
@@ -32,7 +33,6 @@ redhat.java
 redhat.vscode-yaml
 sourcery.sourcery
 timonwong.shellcheck
-travisthetechie.write-good-linter
 VisualStudioExptTeam.vscodeintellicode
 vscjava.vscode-java-debug
 vscjava.vscode-java-dependency

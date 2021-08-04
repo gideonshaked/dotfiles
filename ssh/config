@@ -4,7 +4,7 @@ host deimos
     IdentityFile ~/.ssh/id_rsa_deimos
 host phobos
     hostname gideonshaked.com
-    port 2222
+    port 33
     IdentityFile ~/.ssh/id_rsa_phobos
 host raspi
 	hostname raspberrypi.local

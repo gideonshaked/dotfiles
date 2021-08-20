@@ -3,6 +3,7 @@ asciidoctor.asciidoctor-vscode
 bdavs.expect
 bungcip.better-toml
 coolbear.systemd-unit-file
+cstrachan.vcard
 DavidWang.ini-for-vscode
 ericadamski.carbon-now-sh
 ferhatgec.flascript

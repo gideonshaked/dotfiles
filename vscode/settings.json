@@ -67,5 +67,6 @@
     "[latex]": {
         "editor.defaultFormatter": "James-Yu.latex-workshop"
     },
-    "python.defaultInterpreterPath": "/usr/bin/python3"
+    "python.defaultInterpreterPath": "/usr/bin/python3",
+    "latex-workshop.latex.autoBuild.run": "never"
 }

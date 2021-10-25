@@ -7,6 +7,7 @@ cstrachan.vcard
 DavidWang.ini-for-vscode
 ericadamski.carbon-now-sh
 ferhatgec.flascript
+GitHub.copilot
 James-Yu.latex-workshop
 kiteco.kite
 lextudio.restructuredtext
@@ -18,6 +19,7 @@ ms-python.python
 ms-python.vscode-pylance
 ms-toolsai.jupyter
 ms-toolsai.jupyter-keymap
+ms-toolsai.jupyter-renderers
 ms-vscode-remote.remote-containers
 ms-vscode-remote.remote-ssh
 ms-vscode-remote.remote-ssh-edit
@@ -34,6 +36,7 @@ rashwell.tcl
 redhat.java
 redhat.vscode-yaml
 sourcery.sourcery
+tht13.html-preview-vscode
 timonwong.shellcheck
 VisualStudioExptTeam.vscodeintellicode
 vscjava.vscode-java-debug

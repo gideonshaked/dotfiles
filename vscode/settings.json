@@ -68,5 +68,12 @@
         "editor.defaultFormatter": "James-Yu.latex-workshop"
     },
     "python.defaultInterpreterPath": "/usr/bin/python3",
-    "latex-workshop.latex.autoBuild.run": "never"
+    "latex-workshop.latex.autoBuild.run": "never",
+    "editor.inlineSuggest.enabled": true,
+    "github.copilot.enable": {
+        "*": true,
+        "yaml": true,
+        "plaintext": false,
+        "markdown": false
+    }
 }

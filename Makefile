@@ -8,7 +8,8 @@
 test:
 	mkdir -p ~/dotfiles-install-dir
 	HOME=~/dotfiles-install-dir
-	./install-profile phobos
+	chmod +x ./install
+	./install
 
 ## Delete all compiled Python files and other artifacts
 clean:

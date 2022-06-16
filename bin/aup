@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#
+# (aup = Apt UPdate)
+# Script to ssh into remote servers and update system
+#
+
+UPDATE="sudo apt-get update -y && sudo apt-get upgrade -y"
+echo "-----phobos-----"
+ssh administrator@phobos "$UPDATE"
+echo
+echo "-----deimos-----"
+ssh administrator@deimos "$UPDATE"

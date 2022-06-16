@@ -2,7 +2,6 @@
 # Things too long for an alias and too short for a standalone script
 #
 
-
 # Make a new directory and enter it.
 mk() {
     mkdir "$@" && cd "$@"
@@ -13,7 +12,7 @@ c() {
     cd "$PROJECTS/$1"
 }
 
-# Quickly open VSCode in a project directory
+# Quickly open VS Code in a project directory
 v() {
     code "$PROJECTS/$1"
 }
@@ -33,11 +32,6 @@ xin() {
     cd "${1}" && shift && "${@}"
 }
 
-# Update vscode extensions list
-upext() {
-    xin "$PROJECTS/dotfiles" ./script/code-export-ext && git reset > /dev/null && git stage "vscode/extensions.txt" > /dev/null && git commit -m "Update extensions list" && git push
-}
-
 # Add current conda env to jupyter notebook
 add2jupyter() {
     conda install -n "$CONDA_DEFAULT_ENV" ipykernel
@@ -49,29 +43,26 @@ tp() {
     mkdir -p "${1%/*}" && touch "$1"
 }
 
-# Update dotfiles
-dfu() {
-    cd "$PROJECTS/dotfiles" && git pull --ff-only && ./install-profile "$(hostname)"
-}
-
-# Apt update servers
-apt-servers() {
-    UPDATE="sudo apt-get update -y && sudo apt-get upgrade -y"
-    echo "-----phobos-----"
-    ssh administrator@phobos "$UPDATE"
-    echo
-    echo "-----deimos-----"
-    ssh administrator@deimos "$UPDATE"
-}
-
 # Get proper word count from LaTeX doc
-WC() {
+latexwc() {
     if [[ $# -eq 2 ]]; then
         wc_opts="$2"
     else
         wc_opts="-w"
     fi
     detex "$1" | wc "$wc_opts"
+}
+
+## Dotfile management ##
+
+# Update dotfiles
+dfu() {
+    cd "$PROJECTS/dotfiles" && git pull --ff-only && ./install-profile "$(hostname)"
+}
+
+# Update VS Code extensions list
+upext() {
+    xin "$PROJECTS/dotfiles" ./script/code-export-ext && git reset > /dev/null && git stage "vscode/extensions.txt" > /dev/null && git commit -m "Update extensions list" && git push
 }
 
 # Remove from PATH

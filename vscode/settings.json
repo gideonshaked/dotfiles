@@ -15,14 +15,11 @@
     "editor.formatOnSave": false,
     "python.testing.pytestEnabled": false,
     "kite.showWelcomeNotificationOnStartup": false,
-    "workbench.iconTheme": "material-icon-theme",
-    "material-icon-theme.folders.theme": "specific",
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "java.configuration.checkProjectSettingsExclusions": false,
     "editor.renderControlCharacters": false,
     "python.languageServer": "Pylance",
-    "vscode-json-editor.theme": "dark",
     "settingsSync.ignoredExtensions": [
         "kiteco.kite"
     ],
@@ -38,11 +35,10 @@
     "restructuredtext.confPath": "",
     "jupyter.sendSelectionToInteractiveWindow": false,
     "jupyter.alwaysTrustNotebooks": true,
-    "workbench.colorTheme": "Monokai Dimmed",
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
-    "autoDocstring.docstringFormat": "sphinx",
+    "autoDocstring.docstringFormat": "google",
     "editor.fontFamily": "\"Hack Nerd Font\"",
     "markdownlint.config": {
         "MD033": false
@@ -75,5 +71,12 @@
         "yaml": true,
         "plaintext": false,
         "markdown": false
-    }
+    },
+    "workbench.iconTheme": "material-icon-theme",
+    "material-icon-theme.folders.theme": "specific",
+    "workbench.colorTheme": "Monokai Dimmed",
+    "vscode-json-editor.theme": "dark",
+    "shellcheck.customArgs": [
+        "--shell bash"
+    ]
 }

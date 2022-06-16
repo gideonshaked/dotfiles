@@ -1,0 +1,19 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+
+source "$HOME/.shell/setup.bash"
+
+source "$HOME/.shell/functions.bash"
+
+source "$HOME/.shell/aliases.bash"
+
+source "$HOME/.shell/path.bash"
+
+source "$HOME/.shell/prompt.bash"
+
+source "$HOME/.shell/completions.bash"

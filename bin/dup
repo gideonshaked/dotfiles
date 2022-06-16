@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
-# Script to ssh into remote servers and update dockerfiles/prune old images
+# (dup = Docker UPdate)
+# Script to ssh into remote servers and update dockerfiles / prune old images
 #
 
 run_cmds() {

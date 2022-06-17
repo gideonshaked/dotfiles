@@ -2,7 +2,7 @@
 
 test:
 	mkdir -p ~/dotfiles-install-dir
-	HOME=~/dotfiles-install-dir
+	export HOME=~/dotfiles-install-dir
 	chmod +x ./install
 	./install
 

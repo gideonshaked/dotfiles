@@ -1,6 +1,5 @@
 # Dotfiles 
 
-[![Test](https://github.com/not-stirred/dotfiles/workflows/Test/badge.svg)](https://github.com/not-stirred/dotfiles/actions?query=workflow%3ATest)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/not-stirred/dotfiles/master.svg)](https://results.pre-commit.ci/latest/github/not-stirred/dotfiles/master)
 ![GitHub repo size](https://img.shields.io/github/repo-size/not-stirred/dotfiles?color=orange)
 

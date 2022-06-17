@@ -13,8 +13,6 @@ alias chmox="chmod +x"
 
 alias clip="xclip -selection c"
 
-alias bat="batcat"
-
 alias oops="fuck"
 
 alias batt="upower -i $(upower -e | grep BAT) | grep --color=never -E 'state|to\ full|to\ empty|percentage'"

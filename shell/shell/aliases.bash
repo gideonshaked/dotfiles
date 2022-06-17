@@ -23,6 +23,3 @@ alias ls="ls --color=auto"
 alias ll="ls -alF"
 alias la="ls -A"
 alias l="ls -CF"
-
-alias a@d="ssh administrator@deimos"
-alias a@p="ssh administrator@phobos"

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #
+# (rcpp = Run CPP)
 # Compile a C++ file using g++ and run it if compilation is successful.
 #
 

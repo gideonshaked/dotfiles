@@ -2,9 +2,6 @@
 # Set up various programs
 #
 
-# Scaling
-export GDK_DPI_SCALE=0.5
-
 # Projects directory
 export PROJECTS="$HOME/src"
 

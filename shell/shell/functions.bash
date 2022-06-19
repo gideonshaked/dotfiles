@@ -53,6 +53,13 @@ latexwc() {
     detex "$1" | wc "$wc_opts"
 }
 
+# Clear temporary files
+clrtmp() {
+    rm $HOME/tmp/dl/* -rf
+    rm $HOME/tmp/bluetooth/* -rf
+    rm $HOME/tmp/misc/* -rf
+}
+
 ## Dotfile management ##
 
 # Update dotfiles

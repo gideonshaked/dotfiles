@@ -31,6 +31,7 @@ Run the install script.
 ├── jupyter     <- Jupyter Notebook configuration
 ├── manifest    <- requirements.txt with dev tools
 ├── shell       <- Shell startup files
+├── ssh         <- SSH config file (probably not useful to anyone that isn't me)
 ├── term        <- Starship and Hyper configuration
 └── vscode      <- VS Code configuration and extensions list
 ```

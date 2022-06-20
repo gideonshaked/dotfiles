@@ -64,7 +64,7 @@ clrtmp() {
 
 # Update dotfiles
 dfu() {
-    cd "$PROJECTS/dotfiles" && git pull --ff-only && ./install-profile "$(hostname)"
+    cd "$PROJECTS/dotfiles" && git pull --ff-only && ./install
 }
 
 # Update VS Code extensions list

@@ -13,18 +13,18 @@ Download this repository.
 
 ```bash
 git clone --recursive https://github.com/not-stirred/dotfiles
-cd dotfiles
 ```
 
 Run the install script.
 
 ```bash
+cd dotfiles
 ./install
 ```
 
 ## Directory Structure
 
-```tree
+```
 ├── aws         <- AWS config file
 ├── bin         <- Personal executable scripts written in Bash and Python
 ├── git         <- Git configuration files (aliases, custom formatting, etc.)

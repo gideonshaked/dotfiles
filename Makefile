@@ -1,4 +1,4 @@
-.PHONY: test clean lint update-submodules
+.PHONY: test clean lint
 
 test:
 	mkdir -p ~/dotfiles-install-dir

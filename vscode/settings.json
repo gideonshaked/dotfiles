@@ -12,7 +12,7 @@
         "120"
     ],
     "shellcheck.executablePath": "/usr/bin/shellcheck",
-    "editor.formatOnSave": false,
+    "editor.formatOnSave": true,
     "python.testing.pytestEnabled": false,
     "kite.showWelcomeNotificationOnStartup": false,
     "editor.suggestSelection": "first",

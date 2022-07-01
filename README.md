@@ -22,6 +22,12 @@ cd dotfiles
 ./install
 ```
 
+You can update with the provided update function.
+
+```bash
+dfu
+```
+
 ## Directory Structure
 
 ```

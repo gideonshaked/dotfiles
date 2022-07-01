@@ -53,6 +53,17 @@ latexwc() {
     detex "$1" | wc "$wc_opts"
 }
 
+# Run both server management programs
+servermg() {
+    echo "Running 'aup'"
+    echo
+    aup
+    echo
+    echo "Running 'dup'"
+    echo
+    dup
+}
+
 # Clear temporary files
 clrtmp() {
     rm $HOME/tmp/dl/* -rf

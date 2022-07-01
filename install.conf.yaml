@@ -28,7 +28,6 @@
     ~/.hyper.js: term/hyper.js
     ~/.config/Code/User/settings.json: vscode/settings.json
     ~/.config/Code/User/keybindings.json: vscode/keybindings.json
-    ~/.ssh/config: ssh/config
     ~/.shell: shell/shell/*
     ~/.bashrc: shell/bashrc
     ~/.bash_profile: shell/bash_profile

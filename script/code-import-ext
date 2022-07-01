@@ -10,9 +10,11 @@ not_installed_exts() {
 }
 
 install_exts() {
-    while IFS= read -r extension; do
-        code --install-extension "$extension"
-    done <<< "$1"
+    if [[ -n "$extensions_not_installed" ]]; then
+        while IFS= read -r extension; do
+            code --install-extension "$extension"
+        done <<< "$1"
+    fi
 }
 
 main() {

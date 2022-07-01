@@ -26,3 +26,18 @@ eval "$(thefuck --alias)"
 
 # Issue with pre-commit (see https://github.com/PyCQA/isort/issues/1874)
 export SETUPTOOLS_USE_DISTUTILS=stdlib
+
+# Conda
+# Inserted into ~/.bashrc by `conda init bash`
+__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+conda deactivate

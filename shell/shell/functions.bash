@@ -33,9 +33,14 @@ xin() {
 }
 
 # Add current conda env to jupyter notebook
-add2jupyter() {
-    conda install -n "$CONDA_DEFAULT_ENV" ipykernel
+addtojupyter() {
+    python -m pip install ipykernel
     python -m ipykernel install --user --name "$CONDA_DEFAULT_ENV" --display-name "Python ($CONDA_DEFAULT_ENV)"
+}
+
+# Remove current conda env from jupyter notebook
+removefromjupyter() {
+    rm ~/.local/share/jupyter/kernels/test/ -rf
 }
 
 # Create file and directories on path to file if none exist

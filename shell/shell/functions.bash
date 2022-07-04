@@ -69,11 +69,26 @@ servermg() {
     dup
 }
 
+# Clear downloads
+clrdl() {
+    rm $HOME/tmp/dl/* -rf
+}
+
+# Clear bluetooth transfers
+clrblt() {
+    rm $HOME/tmp/bluetooth/* -rf
+}
+
+# Clear misc temp files
+clrmisc() {
+    rm $HOME/tmp/misc/* -rf
+}
+
 # Clear temporary files
 clrtmp() {
-    rm $HOME/tmp/dl/* -rf
-    rm $HOME/tmp/bluetooth/* -rf
-    rm $HOME/tmp/misc/* -rf
+    clrdl
+    clrblt
+    clrmisc
 }
 
 ## Dotfile management ##

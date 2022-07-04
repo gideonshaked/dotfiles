@@ -78,5 +78,8 @@
     "vscode-json-editor.theme": "dark",
     "shellcheck.customArgs": [
         "--shell bash"
-    ]
+    ],
+    "[javascript]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    }
 }

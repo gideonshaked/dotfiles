@@ -32,6 +32,7 @@ rashwell.tcl
 redhat.java
 redhat.vscode-yaml
 timonwong.shellcheck
+trond-snekvik.simple-rst
 VisualStudioExptTeam.vscodeintellicode
 vscjava.vscode-java-debug
 vscjava.vscode-java-dependency

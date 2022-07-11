@@ -24,6 +24,12 @@ source /usr/bin/virtualenvwrapper.sh
 # The Fuck
 eval "$(thefuck --alias)"
 
+# rbenv
+eval "$(rbenv init - bash)"
+
+# Starship
+eval "$(starship init bash)"
+
 # Issue with pre-commit (see https://github.com/PyCQA/isort/issues/1874)
 export SETUPTOOLS_USE_DISTUTILS=stdlib
 

@@ -37,7 +37,6 @@ dfu
 ├── jupyter     <- Jupyter Notebook configuration
 ├── manifest    <- requirements.txt with dev tools
 ├── shell       <- Shell startup files
-├── term        <- Starship and Hyper configuration
 └── vscode      <- VS Code configuration and extensions list
 ```
 

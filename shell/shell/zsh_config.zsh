@@ -2,6 +2,8 @@
 # Confgure Zsh options and plugins
 #
 
+ZSH=/usr/share/oh-my-zsh # Oh-my-zsh
+
 ## Prompt
 source "$HOME/.p10k.zsh"
 
@@ -26,7 +28,6 @@ zstyle ':completion:*' rehash true                              # automatically 
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
-HISTFILE="$HOME/.zhistory"
 HISTSIZE=10000
 SAVEHIST=10000
 
@@ -34,12 +35,13 @@ SAVEHIST=10000
 plugins=(
     gh
     copyfile
-    copydir
+    colorize
     systemd
     sudo
     web-search
     zsh-autosuggestions
 )
+source $ZSH/oh-my-zsh.sh  # Oh-my-zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  # Syntax highlighting
 
 ## Theme

@@ -19,7 +19,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 export WORKON_HOME="$HOME/.virtualenvs"
 export PROJECT_HOME="$PROJECTS"
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source /usr/bin/virtualenvwrapper.sh
+source "$HOME/.local/bin/virtualenvwrapper.sh"
 
 # The Fuck
 eval "$(thefuck --alias)"

@@ -75,8 +75,8 @@ clrdl() {
 }
 
 # Clear bluetooth transfers
-clrblt() {
-    rm $HOME/tmp/bluetooth/* -rf
+clrkde() {
+    rm $HOME/tmp/kdeconnect/* -rf
 }
 
 # Clear misc temp files
@@ -87,7 +87,7 @@ clrmisc() {
 # Clear temporary files
 clrtmp() {
     clrdl
-    clrblt
+    clrkde
     clrmisc
 }
 

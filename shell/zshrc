@@ -20,4 +20,3 @@ source "$HOME/.shell/aliases.zsh"
 source "$HOME/.shell/path.zsh"
 
 source "$HOME/.shell/completions.zsh"
-

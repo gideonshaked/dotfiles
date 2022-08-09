@@ -61,3 +61,5 @@
 	smudge = git-lfs smudge -- %f
 [gpg]
 	program = gpg
+[safe]
+        directory = *

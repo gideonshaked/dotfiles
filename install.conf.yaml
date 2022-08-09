@@ -15,7 +15,7 @@
     - command: script/code-import-ext
       stdout: true
       stderr: true
-      description: Install VS Code extensions    
+      description: Install VS Code extensions
 
 - link:
     ~/bin/: bin/*
@@ -29,5 +29,4 @@
     ~/.config/Code/User/settings.json: vscode/settings.json
     ~/.config/Code/User/keybindings.json: vscode/keybindings.json
     ~/.shell: shell/shell/*
-    ~/.bashrc: shell/bashrc
-    ~/.bash_profile: shell/bash_profile
+    ~/.zshrc: shell/zshrc

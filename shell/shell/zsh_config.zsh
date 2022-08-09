@@ -40,9 +40,10 @@ plugins=(
     sudo
     web-search
     zsh-autosuggestions
+    zsh-wakatime
 )
 source $ZSH/oh-my-zsh.sh  # Oh-my-zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  # Syntax highlighting
+source $ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  # Syntax highlighting
 
 ## Theme
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme

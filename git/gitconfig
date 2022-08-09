@@ -62,4 +62,4 @@
 [gpg]
 	program = gpg
 [safe]
-        directory = *
+    directory = *

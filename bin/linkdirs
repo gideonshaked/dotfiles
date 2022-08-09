@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#
+# Links directories from /storage/user-dirs to home directory
+#
+
+for dir in /storage/user-dirs/*; do
+    echo "Linking $dir to ~/$(basename $dir)"
+    ln -s "$dir" "$HOME/$(basename $dir)"
+done

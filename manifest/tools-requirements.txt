@@ -1,7 +1,7 @@
 # Tools installable by pip that are NOT installable from the Arch repos
 
-nbdime
 black
-pre-commit
 flake8
+nbdime
+pre-commit
 virtualenvwrapper

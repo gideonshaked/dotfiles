@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Links directories from /storage/user-dirs to home directory
+# Symlink directories from /storage/user-dirs to home directory
 #
 
 for dir in /storage/user-dirs/*; do

@@ -20,3 +20,7 @@ alias clip="xclip -selection c"
 
 # Something SFW
 alias oops="fuck"
+
+# Turn on/off fractional scaling
+alias fracon="gsettings set org.gnome.mutter experimental-features \"['x11-randr-fractional-scaling']\""
+alias fracoff="gsettings reset org.gnome.mutter experimental-features"

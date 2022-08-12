@@ -29,7 +29,11 @@ open() {
 
 # Execute a command in a specific directory
 xin() {
-    cd "${1}" && shift && "${@}"
+    original_dir=$(pwd)
+    cd "$1"
+    shift
+    "${@}"
+    cd "$original_dir"
 }
 
 # Add current conda env to jupyter notebook

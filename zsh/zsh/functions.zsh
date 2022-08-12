@@ -75,16 +75,19 @@ servermg() {
 
 # Clear downloads
 clrdl() {
+    setopt localoptions rmstarsilent
     rm $HOME/tmp/dl/* -rf
 }
 
 # Clear bluetooth transfers
 clrkde() {
+    setopt localoptions rmstarsilent
     rm $HOME/tmp/kdeconnect/* -rf
 }
 
 # Clear misc temp files
 clrmisc() {
+    setopt localoptions rmstarsilent
     rm $HOME/tmp/misc/* -rf
 }
 

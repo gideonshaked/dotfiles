@@ -9,14 +9,14 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-source "$HOME/.shell/zsh_config.zsh"
+source "$HOME/.zsh/zsh_config.zsh"
 
-source "$HOME/.shell/setup.zsh"
+source "$HOME/.zsh/setup.zsh"
 
-source "$HOME/.shell/functions.zsh"
+source "$HOME/.zsh/functions.zsh"
 
-source "$HOME/.shell/aliases.zsh"
+source "$HOME/.zsh/aliases.zsh"
 
-source "$HOME/.shell/path.zsh"
+source "$HOME/.zsh/path.zsh"
 
-source "$HOME/.shell/completions.zsh"
+source "$HOME/.zsh/completions.zsh"

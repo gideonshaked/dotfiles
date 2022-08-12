@@ -30,5 +30,6 @@
     ~/.config/Code/User/keybindings.json: vscode/keybindings.json
 
     ~/bin/: bin/*
-    ~/.shell: shell/shell/*
-    ~/.zshrc: shell/zshrc
+    ~/.zsh: zsh/zsh/*
+    ~/.zshrc: zsh/zshrc
+    ~/.p10k.zsh: zsh/p10k.zsh

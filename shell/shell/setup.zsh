@@ -50,8 +50,8 @@ source "$HOME/.local/bin/virtualenvwrapper.sh"
 export SETUPTOOLS_USE_DISTUTILS=stdlib
 
 # Conda
-# Inserted into ~/.bashrc by `conda init bash`
-__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+# Inserted into ~/.zshrc by `conda init zsh`
+__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else

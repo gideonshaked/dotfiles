@@ -1,5 +1,5 @@
 #
-# Set up various programs
+# Configure external tools
 #
 
 # Projects directory

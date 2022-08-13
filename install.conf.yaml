@@ -4,7 +4,7 @@
       create: true
       glob: true
 
-- clean: ["~"]
+- clean: ["~", "~/.zsh", "~/bin"]
 
 - shell:
     - git submodule sync --recursive

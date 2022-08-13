@@ -11,7 +11,7 @@ fi
 
 source "$HOME/.zsh/zsh_config.zsh"
 
-source "$HOME/.zsh/setup.zsh"
+source "$HOME/.zsh/external.zsh"
 
 source "$HOME/.zsh/functions.zsh"
 

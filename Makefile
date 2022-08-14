@@ -1,10 +1,4 @@
-.PHONY: test clean lint
-
-test:
-	mkdir -p ~/dotfiles-install-dir
-	export HOME=~/dotfiles-install-dir
-	chmod +x ./install
-	./install
+.PHONY: clean lint
 
 clean:
 	find . -type f -name "*.py[co]" -delete

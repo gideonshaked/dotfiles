@@ -8,7 +8,7 @@
 
 - shell:
     - git submodule sync --recursive
-    - git submodule update --recursive
+    - git submodule update --init --recursive
     - command: pip3 install --upgrade -r bin/requirements.txt
       stdout: true
       description: Install dependencies for scripts in ~/bin

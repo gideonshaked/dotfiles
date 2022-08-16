@@ -19,7 +19,7 @@ eval "$(dircolors -b)"
 alias cp="cp -i"
 
 # df
-alias df="d -h"
+alias df="df -h"
 
 # free
 alias free="free -m"

@@ -73,6 +73,21 @@ servermg() {
     dup
 }
 
+# Start Virtualbox VM
+startvm() {
+    vboxmanage startvm "$1" --type headless
+}
+
+# Stop Virtualbox VM
+stopvm() {
+    vboxmanage controlvm "$1" acpipowerbutton
+}
+
+# Check Virtualbox VM status
+vmstatus() {
+    vboxmanage showvminfo "$1" | grep --color=never State
+}
+
 # Clear downloads
 clrdl() {
     setopt localoptions rmstarsilent

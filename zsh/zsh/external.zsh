@@ -5,6 +5,17 @@
 # Projects directory
 export PROJECTS="$HOME/src"
 
+# Make topical directories available as environment variables
+source "$HOME/.config/user-dirs.dirs"
+export XDG_DESKTOP_DIR
+export XDG_DOWNLOAD_DIR
+export XDG_TEMPLATES_DIR
+export XDG_PUBLICSHARE_DIR
+export XDG_DOCUMENTS_DIR
+export XDG_MUSIC_DIR
+export XDG_PICTURES_DIR
+export XDG_VIDEOS_DIR
+
 # chmod
 alias chmox="chmod +x"
 

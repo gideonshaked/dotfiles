@@ -82,5 +82,6 @@
     "[javascript]": {
         "editor.defaultFormatter": "xaver.clang-format"
     },
-    "security.workspace.trust.enabled": false
+    "security.workspace.trust.enabled": false,
+    "clang-format.fallbackStyle": "WebKit"
 }

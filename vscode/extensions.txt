@@ -3,6 +3,7 @@ asciidoctor.asciidoctor-vscode
 bdavs.expect
 bungcip.better-toml
 coolbear.systemd-unit-file
+cschlosser.doxdocgen
 cstrachan.vcard
 DavidWang.ini-for-vscode
 ericadamski.carbon-now-sh
@@ -21,7 +22,10 @@ ms-python.vscode-pylance
 ms-toolsai.jupyter
 ms-toolsai.jupyter-keymap
 ms-toolsai.jupyter-renderers
+ms-vscode.cmake-tools
 ms-vscode.cpptools
+ms-vscode.cpptools-extension-pack
+ms-vscode.cpptools-themes
 ms-vscode.powershell
 myh.preview-vscode
 nickdemayo.vscode-json-editor
@@ -33,6 +37,7 @@ redhat.java
 redhat.vscode-yaml
 timonwong.shellcheck
 trond-snekvik.simple-rst
+twxs.cmake
 VisualStudioExptTeam.vscodeintellicode
 vscjava.vscode-java-debug
 vscjava.vscode-java-dependency

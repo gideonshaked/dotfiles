@@ -83,5 +83,8 @@
         "editor.defaultFormatter": "xaver.clang-format"
     },
     "security.workspace.trust.enabled": false,
-    "clang-format.fallbackStyle": "WebKit"
+    "clang-format.fallbackStyle": "WebKit",
+    "[c]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    }
 }

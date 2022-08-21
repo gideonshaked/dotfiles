@@ -17,6 +17,11 @@ v() {
     code "$PROJECTS/$1"
 }
 
+# Quickly open VS code in the current directory
+vwd() {
+    code $(pwd)
+}
+
 # List everything in the current directory with nice defaults
 d() {
     du --human-readable --all --max-depth 1 "$@" | sort --human-numeric-sort --reverse

@@ -22,6 +22,7 @@
     ~/.aws/config: aws/config
 
     ~/.gitconfig: git/gitconfig
+    ~/.git-identities: git/git-identities
     ~/.gitalias.txt: git/gitalias/gitalias.txt
     ~/.gitattributes: git/gitattributes
 
@@ -30,7 +31,7 @@
     ~/.config/Code/User/settings.json: vscode/settings.json
     ~/.config/Code/User/keybindings.json: vscode/keybindings.json
 
-    ~/bin/: bin/*
-    ~/.zsh: zsh/zsh/*
+    ~/bin: bin
+    ~/.zsh: zsh/zsh
     ~/.zshrc: zsh/zshrc
     ~/.p10k.zsh: zsh/p10k.zsh

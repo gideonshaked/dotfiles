@@ -4,13 +4,13 @@
 #
 
 for dir in /storage/user-dirs/*; do
-	dir_link="$HOME/$(basename $dir)"
+    dir_link="$HOME/$(basename $dir)"
     echo "Linking $dir to $dir_link"
     if [[ -d "$dir_link" ]]
     then
-		echo "$dir_link already exists"
+        echo "$dir_link already exists"
     else
-    	ln -s "$dir" "$HOME/$(basename $dir)"
-    	echo "Success!"
+        ln -s "$dir" "$HOME/$(basename $dir)"
+        echo "Success!"
     fi
 done

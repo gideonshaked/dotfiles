@@ -1,20 +1,42 @@
+# Main identity
 [user]
 	email = gideonshaked@gmail.com
 	name = Gideon Shaked
 	signingkey = 4F60C96390E6E336
 
+# Umich identity
 [includeIf "gitdir:~/umich/"]
     path = ~/.gitidentities/umich
+
+# https://github.com/GitAlias/gitalias
+[include]
+	path = ~/.gitalias.txt
+
+# bin/git-nuke
+[alias]
+	nuke = !git-nuke
+	tag = tag -s
 
 [core]
 	attributesfile = ~/.gitattributes
 
-[include]
-	path = ~/.gitalias.txt
+[gpg]
+	program = gpg
 
-[alias]
-	nuke = !git-nuke
-	tag = tag -s
+[safe]
+    directory = *
+
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+
+[diff "jupyternotebook"]
+	command = git-nbdiffdriver diff
+
+[merge "jupyternotebook"]
+	command = git-nbmergedriver merge %O %A %B %L %P
 
 [commit]
 	gpgsign = true
@@ -24,12 +46,6 @@
 
 [push]
 	default = upstream
-
-[diff "jupyternotebook"]
-	command = git-nbdiffdriver diff
-
-[merge "jupyternotebook"]
-	command = git-nbmergedriver merge %O %A %B %L %P
 
 [color]
 	branch = auto
@@ -56,15 +72,3 @@
 
 [format]
     pretty = %C(yellow)%h%Creset %C(magenta)%cd%Creset %an <%ae> %C(cyan)%s%Creset%C(yellow)%d%Creset%n
-
-[filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	
-[gpg]
-	program = gpg
-
-[safe]
-    directory = *

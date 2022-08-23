@@ -1,0 +1,4 @@
+# Conditions for alternate identities
+
+[includeIf "gitdir:~/umich/"]
+    path = ./umich

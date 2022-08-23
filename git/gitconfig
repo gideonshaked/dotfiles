@@ -4,9 +4,9 @@
 	name = Gideon Shaked
 	signingkey = 4F60C96390E6E336
 
-# Umich identity
-[includeIf "gitdir:~/umich/"]
-    path = ~/.gitidentities/umich
+# Alternate identities
+[include]
+	path = ~/.gitidentities/identities
 
 # https://github.com/GitAlias/gitalias
 [include]

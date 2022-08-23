@@ -4,7 +4,7 @@
 	signingkey = 4F60C96390E6E336
 
 [includeIf "gitdir:~/umich/"]
-    path = ~/.git-identities/gitconfig-umich
+    path = ~/.gitidentities/umich
 
 [core]
 	attributesfile = ~/.gitattributes

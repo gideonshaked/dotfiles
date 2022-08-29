@@ -91,6 +91,15 @@ vmstatus() {
     vboxmanage showvminfo "$1" | grep --color=never State
 }
 
+# Use Openvpn with a VPN profile
+vpn() {
+    if [[ $# -eq 0 ]]; then
+        sudo openvpn --config /etc/openvpn/client/US_East.conf
+    else
+        sudo openvpn --config /etc/openvpn/client/"$1"
+    fi
+}
+
 # Clear downloads
 clrdl() {
     setopt localoptions rmstarsilent

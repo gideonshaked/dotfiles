@@ -13,6 +13,8 @@ James-Yu.latex-workshop
 jeff-hykin.better-cpp-syntax
 kiteco.kite
 lextudio.restructuredtext
+lizheng.auto-insert-semicolon
+luveti.kconfig
 luyizhi.vscode-jsonp
 mads-hartmann.bash-ide-vscode
 miguelsolorio.fluent-icons
@@ -22,11 +24,14 @@ ms-python.vscode-pylance
 ms-toolsai.jupyter
 ms-toolsai.jupyter-keymap
 ms-toolsai.jupyter-renderers
+ms-vscode-remote.remote-ssh
+ms-vscode-remote.remote-ssh-edit
 ms-vscode.cmake-tools
 ms-vscode.cpptools
 ms-vscode.cpptools-extension-pack
 ms-vscode.cpptools-themes
 ms-vscode.powershell
+ms-vscode.remote-repositories
 myh.preview-vscode
 nickdemayo.vscode-json-editor
 nickfode.latex-formatter
@@ -38,6 +43,7 @@ redhat.vscode-yaml
 timonwong.shellcheck
 trond-snekvik.simple-rst
 twxs.cmake
+VisualStudioExptTeam.intellicode-api-usage-examples
 VisualStudioExptTeam.vscodeintellicode
 vscjava.vscode-java-debug
 vscjava.vscode-java-dependency

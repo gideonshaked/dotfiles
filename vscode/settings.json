@@ -64,13 +64,13 @@
         "editor.defaultFormatter": "James-Yu.latex-workshop"
     },
     "python.defaultInterpreterPath": "/usr/bin/python3",
-    "latex-workshop.latex.autoBuild.run": "never",
     "editor.inlineSuggest.enabled": true,
     "github.copilot.enable": {
         "*": true,
         "yaml": true,
         "plaintext": false,
-        "markdown": false
+        "markdown": false,
+        "latex": true
     },
     "workbench.iconTheme": "material-icon-theme",
     "material-icon-theme.folders.theme": "specific",
@@ -86,5 +86,6 @@
     "clang-format.fallbackStyle": "WebKit",
     "[c]": {
         "editor.defaultFormatter": "xaver.clang-format"
-    }
+    },
+    "editor.minimap.enabled": false
 }

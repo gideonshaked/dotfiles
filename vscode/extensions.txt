@@ -36,10 +36,13 @@ myh.preview-vscode
 nickdemayo.vscode-json-editor
 nickfode.latex-formatter
 njpwerner.autodocstring
+njqdev.vscode-python-typehint
 PKief.material-icon-theme
 rashwell.tcl
+RDebugger.r-debugger
 redhat.java
 redhat.vscode-yaml
+REditorSupport.r
 timonwong.shellcheck
 trond-snekvik.simple-rst
 twxs.cmake

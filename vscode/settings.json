@@ -75,7 +75,6 @@
     },
     "workbench.iconTheme": "material-icon-theme",
     "material-icon-theme.folders.theme": "specific",
-    "workbench.colorTheme": "Monokai Dimmed",
     "vscode-json-editor.theme": "dark",
     "shellcheck.customArgs": [
         "--shell bash"
@@ -88,6 +87,12 @@
     "[c]": {
         "editor.defaultFormatter": "xaver.clang-format"
     },
-    "editor.minimap.enabled": false,
-    "debug.onTaskErrors": "abort"
+    "debug.onTaskErrors": "abort",
+    "terminal.external.linuxExec": "kitty",
+    "terminal.explorerKind": "external",
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true
+    },
+    "C_Cpp.enhancedColorization": "Enabled",
+    "workbench.colorTheme": "Monokai Dimmed"
 }

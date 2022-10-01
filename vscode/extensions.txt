@@ -6,7 +6,9 @@ coolbear.systemd-unit-file
 cschlosser.doxdocgen
 cstrachan.vcard
 DavidWang.ini-for-vscode
+enkia.tokyo-night
 ericadamski.carbon-now-sh
+evgeniypeshkov.syntax-highlighter
 ferhatgec.flascript
 GitHub.copilot
 James-Yu.latex-workshop
@@ -29,7 +31,6 @@ ms-vscode-remote.remote-ssh-edit
 ms-vscode.cmake-tools
 ms-vscode.cpptools
 ms-vscode.cpptools-extension-pack
-ms-vscode.cpptools-themes
 ms-vscode.powershell
 ms-vscode.remote-repositories
 myh.preview-vscode
@@ -37,6 +38,7 @@ nickdemayo.vscode-json-editor
 nickfode.latex-formatter
 njpwerner.autodocstring
 njqdev.vscode-python-typehint
+peaceshi.syntax-highlight
 PKief.material-icon-theme
 rashwell.tcl
 RDebugger.r-debugger
@@ -55,3 +57,4 @@ vscjava.vscode-java-test
 vscjava.vscode-maven
 WakaTime.vscode-wakatime
 xaver.clang-format
+zhuangtongfa.material-theme

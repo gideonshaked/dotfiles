@@ -33,6 +33,9 @@ ms-vscode.cpptools
 ms-vscode.cpptools-extension-pack
 ms-vscode.powershell
 ms-vscode.remote-repositories
+ms-vsliveshare.vsliveshare
+ms-vsliveshare.vsliveshare-audio
+ms-vsliveshare.vsliveshare-pack
 myh.preview-vscode
 nickdemayo.vscode-json-editor
 nickfode.latex-formatter
@@ -48,6 +51,7 @@ REditorSupport.r
 timonwong.shellcheck
 trond-snekvik.simple-rst
 twxs.cmake
+usernamehw.highlight-logical-line
 VisualStudioExptTeam.intellicode-api-usage-examples
 VisualStudioExptTeam.vscodeintellicode
 vscjava.vscode-java-debug
@@ -56,5 +60,5 @@ vscjava.vscode-java-pack
 vscjava.vscode-java-test
 vscjava.vscode-maven
 WakaTime.vscode-wakatime
+wengerk.highlight-bad-chars
 xaver.clang-format
-zhuangtongfa.material-theme

@@ -2,7 +2,6 @@
     "workbench.startupEditor": "newUntitledFile",
     "git.enableSmartCommit": true,
     "git.autofetch": true,
-    "diffEditor.ignoreTrimWhitespace": false,
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "python.showStartPage": false,
@@ -94,5 +93,5 @@
         "enabled": true
     },
     "C_Cpp.enhancedColorization": "Enabled",
-    "workbench.colorTheme": "Monokai Dimmed"
+    "workbench.colorTheme": "Syntax Material Dark Level 1 (beta)"
 }

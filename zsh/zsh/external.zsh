@@ -51,12 +51,6 @@ eval "$(thefuck --alias)"
 # rbenv
 eval "$(rbenv init - zsh)"
 
-# Virtualenvwrapper
-export WORKON_HOME="$HOME/.virtualenvs"
-export PROJECT_HOME="$PROJECTS"
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source "$HOME/.local/bin/virtualenvwrapper.sh"
-
 # pre-commit fix (see https://github.com/PyCQA/isort/issues/1874)
 export SETUPTOOLS_USE_DISTUTILS=stdlib
 

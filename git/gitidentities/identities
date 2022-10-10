@@ -1,4 +1,8 @@
 # Conditions for alternate identities
 
+# UMich
 [includeIf "gitdir:~/umich/"]
-    path = ./umich
+    path = ~/.gitidentities/umich
+[includeIf "gitdir:/storage/user-dirs/umich/"]
+    path = ~/.gitidentities/umich
+    

@@ -10,21 +10,13 @@
         "--line-length",
         "120"
     ],
+    "python.pythonPath": "/usr/bin/python3",
+    "python.defaultInterpreterPath": "/usr/bin/python3",
     "shellcheck.executablePath": "/usr/bin/shellcheck",
     "editor.formatOnSave": true,
-    "python.testing.pytestEnabled": false,
     "kite.showWelcomeNotificationOnStartup": false,
-    "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "java.configuration.checkProjectSettingsExclusions": false,
     "editor.renderControlCharacters": false,
     "python.languageServer": "Pylance",
-    "settingsSync.ignoredExtensions": [
-        "kiteco.kite"
-    ],
-    "sourcery.token": "user_JorBhfdCuYHrsuGpN73C_S3HfJDyqp_JFyYqlPwTe0ds_c21Ixd6_tVtV1s",
-    "java.refactor.renameFromFileExplorer": "preview",
-    "C_Cpp.updateChannel": "Insiders",
     "[cpp]": {
         "editor.defaultFormatter": "xaver.clang-format"
     },
@@ -42,28 +34,11 @@
     "markdownlint.config": {
         "MD033": false
     },
-    "files.associations": {
-        "bash_profile": "shellscript",
-        "bashrc": "shellscript",
-        "install-starship": "shellscript",
-        "install-profile": "shellscript",
-        "install-standalone": "shellscript",
-        "*.spec": "python",
-        "*.rmd": "markdown"
-    },
-    "python.testing.promptToConfigure": false,
-    "python.pythonPath": "/usr/bin/python3",
-    "docker.showStartPage": false,
-    "notebook.cellToolbarLocation": {
-        "default": "right",
-        "jupyter-notebook": "left"
-    },
     "latex-workshop.view.pdf.viewer": "tab",
     "redhat.telemetry.enabled": false,
     "[latex]": {
         "editor.defaultFormatter": "James-Yu.latex-workshop"
     },
-    "python.defaultInterpreterPath": "/usr/bin/python3",
     "editor.inlineSuggest.enabled": true,
     "github.copilot.enable": {
         "*": true,
@@ -72,9 +47,6 @@
         "markdown": false,
         "latex": false
     },
-    "workbench.iconTheme": "material-icon-theme",
-    "material-icon-theme.folders.theme": "specific",
-    "vscode-json-editor.theme": "dark",
     "shellcheck.customArgs": [
         "--shell bash"
     ],
@@ -87,11 +59,26 @@
         "editor.defaultFormatter": "xaver.clang-format"
     },
     "debug.onTaskErrors": "abort",
-    "terminal.external.linuxExec": "kitty",
-    "terminal.explorerKind": "external",
     "editor.semanticTokenColorCustomizations": {
         "enabled": true
     },
+    "files.associations": {
+        "bash_profile": "shellscript",
+        "bashrc": "shellscript",
+        "install-starship": "shellscript",
+        "install-profile": "shellscript",
+        "install-standalone": "shellscript",
+        "*.spec": "python",
+        "*.rmd": "markdown"
+    },
+    "docker.showStartPage": false,
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "workbench.iconTheme": "material-icon-theme",
+    "material-icon-theme.folders.theme": "specific",
+    "vscode-json-editor.theme": "dark",
     "C_Cpp.enhancedColorization": "Enabled",
     "workbench.colorTheme": "Syntax Material Dark Level 1 (beta)",
     "editor.semanticHighlighting.enabled": true,

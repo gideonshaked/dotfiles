@@ -12,8 +12,9 @@ evgeniypeshkov.syntax-highlighter
 ferhatgec.flascript
 GitHub.copilot
 James-Yu.latex-workshop
-kiteco.kite
+jeff-hykin.better-cpp-syntax
 lextudio.restructuredtext
+llvm-vs-code-extensions.vscode-clangd
 luveti.kconfig
 luyizhi.vscode-jsonp
 mads-hartmann.bash-ide-vscode
@@ -29,7 +30,9 @@ ms-toolsai.vscode-jupyter-slideshow
 ms-vscode-remote.remote-ssh
 ms-vscode-remote.remote-ssh-edit
 ms-vscode.cmake-tools
+ms-vscode.cpptools
 ms-vscode.cpptools-extension-pack
+ms-vscode.cpptools-themes
 ms-vscode.powershell
 ms-vscode.remote-repositories
 ms-vsliveshare.vsliveshare
@@ -47,12 +50,14 @@ RDebugger.r-debugger
 redhat.java
 redhat.vscode-yaml
 REditorSupport.r
+tdennis4496.cmantic
 timonwong.shellcheck
 trond-snekvik.simple-rst
 twxs.cmake
 usernamehw.highlight-logical-line
 VisualStudioExptTeam.intellicode-api-usage-examples
 VisualStudioExptTeam.vscodeintellicode
+VisualStudioExptTeam.vscodeintellicode-completions
 vscjava.vscode-java-debug
 vscjava.vscode-java-dependency
 vscjava.vscode-java-pack

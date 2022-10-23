@@ -82,5 +82,9 @@
     "C_Cpp.enhancedColorization": "Enabled",
     "workbench.colorTheme": "Syntax Material Dark Level 1 (beta)",
     "editor.semanticHighlighting.enabled": true,
-    "python.linting.pylintCategorySeverity.refactor": "Information"
+    "python.linting.pylintCategorySeverity.refactor": "Information",
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "latex-utilities.message.update.show": false,
+    "latex-utilities.countWord.format": "${words} Words, ${chars} Chars",
+    "editor.minimap.enabled": false
 }

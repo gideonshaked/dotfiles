@@ -1,4 +1,4 @@
-# Dotfiles 
+# Dotfiles
 
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/gideonshaked/dotfiles/master.svg)](https://results.pre-commit.ci/latest/github/gideonshaked/dotfiles/master)
 ![GitHub repo size](https://img.shields.io/github/repo-size/gideonshaked/dotfiles?color=orange)
@@ -32,9 +32,9 @@ dfu
 
 ```
 ├── aws         <- AWS config file
-├── bin         <- Personal executable scripts written in Bash and Python
 ├── git         <- Git configuration files (aliases, custom formatting, etc.)
 ├── jupyter     <- Jupyter Notebook configuration
+├── scripts     <- Personal scripts
 ├── manifest    <- requirements.txt with dev tools
 ├── vscode      <- VS Code configuration and extensions list
 └── zsh         <- Zsh startup files

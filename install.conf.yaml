@@ -9,10 +9,10 @@
 - shell:
     - git submodule sync --recursive
     - git submodule update --init --recursive
-    - command: pip3 install --upgrade -r bin/requirements.txt
+    - command: pip3 install --upgrade -r scripts/requirements.txt
       stdout: true
       stderr: true
-      description: Install dependencies for scripts in ~/bin
+      description: Install dependencies for scripts in ~/scripts
     - command: script/code-import-ext
       stdout: true
       stderr: true
@@ -21,17 +21,18 @@
 - link:
     ~/.aws/config: aws/config
 
-    ~/.gitconfig: git/gitconfig
-    ~/.gitidentities: git/gitidentities
-    ~/.gitalias.txt: git/gitalias/gitalias.txt
-    ~/.gitattributes: git/gitattributes
-
     ~/.jupyter/jupyter_notebook_config.py: jupyter/jupyter_notebook_config.py
 
-    ~/.config/Code/User/settings.json: vscode/settings.json
-    ~/.config/Code/User/keybindings.json: vscode/keybindings.json
+    ~/scripts: scripts
 
-    ~/bin: bin
+    ~/Library/Application Support/Code/User/settings.json: vscode/settings.json
+    ~/Library/Application Support/Code/User/keybindings.json: vscode/keybindings.json
+
     ~/.zsh: zsh/zsh
     ~/.zshrc: zsh/zshrc
     ~/.p10k.zsh: zsh/p10k.zsh
+
+    ~/.gitconfig: git/gitconfig
+    ~/.gitidentities: git/gitidentities
+    ~/.gitalias.txt: git/gitalias.txt
+    ~/.gitattributes: git/gitattributes

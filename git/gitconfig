@@ -1,18 +1,13 @@
-# Main identity
 [user]
 	email = gideonshaked@gmail.com
 	name = Gideon Shaked
 	signingkey = 4F60C96390E6E336
 
-# Alternate identities
-[include]
-	path = ~/.gitidentities/identities
-
 # https://github.com/GitAlias/gitalias
 [include]
 	path = ~/.gitalias.txt
 
-# bin/git-nuke
+# scripts/git-nuke
 [alias]
 	nuke = !git-nuke
 	tag = tag -s

@@ -1,31 +1,28 @@
 {
-    "workbench.startupEditor": "newUntitledFile",
+    "workbench.startupEditor": "none",
     "git.enableSmartCommit": true,
     "git.autofetch": true,
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
-    "python.showStartPage": false,
     "python.formatting.provider": "black",
     "python.formatting.blackArgs": [
         "--line-length",
         "120"
     ],
-    "python.pythonPath": "/usr/bin/python3",
     "python.defaultInterpreterPath": "/usr/bin/python3",
     "shellcheck.executablePath": "/usr/bin/shellcheck",
     "editor.formatOnSave": true,
-    "kite.showWelcomeNotificationOnStartup": false,
     "editor.renderControlCharacters": false,
     "python.languageServer": "Pylance",
     "[cpp]": {
-        "editor.defaultFormatter": "xaver.clang-format"
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+    },
+    "[c]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
     },
     "clang-format.language.cpp.style": "file",
     "git.confirmSync": false,
     "files.eol": "\n",
-    "restructuredtext.confPath": "",
-    "jupyter.sendSelectionToInteractiveWindow": false,
-    "jupyter.alwaysTrustNotebooks": true,
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
@@ -55,9 +52,6 @@
     },
     "security.workspace.trust.enabled": false,
     "clang-format.fallbackStyle": "WebKit",
-    "[c]": {
-        "editor.defaultFormatter": "xaver.clang-format"
-    },
     "debug.onTaskErrors": "abort",
     "editor.semanticTokenColorCustomizations": {
         "enabled": true
@@ -69,9 +63,9 @@
         "install-profile": "shellscript",
         "install-standalone": "shellscript",
         "*.spec": "python",
-        "*.rmd": "markdown"
+        "*.rmd": "markdown",
+        "identities": "gitconfig"
     },
-    "docker.showStartPage": false,
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
@@ -79,7 +73,7 @@
     "workbench.iconTheme": "material-icon-theme",
     "material-icon-theme.folders.theme": "specific",
     "vscode-json-editor.theme": "dark",
-    "C_Cpp.enhancedColorization": "Enabled",
+    "C_Cpp.enhancedColorization": "enabled",
     "workbench.colorTheme": "Syntax Material Dark Level 1 (beta)",
     "editor.semanticHighlighting.enabled": true,
     "python.linting.pylintCategorySeverity.refactor": "Information",

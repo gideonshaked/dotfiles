@@ -1,0 +1,33 @@
+host phobos
+	hostname redkayak.xyz
+	user administrator
+	port 333
+	identityfile ~/.ssh/id_ed25519_phobos
+
+host deimos
+	hostname redkayak.xyz
+	user administrator
+	port 3333
+	identityfile ~/.ssh/id_ed25519_deimos
+
+host playground-ubuntu
+	hostname 127.0.0.1
+	user gideon
+	port 8022
+	identityfile ~/.ssh/id_rsa_playground	
+
+host caen
+	hostname login.engin.umich.edu
+	user gshaked
+	controlmaster auto
+	controlpath ~/.ssh/master-%r@%h:%p
+
+host psor
+	hostname psoriasis.sph.umich.edu
+	user gshaked
+	IdentitiesOnly=yes
+
+Host github.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519_github

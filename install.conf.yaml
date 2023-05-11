@@ -21,9 +21,14 @@
 - link:
     ~/.aws/config: aws/config
 
+    ~/Library/Preferences/clangd/config.yaml: clang/config.yaml
+    ~/.clang-format: clang/clang-format
+
     ~/.jupyter/jupyter_notebook_config.py: jupyter/jupyter_notebook_config.py
 
     ~/scripts: scripts
+
+    ~/.ssh/config: ssh/config
 
     ~/Library/Application Support/Code/User/settings.json: vscode/settings.json
     ~/Library/Application Support/Code/User/keybindings.json: vscode/keybindings.json

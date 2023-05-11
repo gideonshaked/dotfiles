@@ -1,0 +1,93 @@
+# C/C++
+If:
+  PathMatch: [.*\.c, .*\.cc, .*\.cpp, .*\.cxx, .*\.h, .*\.hpp, .*\.inl]
+
+Diagnostics:
+  ClangTidy:
+    Add:
+      - bugprone*
+      - performance*
+      - readability*
+      - modernize*
+    Remove:
+      - readability-identifier-length
+      - readability-named-parameter
+      - readability-qualified-auto
+      - bugprone-easily-swappable-parameters
+      - readability-identifier-naming
+    CheckOptions:
+      readability-identifier-naming.VariableCase: camelBack
+# clangd 14
+  UnusedIncludes: Strict
+
+Completion:
+  AllScopes: No
+
+# clangd 14
+InlayHints:
+  Enabled: No
+  ParameterNames: No
+  DeducedTypes: No
+
+Hover:
+  ShowAKA: Yes
+---
+# C
+If:
+  PathMatch: [.*\.c, .*\.h]
+
+CompileFlags:
+  Add: [--std=c17, -Wall, -Wextra, -Wpedantic]
+---
+# C++
+If:
+  PathMatch: [.*\.cc, .*\.cpp, .*\.cxx, .*\.hpp, .*\.inl]
+
+CompileFlags:
+  Add: [--std=c++17, -Wall, -Wextra, -Wpedantic]
+
+Diagnostics:
+  ClangTidy:
+    Add:
+      - cppcoreguidelines*
+      - google-build-explicit-make-pair
+      - google-default-arguments
+      - google-readability-casting
+      - misc-redundant-expression
+      - misc-static-assert
+      - misc-throw-by-value-catch-by-reference
+    Remove:
+      - cppcoreguidelines-pro-bounds-array-to-pointer-decay
+      - modernize-use-trailing-return-type
+      - readability-implicit-bool-conversion
+      - cppcoreguidelines-init-variables
+      - modernize-avoid-c-arrays
+---
+# C source
+If:
+  PathMatch: [.*\.c]
+
+CompileFlags:
+  Add: [-xc]
+---
+# C header
+If:
+  PathMatch: [.*\.h]
+
+CompileFlags:
+  Add: [-xc-header]
+---
+# C++ source
+If:
+  PathMatch: [.*\.cc, .*\.cpp, .*\.cxx]
+
+CompileFlags:
+  Add: [-xc++]
+---
+# C++ header
+If:
+  PathMatch: [.*\.hpp, .*\.inl]
+
+CompileFlags:
+  Add: [-xc++-header]
+...

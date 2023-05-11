@@ -2,11 +2,9 @@
 # Configure Zsh
 #
 
-ZSH=/usr/share/oh-my-zsh  # Oh-my-zsh
-
 ## Powerlevel10k
+source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 source "$HOME/.p10k.zsh"
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 ## Options
 setopt correct                  								# Auto correct mistakes
@@ -35,13 +33,8 @@ SAVEHIST=10000
 ## Plugins
 plugins=(
     gh
-    copyfile
     colorize
-    systemd
-    sudo
-    web-search
     zsh-autosuggestions
     zsh-wakatime
+    sudo
 )
-source $ZSH/oh-my-zsh.sh  # Oh-my-zsh
-source $ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  # Syntax highlighting

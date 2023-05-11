@@ -3,18 +3,7 @@
 #
 
 # Projects directory
-export PROJECTS="$HOME/src"
-
-# Make topical directories available as environment variables
-source "$HOME/.config/user-dirs.dirs"
-export XDG_DESKTOP_DIR
-export XDG_DOWNLOAD_DIR
-export XDG_TEMPLATES_DIR
-export XDG_PUBLICSHARE_DIR
-export XDG_DOCUMENTS_DIR
-export XDG_MUSIC_DIR
-export XDG_PICTURES_DIR
-export XDG_VIDEOS_DIR
+export PROJECTS="$HOME/Documents/src"
 
 # chmod
 alias chmox="chmod +x"
@@ -24,7 +13,6 @@ alias ls="ls --color=auto"
 alias ll="ls -alF"
 alias la="ls -A"
 alias l="ls -CF"
-eval "$(dircolors -b)"
 
 # cp
 alias cp="cp -i"
@@ -55,18 +43,20 @@ eval "$(rbenv init - zsh)"
 export SETUPTOOLS_USE_DISTUTILS=stdlib
 
 # Conda
-# Inserted into ~/.zshrc by `conda init zsh`
-__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/opt/miniconda3/bin:$PATH"
+        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
+# <<< conda initialize <<<
 conda deactivate  # (not inserted)
 
 # Color man pages

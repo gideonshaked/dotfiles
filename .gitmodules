@@ -2,9 +2,3 @@
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
 	ignore = dirty
-[submodule "git/gitalias"]
-	path = git/gitalias
-	url = https://github.com/GitAlias/gitalias
-[submodule "git/git-fire"]
-	path = git/git-fire
-	url = https://github.com/qw3rtman/git-fire

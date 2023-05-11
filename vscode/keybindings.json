@@ -3,5 +3,14 @@
     {
         "key": "ctrl+shift+v",
         "command": "-extension.preview"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quickOpenView"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quickOpenNavigateNextInViewPicker",
+        "when": "inQuickOpen && inViewsPicker"
     }
 ]

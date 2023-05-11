@@ -32,9 +32,11 @@ dfu
 
 ```
 ├── aws         <- AWS config file
+├── clang       <- clang-format and clangd config
 ├── git         <- Git configuration files (aliases, custom formatting, etc.)
 ├── jupyter     <- Jupyter Notebook configuration
 ├── scripts     <- Personal scripts
+├── ssh         <- SSH config file
 ├── manifest    <- requirements.txt with dev tools
 ├── vscode      <- VS Code configuration and extensions list
 └── zsh         <- Zsh startup files

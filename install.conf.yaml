@@ -33,6 +33,5 @@
     ~/.p10k.zsh: zsh/p10k.zsh
 
     ~/.gitconfig: git/gitconfig
-    ~/.gitidentities: git/gitidentities
     ~/.gitalias.txt: git/gitalias.txt
     ~/.gitattributes: git/gitattributes

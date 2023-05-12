@@ -14,6 +14,7 @@
 
 [core]
 	attributesfile = ~/.gitattributes
+	excludesfile = /Users/gideonshaked/.gitignore
 
 [gpg]
 	program = gpg

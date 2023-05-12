@@ -40,3 +40,4 @@
     ~/.gitconfig: git/gitconfig
     ~/.gitalias.txt: git/gitalias.txt
     ~/.gitattributes: git/gitattributes
+    ~/.gitignore: git/gitignore

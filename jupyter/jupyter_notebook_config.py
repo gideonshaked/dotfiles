@@ -1,4 +1,5 @@
 # Configuration file for jupyter-notebook.
+# Right now the only config being used is on line 450
 
 c = get_config()  # noqa
 
@@ -447,7 +448,7 @@ c = get_config()  # noqa
 
 ## The directory to use for notebooks and kernels.
 #  Default: ''
-c.NotebookApp.notebook_dir = "/Users/gideonsahekd"
+c.NotebookApp.notebook_dir = "/Users/gideonshaked/"
 
 ## Whether to open in a browser after starting.
 #                          The specific browser used is platform dependent and

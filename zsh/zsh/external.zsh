@@ -3,7 +3,7 @@
 #
 
 # Projects directory
-export PROJECTS="$HOME/Documents/src"
+export PROJECTS="$HOME/Documents/dev-personal"
 
 # chmod
 alias chmox="chmod +x"

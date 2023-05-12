@@ -10,7 +10,6 @@
         "120"
     ],
     "python.defaultInterpreterPath": "/usr/bin/python3",
-    "shellcheck.executablePath": "/usr/bin/shellcheck",
     "editor.formatOnSave": true,
     "editor.renderControlCharacters": false,
     "python.languageServer": "Pylance",
@@ -80,5 +79,6 @@
     "C_Cpp.intelliSenseEngine": "disabled",
     "latex-utilities.message.update.show": false,
     "latex-utilities.countWord.format": "${words} Words, ${chars} Chars",
-    "editor.minimap.enabled": false
+    "editor.minimap.enabled": false,
+    "shellcheck.executablePath": "/opt/homebrew/bin/shellcheck"
 }

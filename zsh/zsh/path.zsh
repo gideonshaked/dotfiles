@@ -2,6 +2,9 @@
 # Set path
 #
 
+# ~/.local/bin
+path_prepend "$HOME/.local/bin"
+
 # User-provided executables
 path_prepend "$HOME/bin"
 path_prepend "$HOME/scripts"

@@ -2,10 +2,6 @@
 # Configure Zsh
 #
 
-## Powerlevel10k
-source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
-source "$HOME/.p10k.zsh"
-
 ## Options
 setopt correct                  								# Auto correct mistakes
 setopt extendedglob             								# Extended globbing. Allows using regular expressions with *
@@ -32,9 +28,21 @@ SAVEHIST=10000
 
 ## Plugins
 plugins=(
-    gh
-    colorize
-    zsh-autosuggestions
-    zsh-wakatime
-    sudo
+    gh                          # GitHub CLI autocomletion
+    colorize                    # Colorize cat / less
+    zsh-autosuggestions         # Suggest commands based on history
+    zsh-wakatime                # WakaTime plugin
+    sudo                        # Run previous command with sudo
+    zsh-syntax-highlighting     # Syntax highlighting for terminal input
 )
+
+## Oh-My-Zsh
+source "/Users/$(whoami)/.oh-my-zsh/oh-my-zsh.sh"
+
+## Powerlevel10k
+source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+source "$HOME/.p10k.zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+## Zsh Syntax Highlighting
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

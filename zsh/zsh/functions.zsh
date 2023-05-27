@@ -24,7 +24,7 @@ vwd() {
 
 # List everything in the current directory with nice defaults
 d() {
-    du --human-readable --all --max-depth 1 "$@" | sort --human-numeric-sort --reverse
+    du -h --all --max-depth 1 "$@" | sort --human-numeric-sort --reverse
 }
 
 # Start programs silently and without making them dependent on an open terminal
@@ -100,30 +100,6 @@ vpn() {
     fi
 }
 
-# Clear downloads
-clrdl() {
-    setopt localoptions rmstarsilent
-    rm $HOME/tmp/dl/* -rf
-}
-
-# Clear bluetooth transfers
-clrkde() {
-    setopt localoptions rmstarsilent
-    rm $HOME/tmp/kdeconnect/* -rf
-}
-
-# Clear misc temp files
-clrmisc() {
-    setopt localoptions rmstarsilent
-    rm $HOME/tmp/misc/* -rf
-}
-
-# Clear temporary files
-clrtmp() {
-    clrdl
-    clrkde
-    clrmisc
-}
 
 ## Dotfile management ##
 

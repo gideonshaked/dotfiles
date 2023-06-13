@@ -7,6 +7,7 @@ cstrachan.vcard
 DavidAnson.vscode-markdownlint
 DavidWang.ini-for-vscode
 donjayamanne.githistory
+dsznajder.es7-react-js-snippets
 enkia.tokyo-night
 ericadamski.carbon-now-sh
 evgeniypeshkov.syntax-highlighter
@@ -43,7 +44,6 @@ ms-vscode.powershell
 ms-vscode.remote-explorer
 ms-vscode.remote-repositories
 ms-vsliveshare.vsliveshare
-ms-vsliveshare.vsliveshare-audio
 myh.preview-vscode
 nickdemayo.vscode-json-editor
 nickfode.latex-formatter
@@ -56,7 +56,6 @@ RDebugger.r-debugger
 redhat.java
 redhat.vscode-yaml
 REditorSupport.r
-searKing.preview-vscode
 sidneys1.gitconfig
 SimonSiefke.svg-preview
 tdennis4496.cmantic
@@ -78,4 +77,5 @@ vscjava.vscode-java-test
 vscjava.vscode-maven
 WakaTime.vscode-wakatime
 wengerk.highlight-bad-chars
+xabikos.JavaScriptSnippets
 xaver.clang-format

@@ -10,7 +10,6 @@
         "120"
     ],
     "python.defaultInterpreterPath": "/usr/bin/python3",
-    "editor.formatOnSave": true,
     "editor.renderControlCharacters": false,
     "python.languageServer": "Pylance",
     "[cpp]": {
@@ -63,7 +62,8 @@
         "install-standalone": "shellscript",
         "*.spec": "python",
         "*.rmd": "markdown",
-        "identities": "gitconfig"
+        "identities": "gitconfig",
+        "*.format": "plaintext"
     },
     "notebook.cellToolbarLocation": {
         "default": "right",
@@ -80,5 +80,12 @@
     "latex-utilities.message.update.show": false,
     "latex-utilities.countWord.format": "${words} Words, ${chars} Chars",
     "editor.minimap.enabled": false,
-    "shellcheck.executablePath": "/opt/homebrew/bin/shellcheck"
+    "shellcheck.executablePath": "/opt/homebrew/bin/shellcheck",
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "files.watcherExclude": {
+        "**/node_modules/**": true
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    }
 }

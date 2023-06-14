@@ -75,7 +75,7 @@ export ZSH_WAKATIME_PROJECT_DETECTION=true
 # Make Kitty play nicely with SSH (see https://github.com/kovidgoyal/kitty/issues/1613#issuecomment-734753530)
 if test "$TERM" = "xterm-kitty"
 then
-    alias ssh="kitty +kitten ssh"
+    alias s="kitty +kitten ssh"
 fi
 
 # Make GPG work for git signing

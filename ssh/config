@@ -1,30 +1,31 @@
-host phobos
-	hostname redkayak.xyz
-	user administrator
-	port 333
-	identityfile ~/.ssh/id_ed25519_phobos
 
-host deimos
-	hostname redkayak.xyz
-	user administrator
-	port 3333
-	identityfile ~/.ssh/id_ed25519_deimos
+Host phobos
+	HostName redkayak.xyz
+	User administrator
+	Port 333
+	IdentityFile ~/.ssh/id_ed25519_phobos
 
-host playground-ubuntu
-	hostname 127.0.0.1
-	user gideon
-	port 8022
-	identityfile ~/.ssh/id_rsa_playground	
+Host deimos
+	HostName redkayak.xyz
+	User administrator
+	Port 3333
+	IdentityFile ~/.ssh/id_ed25519_deimos
 
-host caen
-	hostname login.engin.umich.edu
-	user gshaked
+Host playground-ubuntu
+	HostName 127.0.0.1
+	User gideon
+	Port 8022
+	IdentityFile ~/.ssh/id_rsa_playground
+
+Host caen
+	HostName login.engin.umich.edu
+	User gshaked
 	controlmaster auto
 	controlpath ~/.ssh/master-%r@%h:%p
 
-host psor
-	hostname psoriasis.sph.umich.edu
-	user gshaked
+Host psor
+	HostName psoriasis.sph.umich.edu
+	User gshaked
 	IdentitiesOnly=yes
 
 Host github.com
@@ -32,18 +33,34 @@ Host github.com
  	UseKeychain yes
  	IdentityFile ~/.ssh/id_ed25519_github
 
-host shamir4
-	hostname rack-shamir4.cs.tau.ac.il
-	user gshaked
+Host prod
+	HostName rack-shamir3.cs.tau.ac.il
+	User hagailevi
 
-host shamir5
-	hostname rack-shamir5.cs.tau.ac.il
-	user gshaked
+Host shamir4
+	HostName rack-shamir4.cs.tau.ac.il
+	User gshaked
 
-host shamir6
-	hostname rack-shamir6.cs.tau.ac.il
-	user gshaked
+Host shamir5
+	HostName rack-shamir5.cs.tau.ac.il
+	User gshaked
 
-host shamir8
-	hostname rack-shamir8.cs.tau.ac.il
-	user gshaked
+Host shamir6
+	HostName rack-shamir6.cs.tau.ac.il
+	User gshaked
+
+Host shamir8
+	HostName rack-shamir8.cs.tau.ac.il
+	User gshaked
+
+Host elkon1
+	HostName rack-elkon-01.cs.tau.ac.il
+	User gshaked
+
+Host elkon2
+	HostName rack-elkon-02.cs.tau.ac.il
+	User gshaked
+
+Host elkon3
+	HostName rack-elkon-03.cs.tau.ac.il
+	User gshaked

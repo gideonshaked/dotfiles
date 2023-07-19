@@ -83,9 +83,16 @@
     "shellcheck.executablePath": "/opt/homebrew/bin/shellcheck",
     "terminal.integrated.enableMultiLinePasteWarning": false,
     "files.watcherExclude": {
-        "**/node_modules/**": true
+        "**/hpos/**": true,
+        "**/node_modules/**": true,
+        "**/output_data*/**": true,
+        "**/public/**": true
     },
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter"
-    }
+    },
+    "remote.SSH.connectTimeout": 30,
+    "remote.SSH.lockfilesInTmp": true,
+    "remote.SSH.logLevel": "trace",
+    "notebook.lineNumbers": "on"
 }

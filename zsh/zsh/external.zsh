@@ -3,7 +3,7 @@
 #
 
 # Projects directory
-export PROJECTS="$HOME/Documents/dev-personal"
+export PROJECTS="$HOME/Documents/dev"
 
 # chmod
 alias chmox="chmod +x"
@@ -81,3 +81,7 @@ fi
 # Make GPG work for git signing
 # https://gist.github.com/repodevs/a18c7bb42b2ab293155aca889d447f1b
 export GPG_TTY=$(tty)
+
+# Configure ruby
+source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+source /opt/homebrew/opt/chruby/share/chruby/auto.sh

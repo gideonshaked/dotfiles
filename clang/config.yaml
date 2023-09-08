@@ -13,10 +13,14 @@ Diagnostics:
       - readability-identifier-length
       - readability-named-parameter
       - readability-qualified-auto
+      - readability-magic-numbers
+      - readability-implicit-bool-conversion
       - bugprone-easily-swappable-parameters
       - readability-identifier-naming
+      - bugprone-suspicious-string-compare
     CheckOptions:
       readability-identifier-naming.VariableCase: camelBack
+
 # clangd 14
   UnusedIncludes: Strict
 
@@ -37,7 +41,7 @@ If:
   PathMatch: [.*\.c, .*\.h]
 
 CompileFlags:
-  Add: [--std=c17, -Wall, -Wextra, -Wpedantic]
+  Add: [--std=c99, -Wall, -Werror]
 ---
 # C++
 If:
@@ -58,9 +62,8 @@ Diagnostics:
       - misc-throw-by-value-catch-by-reference
     Remove:
       - cppcoreguidelines-pro-bounds-array-to-pointer-decay
-      - modernize-use-trailing-return-type
-      - readability-implicit-bool-conversion
       - cppcoreguidelines-init-variables
+      - modernize-use-trailing-return-type
       - modernize-avoid-c-arrays
 ---
 # C source

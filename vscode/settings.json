@@ -37,9 +37,10 @@
     "editor.inlineSuggest.enabled": true,
     "github.copilot.enable": {
         "*": true,
-        "yaml": true,
-        "plaintext": false,
+        "plaintext": true,
         "markdown": false,
+        "scminput": false,
+        "yaml": true,
         "latex": false
     },
     "shellcheck.customArgs": [
@@ -94,5 +95,12 @@
     "remote.SSH.connectTimeout": 30,
     "remote.SSH.lockfilesInTmp": true,
     "remote.SSH.logLevel": "trace",
-    "notebook.lineNumbers": "on"
+    "notebook.lineNumbers": "on",
+    "editor.formatOnSave": true,
+    "notebook.formatOnSave.enabled": true,
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "black-formatter.args": [
+        "--line-length 120"
+    ],
+    "notebook.formatOnCellExecution": true
 }

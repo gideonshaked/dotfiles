@@ -18,3 +18,5 @@ path_append "$HOME/.cargo/bin"
 
 # Anaconda
 path_append "/opt/homebrew/anaconda3/bin"
+
+path_prepend "/opt/homebrew/bin"

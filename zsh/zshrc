@@ -20,3 +20,4 @@ source "$HOME/.zsh/aliases.zsh"
 source "$HOME/.zsh/path.zsh"
 
 #alias ssh=ssh
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"

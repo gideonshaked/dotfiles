@@ -89,18 +89,23 @@
         "**/output_data*/**": true,
         "**/public/**": true
     },
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter"
-    },
     "remote.SSH.connectTimeout": 30,
     "remote.SSH.lockfilesInTmp": true,
     "remote.SSH.logLevel": "trace",
     "notebook.lineNumbers": "on",
-    "editor.formatOnSave": true,
-    "notebook.formatOnSave.enabled": true,
     "editor.defaultFormatter": "ms-python.black-formatter",
     "black-formatter.args": [
-        "--line-length 120"
+        "--line-length",
+        "88"
     ],
-    "notebook.formatOnCellExecution": true
+    "c-auto-prototypes.UseHeader": false,
+    "editor.accessibilitySupport": "off",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.formatOnSave": true,
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "jupyter.askForKernelRestart": false,
+    "notebook.formatOnSave.enabled": true,
+    "notebook.formatOnCellExecution": true,
 }

@@ -40,7 +40,7 @@ plugins=(
 source "/Users/$(whoami)/.oh-my-zsh/oh-my-zsh.sh"
 
 ## Powerlevel10k
-source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 source "$HOME/.p10k.zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 

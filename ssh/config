@@ -23,8 +23,13 @@ Host caen
 	controlmaster auto
 	controlpath ~/.ssh/master-%r@%h:%p
 
-Host psor
+Host psoriasis
 	HostName psoriasis.sph.umich.edu
+	User gshaked
+	IdentitiesOnly=yes
+
+Host mininubio
+	HostName mininubio.ddns.med.umich.edu
 	User gshaked
 	IdentitiesOnly=yes
 

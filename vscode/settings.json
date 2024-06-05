@@ -96,7 +96,7 @@
     "editor.defaultFormatter": "ms-python.black-formatter",
     "black-formatter.args": [
         "--line-length",
-        "88"
+        "80"
     ],
     "c-auto-prototypes.UseHeader": false,
     "editor.accessibilitySupport": "off",
@@ -108,4 +108,10 @@
     "jupyter.askForKernelRestart": false,
     "notebook.formatOnSave.enabled": true,
     "notebook.formatOnCellExecution": true,
+    "gitlens.ai.experimental.provider": "openai",
+    "gitlens.ai.experimental.openai.model": "gpt-4-turbo-preview",
+    "[r]": {
+        "editor.defaultFormatter": "REditorSupport.r"
+    },
+    "github.copilot.editor.enableAutoCompletions": true,
 }

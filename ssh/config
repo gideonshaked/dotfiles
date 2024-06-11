@@ -11,12 +11,6 @@ Host deimos
 	Port 3333
 	IdentityFile ~/.ssh/id_ed25519_deimos
 
-Host playground-ubuntu
-	HostName 127.0.0.1
-	User gideon
-	Port 8022
-	IdentityFile ~/.ssh/id_rsa_playground
-
 Host caen
 	HostName login.engin.umich.edu
 	User gshaked
@@ -68,4 +62,8 @@ Host elkon2
 
 Host elkon3
 	HostName rack-elkon-03.cs.tau.ac.il
+	User gshaked
+
+Host armis2
+	HostName armis2.arc-ts.umich.edu
 	User gshaked

@@ -10,13 +10,13 @@
     - git submodule sync --recursive
     - git submodule update --init --recursive
     - command: pip3 install --upgrade -r scripts/requirements.txt
-      stdout: true
-      stderr: true
       description: Install dependencies for scripts in ~/scripts
-    - command: script/code-import-ext
       stdout: true
       stderr: true
+    - command: script/code-import-ext
       description: Install VS Code extensions
+      stdout: true
+      stderr: true
 
 - link:
     ~/.aws/config: aws/config

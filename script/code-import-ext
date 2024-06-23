@@ -3,9 +3,11 @@
 # Import extensions from vscode/extensions.txt to VS Code.
 #
 
-not_installed_exts() {
-    local extensions=$(<vscode/extensions.txt)
-    local current_extensions=$(code --list-extensions)
+get_not_installed_exts() {
+    local extensions
+    extensions=$(<vscode/extensions.txt)
+    local current_extensions
+    current_extensions=$(code --list-extensions)
     extensions_not_installed=$(diff --new-line-format="" --unchanged-line-format="" <(echo "$extensions") <(echo "$current_extensions"))
 }
 
@@ -18,8 +20,7 @@ install_exts() {
 }
 
 main() {
-    not_installed_exts
-
+    get_not_installed_exts
     install_exts "$extensions_not_installed"
 }
 

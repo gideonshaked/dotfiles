@@ -1,5 +1,3 @@
-# Tools installable by pip that are NOT installable from the Arch repos
-
 black
 flake8
 nbdime

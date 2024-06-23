@@ -4,11 +4,6 @@
     "git.autofetch": true,
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
-    "python.formatting.provider": "black",
-    "python.formatting.blackArgs": [
-        "--line-length",
-        "120"
-    ],
     "python.defaultInterpreterPath": "/usr/bin/python3",
     "editor.renderControlCharacters": false,
     "python.languageServer": "Pylance",
@@ -76,13 +71,12 @@
     "C_Cpp.enhancedColorization": "enabled",
     "workbench.colorTheme": "Syntax Material Dark Level 1 (beta)",
     "editor.semanticHighlighting.enabled": true,
-    "python.linting.pylintCategorySeverity.refactor": "Information",
     "C_Cpp.intelliSenseEngine": "disabled",
     "latex-utilities.message.update.show": false,
     "latex-utilities.countWord.format": "${words} Words, ${chars} Chars",
     "editor.minimap.enabled": false,
     "shellcheck.executablePath": "/opt/homebrew/bin/shellcheck",
-    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
     "files.watcherExclude": {
         "**/hpos/**": true,
         "**/node_modules/**": true,
@@ -98,7 +92,6 @@
         "--line-length",
         "80"
     ],
-    "c-auto-prototypes.UseHeader": false,
     "editor.accessibilitySupport": "off",
     "diffEditor.ignoreTrimWhitespace": false,
     "editor.formatOnSave": true,
@@ -108,10 +101,12 @@
     "jupyter.askForKernelRestart": false,
     "notebook.formatOnSave.enabled": true,
     "notebook.formatOnCellExecution": true,
-    "gitlens.ai.experimental.provider": "openai",
-    "gitlens.ai.experimental.openai.model": "gpt-4-turbo-preview",
     "[r]": {
         "editor.defaultFormatter": "REditorSupport.r"
     },
     "github.copilot.editor.enableAutoCompletions": true,
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "r.lsp.diagnostics": false,
 }

@@ -67,3 +67,7 @@ Host elkon3
 Host armis2
 	HostName armis2.arc-ts.umich.edu
 	User gshaked
+
+Host hoffman
+	HostName hoffman2.idre.ucla.edu
+	User gshaked

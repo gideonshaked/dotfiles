@@ -28,4 +28,4 @@ repos:
     rev: v2.2.5
     hooks:
       - id: codespell
-exclude: zsh/p10k.zsh|clang/config.yaml|ssh/config|jupyter/*
+exclude: zsh/p10k.zsh|clang/config.yaml|ssh/config|jupyter/

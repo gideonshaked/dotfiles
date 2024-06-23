@@ -71,3 +71,5 @@ wakatime.vscode-wakatime
 wengerk.highlight-bad-chars
 xabikos.javascriptsnippets
 xaver.clang-format
+xenny.markdown-table
+yzhang.markdown-all-in-one

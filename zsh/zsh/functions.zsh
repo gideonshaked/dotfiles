@@ -65,44 +65,7 @@ latexwc() {
     detex "$1" | wc "$wc_opts"
 }
 
-# Run both server management programs
-servermg() {
-    echo "Running 'aup'"
-    echo
-    aup
-    echo
-    echo "Running 'dup'"
-    echo
-    dup
-}
-
-# Start Virtualbox VM
-startvm() {
-    vboxmanage startvm "$1" --type headless
-}
-
-# Stop Virtualbox VM
-stopvm() {
-    vboxmanage controlvm "$1" acpipowerbutton
-}
-
-# Check Virtualbox VM status
-vmstatus() {
-    vboxmanage showvminfo "$1" | grep --color=never State
-}
-
-# Use Openvpn with a VPN profile
-vpn() {
-    if [[ $# -eq 0 ]]; then
-        sudo openvpn --config /etc/openvpn/client/US_East.conf
-    else
-        sudo openvpn --config /etc/openvpn/client/"$1"
-    fi
-}
-
-
 ## Dotfile management ##
-
 # Update dotfiles
 dfu() {
     cd "$PROJECTS/dotfiles" && git pull --ff-only && ./install

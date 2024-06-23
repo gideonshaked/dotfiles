@@ -20,7 +20,11 @@ def get_parser() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
-        "file", metavar="file", nargs="?", type=str, help="the path to the markdown file to be rendered"
+        "file",
+        metavar="file",
+        nargs="?",
+        type=str,
+        help="the path to the markdown file to be rendered",
     )
 
     return parser
@@ -53,4 +57,4 @@ if __name__ == "__main__":
     if is_valid(filepath):
         show_markdown(filepath)
     else:
-        sys.exit(f"""{parser.format_usage()}\nFilepath {filepath} not valid.""")
+        sys.exit(f"""{parser.format_usage()}\nFilepath '{filepath}' not valid.""")

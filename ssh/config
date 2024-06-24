@@ -68,6 +68,6 @@ Host armis2
 	HostName armis2.arc-ts.umich.edu
 	User gshaked
 
-Host hoffman
+Host hoffman2
 	HostName hoffman2.idre.ucla.edu
 	User gshaked

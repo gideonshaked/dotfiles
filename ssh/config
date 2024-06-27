@@ -1,4 +1,3 @@
-
 Host phobos
 	HostName redkayak.xyz
 	User administrator
@@ -71,3 +70,4 @@ Host armis2
 Host hoffman2
 	HostName hoffman2.idre.ucla.edu
 	User gshaked
+	IdentityFile ~/.ssh/hoffman_key

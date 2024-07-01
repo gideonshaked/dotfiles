@@ -87,14 +87,12 @@
     "remote.SSH.lockfilesInTmp": true,
     "remote.SSH.logLevel": "trace",
     "notebook.lineNumbers": "on",
-    "editor.defaultFormatter": "ms-python.black-formatter",
     "black-formatter.args": [
         "--line-length",
-        "80"
+        "88"
     ],
     "editor.accessibilitySupport": "off",
     "diffEditor.ignoreTrimWhitespace": false,
-    "editor.formatOnSave": true,
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
@@ -109,4 +107,8 @@
         "editor.defaultFormatter": "redhat.vscode-yaml"
     },
     "r.lsp.diagnostics": false,
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true,
+    "notebook.defaultFormatter": "ms-python.black-formatter",
 }

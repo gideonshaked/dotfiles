@@ -13,8 +13,8 @@
       description: Install dependencies for scripts in ~/scripts
       stdout: true
       stderr: true
-    - command: script/code-import-ext
-      description: Install VS Code extensions
+    - command: brew bundle --file manifest/Brewfile
+      description: Install Homebrew packages
       stdout: true
       stderr: true
 

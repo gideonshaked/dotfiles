@@ -65,15 +65,15 @@ latexwc() {
     detex "$1" | wc "$wc_opts"
 }
 
+# Convert an md file to pdf
+md2pdf() {
+    pandoc -t beamer -s "$1" -o "${1%.md}.pdf"
+}
+
 ## Dotfile management ##
 # Update dotfiles
 dfu() {
     cd "$PROJECTS/dotfiles" && git pull --ff-only && ./install
-}
-
-# Update VS Code extensions list
-upext() {
-    xin "$PROJECTS/dotfiles" ./script/code-export-ext && git reset > /dev/null && git stage "vscode/extensions.txt" > /dev/null && git commit -m "Update extensions list" && git push
 }
 
 # Remove from PATH
@@ -91,4 +91,8 @@ path_append() {
 path_prepend() {
     path_remove "$1"
     PATH="$1${PATH:+":$PATH"}"
+}
+
+update_brewfile() {
+    brew bundle dump --all --force --file $PROJECTS/dotfiles/manifest/Brewfile
 }

@@ -39,7 +39,7 @@ dfu
 ├── jupyter     <- Jupyter Notebook configuration
 ├── scripts     <- Personal scripts
 ├── ssh         <- SSH config file
-├── manifest    <- requirements.txt with dev tools
+├── manifest    <- Brewfile
 ├── vscode      <- VS Code configuration and extensions list
 └── zsh         <- Zsh startup files
 ```

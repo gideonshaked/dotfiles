@@ -15,6 +15,7 @@ setopt histignorealldups        								# If a new command is a duplicate, remov
 setopt autocd                   								# if only directory path is entered, cd there.
 setopt inc_append_history       								# save commands are added to the history immediately, otherwise only when shell exits.
 setopt histignorespace          								# Don't save commands that start with space
+setopt extended_glob
 
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
@@ -39,10 +40,8 @@ plugins=(
 ## Oh-My-Zsh
 source "/Users/$(whoami)/.oh-my-zsh/oh-my-zsh.sh"
 
-## Powerlevel10k
-source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
-source "$HOME/.p10k.zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
 ## Zsh Syntax Highlighting
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+## Starship
+eval "$(starship init zsh)"

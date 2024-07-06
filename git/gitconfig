@@ -3,11 +3,12 @@
 	name = Gideon Shaked
 	signingkey = 4F60C96390E6E336
 
-# https://github.com/GitAlias/gitalias
-[include]
-	path = ~/.gitalias.txt
+[credential]
+	helper = osxkeychain
 
-# scripts/git-nuke
+[include]
+	path = ~/.gitalias.txt  # https://github.com/GitAlias/gitalias
+
 [alias]
 	nuke = !git-nuke
 	tag = tag -s

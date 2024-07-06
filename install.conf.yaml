@@ -35,7 +35,7 @@
 
     ~/.zsh: zsh/zsh
     ~/.zshrc: zsh/zshrc
-    ~/.p10k.zsh: zsh/p10k.zsh
+    ~/.config/starship.toml: zsh/starship.toml
 
     ~/.gitconfig: git/gitconfig
     ~/.gitalias.txt: git/gitalias.txt

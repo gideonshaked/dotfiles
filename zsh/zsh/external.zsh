@@ -85,3 +85,7 @@ export GPG_TTY=$(tty)
 # Configure ruby
 source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+
+# SSH agent
+eval $(ssh-agent) > /dev/null
+ssh-add ~/.ssh/^(config|known_hosts|known_hosts.old|*.pub) &> /dev/null

@@ -1,0 +1,80 @@
+add_newline = false
+
+[aws]
+symbol = " "
+disabled = true
+
+[battery]
+full_symbol = '🔋 '
+charging_symbol = '⚡️ '
+discharging_symbol = '💀 '
+
+[[battery.display]]
+threshold = 30
+style = 'bold red'
+
+[conda]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[directory]
+read_only_style = "red"
+
+[docker_context]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[git_branch]
+symbol = " "
+
+[golang]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[line_break]
+disabled = true
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[package]
+format = 'via [🎁 $version](208 bold) '
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[python]
+symbol = " "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[scala]
+symbol = " "
+
+[swift]
+symbol = "ﯣ "

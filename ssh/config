@@ -38,30 +38,37 @@ Host prod
 Host shamir4
 	HostName rack-shamir4.cs.tau.ac.il
 	User gshaked
+	PubkeyAuthentication=no
 
 Host shamir5
 	HostName rack-shamir5.cs.tau.ac.il
 	User gshaked
+	PubkeyAuthentication=no
 
 Host shamir6
 	HostName rack-shamir6.cs.tau.ac.il
 	User gshaked
+	PubkeyAuthentication=no
 
 Host shamir8
 	HostName rack-shamir8.cs.tau.ac.il
 	User gshaked
+	PubkeyAuthentication=no
 
 Host elkon1
 	HostName rack-elkon-01.cs.tau.ac.il
 	User gshaked
+	PubkeyAuthentication=no
 
 Host elkon2
 	HostName rack-elkon-02.cs.tau.ac.il
 	User gshaked
+	PubkeyAuthentication=no
 
 Host elkon3
 	HostName rack-elkon-03.cs.tau.ac.il
 	User gshaked
+	PubkeyAuthentication=no
 
 Host armis2
 	HostName armis2.arc-ts.umich.edu
@@ -71,3 +78,8 @@ Host hoffman2
 	HostName hoffman2.idre.ucla.edu
 	User gshaked
 	IdentityFile ~/.ssh/hoffman_key
+
+Host david
+	HostName rack-elkon-03.cs.tau.ac.il
+	User davidlasry
+	PubkeyAuthentication=no

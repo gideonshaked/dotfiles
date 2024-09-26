@@ -17,7 +17,9 @@
     "git.confirmSync": false,
     "files.eol": "\n",
     "workbench.editorAssociations": {
-        "*.ipynb": "jupyter-notebook"
+        "*.copilotmd": "vscode.markdown.preview.editor",
+        "*.ipynb": "jupyter-notebook",
+        "*.pdf": "pdf.preview"
     },
     "autoDocstring.docstringFormat": "google",
     "editor.fontFamily": "\"Hack Nerd Font\"",
@@ -111,4 +113,12 @@
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
     "notebook.defaultFormatter": "ms-python.black-formatter",
+    "git.ignoreLegacyWarning": true,
+    "gitlens.advanced.messages": {
+        "suppressGitVersionWarning": true
+    },
+    "bashIde.shellcheckPath": "~/bin/shellcheck",
+    "update.showReleaseNotes": false,
+    "makefile.configureOnOpen": true,
+    "editor.unicodeHighlight.invisibleCharacters": false,
 }

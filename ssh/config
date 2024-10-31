@@ -73,6 +73,7 @@ Host elkon3
 Host armis2
 	HostName armis2.arc-ts.umich.edu
 	User gshaked
+	PubkeyAuthentication=no
 
 Host hoffman2
 	HostName hoffman2.idre.ucla.edu

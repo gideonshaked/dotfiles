@@ -121,4 +121,9 @@
     "update.showReleaseNotes": false,
     "makefile.configureOnOpen": true,
     "editor.unicodeHighlight.invisibleCharacters": false,
+    "latex.formatter.path": "/opt/homebrew/bin/latexindent",
+    "latex.linter.enabled": false,
+    "latex-workshop.formatting.latex": "latexindent",
+    "latex-workshop.linting.chktex.enabled": true,
+    "cmake.showOptionsMovedNotification": false,
 }

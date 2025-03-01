@@ -1,129 +1,131 @@
 {
-    "workbench.startupEditor": "none",
-    "git.enableSmartCommit": true,
-    "git.autofetch": true,
-    "explorer.confirmDelete": false,
-    "explorer.confirmDragAndDrop": false,
-    "python.defaultInterpreterPath": "/usr/bin/python3",
-    "editor.renderControlCharacters": false,
-    "python.languageServer": "Pylance",
-    "[cpp]": {
-        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
-    },
-    "[c]": {
-        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
-    },
-    "clang-format.language.cpp.style": "file",
-    "git.confirmSync": false,
-    "files.eol": "\n",
-    "workbench.editorAssociations": {
-        "*.copilotmd": "vscode.markdown.preview.editor",
-        "*.ipynb": "jupyter-notebook",
-        "*.pdf": "pdf.preview"
-    },
-    "autoDocstring.docstringFormat": "google",
-    "editor.fontFamily": "\"Hack Nerd Font\"",
-    "markdownlint.config": {
-        "MD033": false
-    },
-    "latex-workshop.view.pdf.viewer": "tab",
-    "redhat.telemetry.enabled": false,
-    "[latex]": {
-        "editor.defaultFormatter": "James-Yu.latex-workshop"
-    },
-    "editor.inlineSuggest.enabled": true,
-    "github.copilot.enable": {
-        "*": true,
-        "plaintext": true,
-        "markdown": false,
-        "scminput": false,
-        "yaml": true,
-        "latex": false
-    },
-    "shellcheck.customArgs": [
-        "--shell bash"
-    ],
-    "[javascript]": {
-        "editor.defaultFormatter": "xaver.clang-format"
-    },
-    "security.workspace.trust.enabled": false,
-    "clang-format.fallbackStyle": "WebKit",
-    "debug.onTaskErrors": "abort",
-    "editor.semanticTokenColorCustomizations": {
-        "enabled": true
-    },
-    "files.associations": {
-        "bash_profile": "shellscript",
-        "bashrc": "shellscript",
-        "install-starship": "shellscript",
-        "install-profile": "shellscript",
-        "install-standalone": "shellscript",
-        "*.spec": "python",
-        "*.rmd": "markdown",
-        "identities": "gitconfig",
-        "*.format": "plaintext"
-    },
-    "notebook.cellToolbarLocation": {
-        "default": "right",
-        "jupyter-notebook": "left"
-    },
-    "workbench.iconTheme": "material-icon-theme",
-    "material-icon-theme.folders.theme": "specific",
-    "vscode-json-editor.theme": "dark",
-    "C_Cpp.enhancedColorization": "enabled",
-    "workbench.colorTheme": "Syntax Material Dark Level 1 (beta)",
-    "editor.semanticHighlighting.enabled": true,
-    "C_Cpp.intelliSenseEngine": "disabled",
-    "latex-utilities.message.update.show": false,
-    "latex-utilities.countWord.format": "${words} Words, ${chars} Chars",
-    "editor.minimap.enabled": false,
-    "shellcheck.executablePath": "/opt/homebrew/bin/shellcheck",
-    "terminal.integrated.enableMultiLinePasteWarning": "never",
-    "files.watcherExclude": {
-        "**/hpos/**": true,
-        "**/node_modules/**": true,
-        "**/output_data*/**": true,
-        "**/public/**": true
-    },
-    "remote.SSH.connectTimeout": 30,
-    "remote.SSH.lockfilesInTmp": true,
-    "remote.SSH.logLevel": "trace",
-    "notebook.lineNumbers": "on",
-    "black-formatter.args": [
-        "--line-length",
-        "88"
-    ],
-    "editor.accessibilitySupport": "off",
-    "diffEditor.ignoreTrimWhitespace": false,
-    "[jsonc]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    },
-    "jupyter.askForKernelRestart": false,
-    "notebook.formatOnSave.enabled": true,
-    "notebook.formatOnCellExecution": true,
-    "[r]": {
-        "editor.defaultFormatter": "REditorSupport.r"
-    },
-    "github.copilot.editor.enableAutoCompletions": true,
-    "[yaml]": {
-        "editor.defaultFormatter": "redhat.vscode-yaml"
-    },
-    "r.lsp.diagnostics": false,
-    "editor.defaultFormatter": "ms-python.black-formatter",
-    "editor.formatOnType": true,
-    "editor.formatOnSave": true,
-    "notebook.defaultFormatter": "ms-python.black-formatter",
-    "git.ignoreLegacyWarning": true,
-    "gitlens.advanced.messages": {
-        "suppressGitVersionWarning": true
-    },
-    "bashIde.shellcheckPath": "~/bin/shellcheck",
-    "update.showReleaseNotes": false,
-    "makefile.configureOnOpen": true,
-    "editor.unicodeHighlight.invisibleCharacters": false,
-    "latex.formatter.path": "/opt/homebrew/bin/latexindent",
-    "latex.linter.enabled": false,
-    "latex-workshop.formatting.latex": "latexindent",
-    "latex-workshop.linting.chktex.enabled": true,
-    "cmake.showOptionsMovedNotification": false,
+	"[cpp]": {
+		"editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+	},
+	"[c]": {
+		"editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "xaver.clang-format"
+	},
+	"[latex]": {
+		"editor.defaultFormatter": "James-Yu.latex-workshop"
+	},
+	"[yaml]": {
+		"editor.defaultFormatter": "redhat.vscode-yaml"
+	},
+	"[r]": {
+		"editor.defaultFormatter": "REditorSupport.r"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"[markdown]": {
+		"editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+	},
+	"editor.renderControlCharacters": false,
+	"editor.fontFamily": "\"Hack Nerd Font\"",
+	"editor.inlineSuggest.enabled": true,
+	"editor.semanticTokenColorCustomizations": {
+		"enabled": true
+	},
+	"editor.semanticHighlighting.enabled": true,
+	"editor.minimap.enabled": false,
+	"editor.defaultFormatter": "ms-python.black-formatter",
+	"editor.formatOnType": true,
+	"editor.formatOnSave": true,
+	"editor.accessibilitySupport": "off",
+	"editor.unicodeHighlight.invisibleCharacters": false,
+	"python.createEnvironment.trigger": "off",
+	"python.languageServer": "Pylance",
+	"clang-format.language.cpp.style": "file",
+	"git.confirmSync": false,
+	"files.eol": "\n",
+	"workbench.editorAssociations": {
+		"*.copilotmd": "vscode.markdown.preview.editor",
+		"*.ipynb": "jupyter-notebook",
+		"*.pdf": "pdf.preview"
+	},
+	"autoDocstring.docstringFormat": "google",
+	"markdownlint.config": {
+		"MD033": false
+	},
+	"latex-workshop.view.pdf.viewer": "tab",
+	"redhat.telemetry.enabled": false,
+	"github.copilot.enable": {
+		"*": false,
+		"plaintext": true,
+		"markdown": false,
+		"scminput": false,
+		"yaml": true,
+		"latex": false
+	},
+	"shellcheck.customArgs": [
+		"--shell bash"
+	],
+	"security.workspace.trust.enabled": false,
+	"clang-format.fallbackStyle": "WebKit",
+	"debug.onTaskErrors": "abort",
+	"files.associations": {
+		"bash_profile": "shellscript",
+		"bashrc": "shellscript",
+		"install-starship": "shellscript",
+		"install-profile": "shellscript",
+		"install-standalone": "shellscript",
+		"*.spec": "python",
+		"*.rmd": "markdown",
+		"identities": "gitconfig",
+		"*.format": "plaintext"
+	},
+	"notebook.cellToolbarLocation": {
+		"default": "right",
+		"jupyter-notebook": "left"
+	},
+	"workbench.iconTheme": "material-icon-theme",
+	"material-icon-theme.folders.theme": "specific",
+	"vscode-json-editor.theme": "dark",
+	"C_Cpp.enhancedColorization": "enabled",
+	"workbench.colorTheme": "Syntax Material Dark Level 1 (beta)",
+	"C_Cpp.intelliSenseEngine": "disabled",
+	"latex-utilities.message.update.show": false,
+	"latex-utilities.countWord.format": "${words} Words, ${chars} Chars",
+	"shellcheck.executablePath": "/opt/homebrew/bin/shellcheck",
+	"terminal.integrated.enableMultiLinePasteWarning": false,
+	"files.watcherExclude": {
+		"**/hpos/**": true,
+		"**/node_modules/**": true,
+		"**/output_data*/**": true,
+		"**/public/**": true
+	},
+	"remote.SSH.connectTimeout": 30,
+	"remote.SSH.lockfilesInTmp": true,
+	"remote.SSH.logLevel": "trace",
+	"notebook.lineNumbers": "on",
+	"black-formatter.args": [
+		"--line-length",
+		"88"
+	],
+	"diffEditor.ignoreTrimWhitespace": false,
+	"jupyter.askForKernelRestart": false,
+	"notebook.formatOnSave.enabled": true,
+	"notebook.formatOnCellExecution": true,
+	"github.copilot.editor.enableAutoCompletions": true,
+	"r.lsp.diagnostics": false,
+	"git.ignoreLegacyWarning": true,
+	"gitlens.advanced.messages": {
+		"suppressGitVersionWarning": true
+	},
+	"bashIde.shellcheckPath": "~/bin/shellcheck",
+	"update.showReleaseNotes": false,
+	"makefile.configureOnOpen": true,
+	"latex.formatter.path": "/opt/homebrew/bin/latexindent",
+	"latex.linter.enabled": false,
+	"latex-workshop.formatting.latex": "latexindent",
+	"latex-workshop.linting.chktex.enabled": true,
+	"cmake.showOptionsMovedNotification": false,
+	"git.ignoreRebaseWarning": true,
+	"notebook.confirmDeleteRunningCell": false,
+	"chat.editing.alwaysSaveWithGeneratedChanges": true,
+	"lldb.suppressUpdateNotifications": true,
+	"github.copilot.selectedCompletionModel": "gpt-4o-copilot"
 }

@@ -7,7 +7,7 @@
   - [Directory Structure](#directory-structure)
   - [Credits](#credits)
 
-My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https://www.anishathalye.com/2014/08/03/managing-your-dotfiles/#dotfiles-are-not-meant-to-be-forked). That being said, this repository contains lots of useful things ([shell functions](https://github.com/gideonshaked/dotfiles/blob/master/zsh/zsh/functions.zsh), [scripts](https://github.com/gideonshaked/dotfiles/blob/master/bin/covid-stats), [gitconfig](https://github.com/gideonshaked/dotfiles/blob/master/git/gitconfig)) that you can add to your personal setup. As such, I encourage anyone that thinks these dotfiles look useful to try to understand them first and then copy the parts that stand out to them.
+My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https://www.anishathalye.com/2014/08/03/managing-your-dotfiles/#dotfiles-are-not-meant-to-be-forked). That being said, this repository contains lots of useful things ([shell functions](https://github.com/gideonshaked/dotfiles/blob/master/zsh/zsh/functions.zsh), [scripts](https://github.com/gideonshaked/dotfiles/tree/master/scripts), [gitconfig](https://github.com/gideonshaked/dotfiles/blob/master/git/gitconfig)) that you can add to your personal setup. As such, I encourage anyone that thinks these dotfiles look useful to try to understand them first and then copy the parts that stand out to them.
 
 ## Install
 
@@ -33,11 +33,9 @@ dfu
 ## Directory Structure
 
 ```text
-├── aws         <- AWS config file
 ├── clang       <- clang-format and clangd config
 ├── git         <- Git configuration files (aliases, custom formatting, etc.)
-├── jupyter     <- Jupyter Notebook configuration
-├── scripts     <- Personal scripts
+├── bin         <- Personal scripts
 ├── ssh         <- SSH config file
 ├── manifest    <- Brewfile
 ├── vscode      <- VS Code configuration and extensions list

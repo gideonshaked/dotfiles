@@ -2,9 +2,6 @@
 # Configure external tools
 #
 
-# Projects directory
-export PROJECTS="$HOME/Documents/dev"
-
 # chmod
 alias chmox="chmod +x"
 
@@ -59,6 +56,27 @@ unset __conda_setup
 # <<< conda initialize <<<
 conda deactivate  # (not inserted)
 
+# Mamba
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/Caskroom/mambaforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/Caskroom/mambaforge/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/mamba.sh" ]; then
+    . "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialize <<<
+conda deactivate  # (not inserted)
+
 # Color man pages
 export LESS_TERMCAP_mb=$'\E[01;32m'
 export LESS_TERMCAP_md=$'\E[01;32m'
@@ -89,3 +107,6 @@ source /opt/homebrew/opt/chruby/share/chruby/auto.sh
 # SSH agent
 eval $(ssh-agent) > /dev/null
 ssh-add ~/.ssh/^(config|known_hosts|known_hosts.old|*.pub) &> /dev/null
+
+# Copilot in terminal
+eval "$(gh copilot alias -- zsh)"

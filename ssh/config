@@ -1,15 +1,15 @@
-Host phobos
-	HostName redkayak.xyz
-	User administrator
-	Port 333
-	IdentityFile ~/.ssh/id_ed25519_phobos
+##################
+# Personal hosts #
+##################
+Host eecs441
+	HostName 24.199.89.71
+	User ubuntu
+	IdentityFile ~/.ssh/ubuntu@24.199.89.71_key
 
-Host deimos
-	HostName redkayak.xyz
-	User administrator
-	Port 3333
-	IdentityFile ~/.ssh/id_ed25519_deimos
 
+##############
+# UofM hosts #
+##############
 Host caen
 	HostName login.engin.umich.edu
 	User gshaked
@@ -31,7 +31,30 @@ Host github.com
  	UseKeychain yes
  	IdentityFile ~/.ssh/id_ed25519_github
 
-Host prod
+Host greatlakes
+	HostName greatlakes.arc-ts.umich.edu
+	User gshaked
+	PubKeyAuthentication=no
+
+Host armis2
+	HostName armis2.arc-ts.umich.edu
+	User gshaked
+	PubkeyAuthentication=no
+
+
+##############
+# UCLA hosts #
+##############
+Host hoffman2
+	HostName hoffman2.idre.ucla.edu
+	User gshaked
+	IdentityFile ~/.ssh/hoffman_key
+
+
+#############	
+# TAU hosts #
+#############
+Host prod-shamir
 	HostName rack-shamir3.cs.tau.ac.il
 	User hagailevi
 
@@ -70,17 +93,7 @@ Host elkon3
 	User gshaked
 	PubkeyAuthentication=no
 
-Host armis2
-	HostName armis2.arc-ts.umich.edu
-	User gshaked
-	PubkeyAuthentication=no
-
-Host hoffman2
-	HostName hoffman2.idre.ucla.edu
-	User gshaked
-	IdentityFile ~/.ssh/hoffman_key
-
-Host david
+Host davidlasry
 	HostName rack-elkon-03.cs.tau.ac.il
 	User davidlasry
 	PubkeyAuthentication=no

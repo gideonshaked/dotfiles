@@ -10,4 +10,4 @@ else
 fi
 set -o xtrace
 ssh-keygen  -t "${algo}" -f "$HOME/.ssh/${1}_key"
-ssh-copy-id -i "$HOME/.ssh/${1}_key.pub" "${1}"
+ssh-copy-id -o IdentitiesOnly=yes -i "$HOME/.ssh/${1}_key.pub" "${1}"

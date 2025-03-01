@@ -2,6 +2,8 @@
 # ~/.zshrc
 #
 
+export DOTFILES_DIR="$HOME/Documents/personal/dev/dotfiles"
+
 source "$HOME/.zsh/zsh_config.zsh"
 
 source "$HOME/.zsh/external.zsh"

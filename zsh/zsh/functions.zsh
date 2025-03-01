@@ -7,16 +7,6 @@ mk() {
     mkdir "$@" && cd "$@"
 }
 
-# Quickly enter a project directory.
-c() {
-    cd "$PROJECTS/$1"
-}
-
-# Quickly open VS Code in a project directory
-v() {
-    code "$PROJECTS/$1"
-}
-
 # Quickly open VS code in the current directory
 vwd() {
     code $(pwd)
@@ -41,8 +31,8 @@ xin() {
 
 # Add current conda env to jupyter notebook
 addtojupyter() {
-    python -m pip install ipykernel
-    python -m ipykernel install --user --name "$CONDA_DEFAULT_ENV" --display-name "Python ($CONDA_DEFAULT_ENV)"
+    python3 -m pip install ipykernel
+    python3 -m ipykernel install --user --name "$CONDA_DEFAULT_ENV" --display-name "Python ($CONDA_DEFAULT_ENV)"
 }
 
 # Remove current conda env from jupyter notebook

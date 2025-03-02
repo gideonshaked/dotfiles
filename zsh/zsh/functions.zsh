@@ -14,7 +14,7 @@ vwd() {
 
 # List everything in the current directory with nice defaults
 d() {
-    du -h --all --max-depth 1 "$@" | sort --human-numeric-sort --reverse
+    du -h -d 1  "$@" | sort --human-numeric-sort --reverse
 }
 
 # Start programs silently and without making them dependent on an open terminal

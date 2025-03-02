@@ -53,7 +53,7 @@
 	"latex-workshop.view.pdf.viewer": "tab",
 	"redhat.telemetry.enabled": false,
 	"github.copilot.enable": {
-		"*": false,
+		"*": true,
 		"plaintext": true,
 		"markdown": false,
 		"scminput": false,
@@ -127,5 +127,6 @@
 	"notebook.confirmDeleteRunningCell": false,
 	"chat.editing.alwaysSaveWithGeneratedChanges": true,
 	"lldb.suppressUpdateNotifications": true,
-	"github.copilot.selectedCompletionModel": "gpt-4o-copilot"
+	"github.copilot.selectedCompletionModel": "gpt-4o-copilot",
+	"workbench.startupEditor": "none"
 }

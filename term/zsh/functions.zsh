@@ -64,7 +64,7 @@ latexwc() {
 
 # Update dotfiles
 dfu() {
-    cd "$PROJECTS/dotfiles" && git pull --ff-only && ./install
+    cd "$DEV/dotfiles" && git pull --ff-only && ./install
 }
 
 # Remove from PATH
@@ -86,5 +86,10 @@ path_prepend() {
 
 # Update file that tracks installed Homebrew packages
 update_brewfile() {
-    brew bundle dump --all --force --file ~/Documents/personal/dev/dotfiles/manifest/Brewfile
+    brew bundle dump --all --force --file "$DOTFILES/manifest/Brewfile"
+}
+
+# Update Dotbot
+update_dotbot() {
+    cd $DOTFILES && git submodule update --init --recursive
 }

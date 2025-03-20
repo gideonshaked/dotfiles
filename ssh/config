@@ -7,6 +7,15 @@ Host eecs441
 	IdentityFile ~/.ssh/ubuntu@24.199.89.71_key
 
 
+###################
+# Special Purpose #
+###################
+Host github.com
+ 	AddKeysToAgent yes
+ 	UseKeychain yes
+ 	IdentityFile ~/.ssh/id_ed25519_github
+
+
 ##############
 # UofM hosts #
 ##############
@@ -19,27 +28,22 @@ Host caen
 Host psoriasis
 	HostName psoriasis.sph.umich.edu
 	User gshaked
-	IdentitiesOnly=yes
+	PubKeyAuthentication no
 
 Host mininubio
 	HostName mininubio.ddns.med.umich.edu
 	User gshaked
-	IdentitiesOnly=yes
-
-Host github.com
- 	AddKeysToAgent yes
- 	UseKeychain yes
- 	IdentityFile ~/.ssh/id_ed25519_github
+	IdentitiesOnly yes
 
 Host greatlakes
 	HostName greatlakes.arc-ts.umich.edu
 	User gshaked
-	PubKeyAuthentication=no
+	PubKeyAuthentication no
 
 Host armis2
 	HostName armis2.arc-ts.umich.edu
 	User gshaked
-	PubkeyAuthentication=no
+	PubkeyAuthentication no
 
 
 ##############
@@ -57,43 +61,44 @@ Host hoffman2
 Host prod-shamir
 	HostName rack-shamir3.cs.tau.ac.il
 	User hagailevi
+	PubkeyAuthentication no
 
 Host shamir4
 	HostName rack-shamir4.cs.tau.ac.il
 	User gshaked
-	PubkeyAuthentication=no
+	PubkeyAuthentication no
 
 Host shamir5
 	HostName rack-shamir5.cs.tau.ac.il
 	User gshaked
-	PubkeyAuthentication=no
+	PubkeyAuthentication no
 
 Host shamir6
 	HostName rack-shamir6.cs.tau.ac.il
 	User gshaked
-	PubkeyAuthentication=no
+	PubkeyAuthentication no
 
 Host shamir8
 	HostName rack-shamir8.cs.tau.ac.il
 	User gshaked
-	PubkeyAuthentication=no
+	PubkeyAuthentication no
 
 Host elkon1
 	HostName rack-elkon-01.cs.tau.ac.il
 	User gshaked
-	PubkeyAuthentication=no
+	PubkeyAuthentication no
 
 Host elkon2
 	HostName rack-elkon-02.cs.tau.ac.il
 	User gshaked
-	PubkeyAuthentication=no
+	PubkeyAuthentication no
 
 Host elkon3
 	HostName rack-elkon-03.cs.tau.ac.il
 	User gshaked
-	PubkeyAuthentication=no
+	PubkeyAuthentication no
 
 Host davidlasry
 	HostName rack-elkon-03.cs.tau.ac.il
 	User davidlasry
-	PubkeyAuthentication=no
+	PubkeyAuthentication no

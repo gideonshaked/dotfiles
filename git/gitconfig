@@ -29,11 +29,11 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 
-[diff "jupyternotebook"]
-	command = git-nbdiffdriver diff
+#[diff "jupyternotebook"]
+#	command = git-nbdiffdriver diff
 
-[merge "jupyternotebook"]
-	command = git-nbmergedriver merge %O %A %B %L %P
+#[merge "jupyternotebook"]
+#	command = git-nbmergedriver merge %O %A %B %L %P
 
 [commit]
 	gpgsign = true

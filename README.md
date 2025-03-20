@@ -39,7 +39,7 @@ dfu
 ├── ssh         <- SSH config file
 ├── manifest    <- Brewfile
 ├── vscode      <- VS Code configuration and extensions list
-└── zsh         <- Zsh startup files
+└── term        <- Zsh/Starship configuration
 ```
 
 ## Credits

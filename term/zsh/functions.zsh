@@ -2,13 +2,31 @@
 # Things too long for an alias and too short for a standalone script
 #
 
-# Make a new directory and enter it.
+# Open a class folder
+class() {
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: class <class_name>"
+        return 1
+    fi
+
+    local class_name="$1"
+    local class_dir="$CLASSES/$class_name"
+
+    if [[ ! -d "$class_dir" ]]; then
+        echo "Class directory $class_dir does not exist."
+        return 1
+    fi
+
+    cd "$class_dir" || return
+}
+
+# Make a new directory and enter it
 mk() {
     mkdir "$@" && cd "$@"
 }
 
 # Quickly open VS code in the current directory
-vwd() {
+c() {
     code $(pwd)
 }
 
@@ -29,17 +47,6 @@ xin() {
     "${@}"
 }
 
-# Add current conda env to jupyter notebook
-addtojupyter() {
-    python3 -m pip install ipykernel
-    python3 -m ipykernel install --user --name "$CONDA_DEFAULT_ENV" --display-name "Python ($CONDA_DEFAULT_ENV)"
-}
-
-# Remove current conda env from jupyter notebook
-removefromjupyter() {
-    rm ~/.local/share/jupyter/kernels/test/ -rf
-}
-
 # Create file and directories on path to file if none exist
 tp() {
     mkdir -p "${1%/*}" && touch "$1"
@@ -55,12 +62,6 @@ latexwc() {
     detex "$1" | wc "$wc_opts"
 }
 
-# Convert an md file to pdf
-md2pdf() {
-    pandoc -t beamer -s "$1" -o "${1%.md}.pdf"
-}
-
-## Dotfile management ##
 # Update dotfiles
 dfu() {
     cd "$PROJECTS/dotfiles" && git pull --ff-only && ./install
@@ -83,6 +84,7 @@ path_prepend() {
     PATH="$1${PATH:+":$PATH"}"
 }
 
+# Update file that tracks installed Homebrew packages
 update_brewfile() {
-    brew bundle dump --all --force --file $PROJECTS/dotfiles/manifest/Brewfile
+    brew bundle dump --all --force --file ~/Documents/personal/dev/dotfiles/manifest/Brewfile
 }

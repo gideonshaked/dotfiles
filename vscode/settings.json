@@ -33,7 +33,6 @@
 	"editor.minimap.enabled": false,
 	"editor.defaultFormatter": "ms-python.black-formatter",
 	"editor.formatOnType": true,
-	"editor.formatOnSave": true,
 	"editor.accessibilitySupport": "off",
 	"editor.unicodeHighlight.invisibleCharacters": false,
 	"python.createEnvironment.trigger": "off",
@@ -128,5 +127,12 @@
 	"chat.editing.alwaysSaveWithGeneratedChanges": true,
 	"lldb.suppressUpdateNotifications": true,
 	"github.copilot.selectedCompletionModel": "gpt-4o-copilot",
-	"workbench.startupEditor": "none"
+	"workbench.startupEditor": "none",
+	"git.autofetch": true,
+	"explorer.confirmDragAndDrop": false,
+	"git.enableSmartCommit": true,
+	"explorer.confirmDelete": false,
+	"git.openRepositoryInParentFolders": "never",
+	"terminal.integrated.inheritEnv": false,
+	"editor.formatOnSave": true
 }

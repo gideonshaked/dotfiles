@@ -57,7 +57,8 @@
 		"markdown": false,
 		"scminput": false,
 		"yaml": true,
-		"latex": false
+		"latex": false,
+		"python": true
 	},
 	"shellcheck.customArgs": [
 		"--shell bash"
@@ -134,5 +135,16 @@
 	"explorer.confirmDelete": false,
 	"git.openRepositoryInParentFolders": "never",
 	"terminal.integrated.inheritEnv": false,
-	"editor.formatOnSave": true
+	"editor.formatOnSave": true,
+	"chat.editing.confirmEditRequestRemoval": false,
+	"editor.pasteAs.preferences": [
+		"chat.attach.text"
+	],
+	"chat.editing.confirmEditRequestRetry": false,
+	"python.defaultInterpreterPath": "/opt/homebrew/Caskroom/mambaforge/base/envs/eecs476",
+	"github.copilot.nextEditSuggestions.enabled": true,
+	"python.analysis.typeCheckingMode": "basic",
+	"[snakemake]": {
+		"editor.defaultFormatter": "tfehlmann.snakefmt"
+	}
 }

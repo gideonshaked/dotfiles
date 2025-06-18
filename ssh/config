@@ -1,12 +1,3 @@
-##################
-# Personal hosts #
-##################
-Host eecs441
-	HostName 24.199.89.71
-	User ubuntu
-	IdentityFile ~/.ssh/ubuntu@24.199.89.71_key
-
-
 ###################
 # Special Purpose #
 ###################
@@ -16,9 +7,9 @@ Host github.com
  	IdentityFile ~/.ssh/id_ed25519_github
 
 
-##############
-# UofM hosts #
-##############
+########
+# UofM #
+########
 Host caen
 	HostName login.engin.umich.edu
 	User gshaked
@@ -46,18 +37,18 @@ Host armis2
 	PubkeyAuthentication no
 
 
-##############
-# UCLA hosts #
-##############
+########
+# UCLA #
+########
 Host hoffman2
 	HostName hoffman2.idre.ucla.edu
 	User gshaked
 	IdentityFile ~/.ssh/hoffman_key
 
 
-#############	
-# TAU hosts #
-#############
+#######	
+# TAU #
+#######
 Host prod-shamir
 	HostName rack-shamir3.cs.tau.ac.il
 	User hagailevi
@@ -102,3 +93,13 @@ Host davidlasry
 	HostName rack-elkon-03.cs.tau.ac.il
 	User davidlasry
 	PubkeyAuthentication no
+
+#########
+# Broad #
+#########
+
+Host broad
+	HostName login.broadinstitute.org
+	User gshaked
+	IdentitiesOnly yes
+	PreferredAuthentications password

@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+#
+# Dotfiles management functions
+#
+
+DOTFILES="$HOME/Documents/personal/dev/dotfiles"
+
+# Update file that tracks installed Homebrew packages
+update_brewfile() {
+    brew bundle dump --all --force --file "$DOTFILES/manifest/Brewfile"
+}
+
+# Update Dotbot
+update_dotbot() {
+    cd $DOTFILES && git submodule update --init --recursive
+}
+
+# Update dotfiles
+dfu() {
+    cd "$DOTFILES" && git pull --ff-only && ./install
+}
+
+# Main function to run appropriate function based on argument
+main() {
+    case "$1" in
+        "update_brewfile"|"brewfile")
+            update_brewfile
+            ;;
+        "update_dotbot"|"dotbot")
+            update_dotbot
+            ;;
+        "dfu"|"update")
+            dfu
+            ;;
+        *)
+            echo "Usage: dotfiles {update_brewfile|brewfile|update_dotbot|dotbot|dfu|update}"
+            echo ""
+            echo "Available functions:"
+            echo "  update_brewfile, brewfile  - Update Homebrew package manifest"
+            echo "  update_dotbot, dotbot      - Update Dotbot submodule"
+            echo "  dfu, update                - Update dotfiles and run install"
+            exit 1
+            ;;
+    esac
+}
+
+# Run main function with all arguments
+main "$@"

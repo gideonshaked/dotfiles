@@ -62,11 +62,6 @@ latexwc() {
     detex "$1" | wc "$wc_opts"
 }
 
-# Update dotfiles
-dfu() {
-    cd "$DEV/dotfiles" && git pull --ff-only && ./install
-}
-
 # Remove from PATH
 path_remove() {
     PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: "\$0 != \"$1\"" | sed 's/:$//')
@@ -82,14 +77,4 @@ path_append() {
 path_prepend() {
     path_remove "$1"
     PATH="$1${PATH:+":$PATH"}"
-}
-
-# Update file that tracks installed Homebrew packages
-update_brewfile() {
-    brew bundle dump --all --force --file "$DOTFILES/manifest/Brewfile"
-}
-
-# Update Dotbot
-update_dotbot() {
-    cd $DOTFILES && git submodule update --init --recursive
 }

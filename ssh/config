@@ -49,9 +49,14 @@ Host hoffman2
 #######	
 # TAU #
 #######
-Host prod-shamir
+Host hagai-shamir3
 	HostName rack-shamir3.cs.tau.ac.il
 	User hagailevi
+	PubkeyAuthentication no
+
+Host shamir3
+	HostName rack-shamir3.cs.tau.ac.il
+	User gshaked
 	PubkeyAuthentication no
 
 Host shamir4
@@ -93,13 +98,3 @@ Host davidlasry
 	HostName rack-elkon-03.cs.tau.ac.il
 	User davidlasry
 	PubkeyAuthentication no
-
-#########
-# Broad #
-#########
-
-Host broad
-	HostName login.broadinstitute.org
-	User gshaked
-	IdentitiesOnly yes
-	PreferredAuthentications password

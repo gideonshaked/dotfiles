@@ -12,7 +12,7 @@ update_brewfile() {
 
 # Update Dotbot
 update_dotbot() {
-    cd $DOTFILES && git submodule update --init --recursive
+    cd $DOTFILES && git submodule update --remote dotbot
 }
 
 # Update dotfiles

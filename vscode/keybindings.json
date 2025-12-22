@@ -11,5 +11,17 @@
         "key": "ctrl+q",
         "command": "-workbench.action.quickOpenNavigateNextInViewPicker",
         "when": "inQuickOpen && inViewsPicker"
+    },
+    {
+        "key": "cmd+e",
+        "command": "composerMode.background"
+    },
+    {
+        "key": "shift+enter",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\\\r\n"
+        },
+        "when": "terminalFocus"
     }
 ]

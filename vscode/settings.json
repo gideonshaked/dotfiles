@@ -105,7 +105,7 @@
 		"--line-length",
 		"88"
 	],
-	"diffEditor.ignoreTrimWhitespace": false,
+	"diffEditor.ignoreTrimWhitespace": true,
 	"jupyter.askForKernelRestart": false,
 	"notebook.formatOnSave.enabled": true,
 	"notebook.formatOnCellExecution": true,
@@ -143,8 +143,16 @@
 	"chat.editing.confirmEditRequestRetry": false,
 	"python.defaultInterpreterPath": "/opt/homebrew/Caskroom/mambaforge/base/envs/eecs476",
 	"github.copilot.nextEditSuggestions.enabled": true,
-	"python.analysis.typeCheckingMode": "basic",
 	"[snakemake]": {
 		"editor.defaultFormatter": "tfehlmann.snakefmt"
-	}
+	},
+	"notebook.cellExecutionTimeVerbosity": "verbose",
+	"claudeCodeChat.wsl.enabled": false,
+	"claudeCodeChat.wsl.distro": "Ubuntu",
+	"claudeCodeChat.wsl.nodePath": "/usr/bin/node",
+	"claudeCodeChat.wsl.claudePath": "/usr/local/bin/claude",
+	"claudeCodeChat.thinking.intensity": "think",
+	"python.terminal.activateEnvironment": false,
+	"claudeCode.preferredLocation": "panel",
+	"workbench.secondarySideBar.defaultVisibility": "hidden"
 }

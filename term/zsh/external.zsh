@@ -58,7 +58,7 @@ if [ -f "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/mamba.sh" ]; then
     . "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
-conda deactivate  # (not inserted)
+#conda deactivate  # (not inserted)
 
 # Color man pages
 export LESS_TERMCAP_mb=$'\E[01;32m'

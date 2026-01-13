@@ -154,5 +154,7 @@
 	"claudeCodeChat.thinking.intensity": "think",
 	"python.terminal.activateEnvironment": false,
 	"claudeCode.preferredLocation": "panel",
-	"workbench.secondarySideBar.defaultVisibility": "hidden"
+	"workbench.secondarySideBar.defaultVisibility": "hidden",
+	"claudeCode.useTerminal": true,
+	"explorer.confirmPasteNative": false
 }

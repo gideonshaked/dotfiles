@@ -20,6 +20,7 @@
     ~/.gitalias.txt: git/gitalias.txt
     ~/.gitattributes: git/gitattributes
     ~/.gitignore: git/gitignore
+    ~/.claude/settings.json: claude/settings.json
 
 - shell:
     - git submodule sync --recursive

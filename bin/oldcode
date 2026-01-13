@@ -1,0 +1,4 @@
+#!/bin/bash
+"/Users/gideonshaked/Documents/Visual Studio Code-1.8.5/Visual Studio Code.app/Contents/Resources/app/bin/code" \ \
+  --user-data-dir "/Users/gideonshaked/Documents/Visual Studio Code-1.8.5/code-portable-data/user-data" \
+  --extensions-dir "/Users/gideonshaked/Documents/Visual Studio Code-1.8.5/code-portable-data/extensions"

@@ -1,0 +1,11 @@
+{
+  "model": "opus",
+  "statusLine": {
+    "type": "command",
+    "command": "input=$(cat); dir=$(echo \"$input\" | jq -r '.workspace.current_dir'); model=$(echo \"$input\" | jq -r '.model.display_name'); total_in=$(echo \"$input\" | jq -r '.context_window.total_input_tokens'); total_out=$(echo \"$input\" | jq -r '.context_window.total_output_tokens'); total=$((total_in + total_out)); printf '%s | %s | %s tokens used' \"$dir\" \"$model\" \"$total\""
+  },
+  "enabledPlugins": {
+    "ralph-loop@claude-plugins-official": true
+  },
+  "attribution": {"commit":"", "pr":""}
+}

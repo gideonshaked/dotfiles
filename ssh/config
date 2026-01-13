@@ -49,6 +49,11 @@ Host hoffman2
 #######	
 # TAU #
 #######
+Host shamir* elkon*
+    ControlMaster auto
+    ControlPath ~/.ssh/sockets/%r@%h-%p
+    ControlPersist 600
+
 Host hagai-shamir3
 	HostName rack-shamir3.cs.tau.ac.il
 	User hagailevi

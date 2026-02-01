@@ -31,7 +31,7 @@
 	},
 	"editor.semanticHighlighting.enabled": true,
 	"editor.minimap.enabled": false,
-	"editor.defaultFormatter": "ms-python.black-formatter",
+	"editor.defaultFormatter": "vscode.json-language-features",
 	"editor.formatOnType": true,
 	"editor.accessibilitySupport": "off",
 	"editor.unicodeHighlight.invisibleCharacters": false,
@@ -147,14 +147,20 @@
 		"editor.defaultFormatter": "tfehlmann.snakefmt"
 	},
 	"notebook.cellExecutionTimeVerbosity": "verbose",
-	"claudeCodeChat.wsl.enabled": false,
-	"claudeCodeChat.wsl.distro": "Ubuntu",
-	"claudeCodeChat.wsl.nodePath": "/usr/bin/node",
-	"claudeCodeChat.wsl.claudePath": "/usr/local/bin/claude",
-	"claudeCodeChat.thinking.intensity": "think",
 	"python.terminal.activateEnvironment": false,
-	"claudeCode.preferredLocation": "panel",
 	"workbench.secondarySideBar.defaultVisibility": "hidden",
 	"claudeCode.useTerminal": true,
-	"explorer.confirmPasteNative": false
+	"claudeCode.preferredLocation": "sidebar",
+	"explorer.confirmPasteNative": false,
+	"latex-workshop.linting.chktex.exec.args": [
+		"-wall",
+		"-n22",
+		"-n30",
+		"-e16",
+		"-q",
+		"-n46",
+		"-n3",
+		"-n45"
+	],
+	"claudeCode.allowDangerouslySkipPermissions": true
 }

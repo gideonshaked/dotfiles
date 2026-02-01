@@ -1,11 +1,53 @@
 {
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "model": "opus",
   "statusLine": {
     "type": "command",
-    "command": "input=$(cat); dir=$(echo \"$input\" | jq -r '.workspace.current_dir'); model=$(echo \"$input\" | jq -r '.model.display_name'); total_in=$(echo \"$input\" | jq -r '.context_window.total_input_tokens'); total_out=$(echo \"$input\" | jq -r '.context_window.total_output_tokens'); total=$((total_in + total_out)); printf '%s | %s | %s tokens used' \"$dir\" \"$model\" \"$total\""
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0
   },
   "enabledPlugins": {
-    "ralph-loop@claude-plugins-official": true
+    "beads@beads-marketplace": true
   },
-  "attribution": {"commit":"", "pr":""}
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "Hi Processing, I'm Dad",
+      "Telling the code to leaf me alone",
+      "I'm reading... get it? No? Okay",
+      "Working on my core memory",
+      "This might take a while... just kidding, I have no idea",
+      "Debugging... found a spider",
+      "I used to hate facial hair, but then it grew on me",
+      "Loading... want to hear a joke about paper? Never mind, it's tearable",
+      "Why did the scarecrow win an award? Outstanding in his field",
+      "I'm on a seafood diet. I see code, I eat it",
+      "Working... I'd tell you a chemistry joke but I'd get no reaction",
+      "I'm friends with all the bytes. We go way back",
+      "Processing your request... it's soda pressing",
+      "What do you call a fake noodle? An impasta",
+      "Thinking so hard my bits are showing",
+      "I told my computer a joke. It didn't laugh, it just computed",
+      "Running... I would run too if I was code",
+      "What's a computer's favorite snack? Microchips",
+      "I'm not lazy, I'm on energy saving mode",
+      "Hold on, I'm buffering... said the streaming service",
+      "Why do programmers wear glasses? They can't C#",
+      "Crunching numbers... they taste terrible",
+      "I'm outstanding... because I'm outside standing",
+      "What did the ocean say? Nothing, it just waved",
+      "Loading dad jokes into memory",
+      "I'm reading the dictionary... it's not a page-turner",
+      "Why don't scientists trust atoms? They make up everything",
+      "Processing... I'm knot kidding",
+      "What do you call a sleeping dinosaur? A dino-snore",
+      "Computing... this is my resting bit face",
+      "I'm not arguing, I'm explaining why I'm right",
+      "What do you call a bear with no teeth? A gummy bear"
+    ]
+  },
+  "autoUpdatesChannel": "stable"
 }

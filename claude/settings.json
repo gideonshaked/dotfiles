@@ -3,7 +3,6 @@
     "commit": "",
     "pr": ""
   },
-  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "npx -y ccstatusline@latest",
@@ -49,5 +48,5 @@
       "What do you call a bear with no teeth? A gummy bear"
     ]
   },
-  "autoUpdatesChannel": "stable"
+  "autoUpdatesChannel": "latest"
 }

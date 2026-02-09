@@ -149,7 +149,6 @@
 	"notebook.cellExecutionTimeVerbosity": "verbose",
 	"python.terminal.activateEnvironment": false,
 	"workbench.secondarySideBar.defaultVisibility": "hidden",
-	"claudeCode.useTerminal": true,
 	"claudeCode.preferredLocation": "sidebar",
 	"explorer.confirmPasteNative": false,
 	"latex-workshop.linting.chktex.exec.args": [
@@ -162,5 +161,11 @@
 		"-n3",
 		"-n45"
 	],
-	"claudeCode.allowDangerouslySkipPermissions": true
+	"claudeCode.allowDangerouslySkipPermissions": true,
+	"python.analysis.typeCheckingMode": "standard",
+	"docker.extension.enableComposeLanguageServer": false,
+	"docker.extension.dockerEngineAvailabilityPrompt": false,
+	"gitlens.ai.model": "vscode",
+	"gitlens.ai.vscode.model": "copilot:gpt-4.1",
+	"claudeCode.useTerminal": true
 }

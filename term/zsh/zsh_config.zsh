@@ -29,16 +29,14 @@ SAVEHIST=10000
 
 ## Plugins
 plugins=(
-    gh                          # GitHub CLI autocomletion
-    colorize                    # Colorize cat / less
+    gh                          # GitHub CLI autocompletion
     zsh-autosuggestions         # Suggest commands based on history
-    zsh-wakatime                # WakaTime plugin
     sudo                        # Run previous command with sudo
     zsh-syntax-highlighting     # Syntax highlighting for terminal input
 )
 
 ## Oh-My-Zsh
-source "/Users/$(whoami)/.oh-my-zsh/oh-my-zsh.sh"
+source "/Users/$USER/.oh-my-zsh/oh-my-zsh.sh"
 
 ## Zsh Syntax Highlighting
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

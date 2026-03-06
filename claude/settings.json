@@ -48,5 +48,6 @@
       "What do you call a bear with no teeth? A gummy bear"
     ]
   },
-  "autoUpdatesChannel": "latest"
+  "autoUpdatesChannel": "stable",
+  "skipDangerousModePermissionPrompt": true
 }

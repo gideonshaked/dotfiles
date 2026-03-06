@@ -5,6 +5,7 @@
 ## Options
 setopt correct                  								# Auto correct mistakes
 setopt extendedglob             								# Extended globbing. Allows using regular expressions with *
+setopt ksh_glob
 setopt nocaseglob               								# Case insensitive globbing
 setopt rcexpandparam            								# Array expansion with parameters
 setopt nocheckjobs              								# Don't warn about running processes when exiting
@@ -15,7 +16,6 @@ setopt histignorealldups        								# If a new command is a duplicate, remov
 setopt autocd                   								# if only directory path is entered, cd there.
 setopt inc_append_history       								# save commands are added to the history immediately, otherwise only when shell exits.
 setopt histignorespace          								# Don't save commands that start with space
-setopt extended_glob
 
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)

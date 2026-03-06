@@ -135,7 +135,6 @@
 	"explorer.confirmDelete": false,
 	"git.openRepositoryInParentFolders": "never",
 	"terminal.integrated.inheritEnv": false,
-	"editor.formatOnSave": true,
 	"chat.editing.confirmEditRequestRemoval": false,
 	"editor.pasteAs.preferences": [
 		"chat.attach.text"
@@ -162,10 +161,11 @@
 		"-n45"
 	],
 	"claudeCode.allowDangerouslySkipPermissions": true,
-	"python.analysis.typeCheckingMode": "standard",
 	"docker.extension.enableComposeLanguageServer": false,
 	"docker.extension.dockerEngineAvailabilityPrompt": false,
 	"gitlens.ai.model": "vscode",
 	"gitlens.ai.vscode.model": "copilot:gpt-4.1",
-	"claudeCode.useTerminal": true
+	"claudeCode.useTerminal": true,
+	"editor.wordWrap": "on",
+	"python.analysis.typeCheckingMode": "standard"
 }

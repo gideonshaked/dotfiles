@@ -3,6 +3,7 @@
 #
 
 source "$HOME/.zsh/env.zsh"
+[[ -f "$HOME/.zsh/secrets.zsh" ]] && source "$HOME/.zsh/secrets.zsh"
 source "$HOME/.zsh/zsh_config.zsh"
 source "$HOME/.zsh/external.zsh"
 source "$HOME/.zsh/functions.zsh"

@@ -1,1 +1,7 @@
 .DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+*.pyc
+__pycache__/

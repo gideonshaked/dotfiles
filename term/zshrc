@@ -9,6 +9,3 @@ source "$HOME/.zsh/external.zsh"
 source "$HOME/.zsh/functions.zsh"
 source "$HOME/.zsh/aliases.zsh"
 source "$HOME/.zsh/path.zsh"
-
-# Added by Antigravity
-export PATH="/Users/gideonshaked/.antigravity/antigravity/bin:$PATH"

@@ -4,7 +4,7 @@
       create: true
       glob: true
 
-- clean: ["~", "~/.zsh", "~/bin", "~/.gitidentities"]
+- clean: ["~", "~/.zsh", "~/bin"]
 
 - link:
     ~/Library/Preferences/clangd/config.yaml: clang/config.yaml
@@ -25,10 +25,6 @@
 - shell:
     - git submodule sync --recursive
     - git submodule update --init --recursive
-    - command: cat bin/requirements.txt | xargs -n1 -I{} pipx install {} --include-deps
-      description: Install dependencies for scripts in ~/bin
-      stdout: true
-      stderr: true
     - command: brew bundle --file manifest/Brewfile
       description: Install Homebrew packages
       stdout: true

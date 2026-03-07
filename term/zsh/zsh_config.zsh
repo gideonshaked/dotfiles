@@ -14,7 +14,6 @@ setopt nobeep                   								# No beep
 setopt inc_append_history       								# Immediately append history instead of overwriting
 setopt histignorealldups        								# If a new command is a duplicate, remove the older one
 setopt autocd                   								# if only directory path is entered, cd there.
-setopt inc_append_history       								# save commands are added to the history immediately, otherwise only when shell exits.
 setopt histignorespace          								# Don't save commands that start with space
 
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
@@ -32,11 +31,10 @@ plugins=(
     gh                          # GitHub CLI autocompletion
     zsh-autosuggestions         # Suggest commands based on history
     sudo                        # Run previous command with sudo
-    zsh-syntax-highlighting     # Syntax highlighting for terminal input
 )
 
 ## Oh-My-Zsh
-source "/Users/$USER/.oh-my-zsh/oh-my-zsh.sh"
+source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 
 ## Zsh Syntax Highlighting
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

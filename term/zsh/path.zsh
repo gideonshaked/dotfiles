@@ -5,9 +5,6 @@
 # User-provided executables
 path_prepend ~/bin
 
-# Anaconda
-path_append "/opt/homebrew/anaconda3/bin"
-
 # Homebrew
 path_prepend "/opt/homebrew/bin"
 

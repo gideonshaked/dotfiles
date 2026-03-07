@@ -2,32 +2,9 @@
 # Things too long for an alias and too short for a standalone script
 #
 
-# Open a class folder
-class() {
-    if [[ $# -eq 0 ]]; then
-        echo "Usage: class <class_name>"
-        return 1
-    fi
-
-    local class_name="$1"
-    local class_dir="$CLASSES/$class_name"
-
-    if [[ ! -d "$class_dir" ]]; then
-        echo "Class directory $class_dir does not exist."
-        return 1
-    fi
-
-    cd "$class_dir" || return
-}
-
 # Make a new directory and enter it
 mk() {
     mkdir "$@" && cd "$@"
-}
-
-# Quickly open VS code in the current directory
-c() {
-    code $(pwd)
 }
 
 # List everything in the current directory with nice defaults
@@ -50,16 +27,6 @@ xin() {
 # Create file and directories on path to file if none exist
 tp() {
     mkdir -p "${1%/*}" && touch "$1"
-}
-
-# Get proper word count from LaTeX doc
-latexwc() {
-    if [[ $# -eq 2 ]]; then
-        wc_opts="$2"
-    else
-        wc_opts="-w"
-    fi
-    detex "$1" | wc "$wc_opts"
 }
 
 # Remove from PATH

@@ -30,7 +30,7 @@ make clean
 Dotbot reads `install.conf.yaml` to:
 1. Clean specified directories
 2. Create symlinks from home directory locations to files in this repo
-3. Run shell commands (sync git submodules, install pipx dependencies, run `brew bundle`)
+3. Run shell commands (sync git submodules, run `brew bundle`)
 
 ### Key Symlink Mappings
 
@@ -48,4 +48,4 @@ Dotbot reads `install.conf.yaml` to:
 
 ## Pre-commit Hooks
 
-Uses pre-commit.ci with: black, isort, flake8 (Python), beautysh (shell), codespell, and standard pre-commit-hooks. Excludes `zsh/p10k.zsh`, `clang/config.yaml`, `ssh/config`, and `jupyter/`.
+Uses pre-commit.ci with: black, isort, flake8 (Python), beautysh (shell), codespell, and standard pre-commit-hooks. Excludes `clang/config.yaml` and `ssh/config`.

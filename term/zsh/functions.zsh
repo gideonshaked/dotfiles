@@ -29,6 +29,24 @@ tp() {
     mkdir -p "${1%/*}" && touch "$1"
 }
 
+# Update the nubio Cloudflare tunnel subdomain in SSH config
+nubio() {
+    if [[ -z "$1" ]]; then
+        grep -A1 'Host nubio' ~/.ssh/config | grep HostName | awk '{print $2}'
+        return
+    fi
+    local hostname
+    if [[ "$1" == *".trycloudflare.com"* ]]; then
+        hostname="${1#*://}"
+        hostname="${hostname%%/*}"
+    else
+        hostname="$1.trycloudflare.com"
+    fi
+    local config=$(readlink -f ~/.ssh/config)
+    sed -i '' '/^Host nubio$/,/^Host /s|^\([[:space:]]*HostName\) .*|\1 '"$hostname"'|' "$config"
+    echo "nubio hostname set to $hostname"
+}
+
 # Remove from PATH
 path_remove() {
     PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: "\$0 != \"$1\"" | sed 's/:$//')

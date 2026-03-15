@@ -48,6 +48,16 @@
       "What do you call a bear with no teeth? A gummy bear"
     ]
   },
-  "autoUpdatesChannel": "stable",
-  "skipDangerousModePermissionPrompt": true
+  "autoUpdatesChannel": "latest",
+  "voiceEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "effortLevel": "high",
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    }
+  }
 }

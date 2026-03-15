@@ -9,3 +9,10 @@ source "$HOME/.zsh/external.zsh"
 source "$HOME/.zsh/functions.zsh"
 source "$HOME/.zsh/aliases.zsh"
 source "$HOME/.zsh/path.zsh"
+
+# bun completions
+[ -s "/Users/gideonshaked/.bun/_bun" ] && source "/Users/gideonshaked/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

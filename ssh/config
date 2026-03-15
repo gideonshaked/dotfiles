@@ -21,11 +21,6 @@ Host psoriasis
 	User gshaked
 	PubKeyAuthentication no
 
-Host mininubio
-	HostName mininubio.ddns.med.umich.edu
-	User gshaked
-	IdentitiesOnly yes
-
 Host greatlakes
 	HostName greatlakes.arc-ts.umich.edu
 	User gshaked
@@ -36,6 +31,11 @@ Host armis2
 	User gshaked
 	PubkeyAuthentication no
 
+Host nubio
+	HostName tooth-worm-coleman-rabbit.trycloudflare.com
+	User gshaked
+	IdentityFile ~/.ssh/id_ed25519_nubio
+	ProxyCommand cloudflared access ssh --hostname %h
 
 ########
 # UCLA #
@@ -49,10 +49,10 @@ Host hoffman2
 #######	
 # TAU #
 #######
-#Host shamir* elkon*
-#    ControlMaster auto
-#    ControlPath ~/.ssh/sockets/%r@%h-%p
-#    ControlPersist 600
+Host shamir* elkon*
+    ControlMaster auto
+    ControlPath ~/.ssh/sockets/%r@%h-%p
+    ControlPersist 600
 
 Host hagai-shamir3
 	HostName rack-shamir3.cs.tau.ac.il

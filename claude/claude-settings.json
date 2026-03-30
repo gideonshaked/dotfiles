@@ -65,6 +65,18 @@
   },
   "skipDangerousModePermissionPrompt": true,
   "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-validate",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "_tag": "ccstatusline-managed",

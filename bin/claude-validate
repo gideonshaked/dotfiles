@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Validates files edited by Claude Code (PostToolUse hook).
+# Checks for actual errors only.
+
+set -o pipefail
+
+f="$(jq -r '.tool_input.file_path // empty')"
+[ -z "$f" ] || [ ! -f "$f" ] && exit 0
+
+case "$f" in
+    *.py)
+        ruff check --select E9,F63,F7,F82 --no-fix "$f" 2>&1
+        ;;
+    *.json)
+        python3 -m json.tool "$f" > /dev/null || echo "Invalid JSON: $f"
+        ;;
+    *.yaml|*.yml)
+        python3 -c "
+import yaml,sys
+try:
+    yaml.safe_load(open(sys.argv[1]))
+except yaml.YAMLError as e:
+    print(f'Invalid YAML: {sys.argv[1]}')
+    print(e)
+" "$f"
+        ;;
+    *.r|*.R)
+        Rscript -e "tryCatch(parse(commandArgs(TRUE)[1]), error=function(e) cat('R parse error:', conditionMessage(e), '\n'))" --args "$f" 2>/dev/null
+        ;;
+esac
+exit 0

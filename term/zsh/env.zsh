@@ -28,3 +28,6 @@ export LESS_TERMCAP_so=$'\E[01;47;34m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-R
+
+# Bun
+export BUN_INSTALL="$HOME/.bun"

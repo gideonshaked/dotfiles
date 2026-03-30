@@ -16,3 +16,6 @@ path_prepend ~/.cargo/bin
 
 # Java
 path_prepend "/opt/homebrew/opt/openjdk@11/bin"
+
+# Bun
+path_prepend "$BUN_INSTALL/bin"

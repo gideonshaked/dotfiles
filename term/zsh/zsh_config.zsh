@@ -33,6 +33,10 @@ plugins=(
     sudo                        # Run previous command with sudo
 )
 
+## Completions
+fpath=($HOME/.docker/completions $fpath)
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
 ## Oh-My-Zsh
 source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 

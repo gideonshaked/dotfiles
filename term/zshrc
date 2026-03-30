@@ -3,21 +3,8 @@
 #
 
 source "$HOME/.zsh/env.zsh"
-[[ -f "$HOME/.zsh/secrets.zsh" ]] && source "$HOME/.zsh/secrets.zsh"
 source "$HOME/.zsh/zsh_config.zsh"
 source "$HOME/.zsh/external.zsh"
 source "$HOME/.zsh/functions.zsh"
 source "$HOME/.zsh/aliases.zsh"
 source "$HOME/.zsh/path.zsh"
-
-# bun completions
-[ -s "/Users/gideonshaked/.bun/_bun" ] && source "/Users/gideonshaked/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/gideonshaked/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions

@@ -34,14 +34,14 @@ dotfiles dotbot      # Update Dotbot submodule
 ## Directory Structure
 
 ```text
-├── claude      <- Configuration for Claude Code
+├── bin         <- Personal scripts
+├── claude      <- Claude Code settings, global CLAUDE.md, and ccstatusline config
 ├── clang       <- clang-format and clangd config
 ├── git         <- Git configuration files (aliases, custom formatting, etc.)
-├── bin         <- Personal scripts
-├── ssh         <- SSH config file
 ├── manifest    <- Brewfile
-├── vscode      <- VS Code configuration and extensions list
-└── term        <- Zsh/Starship configuration
+├── ssh         <- SSH config file
+├── term        <- Zsh/Starship configuration
+└── vscode      <- VS Code configuration and extensions list
 ```
 
 ## Credits

@@ -32,7 +32,7 @@ Host armis2
 	PubkeyAuthentication no
 
 Host nubio
-	HostName tooth-worm-coleman-rabbit.trycloudflare.com
+	HostName ham-exploring-liability-create.trycloudflare.com
 	User gshaked
 	IdentityFile ~/.ssh/id_ed25519_nubio
 	ProxyCommand cloudflared access ssh --hostname %h

@@ -63,3 +63,14 @@ path_prepend() {
     path_remove "$1"
     PATH="$1${PATH:+":$PATH"}"
 }
+
+# Make Kitty play nicely with SSH (see https://github.com/kovidgoyal/kitty/issues/1613#issuecomment-734753530)
+if test "$TERM" = "xterm-kitty"
+then
+    s() {
+        case "$1" in
+            shamir | elkon) ssh "$@" ;;
+            *) kitty +kitten ssh "$@" ;;
+        esac
+    }
+fi

@@ -7,25 +7,36 @@
 - clean: ["~", "~/.zsh", "~/bin"]
 
 - link:
-    ~/Library/Preferences/clangd/config.yaml: clang/config.yaml
-    ~/.clang-format: clang/clang-format
-    ~/bin: bin
-    ~/.ssh/config: ssh/config
-    ~/Library/Application Support/Code/User/settings.json: vscode/settings.json
-    ~/Library/Application Support/Code/User/keybindings.json: vscode/keybindings.json
+    # Terminal
     ~/.zsh: term/zsh
     ~/.zshrc: term/zshrc
     ~/.config/starship.toml: term/starship.toml
+
+    # Git
     ~/.gitconfig: git/gitconfig
     ~/.gitalias.txt: git/gitalias.txt
     ~/.gitattributes: git/gitattributes
     ~/.gitignore: git/gitignore
-    ~/.claude/settings.json: claude/settings.json
+
+    # SSH
+    ~/.ssh/config: ssh/config
+
+    # Claude
+    ~/.claude/settings.json: claude/claude-settings.json
+    ~/.claude/CLAUDE.md: claude/CLAUDE.md
+    ~/.config/ccstatusline/settings.json: claude/ccstatusline-settings.json
+
+    # VSCode (macOS)
+    ~/Library/Application Support/Code/User/settings.json: vscode/settings.json
+    ~/Library/Application Support/Code/User/keybindings.json: vscode/keybindings.json
+
+    # Clang
+    ~/Library/Preferences/clangd/config.yaml: clang/config.yaml
+    ~/.clang-format: clang/clang-format
+
+    # Scripts
+    ~/bin: bin
 
 - shell:
     - git submodule sync --recursive
     - git submodule update --init --recursive
-    - command: brew bundle --file manifest/Brewfile
-      description: Install Homebrew packages
-      stdout: true
-      stderr: true

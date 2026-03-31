@@ -68,16 +68,11 @@ path_prepend() {
 if test "$TERM" = "xterm-kitty"
 then
     s() {
-        # Bootstrap minimal dotfiles on first connect (once per host)
-        local cache_dir="$HOME/.cache/dotfiles-ssh"
-        if [ ! -f "$cache_dir/$1" ]; then
-            ssh "$@" 'test -f ~/.bashrc.dotfiles' 2>/dev/null \
-                || ssh "$@" 'echo "Installing dotfiles on $(hostname)..."; [ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles; cd ~/dotfiles && ./install --minimal'
-            mkdir -p "$cache_dir" && touch "$cache_dir/$1"
-        fi
+        # Bootstrap minimal dotfiles if needed, then start shell (single connection)
+        local cmd='test -f ~/.bashrc.dotfiles || { echo "Installing dotfiles..."; [ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles; cd ~/dotfiles && ./install --minimal; }; exec $SHELL -l'
         case "$1" in
-            shamir* | elkon*) ssh "$@" ;;
-            *) kitty +kitten ssh "$@" ;;
+            shamir* | elkon*) ssh -t "$@" "$cmd" ;;
+            *) kitty +kitten ssh -t "$@" "$cmd" ;;
         esac
     }
 fi

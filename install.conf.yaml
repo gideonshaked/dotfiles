@@ -4,7 +4,7 @@
       create: true
       glob: true
 
-- clean: ["~", "~/.zsh", "~/bin"]
+- clean: ["~", "~/.zsh", "~/bin", "~/.claude"]
 
 - link:
     # Terminal

@@ -4,7 +4,7 @@
       create: true
       glob: true
 
-- clean: ["~", "~/.zsh", "~/bin", "~/.claude"]
+- clean: ["~", "~/.zsh", "~/.claude"]
 
 - link:
     # Terminal
@@ -35,7 +35,10 @@
     ~/.clang-format: clang/clang-format
 
     # Scripts
-    ~/bin: bin
+    ~/bin/claude-validate: bin/claude-validate
+    ~/bin/dotfiles: bin/dotfiles
+    ~/bin/git-nuke: bin/git-nuke
+    ~/bin/sshkey: bin/sshkey
 
 - shell:
     - git submodule sync --recursive

@@ -4,7 +4,7 @@
       create: true
       force: true
 
-- clean: ["~", "~/.zsh", "~/bin", "~/.claude"]
+- clean: ["~", "~/.zsh", "~/.claude"]
 
 - link:
     # Shell (portable subset, shared with zsh)
@@ -27,7 +27,9 @@
     ~/.config/ccstatusline/settings.json: claude/ccstatusline-settings.json
 
     # Scripts
-    ~/bin: bin
+    ~/bin/claude-validate: bin/claude-validate
+    ~/bin/sshkey: bin/sshkey
+    ~/bin/git-nuke: bin/git-nuke
 
 - shell:
     # Source dotfiles bashrc from existing .bashrc (non-destructive)

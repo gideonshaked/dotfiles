@@ -10,20 +10,27 @@ My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https
 
 ## Install
 
-Download this repository.
+### Full install (macOS)
 
 ```bash
 git clone --recursive https://github.com/gideonshaked/dotfiles
-```
-
-Run the install script.
-
-```bash
 cd dotfiles
 ./install
 ```
 
-You can manage dotfiles with the [`dotfiles`](./bin/dotfiles) utility (available after install).
+### Minimal install (remote servers)
+
+One-shot setup for SSH hosts. Installs a portable bash config (prompt, aliases, functions), SSH config, Claude Code + ccstatusline, and git aliases without overwriting the existing `.bashrc`.
+
+```bash
+git clone --recursive https://github.com/gideonshaked/dotfiles
+cd dotfiles
+./install --minimal
+```
+
+### Management
+
+After install, use the [`dotfiles`](./bin/dotfiles) utility:
 
 ```bash
 dotfiles update      # Pull latest changes and run install
@@ -40,7 +47,7 @@ dotfiles dotbot      # Update Dotbot submodule
 ├── git         <- Git configuration files (aliases, custom formatting, etc.)
 ├── manifest    <- Brewfile
 ├── ssh         <- SSH config file
-├── term        <- Zsh/Starship configuration
+├── term        <- Shell configuration (zsh, bash, starship)
 └── vscode      <- VS Code configuration and extensions list
 ```
 

@@ -68,8 +68,9 @@ path_prepend() {
 if test "$TERM" = "xterm-kitty"
 then
     s() {
-        # Bootstrap minimal dotfiles if needed, then start shell (single connection)
-        local cmd='test -f ~/.bashrc.dotfiles || { echo "Installing dotfiles..."; [ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles; cd ~/dotfiles && ./install --minimal; }; exec $SHELL -l'
+        # Bootstrap minimal dotfiles if needed, then start bash (single connection)
+        # Wraps in bash -c so it works even when login shell is tcsh
+        local cmd="exec bash -c 'test -f ~/.bashrc.dotfiles || { echo \"Installing dotfiles...\"; [ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles; cd ~/dotfiles && ./install --minimal; }; exec bash'"
         case "$1" in
             shamir* | elkon*) ssh -t "$@" "$cmd" ;;
             *) kitty +kitten ssh -t "$@" "$cmd" ;;

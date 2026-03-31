@@ -70,14 +70,33 @@ then
     s() {
         # Bootstrap minimal dotfiles on first connect (once per host)
         # Pipes script via stdin to bypass tcsh exec-to-bash issues
+        # Use --setup to force re-install on the remote
+        local setup=false
+        local args=()
+        for arg in "$@"; do
+            case "$arg" in
+                --setup) setup=true ;;
+                *) args+=("$arg") ;;
+            esac
+        done
+        set -- "${args[@]}"
+
         local cache_dir="$HOME/.cache/dotfiles-ssh"
-        if [ ! -f "$cache_dir/$1" ]; then
-            ssh "$@" bash << 'BOOTSTRAP'
+        if $setup || [ ! -f "$cache_dir/$1" ]; then
+            if $setup; then
+                ssh "$@" bash << 'SETUP'
+echo "Updating dotfiles..."
+[ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles
+cd ~/dotfiles && git pull && ./install --minimal
+SETUP
+            else
+                ssh "$@" bash << 'BOOTSTRAP'
 if [ -f ~/.bashrc.dotfiles ]; then exit 0; fi
 echo "Installing dotfiles..."
 [ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles
 cd ~/dotfiles && ./install --minimal
 BOOTSTRAP
+            fi
             mkdir -p "$cache_dir" && touch "$cache_dir/$1"
         fi
         case "$1" in

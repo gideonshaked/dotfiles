@@ -7,8 +7,7 @@
 
 - link:
     # Shell (portable subset, shared with zsh)
-    ~/.zsh/aliases.zsh: term/zsh/aliases.zsh
-    ~/.zsh/functions.zsh: term/zsh/functions.zsh
+    ~/.zsh: term/zsh
     ~/.bashrc.dotfiles: term/bashrc.dotfiles
     ~/.bash_prompt: term/bash_prompt.bash
 
@@ -27,9 +26,7 @@
     ~/.config/ccstatusline/settings.json: claude/ccstatusline-settings.json
 
     # Scripts
-    ~/bin/claude-validate: bin/claude-validate
-    ~/bin/sshkey: bin/sshkey
-    ~/bin/git-nuke: bin/git-nuke
+    ~/bin: bin
 
 - shell:
     # Source dotfiles bashrc from existing .bashrc (non-destructive)

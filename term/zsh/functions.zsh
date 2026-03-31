@@ -68,6 +68,8 @@ path_prepend() {
 if test "$TERM" = "xterm-kitty"
 then
     s() {
+        # Bootstrap minimal dotfiles on first connect
+        ssh "$@" 'test -f ~/.bashrc.dotfiles || { [ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles; cd ~/dotfiles && ./install --minimal; }'
         case "$1" in
             shamir* | elkon*) ssh "$@" ;;
             *) kitty +kitten ssh "$@" ;;

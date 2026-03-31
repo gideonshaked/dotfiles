@@ -69,7 +69,7 @@ if test "$TERM" = "xterm-kitty"
 then
     s() {
         case "$1" in
-            shamir | elkon) ssh "$@" ;;
+            shamir* | elkon*) ssh "$@" ;;
             *) kitty +kitten ssh "$@" ;;
         esac
     }

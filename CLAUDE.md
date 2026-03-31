@@ -45,7 +45,10 @@ For remote servers. Installs: SSH config, Claude Code + ccstatusline, git aliase
 | `vscode/keybindings.json` | `~/Library/Application Support/Code/User/keybindings.json` |
 | `clang/clang-format` | `~/.clang-format` |
 | `clang/config.yaml` | `~/Library/Preferences/clangd/config.yaml` |
-| `bin/` | `~/bin/` |
+| `bin/claude-validate` | `~/bin/claude-validate` |
+| `bin/dotfiles` | `~/bin/dotfiles` |
+| `bin/git-nuke` | `~/bin/git-nuke` |
+| `bin/sshkey` | `~/bin/sshkey` |
 
 ### Key Symlink Mappings (minimal install)
 

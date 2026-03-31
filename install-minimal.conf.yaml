@@ -2,8 +2,9 @@
     link:
       relink: true
       create: true
+      force: true
 
-- clean: ["~/.zsh"]
+- clean: ["~/.zsh", "~/bin", "~/.claude"]
 
 - link:
     # Shell (portable subset, shared with zsh)

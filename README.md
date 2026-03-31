@@ -13,9 +13,7 @@ My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https
 ### Full install (macOS)
 
 ```bash
-git clone --recursive https://github.com/gideonshaked/dotfiles
-cd dotfiles
-./install
+git clone --recursive https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install
 ```
 
 ### Minimal install (remote servers)
@@ -23,9 +21,7 @@ cd dotfiles
 One-shot setup for SSH hosts. Installs a portable bash config (prompt, aliases, functions), SSH config, Claude Code + ccstatusline, and git aliases without overwriting the existing `.bashrc`.
 
 ```bash
-git clone --recursive https://github.com/gideonshaked/dotfiles
-cd dotfiles
-./install --minimal
+git clone --recursive https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install --minimal
 ```
 
 ### Management

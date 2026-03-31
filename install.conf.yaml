@@ -40,3 +40,24 @@
 - shell:
     - git submodule sync --recursive
     - git submodule update --init --recursive
+
+    # Git aliases: add include only if not already present
+    - description: Configuring git aliases
+      command: |
+        git config --global --get-all include.path 2>/dev/null | grep -qF 'gitalias.txt' || \
+          git config --global --add include.path ~/.gitalias.txt
+        git config --global --get core.excludesfile >/dev/null 2>&1 || \
+          git config --global core.excludesfile ~/.gitignore
+      stdout: true
+      stderr: true
+
+    # ccstatusline: best effort, failure does not abort install
+    - description: Installing ccstatusline (optional)
+      command: |
+        if command -v npx >/dev/null 2>&1; then
+          npx -y ccstatusline@latest --version < /dev/null 2>/dev/null && echo "ccstatusline OK" || echo "ccstatusline install failed (non-fatal)"
+        else
+          echo "npx not found, skipping ccstatusline (non-fatal)"
+        fi
+      stdout: true
+      stderr: true

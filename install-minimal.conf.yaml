@@ -1,0 +1,62 @@
+- defaults:
+    link:
+      relink: true
+      create: true
+
+- clean: ["~/.zsh"]
+
+- link:
+    # Shell (portable subset, shared with zsh)
+    ~/.zsh/aliases.zsh: term/zsh/aliases.zsh
+    ~/.zsh/functions.zsh: term/zsh/functions.zsh
+    ~/.bashrc.dotfiles: term/bashrc.dotfiles
+    ~/.bash_prompt: term/bash_prompt.bash
+
+    # SSH
+    ~/.ssh/config: ssh/config
+
+    # Git (aliases only, does not overwrite gitconfig)
+    ~/.gitalias.txt: git/gitalias.txt
+    ~/.gitignore: git/gitignore
+
+    # Claude Code
+    ~/.claude/settings.json: claude/claude-settings.json
+    ~/.claude/CLAUDE.md: claude/CLAUDE.md
+
+    # ccstatusline
+    ~/.config/ccstatusline/settings.json: claude/ccstatusline-settings.json
+
+    # Scripts
+    ~/bin/claude-validate: bin/claude-validate
+    ~/bin/sshkey: bin/sshkey
+    ~/bin/git-nuke: bin/git-nuke
+
+- shell:
+    # Source dotfiles bashrc from existing .bashrc (non-destructive)
+    - description: Hooking into .bashrc
+      command: |
+        grep -qF 'bashrc.dotfiles' "$HOME/.bashrc" 2>/dev/null || \
+          echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> "$HOME/.bashrc"
+      stdout: true
+      stderr: true
+
+    # Git aliases: add include only if not already present
+    - description: Configuring git aliases
+      command: |
+        git config --global --get-all include.path 2>/dev/null | grep -qF 'gitalias.txt' || \
+          git config --global --add include.path ~/.gitalias.txt
+        git config --global --get core.excludesfile >/dev/null 2>&1 || \
+          git config --global core.excludesfile ~/.gitignore
+      stdout: true
+      stderr: true
+
+    # ccstatusline: best effort, failure does not abort install
+    - description: Installing ccstatusline (optional)
+      command: |
+        if command -v npx >/dev/null 2>&1; then
+          npx -y ccstatusline@latest --version && echo "ccstatusline OK" || echo "ccstatusline install failed (non-fatal)"
+        else
+          echo "npx not found, skipping ccstatusline (non-fatal)"
+        fi
+      stdout: true
+      stderr: true

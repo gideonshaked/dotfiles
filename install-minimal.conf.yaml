@@ -28,6 +28,7 @@
 
     # Scripts
     ~/bin/claude-validate: bin/claude-validate
+    ~/bin/dotfiles: bin/dotfiles
     ~/bin/sshkey: bin/sshkey
     ~/bin/git-nuke: bin/git-nuke
 

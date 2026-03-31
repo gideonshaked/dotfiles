@@ -3,7 +3,14 @@
 # Dotfiles management functions
 #
 
-DOTFILES="$HOME/Documents/personal/dev/dotfiles"
+if [ -d "$HOME/Documents/personal/dev/dotfiles" ]; then
+    DOTFILES="$HOME/Documents/personal/dev/dotfiles"
+elif [ -d "$HOME/dotfiles" ]; then
+    DOTFILES="$HOME/dotfiles"
+else
+    echo "dotfiles repo not found" >&2
+    exit 1
+fi
 
 # Update file that tracks installed Homebrew packages
 update_brewfile() {

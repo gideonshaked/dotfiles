@@ -88,13 +88,21 @@ then
 echo "Reinstalling dotfiles..."
 [ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles
 cd ~/dotfiles && git pull && ./install --minimal
+grep -qF bashrc.dotfiles ~/.bashrc 2>/dev/null || echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> ~/.bashrc
+grep -qF bashrc.dotfiles ~/.bash_profile 2>/dev/null || echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> ~/.bash_profile
 SETUP
             else
                 ssh "$@" bash << 'BOOTSTRAP'
-if [ -f ~/.bashrc.dotfiles ]; then exit 0; fi
+if [ -f ~/.bashrc.dotfiles ]; then
+    grep -qF bashrc.dotfiles ~/.bashrc 2>/dev/null || echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> ~/.bashrc
+    grep -qF bashrc.dotfiles ~/.bash_profile 2>/dev/null || echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> ~/.bash_profile
+    exit 0
+fi
 echo "Installing dotfiles..."
 [ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles
 cd ~/dotfiles && ./install --minimal
+grep -qF bashrc.dotfiles ~/.bashrc 2>/dev/null || echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> ~/.bashrc
+grep -qF bashrc.dotfiles ~/.bash_profile 2>/dev/null || echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> ~/.bash_profile
 BOOTSTRAP
             fi
             mkdir -p "$cache_dir" && touch "$cache_dir/$1"

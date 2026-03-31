@@ -69,7 +69,8 @@ if test "$TERM" = "xterm-kitty"
 then
     s() {
         # Bootstrap minimal dotfiles on first connect
-        ssh "$@" 'test -f ~/.bashrc.dotfiles || { echo "Bootstrapping dotfiles..."; [ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles; cd ~/dotfiles && ./install --minimal && echo "Done."; }'
+        echo "Checking dotfiles on $1..."
+        ssh "$@" 'test -f ~/.bashrc.dotfiles || { echo "Installing dotfiles..."; [ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles; cd ~/dotfiles && ./install --minimal && echo "Done."; }'
         case "$1" in
             shamir* | elkon*) ssh "$@" ;;
             *) kitty +kitten ssh "$@" ;;

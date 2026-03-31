@@ -10,7 +10,8 @@ Personal dotfiles repository using [Dotbot](https://github.com/anishathalye/dotb
 
 **Install/update dotfiles:**
 ```bash
-./install
+./install            # Full install (macOS)
+./install --minimal  # Minimal install (remote servers)
 ```
 
 **Manage dotfiles:**
@@ -22,7 +23,11 @@ dotfiles dotbot      # Update Dotbot submodule
 
 ## Architecture
 
-The install script auto-installs Oh My Zsh and Starship if missing, then runs Dotbot with `install.conf.yaml` and optionally Homebrew.
+The install script runs Dotbot with `install.conf.yaml` (full) or `install-minimal.conf.yaml` (via `--minimal` flag).
+
+### Minimal Install
+
+For remote servers. Installs: SSH config, Claude Code + ccstatusline, git aliases, and portable bash config (aliases, functions, prompt). Sources `aliases.zsh` and `functions.zsh` from the same files used by the full zsh setup. Appends a source line to the existing `.bashrc` without overwriting it. ccstatusline install is failure-tolerant.
 
 ### Key Symlink Mappings
 
@@ -52,4 +57,4 @@ The install script auto-installs Oh My Zsh and Starship if missing, then runs Do
 
 ## Pre-commit Hooks
 
-Uses pre-commit.ci with: beautysh (shell), codespell, and standard pre-commit-hooks.
+Uses pre-commit.ci with: ruff (lint + format), beautysh (shell), codespell, and standard pre-commit-hooks.

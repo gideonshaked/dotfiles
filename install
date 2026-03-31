@@ -4,12 +4,20 @@ set -e
 
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
-
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Parse flags: strip our own args, pass the rest to dotbot
+ARGS=()
+for arg in "$@"; do
+    case "$arg" in
+        --minimal) CONFIG="install-minimal.conf.yaml" ;;
+        *) ARGS+=("$arg") ;;
+    esac
+done
 
 cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${ARGS[@]}"

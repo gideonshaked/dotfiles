@@ -1,0 +1,48 @@
+#
+# ~/.bashrc.dotfiles: portable dotfiles shell config
+# Sourced from ~/.bashrc; does not replace it.
+#
+
+# Only run in interactive shells
+case $- in
+    *i*) ;;
+    *) return ;;
+esac
+
+# History
+HISTSIZE=10000
+HISTFILESIZE=10000
+HISTCONTROL=ignoreboth:erasedups
+shopt -s histappend
+
+# Shell options
+shopt -s checkwinsize   # Update LINES/COLUMNS after each command
+shopt -s globstar 2>/dev/null  # ** glob (bash 4+)
+shopt -s nocaseglob     # Case-insensitive globbing
+shopt -s cdspell        # Auto-correct minor cd typos
+shopt -s no_empty_cmd_completion  # Don't complete on empty line
+
+# Colored man pages
+export LESS_TERMCAP_mb=$'\E[01;32m'
+export LESS_TERMCAP_md=$'\E[01;32m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;47;34m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;36m'
+export LESS=-R
+
+# GCC colors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# Source shared dotfiles modules (same files used by zsh)
+[ -f "$HOME/.zsh/functions.zsh" ] && . "$HOME/.zsh/functions.zsh"
+[ -f "$HOME/.zsh/aliases.zsh" ]   && . "$HOME/.zsh/aliases.zsh"
+
+# PATH additions (only if dirs exist)
+[ -d "$HOME/bin" ]       && path_prepend "$HOME/bin"
+[ -d "$HOME/.local/bin" ] && path_prepend "$HOME/.local/bin"
+[ -d "$HOME/.cargo/bin" ] && path_prepend "$HOME/.cargo/bin"
+
+# Prompt
+[ -f "$HOME/.bash_prompt" ] && . "$HOME/.bash_prompt"

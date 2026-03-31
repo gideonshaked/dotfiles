@@ -1,5 +1,14 @@
-[tool.black]
+[project]
+name = "dotfiles"
+version = "0.1.0"
+requires-python = ">=3.10"
+
+[tool.ruff]
 line-length = 120
 
-[tool.isort]
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
 profile = "black"

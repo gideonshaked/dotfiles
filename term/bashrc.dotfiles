@@ -3,7 +3,9 @@
 # Sourced from ~/.bashrc; does not replace it.
 #
 
-# Only run in interactive shells
+# Only run once per shell, and only in interactive shells
+[ -n "$__DOTFILES_SOURCED" ] && return
+__DOTFILES_SOURCED=1
 case $- in
     *i*) ;;
     *) return ;;

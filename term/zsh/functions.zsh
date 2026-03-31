@@ -71,9 +71,9 @@ then
         # Bootstrap minimal dotfiles on first connect (once per host)
         local cache_dir="$HOME/.cache/dotfiles-ssh"
         if [ ! -f "$cache_dir/$1" ]; then
-            echo "Checking dotfiles on $1..."
-            ssh "$@" 'test -f ~/.bashrc.dotfiles || { echo "Installing dotfiles..."; [ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles; cd ~/dotfiles && ./install --minimal; }' \
-                && mkdir -p "$cache_dir" && touch "$cache_dir/$1"
+            ssh "$@" 'test -f ~/.bashrc.dotfiles' 2>/dev/null \
+                || ssh "$@" 'echo "Installing dotfiles on $(hostname)..."; [ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles; cd ~/dotfiles && ./install --minimal'
+            mkdir -p "$cache_dir" && touch "$cache_dir/$1"
         fi
         case "$1" in
             shamir* | elkon*) ssh "$@" ;;

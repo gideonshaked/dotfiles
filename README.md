@@ -16,13 +16,17 @@ My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https
 git clone --recursive https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install
 ```
 
-### Minimal install
+### Minimal install (remote servers)
 
-This mode is meant to be a ane-shot setup for SSH hosts. Installs a portable bash config (prompt, aliases, functions), SSH config, Claude Code + ccstatusline, and git aliases without overwriting the existing `.bashrc`.
+One-shot setup for SSH hosts. Installs a portable bash config (prompt, aliases, functions), SSH config, Claude Code + ccstatusline, and git aliases without overwriting the existing shell config.
 
 ```bash
 git clone --recursive https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install --minimal
 ```
+
+### Auto-bootstrap via SSH
+
+The `s` function (Kitty SSH wrapper) automatically installs minimal dotfiles on first connection to a new host. Use `s --force-reinstall <host>` to pull latest changes and re-run the install.
 
 ### Management
 
@@ -37,7 +41,7 @@ dotfiles dotbot      # Update Dotbot submodule
 ## Directory Structure
 
 ```text
-├── bin         <- Personal scripts
+├── bin         <- Personal scripts (git-nuke, sshkey, dotfiles, claude-validate)
 ├── claude      <- Claude Code settings, global CLAUDE.md, and ccstatusline config
 ├── clang       <- clang-format and clangd config
 ├── git         <- Git configuration files (aliases, custom formatting, etc.)

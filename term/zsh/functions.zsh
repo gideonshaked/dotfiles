@@ -69,8 +69,9 @@ if test "$TERM" = "xterm-kitty"
 then
     s() {
         # Bootstrap minimal dotfiles if needed, then start bash (single connection)
-        # Wraps in bash -c so it works even when login shell is tcsh
-        local cmd="exec bash -c 'test -f ~/.bashrc.dotfiles || { echo \"Installing dotfiles...\"; [ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles; cd ~/dotfiles && ./install --minimal; }; exec bash'"
+        # Uses bash -c so it works even when login shell is tcsh
+        # Avoids single quotes inside the bash -c string to keep tcsh quoting clean
+        local cmd='bash -c '"'"'test -f ~/.bashrc.dotfiles || { echo "Installing dotfiles..."; [ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles; cd ~/dotfiles && ./install --minimal; }; grep -qF bashrc.dotfiles ~/.bashrc 2>/dev/null || printf "%s\n" "[ -f ~/.bashrc.dotfiles ] && . ~/.bashrc.dotfiles" >> ~/.bashrc; exec bash'"'"
         case "$1" in
             shamir* | elkon*) ssh -t "$@" "$cmd" ;;
             *) kitty +kitten ssh -t "$@" "$cmd" ;;

@@ -31,10 +31,12 @@
 
 - shell:
     # Source dotfiles bashrc from existing .bashrc (non-destructive)
-    - description: Hooking into .bashrc
+    - description: Hooking into .bashrc and .bash_profile
       command: |
         grep -qF 'bashrc.dotfiles' "$HOME/.bashrc" 2>/dev/null || \
           echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> "$HOME/.bashrc"
+        grep -qF 'bashrc.dotfiles' "$HOME/.bash_profile" 2>/dev/null || \
+          echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> "$HOME/.bash_profile"
       stdout: true
       stderr: true
 

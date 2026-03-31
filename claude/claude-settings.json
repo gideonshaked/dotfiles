@@ -3,6 +3,44 @@
     "commit": "",
     "pr": ""
   },
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-validate",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y ccstatusline@latest --hook"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y ccstatusline@latest --hook"
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "npx -y ccstatusline@latest",
@@ -60,45 +98,5 @@
   "effortLevel": "high",
   "autoUpdatesChannel": "latest",
   "voiceEnabled": true,
-  "permissions": {
-    "defaultMode": "bypassPermissions"
-  },
-  "skipDangerousModePermissionPrompt": true,
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claude-validate",
-            "timeout": 10
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "_tag": "ccstatusline-managed",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "npx -y ccstatusline@latest --hook"
-          }
-        ],
-        "matcher": "Skill"
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "_tag": "ccstatusline-managed",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "npx -y ccstatusline@latest --hook"
-          }
-        ]
-      }
-    ]
-  }
+  "skipDangerousModePermissionPrompt": true
 }

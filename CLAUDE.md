@@ -27,7 +27,11 @@ The install script runs Dotbot with `install.conf.yaml` (full) or `install-minim
 
 ### Minimal Install
 
-For remote servers. Installs: SSH config, Claude Code + ccstatusline, git aliases, and portable bash config (aliases, functions, prompt). Sources `aliases.zsh` and `functions.zsh` from the same files used by the full zsh setup. Appends a source line to the existing `.bashrc` without overwriting it. ccstatusline install is failure-tolerant.
+For remote servers. Installs: SSH config, Claude Code + ccstatusline, git aliases, and portable bash config (aliases, functions, prompt). Sources `aliases.zsh` and `functions.zsh` from the same files used by the full zsh setup. Appends a source line to both `.bashrc` and `.bash_profile` for login shell compatibility (e.g., tcsh exec-to-bash). ccstatusline install is failure-tolerant. Guarded against double-sourcing.
+
+### SSH Auto-Bootstrap
+
+The `s()` function (Kitty SSH wrapper in `functions.zsh`) auto-installs minimal dotfiles on first connection to a new host. Uses a local cache at `~/.cache/dotfiles-ssh/` to avoid repeat checks. Use `s --force-reinstall <host>` to pull and re-run the install. The bootstrap pipes the install script via stdin to work with any remote login shell (bash, tcsh, etc.).
 
 ### Key Symlink Mappings (full install)
 
@@ -54,8 +58,7 @@ For remote servers. Installs: SSH config, Claude Code + ccstatusline, git aliase
 
 | Source in repo | Target location |
 |----------------|-----------------|
-| `term/zsh/aliases.zsh` | `~/.zsh/aliases.zsh` |
-| `term/zsh/functions.zsh` | `~/.zsh/functions.zsh` |
+| `term/zsh/` | `~/.zsh/` |
 | `term/bashrc.dotfiles` | `~/.bashrc.dotfiles` |
 | `term/bash_prompt.bash` | `~/.bash_prompt` |
 | `ssh/config` | `~/.ssh/config` |
@@ -65,8 +68,9 @@ For remote servers. Installs: SSH config, Claude Code + ccstatusline, git aliase
 | `claude/CLAUDE.md` | `~/.claude/CLAUDE.md` |
 | `claude/ccstatusline-settings.json` | `~/.config/ccstatusline/settings.json` |
 | `bin/claude-validate` | `~/bin/claude-validate` |
-| `bin/sshkey` | `~/bin/sshkey` |
+| `bin/dotfiles` | `~/bin/dotfiles` |
 | `bin/git-nuke` | `~/bin/git-nuke` |
+| `bin/sshkey` | `~/bin/sshkey` |
 
 ### Submodules
 
@@ -78,7 +82,7 @@ For remote servers. Installs: SSH config, Claude Code + ccstatusline, git aliase
 
 ### Bash Configuration (minimal)
 
-`~/.bashrc.dotfiles` is appended to the existing `~/.bashrc`. It sources `~/.zsh/functions.zsh`, `~/.zsh/aliases.zsh`, and `~/.bash_prompt`. The bash prompt is a pure-bash starship-like prompt showing user@host, directory, git branch, and virtualenv.
+`~/.bashrc.dotfiles` is sourced from both `~/.bashrc` and `~/.bash_profile` for login shell compatibility. It sources `~/.zsh/functions.zsh`, `~/.zsh/aliases.zsh`, and `~/.bash_prompt`. The bash prompt is a pure-bash starship-like prompt showing user@host, directory, git branch, and virtualenv. Has a double-source guard.
 
 ## Pre-commit Hooks
 

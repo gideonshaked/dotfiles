@@ -68,9 +68,9 @@
     "agentic-peer-review": {
       "source": {
         "source": "github",
-        "repo": "gideonshaked/agentic-peer-review"
-      },
-      "autoUpdate": true
+        "repo": "gideonshaked/agentic-peer-review",
+        "autoUpdate": true
+      }
     }
   },
   "spinnerTipsEnabled": false,

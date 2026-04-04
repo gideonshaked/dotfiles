@@ -46,7 +46,7 @@ if [ -d ~/dotfiles ]; then
     cd ~/dotfiles && bin/dotfiles update --minimal
 else
     echo "Installing dotfiles..."
-    git clone git@github.com:gideonshaked/dotfiles.git ~/dotfiles
+    git clone https://github.com/gideonshaked/dotfiles ~/dotfiles
     cd ~/dotfiles && ./install --minimal
 fi
 EOF
@@ -55,7 +55,7 @@ EOF
         ssh "$@" bash << 'EOF'
 echo "Reinstalling dotfiles..."
 rm -rf ~/dotfiles
-git clone git@github.com:gideonshaked/dotfiles.git ~/dotfiles
+git clone https://github.com/gideonshaked/dotfiles ~/dotfiles
 cd ~/dotfiles && ./install --minimal
 EOF
         ;;

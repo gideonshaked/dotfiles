@@ -1,0 +1,10 @@
+- defaults:
+    link:
+      relink: true
+      create: true
+
+- link:
+    ~/.claude/CLAUDE.md: claude/claude-skills/CLAUDE.md
+    ~/.claude/commands:
+      path: claude/claude-skills/commands
+      glob: false

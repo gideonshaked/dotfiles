@@ -23,7 +23,6 @@
 
     # Claude
     ~/.claude/settings.json: claude/claude-settings.json
-    ~/.claude/CLAUDE.md: claude/CLAUDE.md
     ~/.config/ccstatusline/settings.json: claude/ccstatusline-settings.json
 
     # VSCode (macOS)
@@ -41,9 +40,6 @@
     ~/bin/sshkey: bin/sshkey
 
 - shell:
-    - git submodule sync --recursive
-    - git submodule update --init --recursive
-
     # Git aliases: add include only if not already present
     - description: Configuring git aliases
       command: |

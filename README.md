@@ -22,7 +22,8 @@ git clone --recursive https://github.com/gideonshaked/dotfiles && cd dotfiles &&
 
 ### Private submodule: claude-skills
 
-The `claude/claude-skills` submodule is a private repo containing my global `CLAUDE.md` and custom slash commands. The install script handles this gracefully — if you don't have access, it skips the submodule and everything else installs normally.
+The `claude/claude-skills` submodule is a private repo containing my global `CLAUDE.md` and skills. 
+The install script handles not being able to access the skills repo gracefully, so it shouldn't be an issue if you install this repo and you're not me ;).
 
 ### Auto-bootstrap via SSH
 

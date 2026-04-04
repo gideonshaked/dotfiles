@@ -34,10 +34,7 @@
     ~/.clang-format: clang/clang-format
 
     # Scripts
-    ~/bin/claude-validate: bin/claude-validate
-    ~/bin/dotfiles: bin/dotfiles
-    ~/bin/git-nuke: bin/git-nuke
-    ~/bin/sshkey: bin/sshkey
+    ~/bin: bin
 
 - shell:
     # Git aliases: add include only if not already present

@@ -12,15 +12,16 @@ My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https
 git clone --recursive https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install
 ```
 
-### Minimal install (remote servers)
+### Minimal install (suitable for Linux and macOS)
 
-One-shot setup for SSH hosts. Installs a portable bash config (prompt, aliases, functions), SSH config, Claude Code + ccstatusline, and git aliases without overwriting the existing shell config.
+A minimal installation intended primarily for headless linux servers.
+Installs a portable bash config (prompt, aliases, functions), SSH config, Claude Code + ccstatusline, and git aliases without overwriting the existing shell config.
 
 ```bash
 git clone --recursive https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install --minimal
 ```
 
-### Private submodule: claude-skills
+### `claude-skills` private submodule
 
 The `claude/claude-skills` submodule is a private repo containing my global `CLAUDE.md` and skills. 
 The install script handles not being able to access the skills repo gracefully, so it shouldn't be an issue if you install this repo and you're not me ;).

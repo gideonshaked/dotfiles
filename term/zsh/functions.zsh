@@ -47,6 +47,19 @@ nubio() {
     echo "nubio hostname set to $hostname"
 }
 
+# Update all Claude Code marketplaces and plugins
+cplu() {
+    claude plugins marketplace update
+    local plugins=($(claude plugins list --json | jq -r '.[].id'))
+    if [[ ${#plugins[@]} -eq 0 ]]; then
+        echo "No plugins installed"
+        return 1
+    fi
+    for plugin in "${plugins[@]}"; do
+        claude plugin update "$plugin"
+    done
+}
+
 # Remove from PATH
 path_remove() {
     PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: "\$0 != \"$1\"" | sed 's/:$//')

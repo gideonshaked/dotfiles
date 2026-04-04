@@ -20,6 +20,10 @@ One-shot setup for SSH hosts. Installs a portable bash config (prompt, aliases, 
 git clone --recursive https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install --minimal
 ```
 
+### Private submodule: claude-skills
+
+The `claude/claude-skills` submodule is a private repo containing my global `CLAUDE.md` and custom slash commands. The install script handles this gracefully — if you don't have access, it skips the submodule and everything else installs normally.
+
 ### Auto-bootstrap via SSH
 
 The `s` function (Kitty SSH wrapper) automatically installs minimal dotfiles on first connection to a new host. Use `s --force-reinstall <host>` to pull latest changes and re-run the install.
@@ -38,7 +42,8 @@ dotfiles dotbot      # Update Dotbot submodule
 
 ```text
 ├── bin         <- Personal scripts (git-nuke, sshkey, dotfiles, claude-validate)
-├── claude      <- Claude Code settings, global CLAUDE.md, and ccstatusline config
+├── claude      <- Claude Code settings, ccstatusline config, and claude-skills submodule
+│   └── claude-skills  <- (private submodule) Global CLAUDE.md and custom slash commands
 ├── clang       <- clang-format and clangd config
 ├── git         <- Git configuration files (aliases, custom formatting, etc.)
 ├── manifest    <- Brewfile

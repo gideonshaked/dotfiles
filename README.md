@@ -4,6 +4,13 @@
 
 My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https://www.anishathalye.com/2014/08/03/managing-your-dotfiles/#dotfiles-are-not-meant-to-be-forked). That being said, this repository contains lots of useful things ([shell functions](https://github.com/gideonshaked/dotfiles/blob/master/term/zsh/functions.zsh), [scripts](https://github.com/gideonshaked/dotfiles/tree/master/bin), [gitconfig](https://github.com/gideonshaked/dotfiles/blob/master/git/gitconfig)) that you can add to your personal setup. As such, I encourage anyone that thinks these dotfiles look useful to try to understand them first and then copy the parts that stand out to them.
 
+<p align="center">
+  <a href="#install">Install</a> &bull;
+  <a href="#contents">Contents</a> &bull;
+  <a href="#notes">Notes</a> &bull;
+  <a href="#credits">Credits</a>
+</p>
+
 ## Install
 
 ### Full install (macOS)
@@ -21,6 +28,21 @@ Installs a portable bash config (prompt, aliases, functions), SSH config, Claude
 git clone --recursive https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install --minimal
 ```
 
+## Contents
+
+```text
+├── bin         <- Personal scripts (git-nuke, sshkey, dotfiles, claude-validate)
+├── claude      <- Claude Code settings, ccstatusline config, and claude-skills submodule
+├── clang       <- clang-format and clangd config
+├── git         <- Git configuration files (aliases, custom formatting, etc.)
+├── manifest    <- Brewfile
+├── ssh         <- SSH config file
+├── term        <- Shell configuration (zsh, bash, starship)
+└── vscode      <- VS Code configuration and extensions list
+```
+
+## Notes
+
 ### `claude-skills` private submodule
 
 The `claude/claude-skills` submodule is a private repo containing my global `CLAUDE.md` and skills. 
@@ -30,7 +52,7 @@ The install script handles not being able to access the skills repo gracefully, 
 
 The `s` function (Kitty SSH wrapper) automatically installs minimal dotfiles on first connection to a new host. Use `s --force-reinstall <host>` to pull latest changes and re-run the install.
 
-### Management
+### Dotfile management
 
 After install, use the [`dotfiles`](./bin/dotfiles) utility:
 
@@ -38,20 +60,6 @@ After install, use the [`dotfiles`](./bin/dotfiles) utility:
 dotfiles update      # Pull latest changes and run install
 dotfiles brewfile    # Update Homebrew package manifest
 dotfiles dotbot      # Update Dotbot submodule
-```
-
-## Directory Structure
-
-```text
-├── bin         <- Personal scripts (git-nuke, sshkey, dotfiles, claude-validate)
-├── claude      <- Claude Code settings, ccstatusline config, and claude-skills submodule
-│   └── claude-skills  <- (private submodule) Global CLAUDE.md and custom slash commands
-├── clang       <- clang-format and clangd config
-├── git         <- Git configuration files (aliases, custom formatting, etc.)
-├── manifest    <- Brewfile
-├── ssh         <- SSH config file
-├── term        <- Shell configuration (zsh, bash, starship)
-└── vscode      <- VS Code configuration and extensions list
 ```
 
 ## Credits

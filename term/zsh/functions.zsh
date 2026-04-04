@@ -99,7 +99,7 @@ then
             if $reinstall; then
                 ssh "$@" bash << 'SETUP'
 echo "Reinstalling dotfiles..."
-[ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles
+[ -d ~/dotfiles ] || git clone https://github.com/gideonshaked/dotfiles ~/dotfiles
 cd ~/dotfiles && git pull && ./install --minimal
 grep -qF bashrc.dotfiles ~/.bashrc 2>/dev/null || echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> ~/.bashrc
 grep -qF bashrc.dotfiles ~/.bash_profile 2>/dev/null || echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> ~/.bash_profile
@@ -112,7 +112,7 @@ if [ -f ~/.bashrc.dotfiles ]; then
     exit 0
 fi
 echo "Installing dotfiles..."
-[ -d ~/dotfiles ] || git clone --recursive https://github.com/gideonshaked/dotfiles ~/dotfiles
+[ -d ~/dotfiles ] || git clone https://github.com/gideonshaked/dotfiles ~/dotfiles
 cd ~/dotfiles && ./install --minimal
 grep -qF bashrc.dotfiles ~/.bashrc 2>/dev/null || echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> ~/.bashrc
 grep -qF bashrc.dotfiles ~/.bash_profile 2>/dev/null || echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> ~/.bash_profile

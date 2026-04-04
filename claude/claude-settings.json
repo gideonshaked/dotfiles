@@ -52,6 +52,13 @@
     "agentic-peer-review@agentic-peer-review": true
   },
   "extraKnownMarketplaces": {
+    "beads-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "steveyegge/beads",
+        "autoUpdate": true
+      }
+    },
     "claude-plugins-official": {
       "source": {
         "source": "github",
@@ -62,35 +69,65 @@
       "source": {
         "source": "github",
         "repo": "gideonshaked/agentic-peer-review"
-      }
+      },
+      "autoUpdate": true
     }
   },
+  "spinnerTipsEnabled": false,
   "spinnerVerbs": {
     "mode": "replace",
     "verbs": [
       "Refuckulating",
+      "Unfucking your code",
+      "Shit-compiling",
+      "Percussive debugging",
+      "Yelling at the compiler",
+      "Asking the code nicely to not be trash",
       "Sacrificing a rubber duck",
       "Performing mass bitchery",
+      "Aggressively vibing",
+      "Weaponizing semicolons",
       "Committing crimes against clean code",
+      "Duct-taping this shit together",
       "Doing unspeakable things to your codebase",
+      "Gaslighting the type checker",
       "Making the linter cry",
       "Absolute fuckery in progress",
+      "Cursing in binary",
       "Violating every best practice known to man",
+      "Telling the bugs to fuck off",
       "Hotboxing the stack trace",
-      "Kidnapping the compiler's children and holding them for ransom",
+      "Brute-forcing elegance",
+      "Bullshitting through the algorithm",
+      "Kicking the runtime in the teeth",
+      "Strangling a memory leak",
+      "Emotionally manipulating the garbage collector",
+      "Suplexing a segfault",
+      "Hate-compiling",
+      "Rage-optimizing",
+      "Threatening the build system",
+      "Whispering sweet nothings to stderr",
       "Smoking a fat stack trace",
       "Rolling a joint commit",
+      "Blazing through your codebase",
+      "Taking a fat rip of the API",
+      "Puff puff parsing",
+      "Getting the code properly baked",
       "Hitting the hash table",
+      "Greening out on garbage collection",
       "Chiefing on the call stack",
+      "Passing the dutchie to the left side of the tree",
       "420 compile it",
+      "Dabbing on the runtime",
       "Edibles kicking in... please wait",
+      "Hotboxing the Docker container",
       "Toking on your tokens",
+      "In a higher-order state of mind",
       "Blunt-force solving this problem"
     ]
   },
   "effortLevel": "high",
   "autoUpdatesChannel": "latest",
   "voiceEnabled": true,
-  "skipDangerousModePermissionPrompt": true,
-  "spinnerTipsEnabled": false
+  "skipDangerousModePermissionPrompt": true
 }

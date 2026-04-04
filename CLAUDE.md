@@ -23,7 +23,7 @@ dotfiles dotbot      # Update Dotbot submodule
 
 ## Architecture
 
-The install script runs Dotbot with `install.conf.yaml` (full) or `install-minimal.conf.yaml` (via `--minimal` flag).
+The install script runs Dotbot with `install.conf.yaml` (full) or `install-minimal.conf.yaml` (via `--minimal` flag). After the main config, it tries to init the private `claude/claude-skills` submodule and runs `install-skills.conf.yaml` if available, otherwise skips gracefully.
 
 ### Minimal Install
 
@@ -43,8 +43,9 @@ The `s()` function (Kitty SSH wrapper in `functions.zsh`) auto-installs minimal 
 | `git/gitconfig` | `~/.gitconfig` |
 | `ssh/config` | `~/.ssh/config` |
 | `claude/claude-settings.json` | `~/.claude/settings.json` |
-| `claude/CLAUDE.md` | `~/.claude/CLAUDE.md` |
 | `claude/ccstatusline-settings.json` | `~/.config/ccstatusline/settings.json` |
+| `claude/claude-skills/CLAUDE.md` | `~/.claude/CLAUDE.md` (private submodule) |
+| `claude/claude-skills/commands` | `~/.claude/commands` (private submodule) |
 | `vscode/settings.json` | `~/Library/Application Support/Code/User/settings.json` |
 | `vscode/keybindings.json` | `~/Library/Application Support/Code/User/keybindings.json` |
 | `clang/clang-format` | `~/.clang-format` |
@@ -65,8 +66,9 @@ The `s()` function (Kitty SSH wrapper in `functions.zsh`) auto-installs minimal 
 | `git/gitalias.txt` | `~/.gitalias.txt` |
 | `git/gitignore` | `~/.gitignore` |
 | `claude/claude-settings.json` | `~/.claude/settings.json` |
-| `claude/CLAUDE.md` | `~/.claude/CLAUDE.md` |
 | `claude/ccstatusline-settings.json` | `~/.config/ccstatusline/settings.json` |
+| `claude/claude-skills/CLAUDE.md` | `~/.claude/CLAUDE.md` (private submodule) |
+| `claude/claude-skills/commands` | `~/.claude/commands` (private submodule) |
 | `bin/claude-validate` | `~/bin/claude-validate` |
 | `bin/dotfiles` | `~/bin/dotfiles` |
 | `bin/git-nuke` | `~/bin/git-nuke` |
@@ -75,6 +77,7 @@ The `s()` function (Kitty SSH wrapper in `functions.zsh`) auto-installs minimal 
 ### Submodules
 
 - `dotbot/` : Dotbot installer
+- `claude/claude-skills/` : (private) Global CLAUDE.md and custom slash commands
 
 ### Zsh Configuration
 

@@ -28,6 +28,7 @@ for arg in "$@"; do
         --install-dotfiles) action="install" ;;
         --reinstall-dotfiles) action="reinstall" ;;
         --update-dotfiles) action="update" ;;
+        --*) echo "Unknown option: $arg" >&2; usage >&2; exit 1 ;;
         *) args+=("$arg") ;;
     esac
 done

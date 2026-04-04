@@ -23,9 +23,7 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 
 # claude-skills: private submodule, skip if unavailable
 SKILLS_DIR="claude/claude-skills"
-if [ ! -d "${BASEDIR}/${SKILLS_DIR}/.git" ] && [ ! -f "${BASEDIR}/${SKILLS_DIR}/.git" ]; then
-    git submodule update --init "${SKILLS_DIR}" 2>/dev/null || true
-fi
+git submodule update --init "${SKILLS_DIR}" 2>/dev/null || true
 if [ -d "${BASEDIR}/${SKILLS_DIR}/skills" ] || [ -d "${BASEDIR}/${SKILLS_DIR}/commands" ]; then
     "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c install-skills.conf.yaml "${ARGS[@]}"
 else

@@ -17,7 +17,6 @@ for arg in "$@"; do
 done
 
 cd "${BASEDIR}"
-(cd "${DOTBOT_DIR}" && git submodule sync --quiet --recursive)
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${ARGS[@]}"

@@ -16,9 +16,11 @@ Personal dotfiles repository using [Dotbot](https://github.com/anishathalye/dotb
 
 **Manage dotfiles:**
 ```bash
-dotfiles update      # Pull latest changes and run install
-dotfiles brewfile    # Update Homebrew package manifest
-dotfiles dotbot      # Update Dotbot submodule
+dotfiles update              # Pull latest changes and run install
+dotfiles update --minimal    # Same, but minimal install
+dotfiles brewfile            # Update Homebrew package manifest
+dotfiles dotbot              # Update Dotbot submodule
+dotfiles skills              # Update Claude skills submodule
 ```
 
 ## Architecture
@@ -29,9 +31,9 @@ The install script runs Dotbot with `install.conf.yaml` (full) or `install-minim
 
 For remote servers. Installs: SSH config, Claude Code + ccstatusline, git aliases, and portable bash config (aliases, functions, prompt). Sources `aliases.zsh` and `functions.zsh` from the same files used by the full zsh setup. Appends a source line to both `.bashrc` and `.bash_profile` for login shell compatibility (e.g., tcsh exec-to-bash). ccstatusline install is failure-tolerant. Guarded against double-sourcing.
 
-### SSH Auto-Bootstrap
+### SSH Wrapper (`bin/s`)
 
-The `s()` function (Kitty SSH wrapper in `functions.zsh`) auto-installs minimal dotfiles on first connection to a new host. Uses a local cache at `~/.cache/dotfiles-ssh/` to avoid repeat checks. Use `s --force-reinstall <host>` to pull and re-run the install. The bootstrap pipes the install script via stdin to work with any remote login shell (bash, tcsh, etc.).
+The `s` script is an SSH wrapper that uses the Kitty SSH kitten when available, falling back to plain ssh. Dotfiles management on remotes is opt-in via flags: `--install-dotfiles`, `--reinstall-dotfiles`, `--update-dotfiles`. Default is just SSH with no dotfiles action.
 
 ### Key Symlink Mappings (full install)
 
@@ -50,10 +52,7 @@ The `s()` function (Kitty SSH wrapper in `functions.zsh`) auto-installs minimal 
 | `vscode/keybindings.json` | `~/Library/Application Support/Code/User/keybindings.json` |
 | `clang/clang-format` | `~/.clang-format` |
 | `clang/config.yaml` | `~/Library/Preferences/clangd/config.yaml` |
-| `bin/claude-validate` | `~/bin/claude-validate` |
-| `bin/dotfiles` | `~/bin/dotfiles` |
-| `bin/git-nuke` | `~/bin/git-nuke` |
-| `bin/sshkey` | `~/bin/sshkey` |
+| `bin/` | `~/bin` |
 
 ### Key Symlink Mappings (minimal install)
 
@@ -69,10 +68,7 @@ The `s()` function (Kitty SSH wrapper in `functions.zsh`) auto-installs minimal 
 | `claude/ccstatusline-settings.json` | `~/.config/ccstatusline/settings.json` |
 | `claude/claude-skills/CLAUDE.md` | `~/.claude/CLAUDE.md` (private submodule) |
 | `claude/claude-skills/commands` | `~/.claude/commands` (private submodule) |
-| `bin/claude-validate` | `~/bin/claude-validate` |
-| `bin/dotfiles` | `~/bin/dotfiles` |
-| `bin/git-nuke` | `~/bin/git-nuke` |
-| `bin/sshkey` | `~/bin/sshkey` |
+| `bin/` | `~/bin` |
 
 ### Submodules
 

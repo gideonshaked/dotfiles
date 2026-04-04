@@ -31,7 +31,7 @@ git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install -
 ## Contents
 
 ```text
-├── bin         <- Personal scripts (git-nuke, sshkey, dotfiles, claude-validate)
+├── bin         <- Personal scripts (s, dotfiles, git-nuke, sshkey, claude-validate)
 ├── claude      <- Claude Code settings, ccstatusline config, and claude-skills submodule
 ├── clang       <- clang-format and clangd config
 ├── git         <- Git configuration files (aliases, custom formatting, etc.)
@@ -48,18 +48,27 @@ git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install -
 The `claude/claude-skills` submodule is a private repo containing my global `CLAUDE.md` and skills. 
 The install script handles not being able to access the skills repo gracefully, so it shouldn't be an issue if you install this repo and you're not me ;).
 
-### Auto-bootstrap via SSH
+### SSH wrapper (`s`)
 
-The `s` function (Kitty SSH wrapper) automatically installs minimal dotfiles on first connection to a new host. Use `s --force-reinstall <host>` to pull latest changes and re-run the install.
+The [`s`](./bin/s) script is an SSH wrapper that uses the Kitty SSH kitten when available and falls back to plain ssh otherwise. It supports optional dotfiles management on remote hosts:
+
+```bash
+s host                          # Just SSH (default)
+s --install-dotfiles host       # Install dotfiles (or update if present)
+s --reinstall-dotfiles host     # Delete and reinstall from scratch
+s --update-dotfiles host        # Pull latest and re-run install
+```
 
 ### Dotfile management
 
 After install, use the [`dotfiles`](./bin/dotfiles) utility:
 
 ```bash
-dotfiles update      # Pull latest changes and run install
-dotfiles brewfile    # Update Homebrew package manifest
-dotfiles dotbot      # Update Dotbot submodule
+dotfiles update              # Pull latest changes and run install
+dotfiles update --minimal    # Same, but minimal install
+dotfiles brewfile            # Update Homebrew package manifest
+dotfiles dotbot              # Update Dotbot submodule
+dotfiles skills              # Update Claude skills submodule
 ```
 
 ## Credits

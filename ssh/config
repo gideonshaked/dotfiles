@@ -2,6 +2,7 @@
 # Special Purpose #
 ###################
 Host github.com
+ 	IgnoreUnknown UseKeychain
  	AddKeysToAgent yes
  	UseKeychain yes
  	IdentityFile ~/.ssh/id_ed25519_github
@@ -43,63 +44,54 @@ Host nubio
 Host hoffman2
 	HostName hoffman2.idre.ucla.edu
 	User gshaked
-	IdentityFile ~/.ssh/hoffman_key
+	IdentityFile ~/.ssh/id_ed25519_hoffman
 
 
 #######	
 # TAU #
 #######
-Host shamir* elkon*
-    ControlMaster auto
-    ControlPath ~/.ssh/sockets/%r@%h-%p
-    ControlPersist 600
+Host shamir* elkon* davidlasry hagai-shamir3
+	PubkeyAuthentication no
+	ControlMaster auto
+	ControlPath ~/.ssh/sockets/%r@%h-%p
+	ControlPersist 600
 
 Host hagai-shamir3
 	HostName rack-shamir3.cs.tau.ac.il
 	User hagailevi
-	PubkeyAuthentication no
 
 Host shamir3
 	HostName rack-shamir3.cs.tau.ac.il
 	User gshaked
-	PubkeyAuthentication no
 
 Host shamir4
 	HostName rack-shamir4.cs.tau.ac.il
 	User gshaked
-	PubkeyAuthentication no
 
 Host shamir5
 	HostName rack-shamir5.cs.tau.ac.il
 	User gshaked
-	PubkeyAuthentication no
 
 Host shamir6
 	HostName rack-shamir6.cs.tau.ac.il
 	User gshaked
-	PubkeyAuthentication no
 
 Host shamir8
 	HostName rack-shamir8.cs.tau.ac.il
 	User gshaked
-	PubkeyAuthentication no
 
 Host elkon1
 	HostName rack-elkon-01.cs.tau.ac.il
 	User gshaked
-	PubkeyAuthentication no
 
 Host elkon2
 	HostName rack-elkon-02.cs.tau.ac.il
 	User gshaked
-	PubkeyAuthentication no
 
 Host elkon3
 	HostName rack-elkon-03.cs.tau.ac.il
 	User gshaked
-	PubkeyAuthentication no
 
 Host davidlasry
 	HostName rack-elkon-03.cs.tau.ac.il
 	User davidlasry
-	PubkeyAuthentication no

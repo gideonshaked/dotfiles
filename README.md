@@ -16,7 +16,7 @@ My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https
 ### Full install (macOS)
 
 ```bash
-git clone --recursive https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install
+git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install
 ```
 
 ### Minimal install (suitable for Linux and macOS)
@@ -25,7 +25,7 @@ A minimal installation intended primarily for headless linux servers.
 Installs a portable bash config (prompt, aliases, functions), SSH config, Claude Code + ccstatusline, and git aliases without overwriting the existing shell config.
 
 ```bash
-git clone --recursive https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install --minimal
+git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install --minimal
 ```
 
 ## Contents

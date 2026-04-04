@@ -120,5 +120,6 @@
   "effortLevel": "high",
   "autoUpdatesChannel": "latest",
   "voiceEnabled": true,
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "spinnerTipsEnabled": false
 }

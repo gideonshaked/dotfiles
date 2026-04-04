@@ -1,30 +1,33 @@
 #!/usr/bin/env bash
 #
-# SSH wrapper that auto-bootstraps minimal dotfiles on first connection.
+# SSH wrapper with optional dotfiles bootstrapping.
 # Uses Kitty SSH kitten when available, plain ssh otherwise.
-# Pipes script via stdin to bypass tcsh exec-to-bash issues.
 #
-# Usage: s [--force-reinstall] <host> [ssh args...]
+# Usage: s [options] <host> [ssh args...]
 
 set -e
 
 usage() {
-    echo "Usage: s [--force-reinstall] <host> [ssh args...]"
+    echo "Usage: s [options] <host> [ssh args...]"
     echo ""
-    echo "SSH wrapper that auto-bootstraps minimal dotfiles on first connection."
+    echo "SSH wrapper with optional dotfiles bootstrapping."
     echo "Uses Kitty SSH kitten when available, plain ssh otherwise."
     echo ""
     echo "Options:"
-    echo "  --force-reinstall  Pull latest dotfiles and re-run install on the remote"
-    echo "  -h, --help         Show this help message"
+    echo "  --install-dotfiles    Install dotfiles (or update if already present)"
+    echo "  --reinstall-dotfiles  Delete existing dotfiles and reinstall from scratch"
+    echo "  --update-dotfiles     Pull latest changes and re-run install"
+    echo "  -h, --help            Show this help message"
 }
 
-reinstall=false
+action=""
 args=()
 for arg in "$@"; do
     case "$arg" in
         -h|--help) usage; exit 0 ;;
-        --force-reinstall) reinstall=true ;;
+        --install-dotfiles) action="install" ;;
+        --reinstall-dotfiles) action="reinstall" ;;
+        --update-dotfiles) action="update" ;;
         *) args+=("$arg") ;;
     esac
 done
@@ -35,26 +38,37 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-cache_dir="$HOME/.cache/dotfiles-ssh"
-if $reinstall || [ ! -f "$cache_dir/$1" ]; then
-    if $reinstall; then
-        ssh "$@" bash << 'SETUP'
+case "$action" in
+    install)
+        ssh "$@" bash << 'EOF'
+if [ -d ~/dotfiles ]; then
+    echo "Updating dotfiles..."
+    cd ~/dotfiles && bin/dotfiles update --minimal
+else
+    echo "Installing dotfiles..."
+    git clone git@github.com:gideonshaked/dotfiles.git ~/dotfiles
+    cd ~/dotfiles && ./install --minimal
+fi
+EOF
+        ;;
+    reinstall)
+        ssh "$@" bash << 'EOF'
 echo "Reinstalling dotfiles..."
-[ -d ~/dotfiles ] || git clone git@github.com:gideonshaked/dotfiles.git ~/dotfiles
-cd ~/dotfiles && git pull && ./install --minimal
-SETUP
-    else
-        ssh "$@" bash << 'BOOTSTRAP'
-if [ -f ~/.bashrc.dotfiles ]; then
-    exit 0
-fi
-echo "Installing dotfiles..."
-[ -d ~/dotfiles ] || git clone git@github.com:gideonshaked/dotfiles.git ~/dotfiles
+rm -rf ~/dotfiles
+git clone git@github.com:gideonshaked/dotfiles.git ~/dotfiles
 cd ~/dotfiles && ./install --minimal
-BOOTSTRAP
-    fi
-    mkdir -p "$cache_dir" && touch "$cache_dir/$1"
+EOF
+        ;;
+    update)
+        ssh "$@" bash << 'EOF'
+if [ -d ~/dotfiles ]; then
+    cd ~/dotfiles && bin/dotfiles update --minimal
+else
+    echo "Dotfiles not installed on this host"
 fi
+EOF
+        ;;
+esac
 
 if test "$TERM" = "xterm-kitty"; then
     case "$1" in

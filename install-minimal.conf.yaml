@@ -7,29 +7,27 @@
 - clean: ["~", "~/.zsh", "~/.claude"]
 
 - link:
-    # Shell (portable subset, shared with zsh)
+    # Terminal
     ~/.zsh: term/zsh
     ~/.bashrc.dotfiles: term/bashrc.dotfiles
     ~/.bash_prompt: term/bash_prompt.bash
 
-    # SSH
-    ~/.ssh/config: ssh/config
-
-    # Git (aliases only, does not overwrite gitconfig)
+    # Git
     ~/.gitalias.txt: git/gitalias.txt
     ~/.gitignore: git/gitignore
 
-    # Claude Code
-    ~/.claude/settings.json: claude/claude-settings.json
+    # SSH
+    ~/.ssh/config: ssh/config
 
-    # ccstatusline
+    # Claude
+    ~/.claude/settings.json: claude/claude-settings.json
     ~/.config/ccstatusline/settings.json: claude/ccstatusline-settings.json
 
     # Scripts
     ~/bin: bin
 
 - shell:
-    # Source dotfiles bashrc (non-destructive)
+    # Bash: source dotfiles bashrc (non-destructive)
     - description: Hooking into .bashrc and .bash_profile
       command: |
         grep -qF 'bashrc.dotfiles' "$HOME/.bashrc" 2>/dev/null || \

@@ -29,7 +29,7 @@ update_skills() {
 
 # Update dotfiles
 dfu() {
-    cd "$DOTFILES" && git pull --ff-only && ./install
+    cd "$DOTFILES" && git pull --ff-only && ./install "$@"
 }
 
 # Main function to run appropriate function based on argument
@@ -45,7 +45,8 @@ main() {
             update_skills
             ;;
         "dfu"|"update")
-            dfu
+            shift
+            dfu "$@"
             ;;
         *)
             echo "Usage: dotfiles {brewfile|dotbot|skills|update}"

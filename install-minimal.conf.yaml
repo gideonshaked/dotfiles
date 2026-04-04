@@ -6,6 +6,16 @@
 
 - clean: ["~", "~/.zsh", "~/.claude"]
 
+- shell:
+    - description: Removing stale bin hardlinks
+      command: |
+        for f in claude-validate dotfiles sshkey git-nuke; do
+          [ -f "$HOME/bin/$f" ] && [ ! -L "$HOME/bin/$f" ] && rm "$HOME/bin/$f"
+        done
+        true
+      stdout: true
+      stderr: true
+
 - link:
     # Shell (portable subset, shared with zsh)
     ~/.zsh: term/zsh

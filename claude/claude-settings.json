@@ -48,13 +48,20 @@
   },
   "enabledPlugins": {
     "beads@beads-marketplace": true,
-    "ralph-loop@claude-plugins-official": true
+    "ralph-loop@claude-plugins-official": true,
+    "agentic-peer-review@agentic-peer-review": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
       "source": {
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "agentic-peer-review": {
+      "source": {
+        "source": "github",
+        "repo": "gideonshaked/agentic-peer-review"
       }
     }
   },

@@ -21,7 +21,6 @@
 
     # Claude Code
     ~/.claude/settings.json: claude/claude-settings.json
-    ~/.claude/CLAUDE.md: claude/CLAUDE.md
 
     # ccstatusline
     ~/.config/ccstatusline/settings.json: claude/ccstatusline-settings.json
@@ -33,7 +32,7 @@
     ~/bin/git-nuke: bin/git-nuke
 
 - shell:
-    # Source dotfiles bashrc from existing .bashrc (non-destructive)
+    # Source dotfiles bashrc (non-destructive)
     - description: Hooking into .bashrc and .bash_profile
       command: |
         grep -qF 'bashrc.dotfiles' "$HOME/.bashrc" 2>/dev/null || \

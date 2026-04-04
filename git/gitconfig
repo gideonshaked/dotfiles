@@ -1,7 +1,6 @@
 [user]
 	email = gideonshaked@gmail.com
 	name = Gideon Shaked
-	signingkey = 4F60C96390E6E336
 
 [credential]
 	helper = osxkeychain
@@ -28,9 +27,6 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-
-[commit]
-	gpgsign = true
 
 [pull]
 	ff = only

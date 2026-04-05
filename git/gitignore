@@ -5,3 +5,4 @@ Thumbs.db
 .idea/
 *.pyc
 __pycache__/
+.ruff_cache/

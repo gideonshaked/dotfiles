@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#
+# Commit and push claude-skills submodule, then update the parent repo.
+# Usage: ./sync-skills "commit message"
+#
+
+set -e
+
+DOTFILES="$(cd "$(dirname "$0")" && pwd)"
+SKILLS="$DOTFILES/claude/claude-skills"
+
+cd "$SKILLS"
+if [ -z "$(git status --porcelain)" ]; then
+    echo "No changes in skills submodule"
+    exit 0
+fi
+
+git add -A
+git commit -m "$1"
+git push
+
+HASH="$(git rev-parse --short HEAD)"
+MSG="$(git log -1 --format=%s)"
+
+cd "$DOTFILES"
+git add claude/claude-skills
+git commit -m "Updated claude-skills repo to latest commit: $HASH ($MSG)"
+git push

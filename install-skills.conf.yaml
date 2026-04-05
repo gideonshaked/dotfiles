@@ -11,3 +11,6 @@
     ~/.claude/skills:
       path: claude/claude-skills/skills
       glob: false
+    ~/.claude/commands:
+      path: claude/claude-skills/commands
+      glob: false

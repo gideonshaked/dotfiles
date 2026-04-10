@@ -166,6 +166,5 @@
 	"gitlens.ai.model": "vscode",
 	"gitlens.ai.vscode.model": "copilot:gpt-4.1",
 	"claudeCode.useTerminal": true,
-	"editor.wordWrap": "on",
-	"python.analysis.typeCheckingMode": "standard"
+	"editor.wordWrap": "on"
 }

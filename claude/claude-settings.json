@@ -49,14 +49,14 @@
   "enabledPlugins": {
     "beads@beads-marketplace": true,
     "ralph-loop@claude-plugins-official": true,
-    "agentic-peer-review@agentic-peer-review": true
+    "agentic-peer-review@agentic-peer-review": true,
+    "hf-cli@huggingface-skills": true
   },
   "extraKnownMarketplaces": {
     "beads-marketplace": {
       "source": {
         "source": "github",
-        "repo": "steveyegge/beads",
-        "autoUpdate": true
+        "repo": "steveyegge/beads"
       }
     },
     "claude-plugins-official": {
@@ -68,8 +68,13 @@
     "agentic-peer-review": {
       "source": {
         "source": "github",
-        "repo": "gideonshaked/agentic-peer-review",
-        "autoUpdate": true
+        "repo": "gideonshaked/agentic-peer-review"
+      }
+    },
+    "huggingface-skills": {
+      "source": {
+        "source": "github",
+        "repo": "huggingface/skills"
       }
     }
   },

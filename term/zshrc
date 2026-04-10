@@ -8,3 +8,7 @@ source "$HOME/.zsh/external.zsh"
 source "$HOME/.zsh/functions.zsh"
 source "$HOME/.zsh/aliases.zsh"
 source "$HOME/.zsh/path.zsh"
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+zstyle ':completion:*' menu select

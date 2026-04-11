@@ -11,6 +11,9 @@
   - **Metaprompt templating:** The general instructions block (read the task file, read CLAUDE.md, fix each bug, run tests, commit) should be a configurable template, not hardcoded. Could live in `~/.claude/` or in the repo's CLAUDE.md. The template should support variables like `{test_command}` (e.g. `make test`), `{task_file}`, etc.
   - **Merge-back helper:** After all sessions finish, a command to merge each worktree branch back into main (or at least report status: which branches have commits, which are clean, which have conflicts).
   - **Conflict avoidance:** When grouping issues, warn if two groups touch the same files (based on test file paths or source file mentions in the issue text). This is the hardest part to automate well.
+  - The issue tracking should work with beads as well, and it should properly clean up issues that have been moved around in the task tracker
+    - Note that its important that issues that should be left open, are if the worktree agents did not fix properly
+    - Could also have an option for each worktree to push as a separate branch and use gh to make a PR, so I can review properly
 
   **Non-requirements (keep it simple):**
   - No daemon, no server, no web UI. Just a CLI script.

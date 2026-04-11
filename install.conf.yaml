@@ -57,3 +57,33 @@
         fi
       stdout: true
       stderr: true
+
+    # Claude plugins: install/update from settings.json
+    - description: Installing and updating Claude plugins (optional)
+      command: |
+        if ! command -v claude >/dev/null 2>&1; then
+          echo "claude CLI not found, skipping plugins (non-fatal)"
+          exit 0
+        fi
+        if ! command -v jq >/dev/null 2>&1; then
+          echo "jq not found, skipping plugins (non-fatal)"
+          exit 0
+        fi
+        SETTINGS="$HOME/.claude/settings.json"
+        if [ ! -f "$SETTINGS" ]; then
+          echo "settings.json not found, skipping plugins (non-fatal)"
+          exit 0
+        fi
+        # Add marketplaces
+        jq -r '.extraKnownMarketplaces // {} | to_entries[] | .value.source.repo' "$SETTINGS" | while read -r repo; do
+          echo "Adding marketplace: $repo"
+          claude plugins marketplace add "$repo" || true
+        done
+        # Install or update plugins
+        jq -r '.enabledPlugins // {} | keys[]' "$SETTINGS" | while read -r plugin; do
+          echo "Installing/updating plugin: $plugin"
+          claude plugins install "$plugin" 2>/dev/null || claude plugins update "$plugin" 2>/dev/null || true
+        done
+        echo "Claude plugins OK"
+      stdout: true
+      stderr: true

@@ -13,14 +13,6 @@
         }
       },
       {
-        "id": "5",
-        "type": "block-timer",
-        "color": "magenta",
-        "metadata": {
-          "display": "time"
-        }
-      },
-      {
         "id": "7",
         "type": "git-changes",
         "color": "yellow",
@@ -31,8 +23,13 @@
         }
       },
       {
+        "id": "d8a41fc7-109d-4f23-b053-7304b438975d",
+        "type": "git-branch"
+      },
+      {
         "id": "4247e5de-53d0-4d89-8027-a14f90108302",
         "type": "skills",
+        "rawValue": true,
         "metadata": {
           "mode": "list"
         }
@@ -47,6 +44,7 @@
   "defaultPadding": " ",
   "inheritSeparatorColors": false,
   "globalBold": false,
+  "minimalistMode": false,
   "powerline": {
     "enabled": true,
     "separators": [
@@ -58,6 +56,7 @@
     "startCaps": [],
     "endCaps": [],
     "theme": "custom",
-    "autoAlign": true
+    "autoAlign": true,
+    "continueThemeAcrossLines": false
   }
 }

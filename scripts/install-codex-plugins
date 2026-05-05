@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if ! command -v codex >/dev/null 2>&1; then
+    echo "codex CLI not found, skipping plugins (non-fatal)"
+    exit 0
+fi
+
+CONFIG="${CODEX_HOME:-${HOME}/.codex}/config.toml"
+if [ ! -f "$CONFIG" ]; then
+    echo "config.toml not found, skipping plugins (non-fatal)"
+    exit 0
+fi
+
+echo "Upgrading configured Codex marketplaces"
+codex plugin marketplace upgrade || true
+
+echo "Refreshing Codex plugin discovery"
+if ! codex debug prompt-input "plugin cache warmup" >/dev/null 2>&1; then
+    echo "Codex plugin discovery refresh failed (non-fatal)"
+fi
+
+plugin=""
+while IFS= read -r line; do
+    case "$line" in
+        "[plugins.\""*"\"]")
+            plugin="${line#\[plugins.\"}"
+            plugin="${plugin%\"\]}"
+            ;;
+        "enabled = true")
+            [ -n "$plugin" ] || continue
+            echo "Enabled Codex plugin: $plugin"
+            ;;
+        \[*)
+            plugin=""
+            ;;
+    esac
+done <"$CONFIG"
+
+echo "Codex plugins OK"

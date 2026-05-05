@@ -1,0 +1,81 @@
+model = "gpt-5.5"
+model_reasoning_effort = "xhigh"
+personality = "friendly"
+approvals_reviewer = "user"
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+
+[mcp_servers]
+
+[mcp_servers.MCP_DOCKER]
+command = "docker"
+args = ["mcp", "gateway", "run"]
+
+[mcp_servers.openaiDeveloperDocs]
+url = "https://developers.openai.com/mcp"
+
+[mcp_servers.gcloud]
+command = "npx"
+args = ["-y", "@google-cloud/gcloud-mcp"]
+
+[projects]
+[projects.'/']
+trust_level = 'trusted'
+
+[projects.'/Users/gideonshaked']
+trust_level = 'trusted'
+
+[projects."/Users/gideonshaked/Documents/afterquery/genomicsbench/genomicsbench-src"]
+trust_level = "trusted"
+
+[projects."/Users/gideonshaked/Documents/octant/internship-take-home"]
+trust_level = "trusted"
+
+[projects."/Users/gideonshaked/Documents/afterquery/omicsbench"]
+trust_level = "trusted"
+
+[projects."/Users/gideonshaked/Documents/afterquery/omicsbench/omicsbench-synth"]
+trust_level = "trusted"
+
+[projects."/Users/gideonshaked/Documents/personal/dev/dotfiles"]
+trust_level = "trusted"
+
+[notice]
+hide_full_access_warning = true
+
+[notice.model_migrations]
+"gpt-5.1-codex-max" = "gpt-5.4"
+
+[tui]
+status_line = ["model-with-reasoning", "current-dir", "git-branch", "context-remaining", "task-progress"]
+terminal_title = ["activity", "task-progress", "current-dir", "git-branch", "app-name"]
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+
+[plugins."superpowers@openai-curated"]
+enabled = false
+
+[plugins."life-science-research@openai-curated"]
+enabled = true
+
+[plugins."github@openai-curated"]
+enabled = true
+
+[plugins."hugging-face@openai-curated"]
+enabled = true
+
+[plugins."google-calendar@openai-curated"]
+enabled = true
+
+[plugins."gmail@openai-curated"]
+enabled = true
+
+[plugins."google-drive@openai-curated"]
+enabled = true
+
+[features]
+memories = true
+terminal_resize_reflow = true
+prevent_idle_sleep = true
+goals = true

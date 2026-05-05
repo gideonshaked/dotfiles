@@ -97,8 +97,11 @@
 		"**/output_data*/**": true,
 		"**/public/**": true
 	},
-	"remote.SSH.connectTimeout": 30,
+	"remote.SSH.connectTimeout": 90,
 	"remote.SSH.lockfilesInTmp": true,
+  	"remote.SSH.useExecServer": false,
+  	"remote.SSH.useLocalServer": false,
+  	"remote.SSH.showLoginTerminal": true,
 	"remote.SSH.logLevel": "trace",
 	"notebook.lineNumbers": "on",
 	"black-formatter.args": [
@@ -166,5 +169,8 @@
 	"gitlens.ai.model": "vscode",
 	"gitlens.ai.vscode.model": "copilot:gpt-4.1",
 	"claudeCode.useTerminal": true,
-	"editor.wordWrap": "on"
+	"editor.wordWrap": "on",
+	"remote.SSH.remotePlatform": {
+		"nubio": "linux"
+	}
 }

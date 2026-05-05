@@ -10,10 +10,11 @@ ARGS=(hook-impl --config=.pre-commit-config.yaml --hook-type=pre-commit)
 HERE="$(cd "$(dirname "$0")" && pwd)"
 ARGS+=(--hook-dir "$HERE" -- "$@")
 
+_pre_commit_exit=0
 if [ -x "$INSTALL_PYTHON" ]; then
-    exec "$INSTALL_PYTHON" -mpre_commit "${ARGS[@]}"
+    "$INSTALL_PYTHON" -mpre_commit "${ARGS[@]}" || _pre_commit_exit=$?
 elif command -v pre-commit > /dev/null; then
-    exec pre-commit "${ARGS[@]}"
+    pre-commit "${ARGS[@]}" || _pre_commit_exit=$?
 else
     echo '`pre-commit` not found.  Did you forget to activate your virtualenv?' 1>&2
     exit 1
@@ -42,3 +43,5 @@ if command -v bd >/dev/null 2>&1; then
     if [ $_bd_exit -ne 0 ]; then exit $_bd_exit; fi
 fi
 # --- END BEADS INTEGRATION v1.0.0 ---
+
+exit $_pre_commit_exit

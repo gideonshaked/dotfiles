@@ -3,3 +3,8 @@ __pycache__/
 term/zsh/secrets.zsh
 .ruff_cache/
 .vscode/
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key

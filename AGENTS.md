@@ -20,16 +20,15 @@ dotfiles update              # Pull latest changes and run install
 dotfiles update --minimal    # Same, but minimal install
 dotfiles brewfile            # Update Homebrew package manifest
 dotfiles dotbot              # Update Dotbot submodule
-dotfiles skills              # Update Claude skills submodule
 ```
 
 ## Architecture
 
-The install script runs Dotbot with `install.conf.yaml` (full) or `install-minimal.conf.yaml` (via `--minimal` flag). After the main config, it tries to init the private `claude/claude-skills` submodule and runs `install-skills.conf.yaml` if available, otherwise skips gracefully.
+The install script initializes the Dotbot submodule and runs Dotbot with `install.conf.yaml`. The `--minimal` flag sets `DOTFILES_INSTALL_MODE=minimal`, and the same YAML file conditionally skips the full macOS links.
 
 ### Minimal Install
 
-For remote servers. Installs: SSH config, Claude Code + ccstatusline, git aliases, and portable bash config (aliases, functions, prompt). Sources `aliases.zsh` and `functions.zsh` from the same files used by the full zsh setup. Appends a source line to both `.bashrc` and `.bash_profile` for login shell compatibility (e.g., tcsh exec-to-bash). ccstatusline install is failure-tolerant. Guarded against double-sourcing.
+For remote servers. Installs: SSH config, Claude/Codex agent config, ccstatusline, git aliases, and portable bash config (aliases, functions, prompt). Sources `aliases.zsh` and `functions.zsh` from the same files used by the full zsh setup. Appends a source line to both `.bashrc` and `.bash_profile` for login shell compatibility (e.g., tcsh exec-to-bash). ccstatusline install is failure-tolerant. Guarded against double-sourcing.
 
 ### SSH Wrapper (`bin/s`)
 
@@ -44,10 +43,13 @@ The `s` script is an SSH wrapper that uses the Kitty SSH kitten when available, 
 | `term/starship.toml` | `~/.config/starship.toml` |
 | `git/gitconfig` | `~/.gitconfig` |
 | `ssh/config` | `~/.ssh/config` |
-| `claude/claude-settings.json` | `~/.claude/settings.json` |
-| `claude/ccstatusline-settings.json` | `~/.config/ccstatusline/settings.json` |
-| `claude/claude-skills/CLAUDE.md` | `~/.claude/CLAUDE.md` (private submodule) |
-| `claude/claude-skills/commands` | `~/.claude/commands` (private submodule) |
+| `agents/claude/settings.json` | `~/.claude/settings.json` |
+| `agents/claude/ccstatusline-settings.json` | `~/.config/ccstatusline/settings.json` |
+| `agents/shared/instructions.md` | `~/.claude/CLAUDE.md` |
+| `agents/claude/commands` | `~/.claude/commands` |
+| `agents/claude/skills` | `~/.claude/skills` |
+| `agents/codex/config.toml` | `~/.codex/config.toml` |
+| `agents/shared/instructions.md` | `~/.codex/AGENTS.md` |
 | `vscode/settings.json` | `~/Library/Application Support/Code/User/settings.json` |
 | `vscode/keybindings.json` | `~/Library/Application Support/Code/User/keybindings.json` |
 | `clang/clang-format` | `~/.clang-format` |
@@ -64,16 +66,18 @@ The `s` script is an SSH wrapper that uses the Kitty SSH kitten when available, 
 | `ssh/config` | `~/.ssh/config` |
 | `git/gitalias.txt` | `~/.gitalias.txt` |
 | `git/gitignore` | `~/.gitignore` |
-| `claude/claude-settings.json` | `~/.claude/settings.json` |
-| `claude/ccstatusline-settings.json` | `~/.config/ccstatusline/settings.json` |
-| `claude/claude-skills/CLAUDE.md` | `~/.claude/CLAUDE.md` (private submodule) |
-| `claude/claude-skills/commands` | `~/.claude/commands` (private submodule) |
+| `agents/claude/settings.json` | `~/.claude/settings.json` |
+| `agents/claude/ccstatusline-settings.json` | `~/.config/ccstatusline/settings.json` |
+| `agents/shared/instructions.md` | `~/.claude/CLAUDE.md` |
+| `agents/claude/commands` | `~/.claude/commands` |
+| `agents/claude/skills` | `~/.claude/skills` |
+| `agents/codex/config.toml` | `~/.codex/config.toml` |
+| `agents/shared/instructions.md` | `~/.codex/AGENTS.md` |
 | `bin/` | `~/bin` |
 
 ### Submodules
 
 - `dotbot/` : Dotbot installer
-- `claude/claude-skills/` : (private) Global CLAUDE.md and custom slash commands
 
 ### Zsh Configuration
 

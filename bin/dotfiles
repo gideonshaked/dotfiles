@@ -22,11 +22,6 @@ update_dotbot() {
     cd $DOTFILES && git submodule update --remote dotbot
 }
 
-# Update Claude skills submodule
-update_skills() {
-    cd $DOTFILES && git submodule update --remote claude/claude-skills
-}
-
 # Update dotfiles
 dfu() {
     cd "$DOTFILES" && git pull --ff-only && ./install "$@"
@@ -41,20 +36,16 @@ main() {
         "update_dotbot"|"dotbot")
             update_dotbot
             ;;
-        "update_skills"|"skills")
-            update_skills
-            ;;
         "dfu"|"update")
             shift
             dfu "$@"
             ;;
         *)
-            echo "Usage: dotfiles {brewfile|dotbot|skills|update}"
+            echo "Usage: dotfiles {brewfile|dotbot|update}"
             echo ""
             echo "Available functions:"
             echo "  update_brewfile, brewfile  - Update Homebrew package manifest"
             echo "  update_dotbot, dotbot      - Update Dotbot submodule"
-            echo "  update_skills, skills      - Update Claude skills submodule"
             echo "  dfu, update                - Update dotfiles and run install"
             exit 1
             ;;

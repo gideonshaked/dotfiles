@@ -2,41 +2,99 @@
     link:
       relink: true
       create: true
-      glob: true
 
 - clean: ["~", "~/.zsh", "~/.claude"]
 
 - link:
-    # Terminal
+    # Common
     ~/.zsh: term/zsh
-    ~/.zshrc: term/zshrc
-    ~/.config/starship.toml: term/starship.toml
-
-    # Git
-    ~/.gitconfig: git/gitconfig
     ~/.gitalias.txt: git/gitalias.txt
-    ~/.gitattributes: git/gitattributes
     ~/.gitignore: git/gitignore
-
-    # SSH
     ~/.ssh/config: ssh/config
-
-    # Claude
-    ~/.claude/settings.json: claude/claude-settings.json
-    ~/.config/ccstatusline/settings.json: claude/ccstatusline-settings.json
-
-    # VSCode (macOS)
-    ~/Library/Application Support/Code/User/settings.json: vscode/settings.json
-    ~/Library/Application Support/Code/User/keybindings.json: vscode/keybindings.json
-
-    # Clang
-    ~/Library/Preferences/clangd/config.yaml: clang/config.yaml
-    ~/.clang-format: clang/clang-format
-
-    # Scripts
     ~/bin: bin
 
+    # Full install
+    ~/.zshrc:
+      path: term/zshrc
+      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+    ~/.config/starship.toml:
+      path: term/starship.toml
+      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+    ~/.gitconfig:
+      path: git/gitconfig
+      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+    ~/.gitattributes:
+      path: git/gitattributes
+      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+    ~/Library/Application Support/Code/User/settings.json:
+      path: vscode/settings.json
+      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+    ~/Library/Application Support/Code/User/keybindings.json:
+      path: vscode/keybindings.json
+      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+    ~/Library/Preferences/clangd/config.yaml:
+      path: clang/config.yaml
+      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+    ~/.clang-format:
+      path: clang/clang-format
+      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+
+    # Minimal install
+    ~/.bashrc.dotfiles:
+      path: term/bashrc.dotfiles
+      force: true
+      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "minimal" ]'
+    ~/.bash_prompt:
+      path: term/bash_prompt.bash
+      force: true
+      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "minimal" ]'
+
+    # Agents
+    ## Claude
+    ~/.claude/settings.json:
+      path: agents/claude/settings.json
+      force: true
+    ~/.config/ccstatusline/settings.json:
+      path: agents/claude/ccstatusline-settings.json
+      force: true
+    ~/.claude/CLAUDE.md:
+      path: agents/shared/instructions.md
+      force: true
+    ~/.claude/skills:
+      path: agents/claude/skills
+      glob: false
+      force: true
+    ~/.claude/commands:
+      path: agents/claude/commands
+      glob: false
+      force: true
+    ## Codex
+    ~/.codex/config.toml:
+      path: agents/codex/config.toml
+      force: true
+    ~/.codex/AGENTS.md:
+      path: agents/shared/instructions.md
+      force: true
+    ~/.codex/skills:
+      path: agents/codex/skills/*
+      glob: true
+      force: true
+
 - shell:
+    # Bash: source dotfiles bashrc on minimal installs only
+    - description: Hooking into .bashrc and .bash_profile
+      command: |
+        if [ "${DOTFILES_INSTALL_MODE:-full}" != "minimal" ]; then
+          echo "Skipping bash hooks outside minimal install"
+          exit 0
+        fi
+        grep -qF 'bashrc.dotfiles' "$HOME/.bashrc" 2>/dev/null || \
+          echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> "$HOME/.bashrc"
+        grep -qF 'bashrc.dotfiles' "$HOME/.bash_profile" 2>/dev/null || \
+          echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> "$HOME/.bash_profile"
+      stdout: true
+      stderr: true
+
     # Git aliases: add include only if not already present
     - description: Configuring git aliases
       command: |
@@ -58,32 +116,12 @@
       stdout: true
       stderr: true
 
-    # Claude plugins: install/update from settings.json
+    # Agent plugins
     - description: Installing and updating Claude plugins (optional)
-      command: |
-        if ! command -v claude >/dev/null 2>&1; then
-          echo "claude CLI not found, skipping plugins (non-fatal)"
-          exit 0
-        fi
-        if ! command -v jq >/dev/null 2>&1; then
-          echo "jq not found, skipping plugins (non-fatal)"
-          exit 0
-        fi
-        SETTINGS="$HOME/.claude/settings.json"
-        if [ ! -f "$SETTINGS" ]; then
-          echo "settings.json not found, skipping plugins (non-fatal)"
-          exit 0
-        fi
-        # Add marketplaces
-        jq -r '.extraKnownMarketplaces // {} | to_entries[] | .value.source.repo' "$SETTINGS" | while read -r repo; do
-          echo "Adding marketplace: $repo"
-          claude plugins marketplace add "$repo" || true
-        done
-        # Install or update plugins
-        jq -r '.enabledPlugins // {} | keys[]' "$SETTINGS" | while read -r plugin; do
-          echo "Installing/updating plugin: $plugin"
-          claude plugins install "$plugin" 2>/dev/null || claude plugins update "$plugin" 2>/dev/null || true
-        done
-        echo "Claude plugins OK"
+      command: scripts/install-claude-plugins
+      stdout: true
+      stderr: true
+    - description: Installing and updating Codex plugins (optional)
+      command: scripts/install-codex-plugins
       stdout: true
       stderr: true

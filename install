@@ -3,6 +3,7 @@
 set -e
 
 CONFIG="install.conf.yaml"
+MODE="full"
 DOTBOT_DIR="dotbot"
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -11,7 +12,7 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ARGS=()
 for arg in "$@"; do
     case "$arg" in
-        --minimal) CONFIG="install-minimal.conf.yaml" ;;
+        --minimal) MODE="minimal" ;;
         *) ARGS+=("$arg") ;;
     esac
 done
@@ -19,13 +20,4 @@ done
 cd "${BASEDIR}"
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${ARGS[@]}"
-
-# claude-skills: private submodule, skip if unavailable
-SKILLS_DIR="claude/claude-skills"
-git submodule update --init "${SKILLS_DIR}" 2>/dev/null || true
-if [ -d "${BASEDIR}/${SKILLS_DIR}/skills" ] || [ -d "${BASEDIR}/${SKILLS_DIR}/commands" ]; then
-    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c install-skills.conf.yaml "${ARGS[@]}"
-else
-    echo "Skipping claude-skills (private submodule not available)"
-fi
+DOTFILES_INSTALL_MODE="${MODE}" "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${ARGS[@]}"

@@ -72,3 +72,8 @@ When working with external APIs (OpenRouter, Harbor, etc.), always verify model 
 ## Code Hygiene
 
 - Never keep dead code as scaffolding "in case we need it later." If a class, function, module, or test is unused today, delete it. Git history is the retrieval mechanism, not the source tree.
+
+## Prompt Files
+
+- Keep prompts separate from code. Store prompts in dedicated prompt/template files, ideally under their own prompts/templates directory, and load them from code rather than embedding long prompt strings inline.
+- Prefer template files such as Jinja2 templates when prompts need variables or structured rendering.

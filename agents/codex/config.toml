@@ -54,10 +54,10 @@ terminal_title = ["activity", "task-progress", "current-dir", "git-branch", "app
 "gpt-5.5" = 4
 
 [plugins."superpowers@openai-curated"]
-enabled = false
+enabled = true
 
 [plugins."life-science-research@openai-curated"]
-enabled = true
+enabled = false
 
 [plugins."github@openai-curated"]
 enabled = true
@@ -66,13 +66,13 @@ enabled = true
 enabled = true
 
 [plugins."google-calendar@openai-curated"]
-enabled = true
+enabled = false
 
 [plugins."gmail@openai-curated"]
-enabled = true
+enabled = false
 
 [plugins."google-drive@openai-curated"]
-enabled = true
+enabled = false
 
 [features]
 memories = true

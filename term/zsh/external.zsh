@@ -28,7 +28,3 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     eval $(ssh-agent) > /dev/null
     ssh-add ~/.ssh/^(config|known_hosts|known_hosts.old|*.pub) &> /dev/null
 fi
-
-# Copilot in terminal (lazy-loaded)
-ghcs() { unfunction ghcs ghce 2>/dev/null; eval "$(gh copilot alias -- zsh)"; ghcs "$@" }
-ghce() { unfunction ghcs ghce 2>/dev/null; eval "$(gh copilot alias -- zsh)"; ghce "$@" }

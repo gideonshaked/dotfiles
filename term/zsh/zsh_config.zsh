@@ -29,6 +29,9 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 
 ## zsh-autocomplete - real-time fish-like type-ahead menu.
 ## Owns compinit and key bindings; must be sourced before any compdef calls.
+## -u tells compinit to skip the security check on /opt/homebrew/share, which
+## is intentionally group-writable for Homebrew.
+zstyle '*:compinit' arguments -u
 source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 ## fzf-tab - replaces tab menu with fzf + preview pane.

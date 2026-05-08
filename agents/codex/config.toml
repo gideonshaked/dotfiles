@@ -48,3 +48,6 @@ memories = true
 terminal_resize_reflow = true
 prevent_idle_sleep = true
 goals = true
+
+[projects."/Users/gideonshaked/Documents/personal/dev/dotfiles"]
+trust_level = "trusted"

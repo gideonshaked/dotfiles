@@ -1,5 +1,9 @@
 # Global Agent Instructions
 
+## Session Handoffs
+
+If `bd prime` injects a memory with key `handoff:latest`, treat it as the previous session's wrap-up summary. Acknowledge it briefly in your first response and use it to inform what you tackle next. Other memories surfaced by `bd prime` are durable, topic-keyed insights. Apply them as relevant context, not as a session log.
+
 ## Documentation Lookups
 
 When a question involves a library, framework, SDK, API, CLI tool, or cloud service, query context7 (`mcp__plugin_context7_context7__resolve-library-id` then `query-docs`) before answering, even when local evidence already suggests an answer. Local files tell you what's broken; docs tell you whether the proposed fix is the right one. Skip only for pure refactors, business-logic debugging, or general programming concepts.

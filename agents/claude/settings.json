@@ -1,119 +1,121 @@
 {
+  "agentPushNotifEnabled": true,
   "attribution": {
     "commit": "",
     "pr": ""
   },
-  "permissions": {
-    "defaultMode": "bypassPermissions"
+  "autoCompactEnabled": false,
+  "autoUpdatesChannel": "latest",
+  "effortLevel": "high",
+  "enabledPlugins": {
+    "agentic-peer-review@agentic-peer-review": true,
+    "beads@beads-marketplace": true,
+    "context7@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "ralph-loop@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "agentic-peer-review": {
+      "source": {
+        "repo": "gideonshaked/agentic-peer-review",
+        "source": "github"
+      }
+    },
+    "beads-marketplace": {
+      "source": {
+        "repo": "steveyegge/beads",
+        "source": "github"
+      }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "repo": "anthropics/claude-plugins-official",
+        "source": "github"
+      }
+    },
+    "huggingface-skills": {
+      "source": {
+        "repo": "huggingface/skills",
+        "source": "github"
+      }
+    }
   },
   "hooks": {
     "PostToolUse": [
       {
-        "matcher": "Write|Edit",
         "hooks": [
           {
-            "type": "command",
             "command": "claude-validate",
-            "timeout": 10
+            "timeout": 10,
+            "type": "command"
           }
-        ]
+        ],
+        "matcher": "Write|Edit"
       }
     ],
     "PreToolUse": [
       {
-        "matcher": "Skill",
         "hooks": [
           {
-            "type": "command",
-            "command": "npx -y ccstatusline@latest --hook"
+            "command": "npx -y ccstatusline@latest --hook",
+            "type": "command"
           }
-        ]
+        ],
+        "matcher": "Skill"
       },
       {
-        "matcher": "Skill",
         "hooks": [
           {
-            "type": "command",
-            "command": "npx -y ccstatusline@latest --hook"
+            "command": "npx -y ccstatusline@latest --hook",
+            "type": "command"
           }
-        ]
+        ],
+        "matcher": "Skill"
       },
       {
-        "matcher": "Skill",
         "hooks": [
           {
-            "type": "command",
-            "command": "npx -y ccstatusline@latest --hook"
+            "command": "npx -y ccstatusline@latest --hook",
+            "type": "command"
           }
-        ]
+        ],
+        "matcher": "Skill"
       }
     ],
     "UserPromptSubmit": [
       {
         "hooks": [
           {
-            "type": "command",
-            "command": "npx -y ccstatusline@latest --hook"
+            "command": "npx -y ccstatusline@latest --hook",
+            "type": "command"
           }
         ]
       },
       {
         "hooks": [
           {
-            "type": "command",
-            "command": "npx -y ccstatusline@latest --hook"
+            "command": "npx -y ccstatusline@latest --hook",
+            "type": "command"
           }
         ]
       },
       {
         "hooks": [
           {
-            "type": "command",
-            "command": "npx -y ccstatusline@latest --hook"
+            "command": "npx -y ccstatusline@latest --hook",
+            "type": "command"
           }
         ]
       }
     ]
   },
-  "statusLine": {
-    "type": "command",
-    "command": "npx -y ccstatusline@latest",
-    "padding": 0
+  "permissions": {
+    "defaultMode": "bypassPermissions"
   },
-  "enabledPlugins": {
-    "beads@beads-marketplace": true,
-    "ralph-loop@claude-plugins-official": true,
-    "agentic-peer-review@agentic-peer-review": true,
-    "superpowers@claude-plugins-official": true,
-    "context7@claude-plugins-official": true,
-    "feature-dev@claude-plugins-official": true
-  },
-  "extraKnownMarketplaces": {
-    "beads-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "steveyegge/beads"
-      }
-    },
-    "claude-plugins-official": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/claude-plugins-official"
-      }
-    },
-    "agentic-peer-review": {
-      "source": {
-        "source": "github",
-        "repo": "gideonshaked/agentic-peer-review"
-      }
-    },
-    "huggingface-skills": {
-      "source": {
-        "source": "github",
-        "repo": "huggingface/skills"
-      }
-    }
-  },
+  "preferredNotifChannel": "kitty",
+  "remoteControlAtStartup": true,
+  "skipDangerousModePermissionPrompt": true,
   "spinnerTipsEnabled": false,
   "spinnerVerbs": {
     "mode": "replace",
@@ -140,12 +142,10 @@
       "Selling your social security number on the dark web"
     ]
   },
-  "effortLevel": "high",
-  "autoUpdatesChannel": "latest",
-  "skipDangerousModePermissionPrompt": true,
-  "preferredNotifChannel": "kitty",
-  "autoCompactEnabled": false,
-  "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true,
+  "statusLine": {
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0,
+    "type": "command"
+  },
   "voiceEnabled": true
 }

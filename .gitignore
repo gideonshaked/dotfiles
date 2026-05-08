@@ -3,6 +3,7 @@ __pycache__/
 term/zsh/secrets.zsh
 .ruff_cache/
 .vscode/
+agents/codex/skills/.system/
 
 # Beads / Dolt files (added by bd init)
 .dolt/

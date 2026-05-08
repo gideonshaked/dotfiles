@@ -1,5 +1,9 @@
 # Global Agent Instructions
 
+## Documentation Lookups
+
+When a question involves a library, framework, SDK, API, CLI tool, or cloud service, query context7 (`mcp__plugin_context7_context7__resolve-library-id` then `query-docs`) before answering, even when local evidence already suggests an answer. Local files tell you what's broken; docs tell you whether the proposed fix is the right one. Skip only for pure refactors, business-logic debugging, or general programming concepts.
+
 ## Communication Style
 
 Keep outputs simple and concise. Avoid jargon and unnecessary complexity. When writing docs, lab writeups, or summaries, prefer plain language and shorter explanations unless explicitly asked for detail.

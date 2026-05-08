@@ -1,0 +1,232 @@
+#!/usr/bin/env python3
+"""handoff-bd: deterministic helpers for the handoff skill.
+
+Subcommands
+-----------
+survey
+    Emit current beads state as JSON (ready, in_progress, handoff:* memories).
+    No arguments. Used to brief Claude on existing state before drafting a plan.
+
+apply
+    Read a handoff plan JSON from stdin, execute it, sanity-check, push to dolt.
+    Emit a summary JSON. Exits non-zero if any bd call failed.
+
+Plan JSON schema (stdin to apply)
+---------------------------------
+{
+  "memories": [
+    {"key": "<topic-slug>", "body": "<insight>"}
+  ],
+  "notes": [
+    {"id": "bd-42", "body": "COMPLETED: ... IN PROGRESS: ... NEXT: ..."}
+  ],
+  "tasks": [
+    {
+      "title": "...",
+      "description": "...",
+      "type": "task",
+      "priority": 2,
+      "labels": ["foo", "bar"]
+    }
+  ],
+  "session_summary": "narrative body for handoff:latest"
+}
+
+Invariants enforced
+-------------------
+- The only memory whose key may start with `handoff:` is exactly `handoff:latest`.
+  Per-session keys (`handoff:2026-...`, `handoff:topic`, etc.) are rejected.
+- After apply, any stray `handoff:*` memories that slipped in are removed via
+  `bd forget` and reported in `leaked_keys_cleaned`.
+"""
+
+import json
+import subprocess
+import sys
+
+
+def bd(*args, stdin=None):
+    cp = subprocess.run(
+        ["bd", *args],
+        capture_output=True,
+        text=True,
+        input=stdin,
+    )
+    return cp.returncode, cp.stdout, cp.stderr
+
+
+def parse_json(stream, default):
+    s = (stream or "").strip()
+    if not s:
+        return default
+    try:
+        return json.loads(s)
+    except json.JSONDecodeError:
+        return default
+
+
+def as_list(value):
+    if isinstance(value, list):
+        return value
+    if isinstance(value, dict):
+        for key in ("memories", "items", "results"):
+            if isinstance(value.get(key), list):
+                return value[key]
+        if "key" in value:
+            return [value]
+    return []
+
+
+def survey():
+    rc_r, ready, _ = bd("ready", "--limit", "20", "--json")
+    rc_p, in_progress, _ = bd("list", "--status=in_progress", "--json")
+    rc_m, mems, _ = bd("memories", "handoff", "--json")
+    out = {
+        "ready": as_list(parse_json(ready, [])),
+        "in_progress": as_list(parse_json(in_progress, [])),
+        "handoff_memories": as_list(parse_json(mems, [])),
+    }
+    print(json.dumps(out, indent=2))
+
+
+def validate_plan(plan):
+    if not isinstance(plan, dict):
+        raise ValueError("plan must be a JSON object")
+    for mem in plan.get("memories") or []:
+        key = mem.get("key", "")
+        if not key:
+            raise ValueError("every memory must have a non-empty key")
+        if key.startswith("handoff:") and key != "handoff:latest":
+            raise ValueError(f"per-session key '{key}' forbidden; only 'handoff:latest' may use the handoff: prefix")
+    for note in plan.get("notes") or []:
+        if not note.get("id") or not note.get("body"):
+            raise ValueError("every note must have id and body")
+    for task in plan.get("tasks") or []:
+        if not task.get("title"):
+            raise ValueError("every task must have a title")
+
+
+def write_memories(plan, summary):
+    for mem in plan.get("memories") or []:
+        rc, _, err = bd("remember", mem["body"], "--key", mem["key"])
+        if rc == 0:
+            summary["memories"].append(mem["key"])
+        else:
+            summary["errors"].append(f"remember {mem['key']}: {err.strip()}")
+
+
+def write_notes(plan, summary):
+    for note in plan.get("notes") or []:
+        rc, _, err = bd("update", note["id"], "--notes", note["body"])
+        if rc == 0:
+            summary["notes"].append(note["id"])
+        else:
+            summary["errors"].append(f"update {note['id']} notes: {err.strip()}")
+
+
+def create_tasks(plan, summary):
+    for task in plan.get("tasks") or []:
+        cmd = [
+            "create",
+            "--title",
+            task["title"],
+            "--type",
+            task.get("type", "task"),
+            "--json",
+        ]
+        if task.get("description"):
+            cmd += ["--description", task["description"]]
+        if "priority" in task:
+            cmd += ["--priority", str(task["priority"])]
+        if task.get("labels"):
+            cmd += ["--labels", ",".join(task["labels"])]
+        if task.get("design"):
+            cmd += ["--design", task["design"]]
+        if task.get("acceptance"):
+            cmd += ["--acceptance", task["acceptance"]]
+        rc, out, err = bd(*cmd)
+        if rc != 0:
+            summary["errors"].append(f"create '{task['title']}': {err.strip()}")
+            continue
+        parsed = parse_json(out, {})
+        tid = parsed.get("id") or parsed.get("issue", {}).get("id") or out.strip()
+        summary["tasks"].append({"id": tid, "title": task["title"]})
+
+
+def write_session_summary(plan, summary):
+    body = plan.get("session_summary")
+    if not body:
+        return
+    rc, _, err = bd("remember", body, "--key", "handoff:latest")
+    if rc == 0:
+        summary["session_summary_set"] = True
+    else:
+        summary["errors"].append(f"remember handoff:latest: {err.strip()}")
+
+
+def cleanup_leaked_keys(summary):
+    rc, mems_out, _ = bd("memories", "handoff", "--json")
+    if rc != 0:
+        summary["errors"].append("memories handoff (sanity check) failed")
+        return
+    for m in as_list(parse_json(mems_out, [])):
+        k = m.get("key", "")
+        if k.startswith("handoff:") and k != "handoff:latest":
+            bd("forget", k)
+            summary["leaked_keys_cleaned"].append(k)
+
+
+def push(summary):
+    rc, _, err = bd("dolt", "push")
+    summary["pushed"] = rc == 0
+    if rc != 0:
+        summary["errors"].append(f"dolt push: {err.strip()}")
+
+
+def apply():
+    try:
+        plan = json.loads(sys.stdin.read())
+        validate_plan(plan)
+    except (json.JSONDecodeError, ValueError) as e:
+        print(json.dumps({"errors": [f"invalid plan: {e}"]}, indent=2))
+        sys.exit(2)
+
+    summary = {
+        "memories": [],
+        "notes": [],
+        "tasks": [],
+        "session_summary_set": False,
+        "leaked_keys_cleaned": [],
+        "pushed": False,
+        "errors": [],
+    }
+
+    write_memories(plan, summary)
+    write_notes(plan, summary)
+    create_tasks(plan, summary)
+    write_session_summary(plan, summary)
+    cleanup_leaked_keys(summary)
+
+    if not summary["errors"]:
+        push(summary)
+
+    print(json.dumps(summary, indent=2))
+    sys.exit(0 if not summary["errors"] else 1)
+
+
+def main():
+    if len(sys.argv) < 2:
+        print(__doc__, file=sys.stderr)
+        sys.exit(2)
+    cmd = sys.argv[1]
+    if cmd == "survey":
+        survey()
+    elif cmd == "apply":
+        apply()
+    else:
+        print(f"unknown subcommand: {cmd}", file=sys.stderr)
+        sys.exit(2)
+
+
+if __name__ == "__main__":
+    main()

@@ -4,19 +4,12 @@ personality = "friendly"
 approvals_reviewer = "user"
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
+suppress_unstable_features_warning = true
 
 [mcp_servers]
 
-[mcp_servers.MCP_DOCKER]
-command = "docker"
-args = ["mcp", "gateway", "run"]
-
 [mcp_servers.openaiDeveloperDocs]
 url = "https://developers.openai.com/mcp"
-
-[mcp_servers.gcloud]
-command = "npx"
-args = ["-y", "@google-cloud/gcloud-mcp"]
 
 [projects]
 [projects.'/']
@@ -63,7 +56,7 @@ enabled = false
 enabled = true
 
 [plugins."hugging-face@openai-curated"]
-enabled = true
+enabled = false
 
 [plugins."google-calendar@openai-curated"]
 enabled = false
@@ -75,6 +68,7 @@ enabled = false
 enabled = false
 
 [features]
+apps = false
 memories = true
 terminal_resize_reflow = true
 prevent_idle_sleep = true

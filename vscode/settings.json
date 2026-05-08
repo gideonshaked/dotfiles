@@ -103,7 +103,6 @@
   	"remote.SSH.useLocalServer": false,
   	"remote.SSH.showLoginTerminal": true,
 	"remote.SSH.logLevel": "trace",
-	"notebook.lineNumbers": "on",
 	"black-formatter.args": [
 		"--line-length",
 		"88"

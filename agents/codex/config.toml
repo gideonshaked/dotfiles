@@ -11,33 +11,8 @@ suppress_unstable_features_warning = true
 [mcp_servers.openaiDeveloperDocs]
 url = "https://developers.openai.com/mcp"
 
-[projects]
-[projects.'/']
-trust_level = 'trusted'
-
-[projects.'/Users/gideonshaked']
-trust_level = 'trusted'
-
-[projects."/Users/gideonshaked/Documents/afterquery/genomicsbench/genomicsbench-src"]
-trust_level = "trusted"
-
-[projects."/Users/gideonshaked/Documents/octant/internship-take-home"]
-trust_level = "trusted"
-
-[projects."/Users/gideonshaked/Documents/afterquery/omicsbench"]
-trust_level = "trusted"
-
-[projects."/Users/gideonshaked/Documents/afterquery/omicsbench/omicsbench-synth"]
-trust_level = "trusted"
-
-[projects."/Users/gideonshaked/Documents/personal/dev/dotfiles"]
-trust_level = "trusted"
-
 [notice]
 hide_full_access_warning = true
-
-[notice.model_migrations]
-"gpt-5.1-codex-max" = "gpt-5.4"
 
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "git-branch", "context-remaining", "task-progress"]

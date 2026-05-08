@@ -28,3 +28,9 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     eval $(ssh-agent) > /dev/null
     ssh-add ~/.ssh/^(config|known_hosts|known_hosts.old|*.pub) &> /dev/null
 fi
+
+# fzf - shell integration (key bindings + fuzzy completion)
+[ -x /opt/homebrew/bin/fzf ] && source <(fzf --zsh)
+
+# atuin - smarter shell history (rebinds Ctrl+R, leaves Up arrow alone for zsh-autocomplete)
+[ -x /opt/homebrew/bin/atuin ] && eval "$(atuin init zsh --disable-up-arrow)"

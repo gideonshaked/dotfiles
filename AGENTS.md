@@ -50,6 +50,7 @@ The `s` script is an SSH wrapper that uses the Kitty SSH kitten when available, 
 | `agents/claude/skills` | `~/.claude/skills` |
 | `agents/codex/config.toml` | `~/.codex/config.toml` |
 | `agents/shared/instructions.md` | `~/.codex/AGENTS.md` |
+| `agents/codex/skills` | `~/.codex/skills` |
 | `vscode/settings.json` | `~/Library/Application Support/Code/User/settings.json` |
 | `vscode/keybindings.json` | `~/Library/Application Support/Code/User/keybindings.json` |
 | `clang/clang-format` | `~/.clang-format` |
@@ -73,6 +74,7 @@ The `s` script is an SSH wrapper that uses the Kitty SSH kitten when available, 
 | `agents/claude/skills` | `~/.claude/skills` |
 | `agents/codex/config.toml` | `~/.codex/config.toml` |
 | `agents/shared/instructions.md` | `~/.codex/AGENTS.md` |
+| `agents/codex/skills` | `~/.codex/skills` |
 | `bin/` | `~/bin` |
 
 ### Submodules

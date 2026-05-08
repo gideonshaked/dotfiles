@@ -1,12 +1,85 @@
 {
-  "agentPushNotifEnabled": true,
   "attribution": {
     "commit": "",
     "pr": ""
   },
-  "autoCompactEnabled": false,
-  "autoUpdatesChannel": "latest",
-  "effortLevel": "high",
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-validate",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y ccstatusline@latest --hook"
+          }
+        ]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y ccstatusline@latest --hook"
+          }
+        ]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y ccstatusline@latest --hook"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y ccstatusline@latest --hook"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y ccstatusline@latest --hook"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y ccstatusline@latest --hook"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0
+  },
   "enabledPlugins": {
     "agentic-peer-review@agentic-peer-review": true,
     "beads@beads-marketplace": true,
@@ -18,104 +91,29 @@
   "extraKnownMarketplaces": {
     "agentic-peer-review": {
       "source": {
-        "repo": "gideonshaked/agentic-peer-review",
-        "source": "github"
+        "source": "github",
+        "repo": "gideonshaked/agentic-peer-review"
       }
     },
     "beads-marketplace": {
       "source": {
-        "repo": "steveyegge/beads",
-        "source": "github"
+        "source": "github",
+        "repo": "steveyegge/beads"
       }
     },
     "claude-plugins-official": {
       "source": {
-        "repo": "anthropics/claude-plugins-official",
-        "source": "github"
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
       }
     },
     "huggingface-skills": {
       "source": {
-        "repo": "huggingface/skills",
-        "source": "github"
+        "source": "github",
+        "repo": "huggingface/skills"
       }
     }
   },
-  "hooks": {
-    "PostToolUse": [
-      {
-        "hooks": [
-          {
-            "command": "claude-validate",
-            "timeout": 10,
-            "type": "command"
-          }
-        ],
-        "matcher": "Write|Edit"
-      }
-    ],
-    "PreToolUse": [
-      {
-        "hooks": [
-          {
-            "command": "npx -y ccstatusline@latest --hook",
-            "type": "command"
-          }
-        ],
-        "matcher": "Skill"
-      },
-      {
-        "hooks": [
-          {
-            "command": "npx -y ccstatusline@latest --hook",
-            "type": "command"
-          }
-        ],
-        "matcher": "Skill"
-      },
-      {
-        "hooks": [
-          {
-            "command": "npx -y ccstatusline@latest --hook",
-            "type": "command"
-          }
-        ],
-        "matcher": "Skill"
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "command": "npx -y ccstatusline@latest --hook",
-            "type": "command"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "command": "npx -y ccstatusline@latest --hook",
-            "type": "command"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "command": "npx -y ccstatusline@latest --hook",
-            "type": "command"
-          }
-        ]
-      }
-    ]
-  },
-  "permissions": {
-    "defaultMode": "bypassPermissions"
-  },
-  "preferredNotifChannel": "kitty",
-  "remoteControlAtStartup": true,
-  "skipDangerousModePermissionPrompt": true,
   "spinnerTipsEnabled": false,
   "spinnerVerbs": {
     "mode": "replace",
@@ -142,10 +140,12 @@
       "Selling your social security number on the dark web"
     ]
   },
-  "statusLine": {
-    "command": "npx -y ccstatusline@latest",
-    "padding": 0,
-    "type": "command"
-  },
+  "effortLevel": "high",
+  "autoUpdatesChannel": "latest",
+  "skipDangerousModePermissionPrompt": true,
+  "preferredNotifChannel": "kitty",
+  "autoCompactEnabled": false,
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true,
   "voiceEnabled": true
 }

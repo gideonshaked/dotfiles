@@ -1,0 +1,45 @@
+#!/bin/bash
+# Gathers project context and runs a Claude audit with read-only tool access.
+set -euo pipefail
+
+lang=""
+if [ -f package.json ]; then
+    lang="JavaScript/TypeScript"
+elif [ -f Cargo.toml ]; then
+    lang="Rust"
+elif [ -f pyproject.toml ] || [ -f setup.py ]; then
+    lang="Python"
+elif [ -f go.mod ]; then
+    lang="Go"
+elif [ -f Gemfile ]; then
+    lang="Ruby"
+elif [ -f pom.xml ] || [ -f build.gradle ]; then
+    lang="Java"
+fi
+
+context="Project: $(basename "$PWD")"
+[ -n "$lang" ] && context="$context | Language: $lang"
+
+base="Audit this codebase for bugs, dead code, tech debt, and architectural errors. Report each finding with its file path, line number, severity (high/medium/low), and a brief explanation. Do not edit files or run commands that write to disk."
+
+focus="$*"
+if [ -n "$focus" ]; then
+    if [ -e "$focus" ]; then
+        scope="Focus your audit on: $focus"
+    else
+        scope="Focus on this category: $focus"
+    fi
+else
+    scope="Do a broad sweep of the entire codebase."
+fi
+
+prompt="$base
+
+Context: $context
+$scope"
+
+exec claude -p \
+    --permission-mode default \
+    --tools "Read,Grep,Glob,Bash" \
+    --allowedTools "Read,Grep,Glob,Bash(git status:*),Bash(git diff:*),Bash(git grep:*),Bash(rg:*),Bash(find:*),Bash(ls:*),Bash(sed:*),Bash(cat:*),Bash(nl:*)" \
+    "$prompt" 2>&1

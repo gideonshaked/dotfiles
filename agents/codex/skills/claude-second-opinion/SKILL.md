@@ -13,7 +13,7 @@ Invokes Claude in a constrained, read-only audit mode to look for bugs, dead cod
 
 1. Resolve the `claude-audit` helper next to this `SKILL.md`.
 
-2. Run it with the user's focus text, file path, or no argument:
+2. Run it with the user's focus text, file path, or no argument. Prefer a path or concrete focus when the user gives one:
 
    ```bash
    ./claude-audit <focus-or-path>
@@ -21,8 +21,11 @@ Invokes Claude in a constrained, read-only audit mode to look for bugs, dead cod
 
 3. Print the full output directly for the user. Do not soften, summarize away, or reinterpret the findings.
 
+4. If the helper exits with a timeout, print the timeout output, then rerun once with a narrower path or focus string from the user's request. Say clearly that the broad audit timed out.
+
 ## Notes
 
 - If the argument is a file or directory, the helper scopes the audit there.
 - If the argument is plain text, the helper treats it as the review category.
-- If there is no argument, the helper performs a broad codebase audit.
+- If there is no argument, the helper performs a bounded first-pass codebase audit.
+- The helper uses `CLAUDE_AUDIT_TIMEOUT_SECONDS` (default 180) and `CLAUDE_AUDIT_MAX_BUDGET_USD` (default 1) to avoid silent hangs.

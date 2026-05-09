@@ -57,6 +57,9 @@ goals = true
 [projects."/Users/gideonshaked/Documents/personal/dev/dotfiles"]
 trust_level = "trusted"
 
+[projects."/Users/gideonshaked"]
+trust_level = "trusted"
+
 [mcp_servers.context7]
 type = "http"
 url = "https://mcp.context7.com/mcp"

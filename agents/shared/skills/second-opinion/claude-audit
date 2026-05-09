@@ -38,8 +38,8 @@ prompt="$base
 Context: $context
 $scope"
 
-exec claude -p \
-    --permission-mode default \
+printf '%s\n' "$prompt" | claude -p \
+    --permission-mode dontAsk \
     --tools "Read,Grep,Glob,Bash" \
     --allowedTools "Read,Grep,Glob,Bash(git status:*),Bash(git diff:*),Bash(git grep:*),Bash(rg:*),Bash(find:*),Bash(ls:*),Bash(sed:*),Bash(cat:*),Bash(nl:*)" \
-    "$prompt" 2>&1
+    2>&1

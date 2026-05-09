@@ -15,8 +15,8 @@ url = "https://developers.openai.com/mcp"
 url = "https://mcp.exa.ai/mcp"
 
 [mcp_servers.gcloud]
-command = "npx"
-args = ["-y", "@google-cloud/gcloud-mcp"]
+command = "bash"
+args = ["-lc", "exec \"$HOME/bin/dotfiles-npx\" -y @google-cloud/gcloud-mcp"]
 
 [notice]
 hide_full_access_warning = true

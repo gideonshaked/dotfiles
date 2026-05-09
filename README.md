@@ -25,7 +25,7 @@ git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install
 ### Minimal install (suitable for Linux and macOS)
 
 A minimal installation intended primarily for headless linux servers.
-Installs a portable bash config (prompt, aliases, functions), SSH config, agent configs, ccstatusline, and git aliases without overwriting the existing shell config.
+Installs a portable bash config (prompt, aliases, functions), SSH config, agent configs, ccstatusline, user-local npx via nvm, and git aliases without overwriting the existing shell config.
 
 ```bash
 git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install --minimal

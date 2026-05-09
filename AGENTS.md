@@ -28,7 +28,7 @@ The install script initializes the Dotbot submodule and runs Dotbot with `instal
 
 ### Minimal Install
 
-For remote servers. Installs: SSH config, Claude/Codex agent config, ccstatusline, git aliases, and portable bash config (aliases, functions, prompt). Sources `aliases.zsh` and `functions.zsh` from the same files used by the full zsh setup. Appends a source line to both `.bashrc` and `.bash_profile` for login shell compatibility (e.g., tcsh exec-to-bash). ccstatusline install is failure-tolerant. Guarded against double-sourcing.
+For remote servers. Installs: SSH config, Claude/Codex agent config, ccstatusline, user-local npx via nvm, git aliases, and portable bash config (aliases, functions, prompt). Sources `aliases.zsh` and `functions.zsh` from the same files used by the full zsh setup. Appends a source line to both `.bashrc` and `.bash_profile` for login shell compatibility (e.g., tcsh exec-to-bash). ccstatusline install is failure-tolerant. Guarded against double-sourcing.
 
 ### SSH Wrapper (`bin/s`)
 

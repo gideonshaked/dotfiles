@@ -25,7 +25,7 @@ git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install
 ### Minimal install (suitable for Linux and macOS)
 
 A minimal installation intended primarily for headless linux servers.
-Installs a portable bash config (prompt, aliases, functions), SSH config, agent configs, ccstatusline, user-local npx via nvm, and git aliases without overwriting the existing shell config.
+Installs a portable bash config (prompt, aliases, functions), SSH config, agent configs, ccstatusline, user-local npx via nvm, and git aliases without overwriting the existing shell config. If `~/bin` already exists, required dotfiles tools are linked into it instead of replacing the directory.
 
 ```bash
 git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install --minimal
@@ -35,13 +35,13 @@ git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install -
 
 ```text
 ├── agents      <- Claude and Codex config, skills, and agent plugin settings
-├── bin         <- Personal scripts (s, dotfiles, git-nuke, sshkey, claude-validate)
+├── bin         <- Personal command entrypoints (s, dotfiles, git-nuke, sshkey, claude-validate)
 ├── clang       <- clang-format and clangd config
 ├── dotbot      <- Dotbot installer submodule
 ├── git         <- Git configuration files (aliases, custom formatting, etc.)
 ├── install.conf.yaml <- Dotbot install config for both full and minimal installs
 ├── manifest    <- Brewfile
-├── scripts     <- Repo maintenance scripts
+├── scripts     <- Install helpers and shared script implementations
 ├── ssh         <- SSH config file
 ├── term        <- Shell configuration (zsh, bash, starship)
 └── vscode      <- VS Code configuration and extensions list

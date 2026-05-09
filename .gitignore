@@ -4,6 +4,8 @@ term/zsh/secrets.zsh
 .ruff_cache/
 .vscode/
 agents/codex/skills/.system/
+agents/claude/skills/context7-mcp/
+agents/codex/skills/context7-mcp/
 
 # Beads / Dolt files (added by bd init)
 .dolt/

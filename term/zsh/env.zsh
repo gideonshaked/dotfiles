@@ -31,3 +31,6 @@ export LESS=-R
 
 # Bun
 export BUN_INSTALL="$HOME/.bun"
+
+# Private local environment, such as API keys.
+[ -f "$HOME/.zsh/secrets.zsh" ] && source "$HOME/.zsh/secrets.zsh"

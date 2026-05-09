@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-[ ! -e "$HOME/bin" ] || [ -L "$HOME/bin" ]

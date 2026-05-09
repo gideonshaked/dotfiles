@@ -2,7 +2,17 @@
 
 set -euo pipefail
 
-if ! command -v codex >/dev/null 2>&1; then
+PATH="${HOME}/bin:${HOME}/.local/bin:${HOME}/.bun/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
+export PATH
+
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    # shellcheck disable=SC1091
+    . "$NVM_DIR/nvm.sh"
+    nvm use --silent default >/dev/null 2>&1 || nvm use --silent --lts >/dev/null 2>&1 || true
+fi
+
+if ! which codex >/dev/null 2>&1; then
     echo "codex CLI not found, skipping plugins (non-fatal)"
     exit 0
 fi
@@ -13,29 +23,10 @@ if [ ! -f "$CONFIG" ]; then
     exit 0
 fi
 
-echo "Upgrading configured Codex marketplaces"
-codex plugin marketplace upgrade || true
+codex plugin marketplace upgrade >/dev/null 2>&1 || true
 
-echo "Refreshing Codex plugin discovery"
 if ! codex debug prompt-input "plugin cache warmup" >/dev/null 2>&1; then
     echo "Codex plugin discovery refresh failed (non-fatal)"
 fi
-
-plugin=""
-while IFS= read -r line; do
-    case "$line" in
-        "[plugins.\""*"\"]")
-            plugin="${line#\[plugins.\"}"
-            plugin="${plugin%\"\]}"
-            ;;
-        "enabled = true")
-            [ -n "$plugin" ] || continue
-            echo "Enabled Codex plugin: $plugin"
-            ;;
-        \[*)
-            plugin=""
-            ;;
-    esac
-done <"$CONFIG"
 
 echo "Codex plugins OK"

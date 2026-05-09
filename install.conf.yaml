@@ -16,38 +16,38 @@
     # Full install
     ~/.zshrc:
       path: term/zshrc
-      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+      if: scripts/is-full-install
     ~/.config/starship.toml:
       path: term/starship.toml
-      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+      if: scripts/is-full-install
     ~/.gitconfig:
       path: git/gitconfig
-      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+      if: scripts/is-full-install
     ~/.gitattributes:
       path: git/gitattributes
-      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+      if: scripts/is-full-install
     ~/Library/Application Support/Code/User/settings.json:
       path: vscode/settings.json
-      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+      if: scripts/is-full-install
     ~/Library/Application Support/Code/User/keybindings.json:
       path: vscode/keybindings.json
-      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+      if: scripts/is-full-install
     ~/Library/Preferences/clangd/config.yaml:
       path: clang/config.yaml
-      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+      if: scripts/is-full-install
     ~/.clang-format:
       path: clang/clang-format
-      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "full" ]'
+      if: scripts/is-full-install
 
     # Minimal install
     ~/.bashrc.dotfiles:
       path: term/bashrc.dotfiles
       force: true
-      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "minimal" ]'
+      if: scripts/is-minimal-install
     ~/.bash_prompt:
       path: term/bash_prompt.bash
       force: true
-      if: '[ "${DOTFILES_INSTALL_MODE:-full}" = "minimal" ]'
+      if: scripts/is-minimal-install
 
     # Agents
     ## Claude
@@ -83,50 +83,45 @@
 - shell:
     # Bash: source dotfiles bashrc on minimal installs only
     - description: Hooking into .bashrc and .bash_profile
-      command: |
-        if [ "${DOTFILES_INSTALL_MODE:-full}" != "minimal" ]; then
-          echo "Skipping bash hooks outside minimal install"
-          exit 0
-        fi
-        grep -qF 'bashrc.dotfiles' "$HOME/.bashrc" 2>/dev/null || \
-          echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> "$HOME/.bashrc"
-        grep -qF 'bashrc.dotfiles' "$HOME/.bash_profile" 2>/dev/null || \
-          echo '[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"' >> "$HOME/.bash_profile"
+      command: scripts/configure-bash-hooks
+      quiet: true
       stdout: true
       stderr: true
 
     # Git aliases: add include only if not already present
     - description: Configuring git aliases
-      command: |
-        git config --global --get-all include.path 2>/dev/null | grep -qF 'gitalias.txt' || \
-          git config --global --add include.path ~/.gitalias.txt
-        git config --global --get core.excludesfile >/dev/null 2>&1 || \
-          git config --global core.excludesfile ~/.gitignore
+      command: scripts/configure-git
+      quiet: true
       stdout: true
       stderr: true
 
     # npx: install user-local Node via nvm before npx-based agent helpers
     - description: Installing npx with nvm if needed (optional)
-      command: scripts/ensure-npx || echo "npx install failed (non-fatal)"
+      command: scripts/ensure-npx
+      quiet: true
       stdout: true
       stderr: true
 
     # ccstatusline: best effort, failure does not abort install
     - description: Installing ccstatusline (optional)
       command: scripts/install-ccstatusline
+      quiet: true
       stdout: true
       stderr: true
 
     # Agent plugins
     - description: Installing and updating Claude plugins (optional)
       command: scripts/install-claude-plugins
+      quiet: true
       stdout: true
       stderr: true
     - description: Installing and updating Codex plugins (optional)
       command: scripts/install-codex-plugins
+      quiet: true
       stdout: true
       stderr: true
     - description: Installing agent MCPs (optional)
       command: scripts/install-agent-mcps
+      quiet: true
       stdout: true
       stderr: true

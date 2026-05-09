@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if ! git config --global --get-all include.path 2>/dev/null | grep -qF 'gitalias.txt'; then
+    git config --global --add include.path ~/.gitalias.txt
+fi
+
+if ! git config --global --get core.excludesfile >/dev/null 2>&1; then
+    git config --global core.excludesfile ~/.gitignore
+fi
+
+echo "git config OK"

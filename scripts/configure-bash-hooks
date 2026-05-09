@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ "${DOTFILES_INSTALL_MODE:-full}" != "minimal" ]; then
+    echo "bash hooks skipped"
+    exit 0
+fi
+
+SOURCE_LINE='[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"'
+
+add_source_line() {
+    local file="$1"
+
+    touch "$file"
+    if grep -qF 'bashrc.dotfiles' "$file"; then
+        return 0
+    fi
+
+    printf '\n%s\n' "$SOURCE_LINE" >>"$file"
+}
+
+add_source_line "$HOME/.bashrc"
+add_source_line "$HOME/.bash_profile"
+
+echo "bash hooks OK"

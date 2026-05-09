@@ -1,6 +1,22 @@
 #!/bin/bash
-# Gathers project context and runs a Claude audit with read-only tool access.
+# Gathers project context and runs a bounded Claude audit with read-only tool access.
 set -euo pipefail
+
+TIMEOUT_SECONDS="${CLAUDE_AUDIT_TIMEOUT_SECONDS:-180}"
+MAX_BUDGET_USD="${CLAUDE_AUDIT_MAX_BUDGET_USD:-1}"
+
+kill_descendants() {
+    local signal="$1"
+    local parent="$2"
+    local children
+    local child
+
+    children="$(pgrep -P "$parent" 2>/dev/null || true)"
+    for child in $children; do
+        kill_descendants "$signal" "$child"
+        kill "-$signal" "$child" >/dev/null 2>&1 || true
+    done
+}
 
 lang=""
 if [ -f package.json ]; then
@@ -20,7 +36,7 @@ fi
 context="Project: $(basename "$PWD")"
 [ -n "$lang" ] && context="$context | Language: $lang"
 
-base="Audit this codebase for bugs, dead code, tech debt, and architectural errors. Report each finding with its file path, line number, severity (high/medium/low), and a brief explanation. Do not edit files or run commands that write to disk."
+base="Audit this codebase for bugs, dead code, tech debt, and architectural errors. Report only actionable findings. For each finding include file path, line number, severity (high/medium/low), and a brief explanation. Do not edit files or run commands that write to disk. Keep the audit bounded: prefer the files and paths most relevant to the requested scope, and stop after the most important findings."
 
 focus="$*"
 if [ -n "$focus" ]; then
@@ -30,7 +46,7 @@ if [ -n "$focus" ]; then
         scope="Focus on this category: $focus"
     fi
 else
-    scope="Do a broad sweep of the entire codebase."
+    scope="Do a broad first-pass sweep of the codebase. Inspect the repo shape, git status, and obvious config/script entrypoints first; do not recursively crawl every file."
 fi
 
 prompt="$base
@@ -38,8 +54,49 @@ prompt="$base
 Context: $context
 $scope"
 
-printf '%s\n' "$prompt" | claude -p \
-    --permission-mode dontAsk \
-    --tools "Read,Grep,Glob,Bash" \
-    --allowedTools "Read,Grep,Glob,Bash(git status:*),Bash(git diff:*),Bash(git grep:*),Bash(rg:*),Bash(find:*),Bash(ls:*),Bash(sed:*),Bash(cat:*),Bash(nl:*)" \
-    2>&1
+output="$(mktemp)"
+status=0
+
+(
+    printf '%s\n' "$prompt" | claude -p \
+        --no-session-persistence \
+        --max-budget-usd "$MAX_BUDGET_USD" \
+        --permission-mode dontAsk \
+        --tools "Read,Grep,Glob,Bash" \
+        --allowedTools "Read,Grep,Glob,Bash(git status:*),Bash(git diff:*),Bash(git grep:*),Bash(git ls-files:*),Bash(rg:*),Bash(find:*),Bash(ls:*),Bash(readlink:*),Bash(stat:*),Bash(sed:*),Bash(cat:*),Bash(nl:*)"
+) > "$output" 2>&1 &
+pid="$!"
+started_at="$(date +%s)"
+
+while kill -0 "$pid" >/dev/null 2>&1; do
+    now="$(date +%s)"
+    if [ $((now - started_at)) -ge "$TIMEOUT_SECONDS" ]; then
+        kill_descendants TERM "$pid"
+        sleep 1
+        kill_descendants KILL "$pid"
+        kill -0 "$pid" >/dev/null 2>&1 && kill TERM "$pid" >/dev/null 2>&1 || true
+        sleep 1
+        kill -0 "$pid" >/dev/null 2>&1 && kill -9 "$pid" >/dev/null 2>&1 || true
+        wait "$pid" >/dev/null 2>&1 || true
+        echo "Claude audit timed out after ${TIMEOUT_SECONDS}s."
+        echo "Retry with a narrower file, directory, or focus string."
+        if [ -s "$output" ]; then
+            echo
+            echo "Partial output:"
+            cat "$output"
+        fi
+        rm -f "$output"
+        exit 124
+    fi
+    sleep 2
+done
+
+if wait "$pid"; then
+    status=0
+else
+    status="$?"
+fi
+
+cat "$output"
+rm -f "$output"
+exit "$status"

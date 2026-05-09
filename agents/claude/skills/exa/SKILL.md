@@ -5,7 +5,7 @@ when_to_use: "Use when the user wants to search the web, look something up, veri
 argument-hint: "<search query>"
 allowed-tools:
   - mcp__exa__web_search_exa
-  - mcp__exa__crawling_exa
+  - mcp__exa__web_fetch_exa
 ---
 
 Search the web using Exa and summarize the results.
@@ -16,4 +16,4 @@ Search the web using Exa and summarize the results.
 
 2. Synthesize the results into a concise summary. Focus on answering the user's implicit question. Cite sources with titles and URLs.
 
-3. If the highlights are insufficient for a good answer, follow up with `mcp__exa__crawling_exa` on the most promising URL(s) to get full content, then revise your summary.
+3. If the highlights are insufficient for a good answer, follow up with `mcp__exa__web_fetch_exa` on the most promising URL(s) to get full content, then revise your summary.

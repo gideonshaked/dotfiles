@@ -4,7 +4,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTFILES_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-NPX_CMD="${DOTFILES_NPX:-$DOTFILES_DIR/bin/dotfiles-npx}"
+NPX_CMD="${DOTFILES_NPX:-$DOTFILES_DIR/scripts/dotfiles-npx}"
 
 if ! "$NPX_CMD" --version >/dev/null 2>&1; then
     echo "npx not found, skipping ccstatusline (non-fatal)"

@@ -11,7 +11,9 @@
     ~/.gitalias.txt: git/gitalias.txt
     ~/.gitignore: git/gitignore
     ~/.ssh/config: ssh/config
-    ~/bin: bin
+    ~/bin:
+      path: bin
+      if: scripts/should-link-bin
 
     # Full install
     ~/.zshrc:
@@ -91,6 +93,13 @@
     # Git aliases: add include only if not already present
     - description: Configuring git aliases
       command: scripts/configure-git
+      quiet: true
+      stdout: true
+      stderr: true
+
+    # Bin tools: merge required dotfiles entrypoints into preexisting ~/bin
+    - description: Linking bin tools
+      command: scripts/link-bin-tools
       quiet: true
       stdout: true
       stderr: true

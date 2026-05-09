@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+BIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+LIB="$BIN_DIR/../scripts/lib/npx.sh"
+
+if [ ! -f "$LIB" ]; then
+    LIB="${DOTFILES:-$HOME/Documents/personal/dev/dotfiles}/scripts/lib/npx.sh"
+fi
+
+if [ -f "$LIB" ]; then
+    # shellcheck disable=SC1091
+    . "$LIB"
+else
+    echo "dotfiles-npx could not find scripts/lib/npx.sh" >&2
+    exit 127
+fi
+
+if ! dotfiles_npx_activate; then
+    echo "npx not found. Run dotfiles update or scripts/ensure-npx first." >&2
+    exit 127
+fi
+
+exec npx "$@"

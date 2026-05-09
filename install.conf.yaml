@@ -105,14 +105,15 @@
       stdout: true
       stderr: true
 
+    # npx: install user-local Node via nvm before npx-based agent helpers
+    - description: Installing npx with nvm if needed (optional)
+      command: scripts/ensure-npx || echo "npx install failed (non-fatal)"
+      stdout: true
+      stderr: true
+
     # ccstatusline: best effort, failure does not abort install
     - description: Installing ccstatusline (optional)
-      command: |
-        if command -v npx >/dev/null 2>&1; then
-          npx -y --package ccstatusline@latest node -e "process.exit(0)" 2>/dev/null && echo "ccstatusline OK" || echo "ccstatusline install failed (non-fatal)"
-        else
-          echo "npx not found, skipping ccstatusline (non-fatal)"
-        fi
+      command: scripts/install-ccstatusline
       stdout: true
       stderr: true
 

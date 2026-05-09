@@ -7,6 +7,9 @@ CODEX_AGENTS="${CODEX_HOME:-${HOME}/.codex}/AGENTS.md"
 CONTEXT7_SECRETS="${HOME}/.zsh/secrets.zsh"
 EXA_URL="https://mcp.exa.ai/mcp"
 GCLOUD_PACKAGE="@google-cloud/gcloud-mcp"
+NPX_CMD="${DOTFILES_NPX:-${HOME}/bin/dotfiles-npx}"
+GCLOUD_MCP_COMMAND='exec "$HOME/bin/dotfiles-npx" -y @google-cloud/gcloud-mcp'
+PATH="${HOME}/bin:${HOME}/.local/bin:${PATH}"
 
 claude_has() {
     claude mcp get "$1" 2>/dev/null | grep -qF "$2"
@@ -44,9 +47,9 @@ install_claude_mcp() {
         claude mcp add --scope user --transport http exa "$EXA_URL" || echo "Claude Exa MCP setup failed (non-fatal)"
     fi
 
-    if ! claude_has gcloud "$GCLOUD_PACKAGE"; then
+    if ! claude_has gcloud "dotfiles-npx" || ! claude_has gcloud "$GCLOUD_PACKAGE"; then
         claude mcp remove gcloud -s user >/dev/null 2>&1 || true
-        claude mcp add --scope user gcloud -- npx -y "$GCLOUD_PACKAGE" || echo "Claude gcloud MCP setup failed (non-fatal)"
+        claude mcp add --scope user gcloud -- bash -lc "$GCLOUD_MCP_COMMAND" || echo "Claude gcloud MCP setup failed (non-fatal)"
     fi
 }
 
@@ -61,9 +64,9 @@ install_codex_mcp() {
         codex mcp add exa --url "$EXA_URL" || echo "Codex Exa MCP setup failed (non-fatal)"
     fi
 
-    if ! codex_has gcloud "$GCLOUD_PACKAGE"; then
+    if ! codex_has gcloud "dotfiles-npx" || ! codex_has gcloud "$GCLOUD_PACKAGE"; then
         codex mcp remove gcloud >/dev/null 2>&1 || true
-        codex mcp add gcloud -- npx -y "$GCLOUD_PACKAGE" || echo "Codex gcloud MCP setup failed (non-fatal)"
+        codex mcp add gcloud -- bash -lc "$GCLOUD_MCP_COMMAND" || echo "Codex gcloud MCP setup failed (non-fatal)"
     fi
 }
 
@@ -177,15 +180,15 @@ install_context7() {
         return 0
     fi
 
-    if ! command -v npx >/dev/null 2>&1; then
+    if ! command -v "$NPX_CMD" >/dev/null 2>&1; then
         echo "npx not found, skipping Context7 setup (non-fatal)"
         return 0
     fi
 
     if [ -n "${CONTEXT7_API_KEY:-}" ]; then
-        npx -y ctx7@latest setup --claude --codex --mcp --yes --api-key "$CONTEXT7_API_KEY" || echo "Context7 setup failed (non-fatal)"
+        "$NPX_CMD" -y ctx7@latest setup --claude --codex --mcp --yes --api-key "$CONTEXT7_API_KEY" || echo "Context7 setup failed (non-fatal)"
     else
-        npx -y ctx7@latest setup --claude --codex --mcp --yes || echo "Context7 setup failed (non-fatal)"
+        "$NPX_CMD" -y ctx7@latest setup --claude --codex --mcp --yes || echo "Context7 setup failed (non-fatal)"
     fi
 }
 

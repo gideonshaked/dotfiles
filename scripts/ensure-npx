@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck disable=SC1091
+. "$SCRIPT_DIR/lib/npx.sh"
+
+if dotfiles_npx_activate; then
+    dotfiles_npx_add_loader "$HOME/.bashrc"
+    dotfiles_npx_add_loader "$HOME/.bash_profile"
+    echo "npx OK"
+    exit 0
+fi
+
+dotfiles_npx_install_node || exit 1
+dotfiles_npx_add_loader "$HOME/.bashrc"
+dotfiles_npx_add_loader "$HOME/.bash_profile"
+
+if dotfiles_npx_activate; then
+    echo "npx OK"
+else
+    echo "npx install failed (non-fatal)"
+    exit 1
+fi

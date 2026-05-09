@@ -7,9 +7,10 @@
   "autoCompactEnabled": false,
   "autoUpdatesChannel": "latest",
   "effortLevel": "high",
+  "skillListingBudgetFraction": 0.015,
   "enabledPlugins": {
     "agentic-peer-review@agentic-peer-review": true,
-    "beads@beads-marketplace": false,
+    "beads@beads-marketplace": true,
     "context7@claude-plugins-official": true,
     "feature-dev@claude-plugins-official": true,
     "ralph-loop@claude-plugins-official": true,

@@ -3,7 +3,7 @@ name: exa
 description: "Search and fetch current web content using the configured Exa MCP server. Use when the user asks to search the web, look something up, verify current information, find sources, crawl a page, or use Exa specifically."
 allowed-tools:
   - mcp__exa__web_search_exa
-  - mcp__exa__crawling_exa
+  - mcp__exa__web_fetch_exa
 metadata:
   short-description: Search the web with Exa
 ---
@@ -18,7 +18,7 @@ Use the configured Exa MCP server for web search and source retrieval.
 
 2. Synthesize the results into a concise answer focused on the user's question. Cite source titles and URLs.
 
-3. If snippets are not enough, call the Exa crawling/fetch tool on the most relevant URL or URLs, then revise the answer with the fetched content.
+3. If snippets are not enough, call the Exa web fetch tool on the most relevant URL or URLs, then revise the answer with the fetched content.
 
 ## Rules
 

@@ -1,13 +1,6 @@
 ---
 name: write-tests
 description: "Write comprehensive, principled tests for code. Use when the user asks to write tests, add tests, create a test suite, test a file/function/module, or improve coverage."
-allowed-tools:
-  - Bash
-  - Read
-  - Edit
-  - Write
-  - Grep
-  - Glob
 ---
 
 # Write Tests

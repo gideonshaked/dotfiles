@@ -9,7 +9,7 @@
   "effortLevel": "high",
   "enabledPlugins": {
     "agentic-peer-review@agentic-peer-review": true,
-    "beads@beads-marketplace": true,
+    "beads@beads-marketplace": false,
     "context7@claude-plugins-official": true,
     "feature-dev@claude-plugins-official": true,
     "ralph-loop@claude-plugins-official": true,

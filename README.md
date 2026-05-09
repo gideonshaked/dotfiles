@@ -11,7 +11,6 @@ My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https
 <p align="center">
   <a href="#install">Install</a> &bull;
   <a href="#contents">Contents</a> &bull;
-  <a href="#notes">Notes</a> &bull;
   <a href="#credits">Credits</a>
 </p>
 

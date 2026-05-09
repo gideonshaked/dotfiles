@@ -28,7 +28,7 @@ The install script initializes the Dotbot submodule and runs Dotbot with `instal
 
 ### Minimal Install
 
-For remote servers. Installs: SSH config, Claude/Codex agent config, ccstatusline, user-local npx via nvm, git aliases, and portable bash config (aliases, functions, prompt). Sources `aliases.zsh` and `functions.zsh` from the same files used by the full zsh setup. Appends a source line to both `.bashrc` and `.bash_profile` for login shell compatibility (e.g., tcsh exec-to-bash). If `~/bin` already exists as a directory, required dotfiles tools are linked into it instead of replacing the directory. ccstatusline install is failure-tolerant. Guarded against double-sourcing.
+For remote servers. Installs: SSH config, Claude/Codex agent config, ccstatusline, user-local npx via nvm, git aliases, and portable bash config (aliases, functions, prompt). Sources `aliases.zsh` and `functions.zsh` from the same files used by the full zsh setup. Appends a source line to both `.bashrc` and `.bash_profile` for login shell compatibility (e.g., tcsh exec-to-bash). The install owns `~/bin`; an existing `~/bin` is backed up before the repo bin is linked. ccstatusline install is failure-tolerant. Guarded against double-sourcing.
 
 ### SSH Wrapper (`bin/s`)
 
@@ -55,7 +55,7 @@ The `s` script is an SSH wrapper that uses the Kitty SSH kitten when available, 
 | `vscode/keybindings.json` | `~/Library/Application Support/Code/User/keybindings.json` |
 | `clang/clang-format` | `~/.clang-format` |
 | `clang/config.yaml` | `~/Library/Preferences/clangd/config.yaml` |
-| `bin/` | `~/bin` if absent or already a symlink, otherwise individual tools are linked into existing `~/bin` |
+| `bin/` | `~/bin` |
 
 ### Key Symlink Mappings (minimal install)
 
@@ -75,7 +75,7 @@ The `s` script is an SSH wrapper that uses the Kitty SSH kitten when available, 
 | `agents/codex/config.toml` | `~/.codex/config.toml` |
 | `agents/shared/instructions.md` | `~/.codex/AGENTS.md` |
 | `agents/codex/skills` | `~/.codex/skills` |
-| `bin/` | `~/bin` if absent or already a symlink, otherwise individual tools are linked into existing `~/bin` |
+| `bin/` | `~/bin` |
 
 ### Submodules
 

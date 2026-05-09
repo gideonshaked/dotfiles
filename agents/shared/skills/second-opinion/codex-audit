@@ -1,0 +1,44 @@
+#!/bin/bash
+# Gathers project context and runs a Codex audit in read-only mode.
+set -euo pipefail
+
+# -- Detect project language --
+lang=""
+if [ -f package.json ]; then
+    lang="JavaScript/TypeScript"
+elif [ -f Cargo.toml ]; then
+    lang="Rust"
+elif [ -f pyproject.toml ] || [ -f setup.py ]; then
+    lang="Python"
+elif [ -f go.mod ]; then
+    lang="Go"
+elif [ -f Gemfile ]; then
+    lang="Ruby"
+elif [ -f pom.xml ] || [ -f build.gradle ]; then
+    lang="Java"
+fi
+
+context="Project: $(basename "$PWD")"
+[ -n "$lang" ] && context="$context | Language: $lang"
+
+# -- Build the audit prompt --
+base="Audit this codebase for bugs, dead code, tech debt, and architectural errors. Report each finding with its file path, line number, severity (high/medium/low), and a brief explanation."
+
+focus="$*"
+if [ -n "$focus" ]; then
+    if [ -e "$focus" ]; then
+        scope="Focus your audit on: $focus"
+    else
+        scope="Focus on this category: $focus"
+    fi
+else
+    scope="Do a broad sweep of the entire codebase."
+fi
+
+prompt="$base
+
+Context: $context
+$scope"
+
+# -- Run Codex in read-only sandbox --
+exec codex exec -s read-only "$prompt" 2>&1

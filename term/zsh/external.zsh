@@ -29,8 +29,10 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     ssh-add ~/.ssh/^(config|known_hosts|known_hosts.old|*.pub) &> /dev/null
 fi
 
-# fzf - shell integration (key bindings + fuzzy completion)
-[ -x /opt/homebrew/bin/fzf ] && source <(fzf --zsh)
+# fzf - key bindings only: Ctrl-T (file picker), Alt-C (cd picker).
+# Skip completion.zsh; it would rebind Tab and clash with zsh-autocomplete.
+# Atuin (sourced below) takes over Ctrl-R after this.
+[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ] && source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
 
 # atuin - smarter shell history (rebinds Ctrl+R, leaves Up arrow alone for zsh-autocomplete)
 [ -x /opt/homebrew/bin/atuin ] && eval "$(atuin init zsh --disable-up-arrow)"

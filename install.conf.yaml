@@ -125,7 +125,7 @@
       command: scripts/install-codex-plugins
       stdout: true
       stderr: true
-    - description: Installing Context7 MCP (optional)
-      command: scripts/install-context7
+    - description: Installing agent MCPs (optional)
+      command: scripts/install-agent-mcps
       stdout: true
       stderr: true

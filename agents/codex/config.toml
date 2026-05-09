@@ -12,9 +12,11 @@ suppress_unstable_features_warning = true
 url = "https://developers.openai.com/mcp"
 
 [mcp_servers.exa]
+url = "https://mcp.exa.ai/mcp"
+
+[mcp_servers.gcloud]
 command = "npx"
-args = ["-y", "mcp-remote", "https://mcp.exa.ai/mcp"]
-startup_timeout_sec = 30
+args = ["-y", "@google-cloud/gcloud-mcp"]
 
 [notice]
 hide_full_access_warning = true

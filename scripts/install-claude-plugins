@@ -24,7 +24,7 @@ jq -r '.extraKnownMarketplaces // {} | to_entries[] | .value.source.repo' "$SETT
     claude plugins marketplace add "$repo" || true
 done
 
-jq -r '.enabledPlugins // {} | keys[]' "$SETTINGS" | while read -r plugin; do
+jq -r '.enabledPlugins // {} | to_entries[] | select(.value == true) | .key' "$SETTINGS" | while read -r plugin; do
     [ -n "$plugin" ] || continue
     echo "Installing/updating Claude plugin: $plugin"
     claude plugins install "$plugin" 2>/dev/null || claude plugins update "$plugin" 2>/dev/null || true

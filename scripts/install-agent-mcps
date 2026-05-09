@@ -1,0 +1,198 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+CODEX_CONFIG="${CODEX_HOME:-${HOME}/.codex}/config.toml"
+CODEX_AGENTS="${CODEX_HOME:-${HOME}/.codex}/AGENTS.md"
+CONTEXT7_SECRETS="${HOME}/.zsh/secrets.zsh"
+EXA_URL="https://mcp.exa.ai/mcp"
+GCLOUD_PACKAGE="@google-cloud/gcloud-mcp"
+
+claude_has() {
+    claude mcp get "$1" 2>/dev/null | grep -qF "$2"
+}
+
+codex_has() {
+    codex mcp get "$1" --json 2>/dev/null | grep -qF "$2"
+}
+
+replace_file() {
+    local file="$1"
+    local tmp="$2"
+    local target
+
+    if [ -L "$file" ]; then
+        target="$(readlink "$file")"
+        case "$target" in
+            /*) ;;
+            *) target="$(dirname "$file")/$target" ;;
+        esac
+        mv -f "$tmp" "$target"
+    else
+        mv -f "$tmp" "$file"
+    fi
+}
+
+install_claude_mcp() {
+    if ! command -v claude >/dev/null 2>&1; then
+        echo "claude CLI not found, skipping Claude MCPs (non-fatal)"
+        return 0
+    fi
+
+    if ! claude_has exa "URL: $EXA_URL"; then
+        claude mcp remove exa -s user >/dev/null 2>&1 || true
+        claude mcp add --scope user --transport http exa "$EXA_URL" || echo "Claude Exa MCP setup failed (non-fatal)"
+    fi
+
+    if ! claude_has gcloud "$GCLOUD_PACKAGE"; then
+        claude mcp remove gcloud -s user >/dev/null 2>&1 || true
+        claude mcp add --scope user gcloud -- npx -y "$GCLOUD_PACKAGE" || echo "Claude gcloud MCP setup failed (non-fatal)"
+    fi
+}
+
+install_codex_mcp() {
+    if ! command -v codex >/dev/null 2>&1; then
+        echo "codex CLI not found, skipping Codex MCPs (non-fatal)"
+        return 0
+    fi
+
+    if ! codex_has exa "\"url\": \"$EXA_URL\""; then
+        codex mcp remove exa >/dev/null 2>&1 || true
+        codex mcp add exa --url "$EXA_URL" || echo "Codex Exa MCP setup failed (non-fatal)"
+    fi
+
+    if ! codex_has gcloud "$GCLOUD_PACKAGE"; then
+        codex mcp remove gcloud >/dev/null 2>&1 || true
+        codex mcp add gcloud -- npx -y "$GCLOUD_PACKAGE" || echo "Codex gcloud MCP setup failed (non-fatal)"
+    fi
+}
+
+write_context7_secret() {
+    local key="$1"
+    local tmp
+
+    [ -n "$key" ] || return 0
+
+    mkdir -p "$(dirname "$CONTEXT7_SECRETS")"
+    touch "$CONTEXT7_SECRETS"
+    chmod 600 "$CONTEXT7_SECRETS"
+
+    tmp="$(mktemp)"
+    grep -v '^export CONTEXT7_API_KEY=' "$CONTEXT7_SECRETS" > "$tmp" || true
+    printf 'export CONTEXT7_API_KEY=%q\n' "$key" >> "$tmp"
+    mv -f "$tmp" "$CONTEXT7_SECRETS"
+    chmod 600 "$CONTEXT7_SECRETS"
+}
+
+static_context7_key() {
+    local config="$1"
+
+    [ -f "$config" ] || return 0
+
+    awk '
+        $0 == "[mcp_servers.context7.http_headers]" {
+            in_context7_headers = 1
+            next
+        }
+        in_context7_headers && $0 ~ /^\[/ {
+            in_context7_headers = 0
+        }
+        in_context7_headers && $0 ~ /^CONTEXT7_API_KEY[[:space:]]*=/ {
+            sub(/^[^=]*=[[:space:]]*"/, "")
+            sub(/".*$/, "")
+            print
+            exit
+        }
+    ' "$config"
+}
+
+normalize_codex_context7() {
+    local config="$1"
+    local key
+    local tmp
+
+    [ -f "$config" ] || return 0
+
+    key="$(static_context7_key "$config")"
+    if [ -n "$key" ] && [ -z "${CONTEXT7_API_KEY:-}" ]; then
+        write_context7_secret "$key"
+        echo "Moved Context7 API key to ~/.zsh/secrets.zsh"
+    fi
+
+    tmp="$(mktemp)"
+    awk '
+        $0 == "[mcp_servers.context7.http_headers]" {
+            print "[mcp_servers.context7.env_http_headers]"
+            in_context7_headers = 1
+            wrote_key = 0
+            next
+        }
+        in_context7_headers && $0 ~ /^\[/ {
+            if (!wrote_key) {
+                print "CONTEXT7_API_KEY = \"CONTEXT7_API_KEY\""
+            }
+            in_context7_headers = 0
+        }
+        in_context7_headers && $0 ~ /^CONTEXT7_API_KEY[[:space:]]*=/ {
+            if (!wrote_key) {
+                print "CONTEXT7_API_KEY = \"CONTEXT7_API_KEY\""
+                wrote_key = 1
+            }
+            next
+        }
+        {
+            print
+        }
+        END {
+            if (in_context7_headers && !wrote_key) {
+                print "CONTEXT7_API_KEY = \"CONTEXT7_API_KEY\""
+            }
+        }
+    ' "$config" > "$tmp"
+    replace_file "$config" "$tmp"
+}
+
+remove_generated_context7_rule() {
+    local file="$1"
+    local tmp
+
+    [ -f "$file" ] || return 0
+
+    tmp="$(mktemp)"
+    awk '
+        /^<!-- context7 -->$/ {
+            skip = !skip
+            next
+        }
+        !skip {
+            print
+        }
+    ' "$file" > "$tmp"
+    replace_file "$file" "$tmp"
+}
+
+install_context7() {
+    if [ "${DOTFILES_INSTALL_CONTEXT7:-}" != "1" ] && [ -z "${CONTEXT7_API_KEY:-}" ]; then
+        echo "Context7 setup skipped. Set DOTFILES_INSTALL_CONTEXT7=1 or CONTEXT7_API_KEY to run it."
+        return 0
+    fi
+
+    if ! command -v npx >/dev/null 2>&1; then
+        echo "npx not found, skipping Context7 setup (non-fatal)"
+        return 0
+    fi
+
+    if [ -n "${CONTEXT7_API_KEY:-}" ]; then
+        npx -y ctx7@latest setup --claude --codex --mcp --yes --api-key "$CONTEXT7_API_KEY" || echo "Context7 setup failed (non-fatal)"
+    else
+        npx -y ctx7@latest setup --claude --codex --mcp --yes || echo "Context7 setup failed (non-fatal)"
+    fi
+}
+
+install_claude_mcp
+install_codex_mcp
+install_context7
+normalize_codex_context7 "$CODEX_CONFIG"
+remove_generated_context7_rule "$CODEX_AGENTS"
+
+echo "Agent MCPs OK"

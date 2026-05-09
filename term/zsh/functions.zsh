@@ -29,22 +29,16 @@ tp() {
     mkdir -p "${1%/*}" && touch "$1"
 }
 
-# Update the nubio Cloudflare tunnel subdomain in SSH config
+# Show the fixed nubio Cloudflare tunnel hostname
 nubio() {
-    if [[ -z "$1" ]]; then
-        grep -A1 'Host nubio' ~/.ssh/config | grep HostName | awk '{print $2}'
-        return
+    if [[ $# -gt 0 ]]; then
+        echo "nubio now uses a fixed hostname in ~/.ssh/config"
+        return 1
     fi
-    local hostname
-    if [[ "$1" == *".trycloudflare.com"* ]]; then
-        hostname="${1#*://}"
-        hostname="${hostname%%/*}"
-    else
-        hostname="$1.trycloudflare.com"
-    fi
-    local config=$(readlink -f ~/.ssh/config)
-    sed -i '' '/^Host nubio$/,/^Host /s|^\([[:space:]]*HostName\) .*|\1 '"$hostname"'|' "$config"
-    echo "nubio hostname set to $hostname"
+    grep -A4 'Host nubio' ~/.ssh/config | awk '$1 == "HostName" {
+        print $2
+        exit
+    }'
 }
 
 # Update all Claude Code marketplaces and plugins

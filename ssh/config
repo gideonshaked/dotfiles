@@ -33,7 +33,7 @@ Host armis2
 	PubkeyAuthentication no
 
 Host nubio
-	HostName teaching-mary-sensitive-flickr.trycloudflare.com
+	HostName nubio-ssh.gideonshaked.com
 	User gshaked
 	IdentityFile ~/.ssh/id_ed25519_nubio
 	ProxyCommand /opt/homebrew/bin/cloudflared access ssh --hostname %h

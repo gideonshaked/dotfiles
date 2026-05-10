@@ -16,7 +16,25 @@ url = "https://mcp.exa.ai/mcp"
 
 [mcp_servers.gcloud]
 command = "bash"
-args = ["-lc", "exec \"$HOME/bin/dotfiles-npx\" -y @google-cloud/gcloud-mcp"]
+args = ["-lc", 'exec "$HOME/bin/dotfiles-npx" -y @google-cloud/gcloud-mcp']
+
+[mcp_servers.context7]
+type = "http"
+url = "https://mcp.context7.com/mcp"
+
+[mcp_servers.context7.env_http_headers]
+CONTEXT7_API_KEY = "CONTEXT7_API_KEY"
+
+[mcp_servers.aws-api]
+command = "uvx"
+args = ["awslabs.aws-api-mcp-server@latest"]
+
+[mcp_servers.aws-pricing]
+command = "uvx"
+args = ["awslabs.aws-pricing-mcp-server@latest"]
+
+[mcp_servers.aws-knowledge]
+url = "https://knowledge-mcp.global.api.aws"
 
 [notice]
 hide_full_access_warning = true
@@ -61,10 +79,3 @@ trust_level = "trusted"
 
 [projects."/Users/gideonshaked"]
 trust_level = "trusted"
-
-[mcp_servers.context7]
-type = "http"
-url = "https://mcp.context7.com/mcp"
-
-[mcp_servers.context7.env_http_headers]
-CONTEXT7_API_KEY = "CONTEXT7_API_KEY"

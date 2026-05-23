@@ -1,13 +1,86 @@
 {
-  "agentPushNotifEnabled": true,
+  "skillListingBudgetFraction": 0.015,
   "attribution": {
     "commit": "",
     "pr": ""
   },
-  "autoCompactEnabled": false,
-  "autoUpdatesChannel": "latest",
-  "effortLevel": "high",
-  "skillListingBudgetFraction": 0.015,
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-validate",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest --hook"
+          }
+        ]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest --hook"
+          }
+        ]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest --hook"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest --hook"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest --hook"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest --hook"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest",
+    "padding": 0
+  },
   "enabledPlugins": {
     "agentic-peer-review@agentic-peer-review": true,
     "beads@beads-marketplace": true,
@@ -19,134 +92,56 @@
   "extraKnownMarketplaces": {
     "agentic-peer-review": {
       "source": {
-        "repo": "gideonshaked/agentic-peer-review",
-        "source": "github"
+        "source": "github",
+        "repo": "gideonshaked/agentic-peer-review"
       }
     },
     "beads-marketplace": {
       "source": {
-        "repo": "steveyegge/beads",
-        "source": "github"
+        "source": "github",
+        "repo": "steveyegge/beads"
       }
     },
     "claude-plugins-official": {
       "source": {
-        "repo": "anthropics/claude-plugins-official",
-        "source": "github"
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
       }
     },
     "huggingface-skills": {
       "source": {
-        "repo": "huggingface/skills",
-        "source": "github"
+        "source": "github",
+        "repo": "huggingface/skills"
       }
     }
   },
-  "hooks": {
-    "PostToolUse": [
-      {
-        "hooks": [
-          {
-            "command": "claude-validate",
-            "timeout": 10,
-            "type": "command"
-          }
-        ],
-        "matcher": "Write|Edit"
-      }
-    ],
-    "PreToolUse": [
-      {
-        "hooks": [
-          {
-            "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest --hook",
-            "type": "command"
-          }
-        ],
-        "matcher": "Skill"
-      },
-      {
-        "hooks": [
-          {
-            "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest --hook",
-            "type": "command"
-          }
-        ],
-        "matcher": "Skill"
-      },
-      {
-        "hooks": [
-          {
-            "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest --hook",
-            "type": "command"
-          }
-        ],
-        "matcher": "Skill"
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest --hook",
-            "type": "command"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest --hook",
-            "type": "command"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest --hook",
-            "type": "command"
-          }
-        ]
-      }
-    ]
-  },
-  "permissions": {
-    "defaultMode": "bypassPermissions"
-  },
-  "preferredNotifChannel": "kitty",
-  "remoteControlAtStartup": true,
-  "skipDangerousModePermissionPrompt": true,
   "spinnerTipsEnabled": false,
   "spinnerVerbs": {
     "mode": "replace",
     "verbs": [
-      "Refuckulating",
       "Sacrificing a rubber duck to the code gods",
       "Committing crimes against clean code",
       "Doing unspeakable things to your codebase",
       "Making the linter cry",
-      "Absolute fuckery in progress",
       "Violating every best practice known to man",
-      "420 compile it",
-      "Edibles kicking in... please wait",
-      "Toking on your tokens",
-      "Kidnapping the compiler's family and holding them for ransom",
-      "Fucking up your codebase in the most creative ways possible",
       "Summoning the dark spirits of technical debt",
       "Making you regret every decision that led to this moment",
       "Turning your code into a dumpster fire",
       "Killing all of the joy in your life, one line of code at a time",
-      "Go fuck yourself",
       "Quiet quitting",
-      "Just fucking shit up left and right",
       "Selling your social security number on the dark web"
     ]
   },
-  "statusLine": {
-    "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest",
-    "padding": 0,
-    "type": "command"
+  "effortLevel": "high",
+  "autoUpdatesChannel": "latest",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
   },
+  "skipDangerousModePermissionPrompt": true,
+  "preferredNotifChannel": "kitty",
+  "autoCompactEnabled": false,
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true,
   "voiceEnabled": true
 }

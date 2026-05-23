@@ -79,3 +79,15 @@ trust_level = "trusted"
 
 [projects."/Users/gideonshaked"]
 trust_level = "trusted"
+
+[projects."/Users/gideonshaked/Documents/afterquery/rl-environments/clinical-longitudinal-rl-environment/clinical-longitudinal-rl-environment"]
+trust_level = "trusted"
+
+[projects."/Users/gideonshaked/Documents/afterquery/rl-environments/clinical-longitudinal-rl-environment"]
+trust_level = "trusted"
+
+[projects."/Users/gideonshaked/Documents/personal/dev/longest-path-between-airports"]
+trust_level = "trusted"
+
+[projects."/Users/gideonshaked/Documents/afterquery/rl-environments/drug-discovery-rl-environment"]
+trust_level = "trusted"

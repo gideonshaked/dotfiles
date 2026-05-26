@@ -87,7 +87,8 @@
     "context7@claude-plugins-official": true,
     "feature-dev@claude-plugins-official": true,
     "ralph-loop@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true
+    "superpowers@claude-plugins-official": true,
+    "mm-cli-skill@vlmrun-skills": true
   },
   "extraKnownMarketplaces": {
     "agentic-peer-review": {
@@ -112,6 +113,12 @@
       "source": {
         "source": "github",
         "repo": "huggingface/skills"
+      }
+    },
+    "vlmrun-skills": {
+      "source": {
+        "source": "github",
+        "repo": "vlm-run/skills"
       }
     }
   },

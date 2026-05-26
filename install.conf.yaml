@@ -71,6 +71,12 @@
       path: agents/claude/commands
       glob: false
       force: true
+    ## Universal agents
+    ~/.agents:
+      path: agents/agents
+      glob: false
+      force: true
+      backup: true
     ## Codex
     ~/.codex/config.toml:
       path: agents/codex/config.toml

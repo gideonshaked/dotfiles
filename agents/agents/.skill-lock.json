@@ -1,0 +1,41 @@
+{
+  "version": 3,
+  "skills": {
+    "mm-cli-skill": {
+      "source": "vlm-run/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vlm-run/skills.git",
+      "skillPath": "skills/mm-cli-skill/SKILL.md",
+      "skillFolderHash": "08769b0a59a630796830ce454062a2918e381f1f",
+      "installedAt": "2026-05-26T21:51:39.678Z",
+      "updatedAt": "2026-05-26T21:51:39.678Z"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/skills.git",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "skillFolderHash": "3013fdeb8a11b10b1eb795ec3ae8bfca38f7c26d",
+      "installedAt": "2026-05-26T21:51:43.272Z",
+      "updatedAt": "2026-05-26T21:51:43.272Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  },
+  "lastSelectedAgents": [
+    "amp",
+    "antigravity",
+    "cline",
+    "codex",
+    "cursor",
+    "deepagents",
+    "dexto",
+    "firebender",
+    "gemini-cli",
+    "github-copilot",
+    "kimi-cli",
+    "opencode",
+    "warp"
+  ]
+}

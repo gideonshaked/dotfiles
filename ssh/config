@@ -1,11 +1,14 @@
+Include config.d/*
+
+
 ###################
 # Special Purpose #
 ###################
 Host github.com
- 	IgnoreUnknown UseKeychain
- 	AddKeysToAgent yes
- 	UseKeychain yes
- 	IdentityFile ~/.ssh/id_ed25519_github
+	IgnoreUnknown UseKeychain
+	AddKeysToAgent yes
+	UseKeychain yes
+	IdentityFile ~/.ssh/id_ed25519_github
 
 
 ########
@@ -14,18 +17,18 @@ Host github.com
 Host caen
 	HostName login.engin.umich.edu
 	User gshaked
-	controlmaster auto
-	controlpath ~/.ssh/master-%r@%h:%p
+	ControlMaster auto
+	ControlPath ~/.ssh/master-%r@%h:%p
 
 Host psoriasis
 	HostName psoriasis.sph.umich.edu
 	User gshaked
-	PubKeyAuthentication no
+	PubkeyAuthentication no
 
 Host greatlakes
 	HostName greatlakes.arc-ts.umich.edu
 	User gshaked
-	PubKeyAuthentication no
+	PubkeyAuthentication no
 
 Host armis2
 	HostName armis2.arc-ts.umich.edu
@@ -37,7 +40,7 @@ Host nubio
 	User gshaked
 	IdentityFile ~/.ssh/id_ed25519_nubio
 	ProxyCommand /opt/homebrew/bin/cloudflared access ssh --hostname %h
-	
+
 
 ########
 # UCLA #
@@ -48,7 +51,7 @@ Host hoffman2
 	IdentityFile ~/.ssh/id_ed25519_hoffman
 
 
-#######	
+#######
 # TAU #
 #######
 Host shamir* elkon* davidlasry hagai-shamir3

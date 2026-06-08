@@ -1,0 +1,7 @@
+#
+# ~/.zshenv - loaded first, before /etc/zshrc
+#
+
+# Disable Apple Terminal's shell session save/restore (the "Restored session:"
+# line). Must be set here because /etc/zshrc_Apple_Terminal runs before ~/.zshrc.
+export SHELL_SESSIONS_DISABLE=1

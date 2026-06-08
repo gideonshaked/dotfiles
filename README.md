@@ -18,6 +18,18 @@ My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https
 
 ### Full install (macOS)
 
+#### Prerequisites
+
+- `git`
+- `python3`
+- `npx`
+- `jq`
+- `uv`
+- Claude Code
+- Codex CLI
+
+#### Install command
+
 ```bash
 git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install
 ```

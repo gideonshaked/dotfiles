@@ -67,6 +67,8 @@ After install, use the [`dotfiles`](./bin/dotfiles) utility:
 dotfiles update              # Pull latest changes and run install
 dotfiles update --minimal    # Same, but minimal install
 dotfiles brewfile            # Update Homebrew package manifest
+dotfiles brew                # Install all packages from the manifest
+dotfiles brew --only-plugins # Install just the tracked VS Code extensions
 dotfiles dotbot              # Update Dotbot submodule
 ```
 

@@ -20,6 +20,12 @@
     ~/.zshrc:
       path: term/zshrc
       if: scripts/is-full-install
+    ~/.zshenv:
+      path: term/zshenv
+      if: scripts/is-full-install
+    ~/.hushlogin:
+      path: term/hushlogin
+      if: scripts/is-full-install
     ~/.config/starship.toml:
       path: term/starship.toml
       if: scripts/is-full-install

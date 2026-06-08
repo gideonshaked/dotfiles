@@ -14,6 +14,8 @@ Personal dotfiles repository using [Dotbot](https://github.com/anishathalye/dotb
 ./install --minimal  # Minimal install (remote servers)
 ```
 
+The installer only needs `git` and `python3` to create symlinks. The post-link agent steps additionally use `npx`, `jq`, `uv`, `claude`, and `codex`; each step is failure-tolerant and skips (printing a `non-fatal` message) when its tool is missing.
+
 **Manage dotfiles:**
 ```bash
 dotfiles update              # Pull latest changes and run install
@@ -24,7 +26,24 @@ dotfiles dotbot              # Update Dotbot submodule
 
 ## Architecture
 
-The install script initializes the Dotbot submodule and runs Dotbot with `install.conf.yaml`. The `--minimal` flag sets `DOTFILES_INSTALL_MODE=minimal`, and the same YAML file conditionally skips the full macOS links.
+The install script initializes the Dotbot submodule and runs Dotbot with `install.conf.yaml`. The `--minimal` flag sets `DOTFILES_INSTALL_MODE=minimal`, and the same YAML file conditionally skips the full macOS links. Links are gated per-mode with `scripts/is-full-install` / `scripts/is-minimal-install` (both read `DOTFILES_INSTALL_MODE`).
+
+### Install Shell Steps
+
+After linking, Dotbot runs the `shell:` steps in `install.conf.yaml` (scripts under `scripts/`). They run in both modes and are all failure-tolerant:
+
+- `configure-bash-hooks` : no-op unless minimal; sources `~/.bashrc.dotfiles` from `.bashrc`/`.bash_profile`.
+- `configure-git` : adds the `~/.gitalias.txt` include and sets `core.excludesfile`, only if not already present.
+- `ensure-npx` : provisions a user-local Node via nvm (`scripts/lib/npx.sh`) so `bin/dotfiles-npx` works; appends an nvm loader to the bash rc files.
+- `install-ccstatusline`, `install-claude-plugins`, `install-codex-plugins`, `install-agent-mcps` : provision agent tooling (see below).
+
+### Agent Provisioning
+
+`bin/dotfiles-npx` is a wrapper that activates nvm-managed npx on demand; agent scripts call it rather than a system `npx`.
+
+`install-claude-plugins` reads `extraKnownMarketplaces` and `enabledPlugins` from the linked `~/.claude/settings.json` (via `jq`) and adds/installs each marketplace and plugin. `install-codex-plugins` refreshes the Codex plugin cache.
+
+`install-agent-mcps` registers the same MCP servers for both `claude mcp` and `codex mcp`: `exa` and `aws-knowledge` (HTTP), `gcloud` (via `dotfiles-npx`), and `aws-api` / `aws-pricing` (via `uvx`). Context7 setup is opt-in (`DOTFILES_INSTALL_CONTEXT7=1` or `CONTEXT7_API_KEY`); when run it moves any inline key into `~/.zsh/secrets.zsh` and rewrites the Codex config to reference it through `env_http_headers`.
 
 ### Minimal Install
 

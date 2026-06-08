@@ -34,6 +34,7 @@ After linking, Dotbot runs the `shell:` steps in `install.conf.yaml` (scripts un
 
 - `configure-bash-hooks` : no-op unless minimal; sources `~/.bashrc.dotfiles` from `.bashrc`/`.bash_profile`.
 - `configure-git` : adds the `~/.gitalias.txt` include and sets `core.excludesfile`, only if not already present.
+- `install-shell-tools` : full-install only; `brew install`s the Homebrew packages the zsh interactive config sources (`fzf-tab`, `zsh-autosuggestions`, `zsh-syntax-highlighting`, `zsh-completions`, `starship`, `fzf`, `atuin`). Skips if `brew` is absent.
 - `ensure-npx` : provisions a user-local Node via nvm (`scripts/lib/npx.sh`) so `bin/dotfiles-npx` works; appends an nvm loader to the bash rc files.
 - `install-ccstatusline`, `install-claude-plugins`, `install-codex-plugins`, `install-agent-mcps` : provision agent tooling (see below).
 

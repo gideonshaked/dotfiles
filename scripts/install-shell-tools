@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Full-install only; the minimal install uses bash and does not source the zsh
+# interactive config that depends on these tools.
+if [ "${DOTFILES_INSTALL_MODE:-full}" = "minimal" ]; then
+    echo "shell tools skipped (minimal install)"
+    exit 0
+fi
+
+if ! command -v brew >/dev/null 2>&1; then
+    echo "brew not found, skipping shell tools (non-fatal)"
+    exit 0
+fi
+
+# Interactive zsh runtime deps sourced from term/zsh (fzf-tab, autosuggestions,
+# and syntax-highlighting are sourced unconditionally, so a fresh shell errors
+# without them).
+TOOLS=(
+    fzf-tab
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    zsh-completions
+    starship
+    fzf
+    atuin
+)
+
+if HOMEBREW_NO_AUTO_UPDATE=1 brew install "${TOOLS[@]}"; then
+    echo "shell tools OK"
+else
+    echo "shell tools install failed (non-fatal)"
+fi

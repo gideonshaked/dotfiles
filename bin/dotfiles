@@ -3,13 +3,30 @@
 # Dotfiles management functions
 #
 
-if [ -d "$HOME/Documents/personal/dev/dotfiles" ]; then
-    DOTFILES="$HOME/Documents/personal/dev/dotfiles"
-elif [ -d "$HOME/dotfiles" ]; then
-    DOTFILES="$HOME/dotfiles"
+# Resolve the dotfiles repo root. Prefer the exported $DOTFILES, then derive it
+# from this script's real location (~/bin/dotfiles symlinks into <repo>/bin),
+# then fall back to common clone paths.
+if [ -n "${DOTFILES:-}" ] && [ -d "$DOTFILES" ]; then
+    :
 else
-    echo "dotfiles repo not found" >&2
-    exit 1
+    SOURCE="${BASH_SOURCE[0]}"
+    while [ -L "$SOURCE" ]; do
+        DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+        SOURCE="$(readlink "$SOURCE")"
+        [ "${SOURCE#/}" = "$SOURCE" ] && SOURCE="$DIR/$SOURCE"
+    done
+    DOTFILES="$(cd -P "$(dirname "$SOURCE")/.." && pwd)"
+fi
+
+if [ ! -d "$DOTFILES" ]; then
+    if [ -d "$HOME/Documents/personal/dev/dotfiles" ]; then
+        DOTFILES="$HOME/Documents/personal/dev/dotfiles"
+    elif [ -d "$HOME/dotfiles" ]; then
+        DOTFILES="$HOME/dotfiles"
+    else
+        echo "dotfiles repo not found" >&2
+        exit 1
+    fi
 fi
 
 # Update file that tracks installed Homebrew packages

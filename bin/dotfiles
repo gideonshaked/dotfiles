@@ -17,9 +17,32 @@ update_brewfile() {
     brew bundle dump --force --file "$DOTFILES/manifest/Brewfile"
 }
 
+# Install packages from the manifest. With --only-plugins, install just the
+# tracked VS Code extensions; otherwise install everything via brew bundle.
+install_brew() {
+    local brewfile="$DOTFILES/manifest/Brewfile"
+
+    if [ "${1:-}" = "--only-plugins" ]; then
+        if ! command -v code >/dev/null 2>&1; then
+            echo "code CLI not found, cannot install plugins" >&2
+            exit 1
+        fi
+        grep -E '^vscode "' "$brewfile" | sed -E 's/^vscode "([^"]*)".*/\1/' | while read -r ext; do
+            [ -n "$ext" ] && code --install-extension "$ext"
+        done
+        return
+    fi
+
+    if ! command -v brew >/dev/null 2>&1; then
+        echo "brew not found" >&2
+        exit 1
+    fi
+    brew bundle install --file "$brewfile"
+}
+
 # Update Dotbot
 update_dotbot() {
-    cd $DOTFILES && git submodule update --remote dotbot
+    cd "$DOTFILES" && git submodule update --remote dotbot
 }
 
 # Update dotfiles
@@ -33,6 +56,10 @@ main() {
         "update_brewfile"|"brewfile")
             update_brewfile
             ;;
+        "install_brew"|"brew")
+            shift
+            install_brew "$@"
+            ;;
         "update_dotbot"|"dotbot")
             update_dotbot
             ;;
@@ -41,10 +68,12 @@ main() {
             dfu "$@"
             ;;
         *)
-            echo "Usage: dotfiles {brewfile|dotbot|update}"
+            echo "Usage: dotfiles {brewfile|brew|dotbot|update}"
             echo ""
             echo "Available functions:"
             echo "  update_brewfile, brewfile  - Update Homebrew package manifest"
+            echo "  install_brew, brew         - Install packages from the manifest"
+            echo "                               (--only-plugins for just VS Code extensions)"
             echo "  update_dotbot, dotbot      - Update Dotbot submodule"
             echo "  dfu, update                - Update dotfiles and run install"
             exit 1

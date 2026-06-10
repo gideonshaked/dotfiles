@@ -20,6 +20,7 @@ Subcommands:
 macOS only (relies on the Keychain + Chromium v10 cookie encryption).
 Approving a Keychain prompt may be required the first time.
 """
+
 import argparse
 import gzip
 import json
@@ -53,16 +54,18 @@ def die(msg):
 
 # --- cookie decryption -------------------------------------------------------
 
+
 def _key():
     try:
-        pw = subprocess.check_output(
-            ["security", "find-generic-password", "-w", "-s", KEYCHAIN_SERVICE]
-        ).strip()
+        pw = subprocess.check_output(["security", "find-generic-password", "-w", "-s", KEYCHAIN_SERVICE]).strip()
     except subprocess.CalledProcessError:
         die(f"could not read Keychain item '{KEYCHAIN_SERVICE}' (is Claude Desktop installed?)")
     kdf = PBKDF2HMAC(
-        algorithm=hashes.SHA1(), length=16, salt=b"saltysalt",
-        iterations=1003, backend=default_backend(),
+        algorithm=hashes.SHA1(),
+        length=16,
+        salt=b"saltysalt",
+        iterations=1003,
+        backend=default_backend(),
     )
     return kdf.derive(pw)
 
@@ -89,9 +92,7 @@ def _cookie_jar():
     key = _key()
     con = sqlite3.connect(f"file:{COOKIES}?mode=ro", uri=True)
     jar = {}
-    for name, ev in con.execute(
-        "SELECT name, encrypted_value FROM cookies WHERE host_key LIKE '%claude.ai%'"
-    ):
+    for name, ev in con.execute("SELECT name, encrypted_value FROM cookies WHERE host_key LIKE '%claude.ai%'"):
         val = _decrypt(ev, key)
         if val:
             jar[name] = val
@@ -102,6 +103,7 @@ def _cookie_jar():
 
 
 # --- claude.ai API -----------------------------------------------------------
+
 
 def _get(url, jar):
     req = urllib.request.Request(
@@ -150,6 +152,7 @@ def _fetch_conversation(jar, org, cid):
 
 # --- conversion --------------------------------------------------------------
 
+
 def _web_search_to_text(content):
     if isinstance(content, str):
         return content
@@ -164,8 +167,11 @@ def _web_search_to_text(content):
 
 def _stub_usage():
     return {
-        "input_tokens": 0, "cache_creation_input_tokens": 0,
-        "cache_read_input_tokens": 0, "output_tokens": 0, "service_tier": "standard",
+        "input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "output_tokens": 0,
+        "service_tier": "standard",
     }
 
 
@@ -184,8 +190,12 @@ def convert(conv, cwd, version):
 
     def meta(ts):
         return {
-            "userType": "external", "entrypoint": "cli", "cwd": cwd,
-            "sessionId": session_id, "version": version, "gitBranch": "",
+            "userType": "external",
+            "entrypoint": "cli",
+            "cwd": cwd,
+            "sessionId": session_id,
+            "version": version,
+            "gitBranch": "",
             "timestamp": ts,
         }
 
@@ -195,9 +205,7 @@ def convert(conv, cwd, version):
         blocks = m.get("content", [])
 
         if sender == "human":
-            text = m.get("text", "") or "".join(
-                c.get("text", "") for c in blocks if c.get("type") == "text"
-            )
+            text = m.get("text", "") or "".join(c.get("text", "") for c in blocks if c.get("type") == "text")
             extras = []
             for a in m.get("attachments", []) or []:
                 fn = a.get("file_name") or "pasted-content"
@@ -206,12 +214,17 @@ def convert(conv, cwd, version):
             for f in m.get("files", []) or []:
                 extras.append(f"\n\n[Attached image: {f.get('file_name', 'image')}]")
             uid = str(uuid.uuid4())
-            lines.append({
-                "parentUuid": prev, "isSidechain": False, "promptId": str(uuid.uuid4()),
-                "type": "user",
-                "message": {"role": "user", "content": text + "".join(extras)},
-                "uuid": uid, **meta(created),
-            })
+            lines.append(
+                {
+                    "parentUuid": prev,
+                    "isSidechain": False,
+                    "promptId": str(uuid.uuid4()),
+                    "type": "user",
+                    "message": {"role": "user", "content": text + "".join(extras)},
+                    "uuid": uid,
+                    **meta(created),
+                }
+            )
             prev = uid
             continue
 
@@ -228,36 +241,60 @@ def convert(conv, cwd, version):
                 block = {
                     "type": "tool_use",
                     "id": c.get("id") or ("toolu_" + uuid.uuid4().hex[:24]),
-                    "name": c.get("name", "unknown"), "input": c.get("input", {}),
+                    "name": c.get("name", "unknown"),
+                    "input": c.get("input", {}),
                 }
             elif ctype == "tool_result":
                 text_content = _web_search_to_text(c.get("content"))
                 uid = str(uuid.uuid4())
-                lines.append({
-                    "parentUuid": prev, "isSidechain": False, "promptId": str(uuid.uuid4()),
-                    "type": "user",
-                    "message": {"role": "user", "content": [{
-                        "tool_use_id": c.get("tool_use_id"), "type": "tool_result",
-                        "content": text_content, "is_error": bool(c.get("is_error")),
-                    }]},
-                    "uuid": uid,
-                    "toolUseResult": {"stdout": text_content, "stderr": "", "interrupted": False},
-                    "sourceToolAssistantUUID": prev, **meta(ts),
-                })
+                lines.append(
+                    {
+                        "parentUuid": prev,
+                        "isSidechain": False,
+                        "promptId": str(uuid.uuid4()),
+                        "type": "user",
+                        "message": {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "tool_use_id": c.get("tool_use_id"),
+                                    "type": "tool_result",
+                                    "content": text_content,
+                                    "is_error": bool(c.get("is_error")),
+                                }
+                            ],
+                        },
+                        "uuid": uid,
+                        "toolUseResult": {"stdout": text_content, "stderr": "", "interrupted": False},
+                        "sourceToolAssistantUUID": prev,
+                        **meta(ts),
+                    }
+                )
                 prev = uid
                 continue
             else:
                 continue
             uid = str(uuid.uuid4())
-            lines.append({
-                "parentUuid": prev, "isSidechain": False,
-                "message": {
-                    "model": model, "id": msg_id, "type": "message", "role": "assistant",
-                    "content": [block], "stop_reason": None, "stop_sequence": None,
-                    "usage": _stub_usage(),
-                },
-                "requestId": req_id, "type": "assistant", "uuid": uid, **meta(ts),
-            })
+            lines.append(
+                {
+                    "parentUuid": prev,
+                    "isSidechain": False,
+                    "message": {
+                        "model": model,
+                        "id": msg_id,
+                        "type": "message",
+                        "role": "assistant",
+                        "content": [block],
+                        "stop_reason": None,
+                        "stop_sequence": None,
+                        "usage": _stub_usage(),
+                    },
+                    "requestId": req_id,
+                    "type": "assistant",
+                    "uuid": uid,
+                    **meta(ts),
+                }
+            )
             prev = uid
 
     return session_id, lines, prev
@@ -277,6 +314,7 @@ def write_session(session_id, lines, leaf, cwd):
 
 
 # --- cli ---------------------------------------------------------------------
+
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -317,10 +355,18 @@ def main():
     cwd = os.path.abspath(os.path.expanduser(args.cwd))
     session_id, lines, leaf = convert(conv, cwd, args.version)
     out_path = write_session(session_id, lines, leaf, cwd)
-    print(json.dumps({
-        "session_id": session_id, "out_path": out_path,
-        "lines": len(lines), "source_name": source_name, "cwd": cwd,
-    }, indent=2))
+    print(
+        json.dumps(
+            {
+                "session_id": session_id,
+                "out_path": out_path,
+                "lines": len(lines),
+                "source_name": source_name,
+                "cwd": cwd,
+            },
+            indent=2,
+        )
+    )
 
 
 if __name__ == "__main__":

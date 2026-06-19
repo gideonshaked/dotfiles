@@ -76,11 +76,7 @@
       }
     ]
   },
-  "statusLine": {
-    "type": "command",
-    "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest",
-    "padding": 0
-  },
+  "statusLine": {"type":"command","command":"$HOME/bin/dotfiles-npx -y ccstatusline@latest","padding":0},
   "enabledPlugins": {
     "agentic-peer-review@agentic-peer-review": true,
     "beads@beads-marketplace": true,
@@ -148,6 +144,7 @@
   "preferredNotifChannel": "kitty",
   "autoCompactEnabled": false,
   "remoteControlAtStartup": true,
+  "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "voiceEnabled": true
 }

@@ -76,7 +76,11 @@
       }
     ]
   },
-  "statusLine": {"type":"command","command":"$HOME/bin/dotfiles-npx -y ccstatusline@latest","padding":0},
+  "statusLine": {
+    "type": "command",
+    "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest",
+    "padding": 0
+  },
   "enabledPlugins": {
     "agentic-peer-review@agentic-peer-review": true,
     "beads@beads-marketplace": true,
@@ -133,7 +137,6 @@
       "Quiet quitting"
     ]
   },
-  "effortLevel": "high",
   "autoUpdatesChannel": "latest",
   "voice": {
     "enabled": true,
@@ -146,5 +149,6 @@
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "tui": "fullscreen"
 }

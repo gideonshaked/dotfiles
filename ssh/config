@@ -56,9 +56,8 @@ Host hoffman2
 #######
 Host shamir* elkon* davidlasry hagai-shamir3
 	PubkeyAuthentication no
-	ControlMaster auto
-	ControlPath ~/.ssh/sockets/%r@%h-%p
-	ControlPersist 600
+	ServerAliveInterval 30
+	ServerAliveCountMax 3
 
 Host hagai-shamir3
 	HostName rack-shamir3.cs.tau.ac.il

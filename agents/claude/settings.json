@@ -88,7 +88,8 @@
     "feature-dev@claude-plugins-official": true,
     "ralph-loop@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true,
-    "mm-cli-skill@vlmrun-skills": true
+    "mm-cli-skill@vlmrun-skills": true,
+    "scientific-problem-selection@life-sciences": true
   },
   "extraKnownMarketplaces": {
     "agentic-peer-review": {
@@ -120,6 +121,12 @@
         "source": "github",
         "repo": "vlm-run/skills"
       }
+    },
+    "life-sciences": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/anthropics/life-sciences.git"
+      }
     }
   },
   "spinnerTipsEnabled": false,
@@ -138,6 +145,7 @@
     ]
   },
   "autoUpdatesChannel": "latest",
+  "tui": "fullscreen",
   "voice": {
     "enabled": true,
     "mode": "hold"
@@ -149,6 +157,5 @@
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
-  "voiceEnabled": true,
-  "tui": "fullscreen"
+  "voiceEnabled": true
 }

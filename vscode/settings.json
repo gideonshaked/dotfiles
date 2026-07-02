@@ -142,7 +142,7 @@
 		"chat.attach.text"
 	],
 	"chat.editing.confirmEditRequestRetry": false,
-	"python.defaultInterpreterPath": "/opt/homebrew/Caskroom/mambaforge/base/envs/eecs476",
+	"python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
 	"github.copilot.nextEditSuggestions.enabled": true,
 	"[snakemake]": {
 		"editor.defaultFormatter": "tfehlmann.snakefmt"

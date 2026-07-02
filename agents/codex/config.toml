@@ -6,6 +6,8 @@ approval_policy = "never"
 sandbox_mode = "danger-full-access"
 suppress_unstable_features_warning = true
 
+notify = ["/Users/gideonshaked/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
+
 [mcp_servers]
 
 [mcp_servers.openaiDeveloperDocs]
@@ -35,6 +37,25 @@ args = ["awslabs.aws-pricing-mcp-server@latest"]
 
 [mcp_servers.aws-knowledge]
 url = "https://knowledge-mcp.global.api.aws"
+
+[mcp_servers.node_repl]
+args = []
+command = "/Applications/Codex.app/Contents/Resources/cua_node/bin/node_repl"
+startup_timeout_sec = 120
+
+[mcp_servers.node_repl.env]
+NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
+NODE_REPL_NODE_MODULE_DIRS = "/Applications/Codex.app/Contents/Resources/cua_node/lib/node_modules"
+NODE_REPL_NODE_PATH = "/Applications/Codex.app/Contents/Resources/cua_node/bin/node"
+NODE_REPL_TRUSTED_CODE_PATHS = "/Users/gideonshaked/.codex"
+CODEX_HOME = "/Users/gideonshaked/.codex"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "59e7bb81812ddd5f102e1d580335166e552c91686b5726218a985b59b4f89ca1"
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
+BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+BROWSER_USE_CODEX_APP_VERSION = "26.623.42026"
+CODEX_CLI_PATH = "/Applications/Codex.app/Contents/Resources/codex"
 
 [notice]
 hide_full_access_warning = true
@@ -67,12 +88,31 @@ enabled = false
 [plugins."google-drive@openai-curated"]
 enabled = false
 
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
+enabled = true
+
 [features]
 apps = false
 memories = true
 terminal_resize_reflow = true
 prevent_idle_sleep = true
 goals = true
+js_repl = false
 
 [projects."/Users/gideonshaked/Documents/personal/dev/dotfiles"]
 trust_level = "trusted"
@@ -91,3 +131,32 @@ trust_level = "trusted"
 
 [projects."/Users/gideonshaked/Documents/afterquery/rl-environments/drug-discovery-rl-environment"]
 trust_level = "trusted"
+
+[projects."/Users/gideonshaked/Documents/afterquery/omicsbench/omicsbench-synth"]
+trust_level = "trusted"
+
+[projects."/Users/gideonshaked/Documents/afterquery/omicsbench"]
+trust_level = "trusted"
+
+[projects."/Users/gideonshaked/Documents/Codex/2026-06-21/use-slack-to-catch-me-up"]
+trust_level = "trusted"
+
+[marketplaces.openai-bundled]
+last_updated = "2026-06-28T07:47:21Z"
+source_type = "local"
+source = "/Users/gideonshaked/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.openai-primary-runtime]
+last_updated = "2026-07-01T07:14:17Z"
+source_type = "local"
+source = "/Users/gideonshaked/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
+[desktop]
+conversationDetailMode = "STEPS_COMMANDS"
+ambient-suggestions-enabled = false
+followUpQueueMode = "queue"
+
+[hooks.state]
+
+[hooks.state."/Users/gideonshaked/Documents/afterquery/omicsbench/omicsbench-synth/.codex/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:f7aba2d394ec53d86d3b419a97e9de1ac84e26d4675fc54aed9893501d645e33"

@@ -147,7 +147,7 @@ source_type = "local"
 source = "/Users/gideonshaked/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-06-24T05:14:21Z"
+last_updated = "2026-07-01T07:14:17Z"
 source_type = "local"
 source = "/Users/gideonshaked/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 

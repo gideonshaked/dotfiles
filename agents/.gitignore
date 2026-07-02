@@ -1,0 +1,5 @@
+# Vendored Databricks/MLflow skill bundles (not maintained here)
+**/skills/databricks*/
+**/skills/*mlflow*/
+**/skills/agent-evaluation/
+**/skills/spark-python-data-source/

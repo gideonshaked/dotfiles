@@ -80,8 +80,13 @@ When working with external APIs (OpenRouter, Harbor, etc.), always verify model 
 ## Code Hygiene
 
 - Never keep dead code as scaffolding "in case we need it later." If a class, function, module, or test is unused today, delete it. Git history is the retrieval mechanism, not the source tree.
+- Never use lazy (function-level) imports. All imports go at the top of the module so a module's dependencies are visible at a glance and import errors surface immediately. If a top-level import seems to require a lazy import (circular import, an optional/conflicting dependency), fix the underlying design instead of hiding the import inside a function.
 
 ## Prompt Files
 
 - Keep prompts separate from code. Store prompts in dedicated prompt/template files, ideally under their own prompts/templates directory, and load them from code rather than embedding long prompt strings inline.
 - Prefer template files such as Jinja2 templates when prompts need variables or structured rendering.
+
+## Subagents
+
+- For all implementer subagents and reviewer subagents, use the frontier model. For Anthropic models that means Opus, not Sonnet or Haiku; for OpenAI models use the equivalent frontier tier (e.g. the top GPT model, not a mini/smaller variant).

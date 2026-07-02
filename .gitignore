@@ -5,6 +5,9 @@ term/zsh/secrets.zsh
 .vscode/
 agents/codex/skills/.system/
 
+# Machine-local SSH host configs (work laptop only; avoids home/work conflicts)
+ssh/config.d/
+
 # Beads / Dolt files (added by bd init)
 .dolt/
 *.db

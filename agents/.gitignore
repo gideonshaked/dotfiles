@@ -1,4 +1,5 @@
 # Vendored Databricks/MLflow skill bundles (not maintained here)
+# Normally I would track these in the repo but these skills are only here on my work laptop
 **/skills/databricks*/
 **/skills/*mlflow*/
 **/skills/agent-evaluation/

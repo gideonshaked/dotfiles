@@ -7,6 +7,7 @@
   "permissions": {
     "defaultMode": "bypassPermissions"
   },
+  "model": "opus",
   "hooks": {
     "PostToolUse": [
       {
@@ -74,6 +75,17 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/gideon/.ai-dev-kit/repo/.claude-plugin/check_update.sh",
+            "timeout": 5
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
@@ -89,7 +101,16 @@
     "ralph-loop@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true,
     "mm-cli-skill@vlmrun-skills": true,
-    "scientific-problem-selection@life-sciences": true
+    "scientific-problem-selection@life-sciences": true,
+    "octomind-dev@octant-agent-plugin-marketplace": true,
+    "octant-app-store@octant-agent-plugin-marketplace": true,
+    "octant-comp-chem@octant-agent-plugin-marketplace": true,
+    "cdd-utils@octant-agent-plugin-marketplace": true,
+    "octant-chem-utils@octant-agent-plugin-marketplace": true,
+    "frontend-design@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "playground@claude-plugins-official": true,
+    "impeccable@impeccable": true
   },
   "extraKnownMarketplaces": {
     "agentic-peer-review": {
@@ -127,6 +148,19 @@
         "source": "git",
         "url": "https://github.com/anthropics/life-sciences.git"
       }
+    },
+    "octant-agent-plugin-marketplace": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/octantbio/octant-agent-plugin-marketplace.git"
+      },
+      "autoUpdate": true
+    },
+    "impeccable": {
+      "source": {
+        "source": "github",
+        "repo": "pbakaus/impeccable"
+      }
     }
   },
   "spinnerTipsEnabled": false,
@@ -143,6 +177,14 @@
       "Killing all of the joy in your life, one line of code at a time",
       "Quiet quitting"
     ]
+  },
+  "effortLevel": "xhigh",
+  "pluginConfigs": {
+    "octomind-dev@octant-agent-plugin-marketplace": {
+      "options": {
+        "user_name": "Gideon"
+      }
+    }
   },
   "autoUpdatesChannel": "latest",
   "tui": "fullscreen",

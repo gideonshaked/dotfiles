@@ -8,7 +8,11 @@ Host github.com
 	IgnoreUnknown UseKeychain
 	AddKeysToAgent yes
 	UseKeychain yes
-	IdentityFile ~/.ssh/id_ed25519_github
+	# Pin to the octant user key and opt out of the 1Password agent, which
+	# otherwise offers the read-only octomind deploy key and breaks pushes.
+	IdentitiesOnly yes
+	IdentityAgent none
+	IdentityFile ~/.ssh/id_ed25519_octant_github
 
 
 ########
@@ -98,3 +102,5 @@ Host elkon3
 Host davidlasry
 	HostName rack-elkon-03.cs.tau.ac.il
 	User davidlasry
+Host *
+	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"

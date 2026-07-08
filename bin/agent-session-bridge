@@ -1,0 +1,582 @@
+#!/usr/bin/env python3
+"""Convert local Claude Code and Codex session transcripts.
+
+This is intentionally a best-effort local bridge, not a vendor-supported
+interchange format. It preserves visible user/assistant text scrollback and
+enough metadata for the target CLI to discover the imported session.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import re
+import subprocess
+import sys
+import uuid
+from collections import Counter
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+from typing import Any
+
+DEFAULT_CLAUDE_MODEL = "claude-opus-4-8"
+DEFAULT_CODEX_MODEL = "gpt-5.5"
+DEFAULT_CLAUDE_VERSION = "2.1.201"
+DEFAULT_CODEX_VERSION = "0.142.5"
+
+
+SECRET_PATTERNS = [
+    re.compile(r"AKIA[0-9A-Z]{16}"),
+    re.compile(r"ASIA[0-9A-Z]{16}"),
+    re.compile(r"sk-ant-[A-Za-z0-9_\-]{20,}"),
+    re.compile(r"sk-[A-Za-z0-9_\-]{20,}"),
+    re.compile(r"ghp_[A-Za-z0-9_]{20,}"),
+    re.compile(r"github_pat_[A-Za-z0-9_]{20,}"),
+    re.compile(r"hf_[A-Za-z0-9]{20,}"),
+    re.compile(r"AIza[0-9A-Za-z_\-]{35}"),
+    re.compile(r"xox[baprs]-[A-Za-z0-9\-]{20,}"),
+    re.compile(r"(?is)-----BEGIN [A-Z ]*PRIVATE KEY-----.*?-----END [A-Z ]*PRIVATE KEY-----"),
+]
+ENV_SECRET_PATTERN = re.compile(
+    r"\b(OPENAI_API_KEY|ANTHROPIC_API_KEY|DAYTONA_API_KEY|GITHUB_TOKEN|HF_TOKEN|AWS_SECRET_ACCESS_KEY|"
+    r"AWS_ACCESS_KEY_ID|OPENROUTER_API_KEY)\s*=\s*([^\s'\"`]+)",
+    re.I,
+)
+
+
+def read_jsonl(path: Path) -> list[dict[str, Any]]:
+    rows = []
+    with path.open(encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                rows.append(json.loads(line))
+    return rows
+
+
+def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    with tmp.open("w", encoding="utf-8") as f:
+        for row in rows:
+            f.write(json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n")
+    os.chmod(tmp, 0o600)
+    tmp.replace(path)
+
+
+def redactor(enabled: bool = True):
+    count = 0
+
+    def redact(text: str) -> str:
+        nonlocal count
+        if not enabled:
+            return text
+
+        def replace_env(match: re.Match[str]) -> str:
+            nonlocal count
+            count += 1
+            return f"{match.group(1)}=[REDACTED_SECRET]"
+
+        out = ENV_SECRET_PATTERN.sub(replace_env, text)
+        for pattern in SECRET_PATTERNS:
+            out, n = pattern.subn("[REDACTED_SECRET]", out)
+            count += n
+        return out
+
+    def get_count() -> int:
+        return count
+
+    return redact, get_count
+
+
+def now_utc() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def parse_timestamp(value: str | None, fallback: datetime | None = None) -> datetime:
+    if value:
+        try:
+            return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(timezone.utc)
+        except ValueError:
+            pass
+    return fallback or now_utc()
+
+
+def iso(value: datetime) -> str:
+    return value.astimezone(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
+
+
+def claude_project_dir(home: Path, cwd: str) -> Path:
+    return home / ".claude" / "projects" / cwd.replace("/", "-")
+
+
+def codex_session_dir(home: Path, timestamp: datetime) -> Path:
+    return home / ".codex" / "sessions" / f"{timestamp:%Y}" / f"{timestamp:%m}" / f"{timestamp:%d}"
+
+
+def shorten_prompt(text: str) -> str:
+    text = " ".join(text.split())
+    return text[:237] + "..." if len(text) > 240 else text
+
+
+def extract_text_from_codex_content(content: list[dict[str, Any]]) -> str:
+    texts = []
+    for item in content:
+        if isinstance(item, dict) and item.get("type") in {"input_text", "output_text"}:
+            text = item.get("text")
+            if text:
+                texts.append(text)
+    return "\n".join(texts).strip()
+
+
+def is_internal_codex_user_text(text: str) -> bool:
+    stripped = text.lstrip()
+    return (
+        stripped.startswith("# AGENTS.md instructions")
+        or stripped.startswith("<codex_internal_context")
+        or stripped.startswith("<turn_aborted>")
+        or stripped.startswith("<environment_context>")
+        or stripped.startswith("<permissions instructions>")
+        or stripped.startswith("<collaboration_mode>")
+    )
+
+
+def extract_codex_turns(source: Path, *, include_internal: bool, redact) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    rows = read_jsonl(source)
+    turns: list[dict[str, Any]] = []
+    meta: dict[str, Any] = {}
+    skipped_internal = 0
+    for row in rows:
+        if row.get("type") == "session_meta":
+            payload = row.get("payload") or {}
+            meta.update(payload)
+            continue
+        if row.get("type") != "response_item":
+            continue
+        payload = row.get("payload") or {}
+        if payload.get("type") != "message":
+            continue
+        role = payload.get("role")
+        if role not in {"user", "assistant"}:
+            continue
+        text = extract_text_from_codex_content(payload.get("content") or [])
+        if not text:
+            continue
+        if role == "user" and not include_internal and is_internal_codex_user_text(text):
+            skipped_internal += 1
+            continue
+        turns.append({"role": role, "text": redact(text), "timestamp": payload.get("timestamp")})
+    return turns, {"source_rows": len(rows), "skipped_internal": skipped_internal, **meta}
+
+
+def claude_text_from_message(message: dict[str, Any]) -> str:
+    content = message.get("content")
+    if isinstance(content, str):
+        return content.strip()
+    if isinstance(content, list):
+        parts = []
+        for item in content:
+            if not isinstance(item, dict):
+                continue
+            if item.get("type") == "text" and item.get("text"):
+                parts.append(item["text"])
+            elif item.get("type") == "tool_result" and item.get("content"):
+                parts.append(str(item["content"]))
+        return "\n".join(parts).strip()
+    return ""
+
+
+def extract_claude_turns(source: Path, *, redact) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    rows = read_jsonl(source)
+    turns = []
+    metadata: dict[str, Any] = {}
+    for row in rows:
+        if row.get("type") in {"custom-title", "agent-name"}:
+            metadata[row["type"]] = row.get("customTitle") or row.get("agentName")
+        if row.get("type") not in {"user", "assistant"}:
+            continue
+        message = row.get("message") or {}
+        role = message.get("role")
+        if role not in {"user", "assistant"}:
+            continue
+        text = claude_text_from_message(message)
+        if not text:
+            continue
+        turns.append({"role": role, "text": redact(text), "timestamp": row.get("timestamp")})
+    return turns, {"source_rows": len(rows), **metadata}
+
+
+def write_claude_state(home: Path, cwd: str, session_id: str) -> None:
+    path = home / ".claude.json"
+    if path.exists():
+        data = json.loads(path.read_text(encoding="utf-8"))
+    else:
+        data = {}
+    project = data.setdefault("projects", {}).setdefault(cwd, {})
+    project["lastSessionId"] = session_id
+    tmp = path.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    os.chmod(tmp, 0o600)
+    tmp.replace(path)
+
+
+def append_claude_history(home: Path, cwd: str, session_id: str, title: str) -> None:
+    path = home / ".claude" / "history.jsonl"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    row = {
+        "display": title,
+        "pastedContents": {},
+        "timestamp": int(now_utc().timestamp() * 1000),
+        "project": cwd,
+        "sessionId": session_id,
+    }
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n")
+
+
+def codex_to_claude(
+    *,
+    source: Path,
+    cwd: str,
+    home: Path,
+    model: str = DEFAULT_CLAUDE_MODEL,
+    title: str = "Imported Codex session",
+    update_state: bool = False,
+    include_internal: bool = False,
+    redact_secrets: bool = True,
+) -> dict[str, Any]:
+    redact, redaction_count = redactor(redact_secrets)
+    turns, source_meta = extract_codex_turns(source, include_internal=include_internal, redact=redact)
+    if not turns:
+        raise ValueError(f"no visible Codex user/assistant turns found in {source}")
+
+    session_id = str(uuid.uuid4())
+    start = parse_timestamp(source_meta.get("timestamp"))
+    lines: list[dict[str, Any]] = [
+        {"type": "custom-title", "customTitle": title, "sessionId": session_id},
+        {"type": "agent-name", "agentName": title, "sessionId": session_id},
+        {"type": "mode", "mode": "normal", "sessionId": session_id},
+        {"type": "permission-mode", "permissionMode": "bypassPermissions", "sessionId": session_id},
+    ]
+    parent = None
+    last_user_text = turns[0]["text"]
+    for index, turn in enumerate(turns, 1):
+        row_uuid = str(uuid.uuid4())
+        timestamp = parse_timestamp(turn.get("timestamp"), start + timedelta(seconds=index))
+        common = {
+            "timestamp": iso(timestamp),
+            "userType": "external",
+            "entrypoint": "cli",
+            "cwd": cwd,
+            "sessionId": session_id,
+            "version": DEFAULT_CLAUDE_VERSION,
+            "gitBranch": "",
+        }
+        if turn["role"] == "user":
+            last_user_text = turn["text"]
+            row = {
+                "parentUuid": parent,
+                "isSidechain": False,
+                "promptId": str(uuid.uuid4()),
+                "type": "user",
+                "message": {"role": "user", "content": turn["text"]},
+                "uuid": row_uuid,
+                "permissionMode": "bypassPermissions",
+                "promptSource": "codex-session-bridge",
+                **common,
+            }
+        else:
+            row = {
+                "parentUuid": parent,
+                "isSidechain": False,
+                "message": {
+                    "model": model,
+                    "id": "msg_" + uuid.uuid4().hex[:24],
+                    "type": "message",
+                    "role": "assistant",
+                    "content": [{"type": "text", "text": turn["text"]}],
+                    "stop_reason": "end_turn",
+                    "stop_sequence": None,
+                    "usage": {
+                        "input_tokens": 0,
+                        "cache_creation_input_tokens": 0,
+                        "cache_read_input_tokens": 0,
+                        "output_tokens": 0,
+                        "server_tool_use": {"web_search_requests": 0, "web_fetch_requests": 0},
+                        "service_tier": "standard",
+                    },
+                    "diagnostics": None,
+                },
+                "requestId": "req_" + uuid.uuid4().hex[:24],
+                "type": "assistant",
+                "uuid": row_uuid,
+                **common,
+            }
+        lines.append(row)
+        parent = row_uuid
+
+    lines.append(
+        {
+            "type": "last-prompt",
+            "lastPrompt": shorten_prompt(last_user_text),
+            "leafUuid": parent,
+            "sessionId": session_id,
+        }
+    )
+    out_path = claude_project_dir(home, cwd) / f"{session_id}.jsonl"
+    write_jsonl(out_path, lines)
+    if update_state:
+        write_claude_state(home, cwd, session_id)
+        append_claude_history(home, cwd, session_id, title)
+    return {
+        "session_id": session_id,
+        "out_path": str(out_path),
+        "format": "claude",
+        "turns": len(turns),
+        "redactions": redaction_count(),
+        "skipped_internal": source_meta.get("skipped_internal", 0),
+    }
+
+
+def make_codex_response_item(role: str, text: str) -> dict[str, Any]:
+    content_type = "input_text" if role == "user" else "output_text"
+    return {
+        "type": "response_item",
+        "payload": {
+            "type": "message",
+            "role": role,
+            "content": [{"type": content_type, "text": text}],
+        },
+    }
+
+
+def claude_to_codex(
+    *,
+    source: Path,
+    cwd: str,
+    home: Path,
+    model: str = DEFAULT_CODEX_MODEL,
+    update_state: bool = False,
+    redact_secrets: bool = True,
+) -> dict[str, Any]:
+    redact, redaction_count = redactor(redact_secrets)
+    turns, source_meta = extract_claude_turns(source, redact=redact)
+    if not turns:
+        raise ValueError(f"no visible Claude user/assistant turns found in {source}")
+
+    session_id = str(uuid.uuid4())
+    start = parse_timestamp(turns[0].get("timestamp"))
+    out_dir = codex_session_dir(home, start)
+    out_path = out_dir / f"rollout-{start:%Y-%m-%dT%H-%M-%S}-{session_id}.jsonl"
+    rows = [
+        {
+            "type": "session_meta",
+            "payload": {
+                "session_id": session_id,
+                "id": session_id,
+                "timestamp": iso(start),
+                "cwd": cwd,
+                "originator": "agent-session-bridge",
+                "cli_version": DEFAULT_CODEX_VERSION,
+                "source": "cli",
+                "thread_source": "imported",
+                "model_provider": "openai",
+                "model": model,
+                "imported_from": str(source),
+                "source_rows": source_meta.get("source_rows"),
+            },
+        },
+        {
+            "type": "turn_context",
+            "payload": {
+                "turn_id": str(uuid.uuid4()),
+                "cwd": cwd,
+                "workspace_roots": [cwd],
+                "current_date": start.date().isoformat(),
+                "timezone": "UTC",
+                "approval_policy": "never",
+                "sandbox_policy": {"type": "danger-full-access"},
+                "permission_profile": {"type": "disabled"},
+                "model": model,
+                "effort": "high",
+            },
+        },
+    ]
+    for turn in turns:
+        rows.append(make_codex_response_item(turn["role"], turn["text"]))
+    write_jsonl(out_path, rows)
+    if update_state:
+        append_codex_history(home, cwd, session_id, out_path)
+    return {
+        "session_id": session_id,
+        "out_path": str(out_path),
+        "format": "codex",
+        "turns": len(turns),
+        "redactions": redaction_count(),
+    }
+
+
+def append_codex_history(home: Path, cwd: str, session_id: str, out_path: Path) -> None:
+    path = home / ".codex" / "session-bridge-history.jsonl"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    row = {
+        "timestamp": iso(now_utc()),
+        "cwd": cwd,
+        "session_id": session_id,
+        "path": str(out_path),
+        "note": "Codex currently discovers local rollouts from ~/.codex/sessions; this sidecar is bridge metadata.",
+    }
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n")
+
+
+def detect_format(rows: list[dict[str, Any]]) -> str:
+    types = {row.get("type") for row in rows}
+    if "response_item" in types or "session_meta" in types:
+        return "codex"
+    if "custom-title" in types or any(row.get("message") for row in rows):
+        return "claude"
+    return "unknown"
+
+
+def inspect_session(source: Path) -> dict[str, Any]:
+    rows = read_jsonl(source)
+    roles = Counter()
+    models = Counter()
+    for row in rows:
+        if row.get("type") == "response_item":
+            payload = row.get("payload") or {}
+            if payload.get("role"):
+                roles[payload["role"]] += 1
+        message = row.get("message")
+        if isinstance(message, dict):
+            if message.get("role"):
+                roles[message["role"]] += 1
+            if message.get("model"):
+                models[message["model"]] += 1
+    return {
+        "source": str(source),
+        "format": detect_format(rows),
+        "rows": len(rows),
+        "roles": dict(sorted(roles.items())),
+        "models": dict(sorted(models.items())),
+    }
+
+
+def find_sessions(*, agent: str, cwd: str, home: Path) -> dict[str, Any]:
+    if agent == "claude":
+        paths = sorted(claude_project_dir(home, cwd).glob("*.jsonl"), key=lambda p: p.stat().st_mtime, reverse=True)
+    elif agent == "codex":
+        candidates = sorted(
+            (home / ".codex" / "sessions").glob("**/rollout-*.jsonl"), key=lambda p: p.stat().st_mtime, reverse=True
+        )
+        paths = []
+        for path in candidates:
+            try:
+                rows = read_jsonl(path)
+            except (OSError, json.JSONDecodeError):
+                continue
+            session_cwd = None
+            for row in rows[:20]:
+                if row.get("type") == "session_meta":
+                    session_cwd = (row.get("payload") or {}).get("cwd")
+                    break
+            if session_cwd == cwd:
+                paths.append(path)
+    else:
+        raise ValueError(f"unknown agent {agent!r}")
+    return {
+        "agent": agent,
+        "cwd": cwd,
+        "sessions": [{"path": str(path), "size": path.stat().st_size, "mtime": path.stat().st_mtime} for path in paths],
+    }
+
+
+def maybe_copy_resume_command(command: str, *, enabled: bool) -> None:
+    if not enabled:
+        return
+    try:
+        subprocess.run(["pbcopy"], input=command.encode(), check=True)
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    codex_to_claude_parser = sub.add_parser("codex-to-claude")
+    codex_to_claude_parser.add_argument("--source", required=True, type=Path)
+    codex_to_claude_parser.add_argument("--cwd", required=True)
+    codex_to_claude_parser.add_argument("--home", type=Path, default=Path.home())
+    codex_to_claude_parser.add_argument("--model", default=DEFAULT_CLAUDE_MODEL)
+    codex_to_claude_parser.add_argument("--title", default="Imported Codex session")
+    codex_to_claude_parser.add_argument("--update-state", action="store_true")
+    codex_to_claude_parser.add_argument("--include-internal", action="store_true")
+    codex_to_claude_parser.add_argument("--no-redact", action="store_true")
+    codex_to_claude_parser.add_argument("--copy-resume-command", action="store_true")
+
+    claude_to_codex_parser = sub.add_parser("claude-to-codex")
+    claude_to_codex_parser.add_argument("--source", required=True, type=Path)
+    claude_to_codex_parser.add_argument("--cwd", required=True)
+    claude_to_codex_parser.add_argument("--home", type=Path, default=Path.home())
+    claude_to_codex_parser.add_argument("--model", default=DEFAULT_CODEX_MODEL)
+    claude_to_codex_parser.add_argument("--update-state", action="store_true")
+    claude_to_codex_parser.add_argument("--no-redact", action="store_true")
+
+    find_parser = sub.add_parser("find")
+    find_parser.add_argument("--agent", choices=["codex", "claude"], required=True)
+    find_parser.add_argument("--cwd", required=True)
+    find_parser.add_argument("--home", type=Path, default=Path.home())
+
+    inspect_parser = sub.add_parser("inspect")
+    inspect_parser.add_argument("--source", required=True, type=Path)
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = build_parser().parse_args(argv)
+    if args.command == "codex-to-claude":
+        result = codex_to_claude(
+            source=args.source.expanduser().resolve(),
+            cwd=str(Path(args.cwd).expanduser().resolve()),
+            home=args.home.expanduser(),
+            model=args.model,
+            title=args.title,
+            update_state=args.update_state,
+            include_internal=args.include_internal,
+            redact_secrets=not args.no_redact,
+        )
+        command = (
+            f"cd {Path(args.cwd).expanduser().resolve()} && claude --resume {result['session_id']} --model {args.model}"
+        )
+        result["resume_command"] = command
+        maybe_copy_resume_command(command, enabled=args.copy_resume_command)
+    elif args.command == "claude-to-codex":
+        result = claude_to_codex(
+            source=args.source.expanduser().resolve(),
+            cwd=str(Path(args.cwd).expanduser().resolve()),
+            home=args.home.expanduser(),
+            model=args.model,
+            update_state=args.update_state,
+            redact_secrets=not args.no_redact,
+        )
+    elif args.command == "find":
+        result = find_sessions(
+            agent=args.agent, cwd=str(Path(args.cwd).expanduser().resolve()), home=args.home.expanduser()
+        )
+    elif args.command == "inspect":
+        result = inspect_session(args.source.expanduser().resolve())
+    else:
+        raise AssertionError(args.command)
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except Exception as exc:
+        print(json.dumps({"error": str(exc)}, indent=2), file=sys.stderr)
+        raise SystemExit(1) from exc

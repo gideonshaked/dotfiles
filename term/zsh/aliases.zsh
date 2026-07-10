@@ -10,3 +10,5 @@ alias ls="ls --color=auto"
 
 # df
 alias df="df -h"
+
+alias claude="claude --effort ultracode"

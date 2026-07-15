@@ -62,6 +62,15 @@ When working with external APIs (OpenRouter, Harbor, etc.), always verify model 
 - Ask before making code edits when the user says 'yeah' or similar; they may want a PR comment/suggestion rather than a direct change
 - When suggesting a command the user should run in their terminal, do NOT print the command for them to copy/paste. Instead pipe it into `pbcopy` via Bash so it lands on the clipboard directly. Then tell them it's on the clipboard and what it does. Example: `printf '%s' 'gcloud auth login' | pbcopy`. Exception: if they explicitly ask to see the command.
 
+## Responding to PR review comments
+
+This is very important. When you respond to review comments or feedback on a pull request, ALWAYS use the quote-and-respond format:
+
+- Copy each of the reviewer's original points verbatim into a Markdown blockquote (`>`), then put your response directly beneath that quote.
+- Do this for every point, including every sub-bullet and every low-priority or nit item, so each response is anchored to the exact comment it addresses.
+- Consolidate everything into a single comment; never paraphrase the reviewer's points away, and do not post many separate comments.
+- Be honest: if something was not addressed, quote it and say so plainly rather than skipping it.
+
 ## Version Bumps & Releases
 
 - Always create a git tag after a version bump; do not forget

@@ -20,6 +20,10 @@ Every reviewer point gets quoted verbatim in a blockquote, with your response di
 
 This is the house style for all review responses. Follow it whether the feedback is a formal PR review, an inline thread, a Slack message, or a verbal list.
 
+## Scope: this skill writes the comment, not the fixes
+
+The deliverable is the response comment. This skill governs how you write it, not how you carry out the work the reviewer asked for. Making the fixes, adding the tests, running the suite, tracing a claim to verify it: those happen separately, before you write, through whatever tools or skills the task needs. This skill assumes that work is done (or that you have a truthful position on why it is not) and turns it into a point-by-point reply. Do not treat invoking it as the moment to start fixing; treat it as the moment to report.
+
 ## The rule
 
 - Copy each reviewer point verbatim into a Markdown blockquote (`>`), then put your response directly beneath that quote.
@@ -38,14 +42,16 @@ Pull the complete feedback before writing anything. Miss a point and the quote-a
   - `gh api repos/<owner>/<repo>/pulls/<n>/reviews/<id>/comments` for one review's inline comments
 - List every distinct point, grouped as the reviewer grouped them (severity headers, numbered findings). Preserve their order and their grouping.
 
-## Step 2: Do the work and verify before you write
+## Step 2: Precondition, the work is done and verified
 
-Write responses only after the underlying work is done, so every response is true when posted.
+This step is not part of writing the comment. It is the precondition the comment reports on. Do it before you write (through other skills or tools), so every response is true when posted.
 
 - Trace the actual code path before claiming anything about behavior. Do not assert a fix works, or that a finding is a non-issue, without checking the specific conditions.
 - Make the fixes, add the tests, run the suite and the linter. Note the commit hash for each change so responses can cite it.
 - If you disagree with a point, verify your counter-position against the code first, then say so with the evidence.
 - If a point turns out to be a non-issue, prove it (query the data, read the history) rather than dismissing it.
+
+Once this is settled, the rest of the skill is purely about composing the reply.
 
 ## Step 3: Draft one consolidated comment
 

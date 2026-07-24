@@ -36,3 +36,6 @@ fi
 
 # atuin - smarter shell history (rebinds Ctrl+R, leaves Up arrow alone for zsh-autocomplete)
 [ -x /opt/homebrew/bin/atuin ] && eval "$(atuin init zsh --disable-up-arrow)"
+
+# Enable LSPs in Claude Code
+export ENABLE_LSP_TOOLS=1

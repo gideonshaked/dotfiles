@@ -1,7 +1,7 @@
 add_newline = false
 
-# Wait up to 2s for commands starship runs to gather prompt info (default 500ms)
 command_timeout = 2000
+scan_timeout = 30
 
 [aws]
 symbol = " "

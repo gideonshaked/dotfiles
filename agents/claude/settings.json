@@ -102,15 +102,16 @@
     "superpowers@claude-plugins-official": true,
     "mm-cli-skill@vlmrun-skills": true,
     "scientific-problem-selection@life-sciences": true,
-    "octomind-dev@octant-agent-plugin-marketplace": true,
-    "octant-app-store@octant-agent-plugin-marketplace": true,
-    "octant-comp-chem@octant-agent-plugin-marketplace": true,
-    "cdd-utils@octant-agent-plugin-marketplace": true,
-    "octant-chem-utils@octant-agent-plugin-marketplace": true,
     "frontend-design@claude-plugins-official": true,
     "playwright@claude-plugins-official": true,
     "playground@claude-plugins-official": true,
-    "impeccable@impeccable": true
+    "impeccable@impeccable": true,
+    "cdd-utils@octant-agent-plugin-marketplace": true,
+    "octant-app-store@octant-agent-plugin-marketplace": true,
+    "octant-chem-utils@octant-agent-plugin-marketplace": true,
+    "octant-comp-chem@octant-agent-plugin-marketplace": true,
+    "octomind-rolling@octant-agent-plugin-marketplace": true,
+    "pyright-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "agentic-peer-review": {
@@ -149,18 +150,18 @@
         "url": "https://github.com/anthropics/life-sciences.git"
       }
     },
-    "octant-agent-plugin-marketplace": {
-      "source": {
-        "source": "git",
-        "url": "https://github.com/octantbio/octant-agent-plugin-marketplace.git"
-      },
-      "autoUpdate": true
-    },
     "impeccable": {
       "source": {
         "source": "github",
         "repo": "pbakaus/impeccable"
       }
+    },
+    "octant-agent-plugin-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "octantbio/octant-agent-plugin-marketplace"
+      },
+      "autoUpdate": true
     }
   },
   "spinnerTipsEnabled": false,
@@ -178,11 +179,13 @@
       "Quiet quitting"
     ]
   },
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
   "pluginConfigs": {
-    "octomind-dev@octant-agent-plugin-marketplace": {
+    "octomind-rolling@octant-agent-plugin-marketplace": {
       "options": {
-        "user_name": "Gideon"
+        "user_name": "Gideon",
+        "slack_username": "gideon",
+        "email": "gideon@octant.bio"
       }
     }
   },
@@ -194,6 +197,7 @@
   },
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
+  "theme": "dark",
   "preferredNotifChannel": "kitty",
   "autoCompactEnabled": false,
   "remoteControlAtStartup": true,

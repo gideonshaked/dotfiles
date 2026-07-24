@@ -171,5 +171,13 @@
 	"editor.wordWrap": "on",
 	"remote.SSH.remotePlatform": {
 		"nubio": "linux"
-	}
+	},
+	"yaml.disableSchemaDetection": [
+		"**/.github/workflows/*.yml",
+		"**/.github/workflows/*.yaml",
+		"**/.gitea/workflows/*.yml",
+		"**/.gitea/workflows/*.yaml",
+		"**/.forgejo/workflows/*.yml",
+		"**/.forgejo/workflows/*.yaml"
+	]
 }

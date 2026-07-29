@@ -1,7 +1,7 @@
 add_newline = false
 
 command_timeout = 2000
-scan_timeout = 30
+scan_timeout = 600
 
 [aws]
 symbol = " "

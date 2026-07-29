@@ -109,8 +109,8 @@
     "octant-app-store@octant-agent-plugin-marketplace": true,
     "octant-chem-utils@octant-agent-plugin-marketplace": true,
     "octant-comp-chem@octant-agent-plugin-marketplace": true,
-    "octomind-rolling@octant-agent-plugin-marketplace": true,
-    "pyright-lsp@claude-plugins-official": true
+    "pyright-lsp@claude-plugins-official": true,
+    "octomind-rolling@octant-agent-plugin-marketplace": true
   },
   "extraKnownMarketplaces": {
     "agentic-peer-review": {

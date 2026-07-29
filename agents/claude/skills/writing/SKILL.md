@@ -34,10 +34,14 @@ Simplified Technical English is deliberately flat and literal. When the text is 
 
 ### Balancing the two standards
 
-- Register. The house style allows contractions and a warm second person. Simplified Technical English is flat and literal. Lean flat for instructions, procedures, error messages and anything a downstream agent parses. Lean warm for prose a person reads by choice, and keep the Simplified Technical English discipline on word choice and sentence structure while you do.
+- Register. The house style allows a warm second person. Simplified Technical English is flat and literal. Lean flat for instructions, procedures, error messages and anything a downstream agent parses. Lean warm for prose a person reads by choice, and keep the Simplified Technical English discipline on word choice and sentence structure while you do.
+- Contractions. The two disagree outright. The house style allows them for warmth, and Simplified Technical English forbids them. Write them out in anything instructional or machine-read. Allow them only in prose a person reads by choice, and never to shorten a sentence, which is the use the standard specifically rules out.
 - Structure. Simplified Technical English wants a vertical list for any sequence of 3 or more steps or conditions. The LLM voice section warns against over-structuring. Use a list when the content really is a sequence or a set of conditions. Use prose when it is an argument.
 - Sentence length. Take the tighter of the two caps. That is about 20 words for anything instructional, and about 25 at the outside for description.
 - Vocabulary and tense. Where Simplified Technical English is stricter, follow it. Pick one term per idea and reuse it rather than rotating synonyms, and prefer simple tenses. Neither costs the reader anything.
+- Punctuation. Simplified Technical English is stricter, so follow it. It excludes the semicolon outright, which overrides the softer advice below to merely avoid leaning on semicolons. Em dashes stay permitted by the standard, so the LLM voice guidance governs them, and the working limit is none in repo prose.
+- Connecting words. Simplified Technical English asks for connecting words and phrases so a reader can follow the logic between sentences. The LLM voice section says to cut hollow transitions. These agree once you separate the two cases. Keep a connective that carries real logic, such as a cause or a contrast. Cut one that only decorates, such as "moreover" or "furthermore".
+- Spelling. Use American spelling, which the standard requires and which the rest of this skill already follows.
 
 ### When a word choice is questioned
 
@@ -122,7 +126,23 @@ This skill applies that discipline to everything it writes. The reader it protec
 | Lists for sequences | Use a numbered or bulleted list for 3 or more steps or conditions | Bury a sequence inside one prose sentence |
 | Domain terms | Keep necessary technical nouns and verbs, but define them once if not common English | Use jargon without ever defining it |
 
-Also from the standard: the permitted verb forms are the infinitive, imperative, simple present, simple past, simple future, and the past participle used only as an adjective. Use "-ing" forms only as a technical noun or as part of one, never as a verb form. Open a safety-critical instruction with the command or the condition, and never bury it mid-sentence.
+Also from the standard: the permitted verb forms are the infinitive, imperative, simple present, simple past, simple future, and the past participle used only as an adjective. Use "-ing" forms only as a technical noun or as part of one, never as a verb form.
+
+### Words and terminology
+
+- Reach outside the approved vocabulary only for a genuine technical noun or technical verb. That is the single exception, not a general license to pick a better word.
+- Do not press a technical noun into service as a verb, and do not turn a technical verb into a noun. Each word keeps the role it was approved for.
+- Where you must choose a technical noun, pick the short, easy one over the impressive one.
+- Never use a regional word, a slang word or a jargon word as a technical noun.
+- Use one technical noun per item. Do not call the same thing by two names anywhere in a document.
+- Use American spelling unless an official directive says otherwise.
+
+### Sentences
+
+- Do not drop words to shorten a sentence, and do not use contractions to shorten one either. A shorter sentence bought this way reads as ambiguous rather than crisp.
+- Keep the article or the demonstrative adjective where one applies. Write "the valve" or "this valve", not a bare "valve", because the bare noun leaves the reader guessing which one you mean.
+- Use connecting words and phrases so the reader can follow how one sentence bears on the next.
+- Use a vertical list whenever the text turns complex, not only when it is a numbered sequence.
 
 ### Rules by text type
 
@@ -131,14 +151,14 @@ The standard splits its remaining rules by what you are writing.
 Instructions and steps:
 
 - Write instructions in the imperative. "Open the file", not "the file should be opened".
-- Where the reader must know a condition first, open the sentence with that condition.
+- Where the reader must know a condition first, open the sentence with that condition. Write "If the strategy allows automatic resolution, the tool resolves the conflict." Do not hang the condition off the end.
 - Use a note to give information only. Never put an instruction inside a note.
 
 Description, meaning prose the reader reads rather than follows:
 
 - Introduce information in stages. This is the inverted pyramid again: the conclusion first, then detail as the reader needs it, rather than one dense passage carrying everything.
 - Use key words and repeated phrases to give the text a structure the reader can follow.
-- Group related information into a paragraph, keep each paragraph to one topic, and stop at 6 sentences.
+- Use a paragraph to group information that belongs together. The one-topic and 6-sentence limits are in the table above.
 
 Safety instructions:
 
@@ -164,7 +184,6 @@ These rules are for composing. Apply them as you draft, so the first version alr
 
 - Fix the verb for each recurring action before you start, then reuse it. Choosing once is far less work than retrofitting consistency across a finished draft.
 - Write the sentence you mean, then check its length. If it runs past the cap, find the second idea inside it and give that idea its own sentence.
-- Lead with the condition when a sentence carries one. Write "If the strategy allows automatic resolution, the tool resolves the conflict." Do not hang the condition off the end.
 - Never trade away precision to satisfy a rule. Where keeping a condition, a scope qualifier or a number costs you a longer sentence, keep the longer sentence.
 
 Edit the same way. Change the sentence in place and carry on. Do not produce a violations report, a before and after table, or a list of the rules an earlier draft broke, unless the author asks to see the changes.
@@ -217,7 +236,7 @@ The point of the exercise is to start from the meaning and then choose the words
 
 ## Avoid the LLM voice
 
-Large language models share a set of writing tics that practiced readers now recognise. They are defaults the model reaches for, not choices, and they make the text read as machine-written. Cut them so the real content shows. Rewrite the underlying sentence rather than deleting a flagged word.
+Large language models share a set of writing tics that practiced readers now recognize. They are defaults the model reaches for, not choices, and they make the text read as machine-written. Cut them so the real content shows. Rewrite the underlying sentence rather than deleting a flagged word.
 
 - Do not lean on em dashes, colons and semicolons. Models bolt a qualifying clause into the middle of a sentence with an em dash, and introduce yet another list with a colon. The frequency is the tell, not any single mark. Split the thought into two sentences or use a comma. Keep em dashes to about one per few hundred words.
 - Drop the "it's not X, it's Y" frame, and its cousin "not just X, but Y". State Y on its own. Write "This is a betrayal of trust.", not "This isn't a price rise, it's a betrayal of trust". The contrast sounds profound and commits to nothing.

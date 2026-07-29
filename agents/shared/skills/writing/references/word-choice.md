@@ -8,10 +8,11 @@ Do not open this on every draft. The plain English section of the skill covers t
 
 Work through these in order and stop at the first one that decides it.
 
-1. Check the GOV.UK tables below. If the word sits in an Avoid column, the house style has already settled it. Make the swap and name the entry.
-2. Look the word up in the local copy of the standard, following the instructions in the second section. That is the only authority on whether a word is approved and in which sense.
-3. Check whether you rotated synonyms. If one action appears as check in one place and verify in another, pick one and use it throughout.
-4. If nothing above decides it, the choice was a judgment call. Say so, give your reason, and defer to the author.
+1. Check whether the word is the term of art. A word on an avoid list stays available when it is the exact technical term and the plain alternative would be vaguer or wrong, as with "deploy" for a software release or "robust" for the statistical property. Keep it, and say which domain it is the term in. Orwell's sixth rule is what licenses this.
+2. Check the GOV.UK tables below. If the word sits in an Avoid column and step 1 did not save it, the house style has settled it. Make the swap and name the entry.
+3. Look the word up in the local copy of the standard, following the instructions in the second section. That is the only authority on whether a word is approved and in which sense.
+4. Check whether you rotated synonyms. If one action appears as check in one place and verify in another, pick one and use it throughout.
+5. If nothing above decides it, the choice was a judgment call. Say so, give your reason, and defer to the author.
 
 Quote the rule or entry that settles it rather than restating your preference. Where nothing settles it, say so rather than inventing an authority.
 
@@ -78,21 +79,17 @@ Listed here in full, from the [GOV.UK A to Z style guide](https://guidance.publi
 
 ## Simplified Technical English words
 
-Not listed here. Look them up in the local copy of the standard, which covers all of its approved words rather than a subset, and cannot drift from it.
+Look these up in the local copy of the standard.
 
 ### The local copy
 
 - [ASD-STE100_ISSUE9.txt](file:///Users/gideon/.claude/reference/ASD-STE100_ISSUE9.txt), a text extraction, best for searching
-- [ASD-STE100_ISSUE9.pdf](file:///Users/gideon/.claude/reference/ASD-STE100_ISSUE9.pdf), the original, best for reading a rule in context
 
 Read them at these paths:
 
 ```
 ~/.claude/reference/ASD-STE100_ISSUE9.txt
-~/.claude/reference/ASD-STE100_ISSUE9.pdf
 ```
-
-Both sit outside the repository and are untracked, so they do not travel with these dotfiles. Where the paths are empty, download Issue 9 free from [asd-ste100.org](https://www.asd-ste100.org/).
 
 ### How to read an entry
 
@@ -121,13 +118,3 @@ Word choice is governed by Section 1, Words, which carries 14 rules, and Section
 - Keep the technical nouns and verbs you need, and define each once where it is not common English.
 - Permitted verb forms are the infinitive, the imperative, the simple present, the simple past, the simple future, and the past participle used only as an adjective. Write "we received the report", not "we have received the report".
 - Use an "-ing" form only as a technical noun or part of one, never as a verb form.
-
-## Where the two agree
-
-Three words appear on both lists, which makes them the safest to cut on sight: promote, utilize, eliminate. Orwell files them under pretentious diction, GOV.UK under words to avoid.
-
-## Sources
-
-- [GOV.UK A to Z style guide](https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/style-guides/a-to-z-style-guide/) and the [GOV.UK style guides](https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/style-guides/) index, published by the Government Digital Service under the Open Government Licence.
-- [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/), Issue 9 (January 2025). The rules above paraphrase its Section 1 and Section 3 rules.
-- George Orwell, ['Politics and the English Language'](https://www.orwellfoundation.com/the-orwell-foundation/orwell/essays-and-other-works/politics-and-the-english-language/) (1946), for the overlap noted above.

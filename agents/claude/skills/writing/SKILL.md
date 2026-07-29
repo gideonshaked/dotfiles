@@ -187,12 +187,6 @@ Safety instructions:
 - Follow it with a clear, accurate command or condition.
 - Explain the risk or the possible result, so the reader knows why the instruction matters.
 
-### Limits
-
-This skill does not reproduce ASD's official dictionary of roughly 900 approved words, each restricted to one meaning and one part of speech, or its roughly 1,200 words to avoid. That is ASD's own free-to-download standard, not something to copy wholesale. It applies the underlying principle instead: pick the plainest, most common word available and use it the same way every time.
-
-When exact ASD-approved wording matters, such as actual aircraft maintenance documentation, download the official standard from asd-ste100.org and check word by word against the real dictionary. This is a general-purpose clarity tool inspired by STE, not a certified STE authoring tool.
-
 ## Orwell's rules
 
 Run these over your own draft as you finish it, and again whenever you revise. They govern the result of balancing the two standards above, so where a sentence satisfies both and still reads badly, follow Orwell.

@@ -18,13 +18,13 @@ Three separate bodies of guidance sit below, kept apart so you can see which is 
 
 Two standards set the text. Orwell then judges the result.
 
-The GOV.UK house style and Simplified Technical English both apply while you draft, at the same time. They agree far more than they disagree, because both exist to stop a reader misreading a sentence. Where they pull apart, balance them with your own judgement. Do not look for a rule that settles it for you, and do not pick one and drop the other.
+The GOV.UK house style and Simplified Technical English both apply while you draft, at the same time. They agree far more than they disagree, because both exist to stop a reader misreading a sentence. Where they pull apart, balance them with your own judgment. Do not look for a rule that settles it for you, and do not pick one and drop the other.
 
 Orwell sits above both. Run his rules, his four habits and his questions over whatever the balance produced, and let them correct it. Where a sentence satisfies both standards and still reads badly, Orwell wins. That is what his sixth rule is for. Run the LLM voice section as part of the same pass.
 
 ### Simplified Technical English stays on
 
-Keep Simplified Technical English on unless the author explicitly tells you not to use the standard. Do not switch it off on your own judgement. A piece being marketing copy, a blog post or a research write-up is not a reason to turn it off.
+Keep Simplified Technical English on unless the author explicitly tells you not to use the standard. Do not switch it off on your own judgment. A piece being marketing copy, a blog post or a research write-up is not a reason to turn it off.
 
 Announce it in one line alongside the text, then offer to switch it off. For example: "Written to the GOV.UK house style and ASD-STE100 Simplified Technical English. Tell me if you want STE switched off."
 
@@ -41,13 +41,13 @@ Simplified Technical English is deliberately flat and literal. When the text is 
 - Vocabulary and tense. Where Simplified Technical English is stricter, follow it. Pick one term per idea and reuse it rather than rotating synonyms, and prefer simple tenses. Neither costs the reader anything.
 - Punctuation. Simplified Technical English is stricter, so follow it. It excludes the semicolon outright, which overrides the softer advice below to merely avoid leaning on semicolons. Em dashes stay permitted by the standard, so the LLM voice guidance governs them, and the working limit is none in repo prose.
 - Connecting words. Simplified Technical English asks for connecting words and phrases so a reader can follow the logic between sentences. The LLM voice section says to cut hollow transitions. These agree once you separate the two cases. Keep a connective that carries real logic, such as a cause or a contrast. Cut one that only decorates, such as "moreover" or "furthermore".
-- Spelling. Use American spelling, which the standard requires and which the rest of this skill already follows.
+- Spelling. Always use American English. The standard requires it and it is the house default, so it holds even though the GOV.UK material it sits alongside is written in British English. Write organize, recognize, judgment, license, center, color and behavior. Two things are exempt: a direct quotation keeps the spelling of its source, and a proper name keeps its own, so 'Open Government Licence' stays as it is.
 
 ### When a word choice is questioned
 
 `references/word-choice.md` holds the word choice reference. It has two sections. The GOV.UK words to avoid are listed there in full with their plain replacements. The Simplified Technical English words are looked up in a local copy of the standard, which the file links and gives search instructions for.
 
-Read it when the author questions a word you used, asks why you chose it, or challenges the register. Do not open it on every draft, because the plain English section below covers the common cases. Reach for it when a specific choice is in dispute, and quote the rule that settles it rather than restating your preference. If no rule settles it, say the choice was a judgement call and defer to the author rather than inventing an authority.
+Read it when the author questions a word you used, asks why you chose it, or challenges the register. Do not open it on every draft, because the plain English section below covers the common cases. Reach for it when a specific choice is in dispute, and quote the rule that settles it rather than restating your preference. If no rule settles it, say the choice was a judgment call and defer to the author rather than inventing an authority.
 
 ## GOV.UK house style
 
@@ -135,7 +135,7 @@ Also from the standard: the permitted verb forms are the infinitive, imperative,
 - Where you must choose a technical noun, pick the short, easy one over the impressive one.
 - Never use a regional word, a slang word or a jargon word as a technical noun.
 - Use one technical noun per item. Do not call the same thing by two names anywhere in a document.
-- Use American spelling unless an official directive says otherwise.
+- Use American spelling. See the spelling entry under balancing the two standards for the two exemptions.
 
 ### Sentences
 

@@ -11,7 +11,7 @@ Work through these in order and stop at the first one that decides it.
 1. Check the GOV.UK tables below. If the word sits in an Avoid column, the house style has already settled it. Make the swap and name the entry.
 2. Look the word up in the local copy of the standard, following the instructions in the second section. That is the only authority on whether a word is approved and in which sense.
 3. Check whether you rotated synonyms. If one action appears as check in one place and verify in another, pick one and use it throughout.
-4. If nothing above decides it, the choice was a judgement call. Say so, give your reason, and defer to the author.
+4. If nothing above decides it, the choice was a judgment call. Say so, give your reason, and defer to the author.
 
 Quote the rule or entry that settles it rather than restating your preference. Where nothing settles it, say so rather than inventing an authority.
 
@@ -32,13 +32,13 @@ Listed here in full, from the [GOV.UK A to Z style guide](https://guidance.publi
 | deliver | make, create, provide, or something specific |
 | deploy | use, or build, create, put in place |
 | dialogue | spoke to, or discussion |
-| disincentivise | discourage, deter |
+| disincentivise, disincentivize | discourage, deter |
 | empower | allow, give permission |
 | facilitate | name the action, for example run a workshop |
 | focus | work on, concentrate on |
 | foster | encourage, help |
 | impact | have an effect on, influence |
-| incentivise | encourage, motivate |
+| incentivise, incentivize | encourage, motivate |
 | initiate | start, begin |
 | key | important, significant, or cut it |
 | land | get, achieve |

@@ -39,6 +39,12 @@ Simplified Technical English is deliberately flat and literal. When the text is 
 - Sentence length. Take the tighter of the two caps. That is about 20 words for anything instructional, and about 25 at the outside for description.
 - Vocabulary and tense. Where Simplified Technical English is stricter, follow it. Pick one term per idea and reuse it rather than rotating synonyms, and prefer simple tenses. Neither costs the reader anything.
 
+### When a word choice is questioned
+
+`references/verbs.md` holds the verb and word choice reference. It carries the full GOV.UK list of words to avoid with their plain replacements, the Simplified Technical English rules on verb form and consistency, and a procedure for settling a disputed word.
+
+Read it when the author questions a word you used, asks why you chose it, or challenges the register. Do not open it on every draft, because the plain English section below covers the common cases. Reach for it when a specific choice is in dispute, and quote the rule that settles it rather than restating your preference. If no rule settles it, say the choice was a judgement call and defer to the author rather than inventing an authority.
+
 ## GOV.UK house style
 
 ### Content design principles

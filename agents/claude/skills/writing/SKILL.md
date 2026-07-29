@@ -1,6 +1,6 @@
 ---
 name: writing
-description: Use when drafting or editing any prose or copy — reports, research write-ups, guidance, documentation, READMEs, emails, announcements, summaries, blog posts, marketing or product copy, or any text meant to be read. Triggers whenever the user asks to draft, write, rewrite, or polish copy. Applies GOV.UK / GDS house style, favoring plain English, active voice, front-loaded content, sentence case, and no bold or italics for emphasis. Applies Orwell's rules from 'Politics and the English Language' and ASD-STE100 Simplified Technical English at the same time, balancing the sources by judgement. Simplified Technical English stays on for all prose unless the author explicitly asks for it to be switched off, and Claude announces that it is in use and offers to switch it off. Triggers on requests to simplify or disambiguate text, or for an STE100 rewrite.
+description: Use when drafting or editing any prose or copy — reports, research write-ups, guidance, documentation, READMEs, emails, announcements, summaries, blog posts, marketing or product copy, or any text meant to be read. Triggers whenever the user asks to draft, write, rewrite, or polish copy. Applies GOV.UK / GDS house style, favoring plain English, active voice, front-loaded content, sentence case, and no bold or italics for emphasis. Balances that house style against ASD-STE100 Simplified Technical English, then runs Orwell's rules from 'Politics and the English Language' over the result. Simplified Technical English stays on for all prose unless the author explicitly asks for it to be switched off, and Claude announces that it is in use and offers to switch it off. Triggers on requests to simplify or disambiguate text, or for an STE100 rewrite.
 user-invokable: true
 args:
   - name: target
@@ -12,13 +12,15 @@ Open the content up so anyone can understand it the first time they read it — 
 
 Apply it to reports, research write-ups, guidance and any prose meant to be read. When you write a report, default to this style. When you brief a research agent, pass this skill so its report follows the same style.
 
-Three separate bodies of guidance sit below, kept apart so you can see which is which: the GOV.UK house style, Orwell's rules from 'Politics and the English Language', and ASD-STE100 Simplified Technical English.
+Three separate bodies of guidance sit below, kept apart so you can see which is which: the GOV.UK house style, ASD-STE100 Simplified Technical English, and Orwell's rules from 'Politics and the English Language'.
 
-## Apply all three at once
+## How the sources fit together
 
-The GOV.UK house style and Simplified Technical English both apply to everything you write, at the same time. They agree far more than they disagree, because both exist to stop a reader misreading a sentence. Where they pull apart, balance them with your own judgement. Do not look for a rule that settles it for you, and do not pick one source and drop the other.
+Two standards set the text. Orwell then judges the result.
 
-Orwell's rules apply too. Run them over the finished draft as the last pass.
+The GOV.UK house style and Simplified Technical English both apply while you draft, at the same time. They agree far more than they disagree, because both exist to stop a reader misreading a sentence. Where they pull apart, balance them with your own judgement. Do not look for a rule that settles it for you, and do not pick one and drop the other.
+
+Orwell sits above both. Run his rules, his four habits and his questions over whatever the balance produced, and let them correct it. Where a sentence satisfies both standards and still reads badly, Orwell wins. That is what his sixth rule is for. Run the LLM voice section as part of the same pass.
 
 ### Simplified Technical English stays on
 
@@ -30,7 +32,7 @@ Switch it off only when the author says so, in words such as "do not use Simplif
 
 Simplified Technical English is deliberately flat and literal. When the text is the kind where voice carries part of the meaning, say that in your announcement so the author can decide. Do not decide for them.
 
-### Where the two pull apart
+### Balancing the two standards
 
 - Register. The house style allows contractions and a warm second person. Simplified Technical English is flat and literal. Lean flat for instructions, procedures, error messages and anything a downstream agent parses. Lean warm for prose a person reads by choice, and keep the Simplified Technical English discipline on word choice and sentence structure while you do.
 - Structure. Simplified Technical English wants a vertical list for any sequence of 3 or more steps or conditions. The LLM voice section warns against over-structuring. Use a list when the content really is a sequence or a set of conditions. Use prose when it is an argument.
@@ -91,58 +93,6 @@ This fits front-loading: the main idea leads, and the link carries the reader on
 - Dates and times: write "June 4, 2026" (no "th"). Use "to" for ranges ("June 4 to June 8"). Write times as "10am to 11:30am"; use "midday" and "midnight".
 - Do not use FAQs. If you have answered the user need in the content, you do not need them. Do not use exclamation marks. Do not use ALL CAPS for emphasis.
 
-## Orwell's rules
-
-George Orwell set out six rules in 'Politics and the English Language' (1946). Run them over a finished draft.
-
-1. Never use a metaphor, simile, or other figure of speech which you are used to seeing in print.
-2. Never use a long word where a short one will do.
-3. If it is possible to cut a word out, always cut it out.
-4. Never use the passive where you can use the active.
-5. Never use a foreign phrase, a scientific word, or a jargon word if you can think of an everyday English equivalent.
-6. Break any of these rules sooner than say anything outright barbarous.
-
-Rule 6 is the one people drop. The rules serve clarity, so break one when following it would make a sentence clumsy or change its meaning.
-
-### The four habits to hunt
-
-Orwell's diagnosis is more useful than his rules. He names four habits that let a writer build sentences out of ready-made parts without checking whether they mean anything. Look for them in your own drafts.
-
-- Dying metaphors. Images used so often that the writer no longer sees the picture. Orwell's examples: ring the changes on, take up the cudgel for, toe the line, ride roughshod over, stand shoulder to shoulder with, play into the hands of, no axe to grind, grist to the mill, fishing in troubled waters, on the order of the day, Achilles' heel, swan song, hotbed. Current versions: move the needle, boil the ocean, low-hanging fruit, level playing field, double-edged sword. Use a fresh image, or drop the image and say the thing plainly.
-- Operators, or verbal false limbs. A plain verb swapped for a phrase built round a noun, which pads the sentence and hides who does what. Orwell's examples, with the verb that replaces each: render inoperative (break), militate against (work against), make contact with (contact), be subjected to (undergo), give rise to (cause), give grounds for (cause), have the effect of (cause), play a leading part in (lead), make itself felt (show), take effect (work), exhibit a tendency to (tend), serve the purpose of (serve). The same habit pads connectives: with respect to, having regard to, the fact that, by dint of, in view of, in the interests of, on the hypothesis that.
-- Pretentious diction. Words that dress up a simple statement or borrow an air of scientific impartiality. Orwell's examples: phenomenon, element, individual, objective, categorical, effective, virtual, basic, primary, promote, constitute, exhibit, exploit, utilize, eliminate, liquidate. Also the inflated adjectives: epoch-making, epic, historic, unforgettable, triumphant, veritable, inevitable, inexorable. Also foreign phrases used for effect: status quo, cul de sac, deus ex machina, mutatis mutandis, ancien régime.
-- Meaningless words. Words used to mean so many things that they now carry no agreed content. Orwell's examples: romantic, plastic, values, human, dead, sentimental, natural, vitality, and the political set of democracy, freedom, patriotic, realistic, justice, class. If a word could mean the opposite thing to the next reader, define it or cut it.
-
-### Orwell's questions for every sentence
-
-A scrupulous writer, Orwell says, asks four questions of every sentence:
-
-- What am I trying to say?
-- What words will express it?
-- What image or idiom will make it clearer?
-- Is this image fresh enough to have an effect?
-
-Then two more:
-
-- Could I put it more shortly?
-- Have I said anything that is avoidably ugly?
-
-The point of the exercise is to start from the meaning and then choose the words. The four habits work the other way round, letting the ready-made phrase arrive first and decide what you meant.
-
-## Avoid the LLM voice
-
-Large language models share a set of writing tics that practiced readers now recognise. They are defaults the model reaches for, not choices, and they make the text read as machine-written. Cut them so the real content shows. Rewrite the underlying sentence rather than deleting a flagged word.
-
-- Do not lean on em dashes, colons and semicolons. Models bolt a qualifying clause into the middle of a sentence with an em dash, and introduce yet another list with a colon. The frequency is the tell, not any single mark. Split the thought into two sentences or use a comma. Keep em dashes to about one per few hundred words.
-- Drop the "it's not X, it's Y" frame, and its cousin "not just X, but Y". State Y on its own. Write "This is a betrayal of trust.", not "This isn't a price rise, it's a betrayal of trust". The contrast sounds profound and commits to nothing.
-- Cut jargon used for its own sake. Models reach for an elevated register: delve, nuanced, multifaceted, comprehensive, pivotal, leverage. If a word does not carry meaning the reader needs, remove it or swap it for a plain one. See the plain English section.
-- Do not narrate your own process or refer back to earlier decisions. Cut "as I mentioned", "as we decided earlier", "as established above", "building on the previous section". The reader sees the document as it stands now, not the path that produced it. Make the point without flagging that you are about to, or that you made it before.
-- Do not stack qualifiers. A model hedges twice before it reaches the verb: "while this may vary, generally speaking, in most cases". One qualifier reads as careful. A chain of them reads as a machine dodging commitment. Keep one genuine hedge or none.
-- Take a position. Asked for a recommendation, models tend to lay out every side and settle on a safe middle. If one option is better, say so and say why. False balance reads as evasion.
-- Do not over-structure. Models default to headings, numbered lists and a paragraph per bullet for everything. Use a list only when the content is genuinely a list. Otherwise write prose.
-- Delete throat-clearing openers. "It's worth noting that", "it's important to note", "in today's fast-paced world". Start with the substance. Write "Revenue dropped 15% in Q3", not "It's worth noting that revenue dropped 15% in Q3".
-- Replace hollow transitions. "Moreover", "furthermore", "additionally". Most can be a period, an "and" or an "also". If the link between two sentences is unclear without a formal connector, fix the logic, not the connector.
-
 ## Simplified Technical English
 
 ASD-STE100 is a controlled-language standard built by the aerospace and defense industry (ASD, the AeroSpace and Defense Industries Association of Europe) to stop maintenance technicians from misreading English instructions. The standard removes the two biggest sources of misreading: words with more than one meaning, and sentences with more than one possible structure.
@@ -191,17 +141,73 @@ This skill does not reproduce ASD's official dictionary of roughly 900 approved 
 
 When exact ASD-approved wording matters, such as actual aircraft maintenance documentation, download the official standard from asd-ste100.org and check word by word against the real dictionary. This is a general-purpose clarity tool inspired by STE, not a certified STE authoring tool.
 
+## Orwell's rules
+
+Run this pass over the draft once the house style and Simplified Technical English have been balanced. It governs the result of that balance, so where a sentence satisfies both standards and still reads badly, follow Orwell.
+
+George Orwell set out six rules in 'Politics and the English Language' (1946).
+
+1. Never use a metaphor, simile, or other figure of speech which you are used to seeing in print.
+2. Never use a long word where a short one will do.
+3. If it is possible to cut a word out, always cut it out.
+4. Never use the passive where you can use the active.
+5. Never use a foreign phrase, a scientific word, or a jargon word if you can think of an everyday English equivalent.
+6. Break any of these rules sooner than say anything outright barbarous.
+
+Rule 6 is the one people drop. The rules serve clarity, so break one when following it would make a sentence clumsy or change its meaning. It applies to the two standards above as well as to Orwell's own five rules.
+
+### The four habits to hunt
+
+Orwell's diagnosis is more useful than his rules. He names four habits that let a writer build sentences out of ready-made parts without checking whether they mean anything. Look for them in your own drafts.
+
+- Dying metaphors. Images used so often that the writer no longer sees the picture. Orwell's examples: ring the changes on, take up the cudgel for, toe the line, ride roughshod over, stand shoulder to shoulder with, play into the hands of, no axe to grind, grist to the mill, fishing in troubled waters, on the order of the day, Achilles' heel, swan song, hotbed. Current versions: move the needle, boil the ocean, low-hanging fruit, level playing field, double-edged sword. Use a fresh image, or drop the image and say the thing plainly.
+- Operators, or verbal false limbs. A plain verb swapped for a phrase built round a noun, which pads the sentence and hides who does what. Orwell's examples, with the verb that replaces each: render inoperative (break), militate against (work against), make contact with (contact), be subjected to (undergo), give rise to (cause), give grounds for (cause), have the effect of (cause), play a leading part in (lead), make itself felt (show), take effect (work), exhibit a tendency to (tend), serve the purpose of (serve). The same habit pads connectives: with respect to, having regard to, the fact that, by dint of, in view of, in the interests of, on the hypothesis that.
+- Pretentious diction. Words that dress up a simple statement or borrow an air of scientific impartiality. Orwell's examples: phenomenon, element, individual, objective, categorical, effective, virtual, basic, primary, promote, constitute, exhibit, exploit, utilize, eliminate, liquidate. Also the inflated adjectives: epoch-making, epic, historic, unforgettable, triumphant, veritable, inevitable, inexorable. Also foreign phrases used for effect: status quo, cul de sac, deus ex machina, mutatis mutandis, ancien régime.
+- Meaningless words. Words used to mean so many things that they now carry no agreed content. Orwell's examples: romantic, plastic, values, human, dead, sentimental, natural, vitality, and the political set of democracy, freedom, patriotic, realistic, justice, class. If a word could mean the opposite thing to the next reader, define it or cut it.
+
+### Orwell's questions for every sentence
+
+A scrupulous writer, Orwell says, asks four questions of every sentence:
+
+- What am I trying to say?
+- What words will express it?
+- What image or idiom will make it clearer?
+- Is this image fresh enough to have an effect?
+
+Then two more:
+
+- Could I put it more shortly?
+- Have I said anything that is avoidably ugly?
+
+The point of the exercise is to start from the meaning and then choose the words. The four habits work the other way round, letting the ready-made phrase arrive first and decide what you meant.
+
+## Avoid the LLM voice
+
+Large language models share a set of writing tics that practiced readers now recognise. They are defaults the model reaches for, not choices, and they make the text read as machine-written. Cut them so the real content shows. Rewrite the underlying sentence rather than deleting a flagged word.
+
+- Do not lean on em dashes, colons and semicolons. Models bolt a qualifying clause into the middle of a sentence with an em dash, and introduce yet another list with a colon. The frequency is the tell, not any single mark. Split the thought into two sentences or use a comma. Keep em dashes to about one per few hundred words.
+- Drop the "it's not X, it's Y" frame, and its cousin "not just X, but Y". State Y on its own. Write "This is a betrayal of trust.", not "This isn't a price rise, it's a betrayal of trust". The contrast sounds profound and commits to nothing.
+- Cut jargon used for its own sake. Models reach for an elevated register: delve, nuanced, multifaceted, comprehensive, pivotal, leverage. If a word does not carry meaning the reader needs, remove it or swap it for a plain one. See the plain English section.
+- Do not narrate your own process or refer back to earlier decisions. Cut "as I mentioned", "as we decided earlier", "as established above", "building on the previous section". The reader sees the document as it stands now, not the path that produced it. Make the point without flagging that you are about to, or that you made it before.
+- Do not stack qualifiers. A model hedges twice before it reaches the verb: "while this may vary, generally speaking, in most cases". One qualifier reads as careful. A chain of them reads as a machine dodging commitment. Keep one genuine hedge or none.
+- Take a position. Asked for a recommendation, models tend to lay out every side and settle on a safe middle. If one option is better, say so and say why. False balance reads as evasion.
+- Do not over-structure. Models default to headings, numbered lists and a paragraph per bullet for everything. Use a list only when the content is genuinely a list. Otherwise write prose.
+- Delete throat-clearing openers. "It's worth noting that", "it's important to note", "in today's fast-paced world". Start with the substance. Write "Revenue dropped 15% in Q3", not "It's worth noting that revenue dropped 15% in Q3".
+- Replace hollow transitions. "Moreover", "furthermore", "additionally". Most can be a period, an "and" or an "also". If the link between two sentences is unclear without a formal connector, fix the logic, not the connector.
+
 ## Before you finish: self-check
+
+Work down the list in order. It follows the two layers, standards first, then the pass over them.
 
 - Is the single most important thing first?
 - Could a non-expert understand every sentence on first read?
 - Is every sentence active, short and one idea?
 - Have you removed all bold/italic emphasis, jargon, Latin abbreviations and marketing language?
 - Is everything in sentence case, with descriptive headings and links?
-- Did you run Orwell's six rules and six questions over the draft, and hunt the four habits?
-- Have you cleared the LLM tics: dense punctuation, "not X but Y", jargon, self-reference to earlier decisions, stacked qualifiers, false balance and throat-clearing openers?
 - Does the text comply with Simplified Technical English, and did you flag anything you left unsimplified?
 - Did you announce that you wrote to Simplified Technical English, and offer to switch it off?
+- Did you then run Orwell over the result, covering the six rules, the four habits and the six questions?
+- Have you cleared the LLM tics: dense punctuation, "not X but Y", jargon, self-reference to earlier decisions, stacked qualifiers, false balance and throat-clearing openers?
 - Could you cut any more words without losing meaning? If yes, cut them.
 
 ## Note on this skill's own scope
@@ -211,6 +217,6 @@ The "no bold" and formatting rules apply to the prose you produce (reports, guid
 ## Sources
 
 - GOV.UK style guide and Government Digital Service content design guidance, at guidance.publishing.service.gov.uk
-- George Orwell, 'Politics and the English Language' (1946)
 - ASD-STE100 Simplified Technical English, Issue 9 (January 2025), free to download at asd-ste100.org
+- George Orwell, 'Politics and the English Language' (1946)
 - The Simplified Technical English section is adapted from the asd-ste100-skill by Dustin Yuchen Teng, MIT license, at github.com/danyuchn/asd-ste100-skill

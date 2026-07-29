@@ -1,6 +1,6 @@
 ---
 name: writing
-description: Use when drafting or editing any prose or copy — reports, research write-ups, guidance, documentation, READMEs, emails, announcements, summaries, blog posts, marketing or product copy, or any text meant to be read. Triggers whenever the user asks to draft, write, rewrite, or polish copy. Applies GOV.UK / GDS house style, favoring plain English, active voice, front-loaded content, sentence case, and no bold or italics for emphasis. Balances that house style against ASD-STE100 Simplified Technical English, then runs Orwell's rules from 'Politics and the English Language' over the result. Simplified Technical English stays on for all prose unless the author explicitly asks for it to be switched off, and Claude announces that it is in use and offers to switch it off. Triggers on requests to simplify or disambiguate text, or for an STE100 rewrite.
+description: Use when drafting or editing any prose or copy — reports, research write-ups, guidance, documentation, READMEs, emails, announcements, summaries, blog posts, marketing or product copy, or any text meant to be read. Triggers whenever the user asks to draft, write, rewrite, or polish copy. Applies GOV.UK / GDS house style, favoring plain English, active voice, front-loaded content, sentence case, and no bold or italics for emphasis. Balances that house style against ASD-STE100 Simplified Technical English, then runs Orwell's rules from 'Politics and the English Language' over the result. Simplified Technical English stays on for all prose unless the author explicitly asks for it to be switched off, and Claude announces that it is in use and offers to switch it off. Use it to compose new prose and to keep editing, not to audit finished text.
 user-invokable: true
 args:
   - name: target
@@ -103,9 +103,9 @@ This fits front-loading: the main idea leads, and the link carries the reader on
 
 ASD-STE100 is a controlled-language standard built by the aerospace and defense industry (ASD, the AeroSpace and Defense Industries Association of Europe) to stop maintenance technicians from misreading English instructions. The standard removes the two biggest sources of misreading: words with more than one meaning, and sentences with more than one possible structure.
 
-This skill borrows that same discipline for a different reader: an AI agent or a downstream system that has to parse an English string, such as an error message, a tool description, an inter-agent instruction or a status report, without a human in the loop to resolve ambiguity. If a maintenance technician can misread "close the valve" as an adjective ("the valve that is near") instead of a command, so can a language model.
+This skill applies that discipline to everything it writes. The reader it protects is anyone who cannot ask you a follow-up question, which covers a non-native English speaker, a translation pipeline, someone reading in a hurry, and an agent or downstream system parsing your output. If a maintenance technician can misread "close the valve" as an adjective, meaning the valve that is near, instead of as a command, so can a reader under time pressure, and so can a language model.
 
-### Core rewrite rules
+### Core rules
 
 | Rule | Do | Don't |
 |---|---|---|
@@ -124,22 +124,16 @@ This skill borrows that same discipline for a different reader: an AI agent or a
 
 Also from the standard: the permitted verb forms are the infinitive, imperative, simple present, simple past, simple future, and the past participle used only as an adjective. Use "-ing" forms only as a technical noun or as part of one, never as a verb form. Open a safety-critical instruction with the command or the condition, and never bury it mid-sentence.
 
-### Process
+### Writing this way from the start
 
-1. Read the input text once for meaning. Do not start rewriting before you understand what it must still say afterward.
-2. Walk it sentence by sentence and flag every rule violation (word ambiguity, tense, voice, length, ellipsis, noun stacking).
-3. Rewrite each flagged sentence to fix the violation while preserving the original meaning exactly. If a rewrite would drop necessary precision (a safety condition, a scope qualifier, a number), keep the longer phrasing and flag it instead of silently simplifying.
-4. Produce a before and after table.
-5. If the input already complies, say so. Do not force changes onto compliant text.
+These rules are for composing. Apply them as you draft, so the first version already reads this way and you never translate a finished draft into it.
 
-### Output format
+- Fix the verb for each recurring action before you start, then reuse it. Choosing once is far less work than retrofitting consistency across a finished draft.
+- Write the sentence you mean, then check its length. If it runs past the cap, find the second idea inside it and give that idea its own sentence.
+- Lead with the condition when a sentence carries one. Write "If the strategy allows automatic resolution, the tool resolves the conflict." Do not hang the condition off the end.
+- Never trade away precision to satisfy a rule. Where keeping a condition, a scope qualifier or a number costs you a longer sentence, keep the longer sentence.
 
-| Rule violated | Original | Simplified |
-|---|---|---|
-| Present perfect tense | "We have received your request." | "We received your request." |
-| Noun cluster (4 or more words) | "the agent task queue priority handler" | "the handler that sets task-queue priority" |
-
-Follow the table with a one-line note on anything you deliberately did not simplify, and why. Usually the reason is that simplifying would lose required precision.
+Edit the same way. Change the sentence in place and carry on. Do not produce a violations report, a before and after table, or a list of the rules an earlier draft broke, unless the author asks to see the changes.
 
 ### Limits
 
@@ -149,7 +143,7 @@ When exact ASD-approved wording matters, such as actual aircraft maintenance doc
 
 ## Orwell's rules
 
-Run this pass over the draft once the house style and Simplified Technical English have been balanced. It governs the result of that balance, so where a sentence satisfies both standards and still reads badly, follow Orwell.
+Run these over your own draft as you finish it, and again whenever you revise. They govern the result of balancing the two standards above, so where a sentence satisfies both and still reads badly, follow Orwell.
 
 George Orwell set out six rules in 'Politics and the English Language' (1946).
 
@@ -210,9 +204,9 @@ Work down the list in order. It follows the two layers, standards first, then th
 - Is every sentence active, short and one idea?
 - Have you removed all bold/italic emphasis, jargon, Latin abbreviations and marketing language?
 - Is everything in sentence case, with descriptive headings and links?
-- Does the text comply with Simplified Technical English, and did you flag anything you left unsimplified?
+- Does it read as Simplified Technical English, with one term per action and no sentence over the cap?
 - Did you announce that you wrote to Simplified Technical English, and offer to switch it off?
-- Did you then run Orwell over the result, covering the six rules, the four habits and the six questions?
+- Did you then read it against Orwell, covering the six rules, the four habits and the six questions?
 - Have you cleared the LLM tics: dense punctuation, "not X but Y", jargon, self-reference to earlier decisions, stacked qualifiers, false balance and throat-clearing openers?
 - Could you cut any more words without losing meaning? If yes, cut them.
 

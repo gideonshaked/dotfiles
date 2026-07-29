@@ -1,6 +1,6 @@
 ---
 name: writing
-description: Use when drafting or editing any prose or copy — reports, research write-ups, guidance, documentation, READMEs, emails, announcements, summaries, blog posts, marketing or product copy, or any text meant to be read. Triggers whenever the user asks to draft, write, rewrite, or polish copy. Applies GOV.UK / GDS house style, favoring plain English, active voice, front-loaded content, sentence case, and no bold or italics for emphasis.
+description: Use when drafting or editing any prose or copy — reports, research write-ups, guidance, documentation, READMEs, emails, announcements, summaries, blog posts, marketing or product copy, or any text meant to be read. Triggers whenever the user asks to draft, write, rewrite, or polish copy. Applies GOV.UK / GDS house style, favoring plain English, active voice, front-loaded content, sentence case, and no bold or italics for emphasis. Also applies Orwell's rules from 'Politics and the English Language', and switches to ASD-STE100 Simplified Technical English for instructions, error messages, tool descriptions, and messages between agents. Triggers on requests to simplify or disambiguate text, or for an STE100 rewrite.
 user-invokable: true
 args:
   - name: target
@@ -12,7 +12,29 @@ Open the content up so anyone can understand it the first time they read it — 
 
 Apply it to reports, research write-ups, guidance and any prose meant to be read. When you write a report, default to this style. When you brief a research agent, pass this skill so its report follows the same style.
 
-## Content design principles
+Three separate bodies of guidance sit below, kept apart so you can see which is which: the GOV.UK house style, Orwell's rules from 'Politics and the English Language', and ASD-STE100 Simplified Technical English.
+
+## Which mode to use
+
+Decide this before you write anything. It changes which rules below apply.
+
+Default mode covers reports, research write-ups, guidance, documentation, READMEs, emails, announcements, summaries, blog posts, marketing copy and product copy. Draft with the GOV.UK house style, then revise with Orwell's rules and the LLM voice section. Skip the Simplified Technical English section entirely.
+
+Simplified Technical English mode covers text whose reader cannot ask you a follow-up question:
+
+- instructions, procedures and runbooks
+- error messages and log lines
+- tool descriptions, system prompts and messages between agents
+- safety or compliance text where a misreading has a real cost
+- anything going into machine translation
+
+In that mode, read the Simplified Technical English section and let it win wherever it disagrees with the house style. It sets its own sentence length caps, and its rule to use a vertical list for every sequence of 3 or more steps overrides the warning against over-structuring. Plain English word choice, sentence case and the ban on bold still hold.
+
+Never apply Simplified Technical English to reports, guidance, blog posts, marketing copy or product copy. It is deliberately flat and literal. On prose where voice carries part of the meaning, it strips something the reader needs.
+
+## GOV.UK house style
+
+### Content design principles
 
 - Start from the user need. Write what the reader needs to know to do or decide something, not what you want to say.
 - Front-load everything. Put the most important point first — in the document, each section, each paragraph and each sentence. Use the inverted pyramid: conclusion first, then detail, then background.
@@ -20,7 +42,7 @@ Apply it to reports, research write-ups, guidance and any prose meant to be read
 - Be specific and concrete. Give the number, the name, the date. Cut vague abstractions ("a range of", "going forward", "in terms of").
 - Cut everything that does not add meaning. Shorter is clearer. Remove duplication.
 
-## Structure paragraphs with MEAL
+### Structure paragraphs with MEAL
 
 When a paragraph makes a point or builds an argument, follow the MEAL pattern. It keeps each paragraph to one idea and ties it back to the thesis. Skip it for short instructions, lists or pure reference, where it adds nothing.
 
@@ -31,7 +53,7 @@ When a paragraph makes a point or builds an argument, follow the MEAL pattern. I
 
 This fits front-loading: the main idea leads, and the link carries the reader on.
 
-## Plain English
+### Plain English
 
 - Open it up, do not dumb it down. Keep all the substance, nuance and precision. Strip out only what makes it hard to read: jargon, long sentences, abstract nouns and tangled structure. A non-specialist and an expert should both grasp it on first read. Plain English carries complex ideas better, not worse — even experts read faster and prefer it.
 - Use the active voice. Say who does what. Write "We reviewed the data", not "The data was reviewed".
@@ -50,7 +72,7 @@ This fits front-loading: the main idea leads, and the link carries the reader on
 - Address the reader as "you". Write about yourself or the organization as "we". Use "they", "them" and "their" rather than gendered pronouns. Write "disabled people", not "the disabled".
 - Contractions are fine for a warmer tone (we'll, you'll), but avoid negative contractions — write "cannot", not "can't" — and avoid "should've", "could've", "would've".
 
-## Formatting
+### Formatting
 
 - Do not use bold or italics for emphasis. Plain words and good structure carry the meaning. Bold is only acceptable to name a literal interface element in an instruction, for example: select Save. Use single quotation marks for the titles of schemes or documents, not italics.
 - Use sentence case everywhere — headings, titles, table headers, the lot. Capitalize only proper nouns.
@@ -63,6 +85,44 @@ This fits front-loading: the main idea leads, and the link carries the reader on
 - Numbers: write "one" but use numerals from 2 upwards (2, 9, 25). Use the % symbol with numerals (50%). Use $ with no decimals unless there are cents ($75, $75.50). Spell out millions and billions ($5 million, not $5m). Write ranges with "to", not a hyphen (10 to 20, Monday to Friday).
 - Dates and times: write "June 4, 2026" (no "th"). Use "to" for ranges ("June 4 to June 8"). Write times as "10am to 11:30am"; use "midday" and "midnight".
 - Do not use FAQs. If you have answered the user need in the content, you do not need them. Do not use exclamation marks. Do not use ALL CAPS for emphasis.
+
+## Orwell's rules
+
+George Orwell set out six rules in 'Politics and the English Language' (1946). Run them over a finished draft.
+
+1. Never use a metaphor, simile, or other figure of speech which you are used to seeing in print.
+2. Never use a long word where a short one will do.
+3. If it is possible to cut a word out, always cut it out.
+4. Never use the passive where you can use the active.
+5. Never use a foreign phrase, a scientific word, or a jargon word if you can think of an everyday English equivalent.
+6. Break any of these rules sooner than say anything outright barbarous.
+
+Rule 6 is the one people drop. The rules serve clarity, so break one when following it would make a sentence clumsy or change its meaning.
+
+### The four habits to hunt
+
+Orwell's diagnosis is more useful than his rules. He names four habits that let a writer build sentences out of ready-made parts without checking whether they mean anything. Look for them in your own drafts.
+
+- Dying metaphors. Images used so often that the writer no longer sees the picture. Orwell's examples: ring the changes on, take up the cudgel for, toe the line, ride roughshod over, stand shoulder to shoulder with, play into the hands of, no axe to grind, grist to the mill, fishing in troubled waters, on the order of the day, Achilles' heel, swan song, hotbed. Current versions: move the needle, boil the ocean, low-hanging fruit, level playing field, double-edged sword. Use a fresh image, or drop the image and say the thing plainly.
+- Operators, or verbal false limbs. A plain verb swapped for a phrase built round a noun, which pads the sentence and hides who does what. Orwell's examples, with the verb that replaces each: render inoperative (break), militate against (work against), make contact with (contact), be subjected to (undergo), give rise to (cause), give grounds for (cause), have the effect of (cause), play a leading part in (lead), make itself felt (show), take effect (work), exhibit a tendency to (tend), serve the purpose of (serve). The same habit pads connectives: with respect to, having regard to, the fact that, by dint of, in view of, in the interests of, on the hypothesis that.
+- Pretentious diction. Words that dress up a simple statement or borrow an air of scientific impartiality. Orwell's examples: phenomenon, element, individual, objective, categorical, effective, virtual, basic, primary, promote, constitute, exhibit, exploit, utilize, eliminate, liquidate. Also the inflated adjectives: epoch-making, epic, historic, unforgettable, triumphant, veritable, inevitable, inexorable. Also foreign phrases used for effect: status quo, cul de sac, deus ex machina, mutatis mutandis, ancien régime.
+- Meaningless words. Words used to mean so many things that they now carry no agreed content. Orwell's examples: romantic, plastic, values, human, dead, sentimental, natural, vitality, and the political set of democracy, freedom, patriotic, realistic, justice, class. If a word could mean the opposite thing to the next reader, define it or cut it.
+
+### Orwell's questions for every sentence
+
+A scrupulous writer, Orwell says, asks four questions of every sentence:
+
+- What am I trying to say?
+- What words will express it?
+- What image or idiom will make it clearer?
+- Is this image fresh enough to have an effect?
+
+Then two more:
+
+- Could I put it more shortly?
+- Have I said anything that is avoidably ugly?
+
+The point of the exercise is to start from the meaning and then choose the words. The four habits work the other way round, letting the ready-made phrase arrive first and decide what you meant.
 
 ## Avoid the LLM voice
 
@@ -78,6 +138,56 @@ Large language models share a set of writing tics that practiced readers now rec
 - Delete throat-clearing openers. "It's worth noting that", "it's important to note", "in today's fast-paced world". Start with the substance. Write "Revenue dropped 15% in Q3", not "It's worth noting that revenue dropped 15% in Q3".
 - Replace hollow transitions. "Moreover", "furthermore", "additionally". Most can be a period, an "and" or an "also". If the link between two sentences is unclear without a formal connector, fix the logic, not the connector.
 
+## Simplified Technical English mode
+
+Read this section only if the mode gate sent you here.
+
+ASD-STE100 is a controlled-language standard built by the aerospace and defense industry (ASD, the AeroSpace and Defense Industries Association of Europe) to stop maintenance technicians from misreading English instructions. The standard removes the two biggest sources of misreading: words with more than one meaning, and sentences with more than one possible structure.
+
+This mode borrows that same discipline for a different reader: an AI agent or a downstream system that has to parse an English string, such as an error message, a tool description, an inter-agent instruction or a status report, without a human in the loop to resolve ambiguity. If a maintenance technician can misread "close the valve" as an adjective ("the valve that is near") instead of a command, so can a language model.
+
+### Core rewrite rules
+
+| Rule | Do | Don't |
+|---|---|---|
+| One word, one meaning | Pick one verb for one action and reuse it every time (always "check", never mix "check"/"verify"/"confirm" for the same action) | Rotate synonyms for the same idea across a document |
+| One part of speech per word | "Apply oil to the valve" (oil = noun) | "Oil the valve" (oil = verb), if "oil" is only approved as a noun |
+| Precise verb meaning | "Obey the safety instructions." | "Follow the safety instructions.", where "follow" can also mean "come after" |
+| Active voice | "The agent deletes the file." | "The file is deleted (by the agent).", unless the actor is genuinely unknown or irrelevant |
+| Simple tenses only | "We received the report." (simple past) | "We have received the report." (present perfect) |
+| One instruction per sentence | "Open the file. Read line 3." | "Open the file and read line 3, then check if it matches." |
+| Sentence length | 20 words or fewer for instructions and procedures, 25 or fewer for descriptions | Long compound or subordinate-clause sentences |
+| Noun clusters | 3 words or fewer stacked as a noun phrase ("fuel pump valve") | Stacks of 4 or more words ("high pressure fuel pump inlet valve assembly") |
+| No ellipsis | Keep the subject, verb, and article explicit even if it reads longer | Drop words to save space ("Files not backed up will be lost" leaves it ambiguous which files) |
+| Paragraph limits | One topic per paragraph, 6 sentences or fewer | Multi-topic paragraphs |
+| Lists for sequences | Use a numbered or bulleted list for 3 or more steps or conditions | Bury a sequence inside one prose sentence |
+| Domain terms | Keep necessary technical nouns and verbs, but define them once if not common English (STE allows a project-specific glossary beyond its base dictionary) | Use jargon without ever defining it |
+
+Also from the standard: the permitted verb forms are the infinitive, imperative, simple present, simple past, simple future, and the past participle used only as an adjective. Use "-ing" forms only as a technical noun or as part of one, never as a verb form. Open a safety-critical instruction with the command or the condition, and never bury it mid-sentence.
+
+### Process
+
+1. Read the input text once for meaning. Do not start rewriting before you understand what it must still say afterward.
+2. Walk it sentence by sentence and flag every rule violation (word ambiguity, tense, voice, length, ellipsis, noun stacking).
+3. Rewrite each flagged sentence to fix the violation while preserving the original meaning exactly. If a rewrite would drop necessary precision (a safety condition, a scope qualifier, a number), keep the longer phrasing and flag it instead of silently simplifying.
+4. Produce a before and after table.
+5. If the input already complies, say so. Do not force changes onto compliant text.
+
+### Output format
+
+| Rule violated | Original | Simplified |
+|---|---|---|
+| Present perfect tense | "We have received your request." | "We received your request." |
+| Noun cluster (4 or more words) | "the agent task queue priority handler" | "the handler that sets task-queue priority" |
+
+Follow the table with a one-line note on anything you deliberately did not simplify, and why. Usually the reason is that simplifying would lose required precision.
+
+### Limits
+
+This mode does not reproduce ASD's official dictionary of roughly 900 approved words, each restricted to one meaning and one part of speech, or its roughly 1,200 words to avoid. That is ASD's own free-to-download standard, not something to copy wholesale. It applies the underlying principle instead: pick the plainest, most common word available and use it the same way every time.
+
+When exact ASD-approved wording matters, such as actual aircraft maintenance documentation, download the official standard from asd-ste100.org and check word by word against the real dictionary. This is a general-purpose clarity tool inspired by STE, not a certified STE authoring tool.
+
 ## Before you finish: self-check
 
 - Is the single most important thing first?
@@ -85,9 +195,18 @@ Large language models share a set of writing tics that practiced readers now rec
 - Is every sentence active, short and one idea?
 - Have you removed all bold/italic emphasis, jargon, Latin abbreviations and marketing language?
 - Is everything in sentence case, with descriptive headings and links?
+- Did you run Orwell's six rules and six questions over the draft, and hunt the four habits?
 - Have you cleared the LLM tics: dense punctuation, "not X but Y", jargon, self-reference to earlier decisions, stacked qualifiers, false balance and throat-clearing openers?
+- If the mode gate sent you to Simplified Technical English, does the text comply with it, and did you flag anything you left unsimplified?
 - Could you cut any more words without losing meaning? If yes, cut them.
 
 ## Note on this skill's own scope
 
 The "no bold" and formatting rules apply to the prose you produce (reports, guidance, summaries). Code, data tables and direct quotations keep their own conventions. Markdown headings and lists are fine — they are structure, not emphasis.
+
+## Sources
+
+- GOV.UK style guide and Government Digital Service content design guidance, at guidance.publishing.service.gov.uk
+- George Orwell, 'Politics and the English Language' (1946)
+- ASD-STE100 Simplified Technical English, Issue 9 (January 2025), free to download at asd-ste100.org
+- The Simplified Technical English section is adapted from the asd-ste100-skill by Dustin Yuchen Teng, MIT license, at github.com/danyuchn/asd-ste100-skill

@@ -114,15 +114,49 @@ This skill applies that discipline to everything it writes. The reader it protec
 | Precise verb meaning | "Obey the safety instructions." | "Follow the safety instructions.", where "follow" can also mean "come after" |
 | Active voice | "The agent deletes the file." | "The file is deleted (by the agent).", unless the actor is genuinely unknown or irrelevant |
 | Simple tenses only | "We received the report." (simple past) | "We have received the report." (present perfect) |
-| One instruction per sentence | "Open the file. Read line 3." | "Open the file and read line 3, then check if it matches." |
+| One instruction per sentence | One instruction per sentence, unless two or more actions genuinely happen at the same time. "Open the file. Read line 3." | "Open the file and read line 3, then check if it matches." |
 | Sentence length | 20 words or fewer for instructions and procedures, 25 or fewer for descriptions | Long compound or subordinate-clause sentences |
-| Noun clusters | 3 words or fewer stacked as a noun phrase ("fuel pump valve") | Stacks of 4 or more words ("high pressure fuel pump inlet valve assembly") |
+| Noun clusters | 3 words or fewer stacked as a noun phrase ("fuel pump valve"). Where a technical noun runs longer than 3 words, write it out in full instead of stacking it | Stacks of 4 or more words ("high pressure fuel pump inlet valve assembly") |
 | No ellipsis | Keep the subject, verb, and article explicit even if it reads longer | Drop words to save space ("Files not backed up will be lost" leaves it ambiguous which files) |
 | Paragraph limits | One topic per paragraph, 6 sentences or fewer | Multi-topic paragraphs |
 | Lists for sequences | Use a numbered or bulleted list for 3 or more steps or conditions | Bury a sequence inside one prose sentence |
 | Domain terms | Keep necessary technical nouns and verbs, but define them once if not common English | Use jargon without ever defining it |
 
 Also from the standard: the permitted verb forms are the infinitive, imperative, simple present, simple past, simple future, and the past participle used only as an adjective. Use "-ing" forms only as a technical noun or as part of one, never as a verb form. Open a safety-critical instruction with the command or the condition, and never bury it mid-sentence.
+
+### Rules by text type
+
+The standard splits its remaining rules by what you are writing.
+
+Instructions and steps:
+
+- Write instructions in the imperative. "Open the file", not "the file should be opened".
+- Where the reader must know a condition first, open the sentence with that condition.
+- Use a note to give information only. Never put an instruction inside a note.
+
+Description, meaning prose the reader reads rather than follows:
+
+- Introduce information in stages. This is the inverted pyramid again: the conclusion first, then detail as the reader needs it, rather than one dense passage carrying everything.
+- Use key words and repeated phrases to give the text a structure the reader can follow.
+- Group related information into a paragraph, keep each paragraph to one topic, and stop at 6 sentences.
+
+Safety instructions:
+
+- Open with a signal word naming the level of risk, such as warning or caution.
+- Follow it with a clear, accurate command or condition.
+- Explain the risk or the possible result, so the reader knows why the instruction matters.
+
+### Punctuation and counting
+
+- Use any standard English punctuation mark except the semicolon, which the standard excludes outright.
+- Use hyphens to join words that are directly related.
+- Counting words against the caps above: a number, a number with its unit, an abbreviation, an alphanumeric identifier, quoted text, a title or label, and a proper noun each count as one word. So does a hyphenated word, and so does a parenthetical. In a vertical list, a colon counts like a period.
+
+### Other practices
+
+- Recast the sentence when a word-for-word fix will not comply. Changing the construction beats forcing the original shape.
+- Do not build a phrasal verb by pairing a verb with a particle. Use the single verb that means the thing.
+- Keep terminology and wording consistent once you have chosen it.
 
 ### Writing this way from the start
 

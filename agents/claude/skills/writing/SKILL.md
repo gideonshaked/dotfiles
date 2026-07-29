@@ -114,7 +114,7 @@ This skill borrows that same discipline for a different reader: an AI agent or a
 | No ellipsis | Keep the subject, verb, and article explicit even if it reads longer | Drop words to save space ("Files not backed up will be lost" leaves it ambiguous which files) |
 | Paragraph limits | One topic per paragraph, 6 sentences or fewer | Multi-topic paragraphs |
 | Lists for sequences | Use a numbered or bulleted list for 3 or more steps or conditions | Bury a sequence inside one prose sentence |
-| Domain terms | Keep necessary technical nouns and verbs, but define them once if not common English (STE allows a project-specific glossary beyond its base dictionary) | Use jargon without ever defining it |
+| Domain terms | Keep necessary technical nouns and verbs, but define them once if not common English | Use jargon without ever defining it |
 
 Also from the standard: the permitted verb forms are the infinitive, imperative, simple present, simple past, simple future, and the past participle used only as an adjective. Use "-ing" forms only as a technical noun or as part of one, never as a verb form. Open a safety-critical instruction with the command or the condition, and never bury it mid-sentence.
 
@@ -219,5 +219,5 @@ The "no bold" and formatting rules apply to the prose you produce (reports, guid
 One entry per source, in the order the sections appear above.
 
 - GOV.UK house style, from the [GOV.UK style guides](https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/style-guides/) and the [GOV.UK A to Z style guide](https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/style-guides/a-to-z-style-guide/), published by the Government Digital Service.
-- Simplified Technical English, from [ASD-STE100](https://www.asd-ste100.org/), Issue 9 (January 2025), free to download. That section is adapted from the [asd-ste100-skill](https://github.com/danyuchn/asd-ste100-skill) by Dustin Yuchen Teng, MIT license. It paraphrases the rule categories and does not reproduce the standard or its dictionary of approved words.
+- Simplified Technical English, from [ASD-STE100](https://www.asd-ste100.org/), Issue 9 (January 2025), free to download. That section is adapted from the [asd-ste100-skill](https://github.com/danyuchn/asd-ste100-skill) by Dustin Yuchen Teng, MIT license. It paraphrases the rule categories and does not reproduce the standard or its dictionary of approved words. It also departs from the standard in one place, dropping the terminology allowance that lets a project approve technical words of its own beyond the base dictionary.
 - Orwell's rules, from ['Politics and the English Language'](https://www.orwellfoundation.com/the-orwell-foundation/orwell/essays-and-other-works/politics-and-the-english-language/) (1946), full text at the Orwell Foundation. The six rules and the six questions are quoted from it, though the original numbers the rules with roman numerals. The example words and phrases are a short selection from his longer lists. The plain verbs and the present-day cliches are this skill's additions, not his.

@@ -82,7 +82,10 @@ This fits front-loading: the main idea leads, and the link carries the reader on
   - make or provide, not deliver
   - about, not in relation to or with regard to
   - so, not in order to
-  - start, not commence; end, not terminate; buy, not purchase; enough, not sufficient
+  - start, not commence
+  - end, not terminate
+  - buy, not purchase
+  - enough, not sufficient
   - solve, fix or deal with, not tackle or combat
   - effect on, not impact on (do not use impact as a verb)
 - Avoid metaphors and clichés: drive, unlock, deep dive, robust, key, ring-fence, hub, portal, landscape, ecosystem, going forward.
@@ -101,7 +104,7 @@ This fits front-loading: the main idea leads, and the link carries the reader on
 - Do not use Latin abbreviations. Write "for example" not "eg", "that is" not "ie", "and so on" or "such as" not "etc". They confuse screen readers and some readers.
 - Ampersands: write "and", not "&" (except in a registered name or logo).
 - Numbers: write "one" but use numerals from 2 upwards (2, 9, 25). Use the % symbol with numerals (50%). Use $ with no decimals unless there are cents ($75, $75.50). Spell out millions and billions ($5 million, not $5m). Write ranges with "to", not a hyphen (10 to 20, Monday to Friday).
-- Dates and times: write "June 4, 2026" (no "th"). Use "to" for ranges ("June 4 to June 8"). Write times as "10am to 11:30am"; use "midday" and "midnight".
+- Dates and times: write "June 4, 2026" (no "th"). Use "to" for ranges ("June 4 to June 8"). Write times as "10am to 11:30am". Use "midday" and "midnight".
 - Do not use FAQs. If you have answered the user need in the content, you do not need them. Do not use exclamation marks. Do not use ALL CAPS for emphasis.
 
 ## Simplified Technical English

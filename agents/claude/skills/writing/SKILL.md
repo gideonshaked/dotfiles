@@ -1,6 +1,6 @@
 ---
 name: writing
-description: Use when drafting or editing any prose or copy — reports, research write-ups, guidance, documentation, READMEs, emails, announcements, summaries, blog posts, marketing or product copy, or any text meant to be read. Triggers whenever the user asks to draft, write, rewrite, or polish copy. Applies GOV.UK / GDS house style, favoring plain English, active voice, front-loaded content, sentence case, and no bold or italics for emphasis. Also applies Orwell's rules from 'Politics and the English Language', and switches to ASD-STE100 Simplified Technical English for instructions, error messages, tool descriptions, and messages between agents. Triggers on requests to simplify or disambiguate text, or for an STE100 rewrite.
+description: Use when drafting or editing any prose or copy — reports, research write-ups, guidance, documentation, READMEs, emails, announcements, summaries, blog posts, marketing or product copy, or any text meant to be read. Triggers whenever the user asks to draft, write, rewrite, or polish copy. Applies GOV.UK / GDS house style, favoring plain English, active voice, front-loaded content, sentence case, and no bold or italics for emphasis. Applies Orwell's rules from 'Politics and the English Language' and ASD-STE100 Simplified Technical English at the same time, balancing the sources by judgement. Simplified Technical English stays on for all prose unless the author explicitly asks for it to be switched off, and Claude announces that it is in use and offers to switch it off. Triggers on requests to simplify or disambiguate text, or for an STE100 rewrite.
 user-invokable: true
 args:
   - name: target
@@ -14,23 +14,28 @@ Apply it to reports, research write-ups, guidance and any prose meant to be read
 
 Three separate bodies of guidance sit below, kept apart so you can see which is which: the GOV.UK house style, Orwell's rules from 'Politics and the English Language', and ASD-STE100 Simplified Technical English.
 
-## Which mode to use
+## Apply all three at once
 
-Decide this before you write anything. It changes which rules below apply.
+The GOV.UK house style and Simplified Technical English both apply to everything you write, at the same time. They agree far more than they disagree, because both exist to stop a reader misreading a sentence. Where they pull apart, balance them with your own judgement. Do not look for a rule that settles it for you, and do not pick one source and drop the other.
 
-Default mode covers reports, research write-ups, guidance, documentation, READMEs, emails, announcements, summaries, blog posts, marketing copy and product copy. Draft with the GOV.UK house style, then revise with Orwell's rules and the LLM voice section. Skip the Simplified Technical English section entirely.
+Orwell's rules apply too. Run them over the finished draft as the last pass.
 
-Simplified Technical English mode covers text whose reader cannot ask you a follow-up question:
+### Simplified Technical English stays on
 
-- instructions, procedures and runbooks
-- error messages and log lines
-- tool descriptions, system prompts and messages between agents
-- safety or compliance text where a misreading has a real cost
-- anything going into machine translation
+Keep Simplified Technical English on unless the author explicitly tells you not to use the standard. Do not switch it off on your own judgement. A piece being marketing copy, a blog post or a research write-up is not a reason to turn it off.
 
-In that mode, read the Simplified Technical English section and let it win wherever it disagrees with the house style. It sets its own sentence length caps, and its rule to use a vertical list for every sequence of 3 or more steps overrides the warning against over-structuring. Plain English word choice, sentence case and the ban on bold still hold.
+Announce it in one line alongside the text, then offer to switch it off. For example: "Written to the GOV.UK house style and ASD-STE100 Simplified Technical English. Tell me if you want STE switched off."
 
-Never apply Simplified Technical English to reports, guidance, blog posts, marketing copy or product copy. It is deliberately flat and literal. On prose where voice carries part of the meaning, it strips something the reader needs.
+Switch it off only when the author says so, in words such as "do not use Simplified Technical English", "drop STE" or "no STE100". A general request for warmer, punchier or more persuasive copy is not enough on its own, though it is a good moment to offer. Ask, then wait for the answer.
+
+Simplified Technical English is deliberately flat and literal. When the text is the kind where voice carries part of the meaning, say that in your announcement so the author can decide. Do not decide for them.
+
+### Where the two pull apart
+
+- Register. The house style allows contractions and a warm second person. Simplified Technical English is flat and literal. Lean flat for instructions, procedures, error messages and anything a downstream agent parses. Lean warm for prose a person reads by choice, and keep the Simplified Technical English discipline on word choice and sentence structure while you do.
+- Structure. Simplified Technical English wants a vertical list for any sequence of 3 or more steps or conditions. The LLM voice section warns against over-structuring. Use a list when the content really is a sequence or a set of conditions. Use prose when it is an argument.
+- Sentence length. Take the tighter of the two caps. That is about 20 words for anything instructional, and about 25 at the outside for description.
+- Vocabulary and tense. Where Simplified Technical English is stricter, follow it. Pick one term per idea and reuse it rather than rotating synonyms, and prefer simple tenses. Neither costs the reader anything.
 
 ## GOV.UK house style
 
@@ -138,13 +143,11 @@ Large language models share a set of writing tics that practiced readers now rec
 - Delete throat-clearing openers. "It's worth noting that", "it's important to note", "in today's fast-paced world". Start with the substance. Write "Revenue dropped 15% in Q3", not "It's worth noting that revenue dropped 15% in Q3".
 - Replace hollow transitions. "Moreover", "furthermore", "additionally". Most can be a period, an "and" or an "also". If the link between two sentences is unclear without a formal connector, fix the logic, not the connector.
 
-## Simplified Technical English mode
-
-Read this section only if the mode gate sent you here.
+## Simplified Technical English
 
 ASD-STE100 is a controlled-language standard built by the aerospace and defense industry (ASD, the AeroSpace and Defense Industries Association of Europe) to stop maintenance technicians from misreading English instructions. The standard removes the two biggest sources of misreading: words with more than one meaning, and sentences with more than one possible structure.
 
-This mode borrows that same discipline for a different reader: an AI agent or a downstream system that has to parse an English string, such as an error message, a tool description, an inter-agent instruction or a status report, without a human in the loop to resolve ambiguity. If a maintenance technician can misread "close the valve" as an adjective ("the valve that is near") instead of a command, so can a language model.
+This skill borrows that same discipline for a different reader: an AI agent or a downstream system that has to parse an English string, such as an error message, a tool description, an inter-agent instruction or a status report, without a human in the loop to resolve ambiguity. If a maintenance technician can misread "close the valve" as an adjective ("the valve that is near") instead of a command, so can a language model.
 
 ### Core rewrite rules
 
@@ -184,7 +187,7 @@ Follow the table with a one-line note on anything you deliberately did not simpl
 
 ### Limits
 
-This mode does not reproduce ASD's official dictionary of roughly 900 approved words, each restricted to one meaning and one part of speech, or its roughly 1,200 words to avoid. That is ASD's own free-to-download standard, not something to copy wholesale. It applies the underlying principle instead: pick the plainest, most common word available and use it the same way every time.
+This skill does not reproduce ASD's official dictionary of roughly 900 approved words, each restricted to one meaning and one part of speech, or its roughly 1,200 words to avoid. That is ASD's own free-to-download standard, not something to copy wholesale. It applies the underlying principle instead: pick the plainest, most common word available and use it the same way every time.
 
 When exact ASD-approved wording matters, such as actual aircraft maintenance documentation, download the official standard from asd-ste100.org and check word by word against the real dictionary. This is a general-purpose clarity tool inspired by STE, not a certified STE authoring tool.
 
@@ -197,7 +200,8 @@ When exact ASD-approved wording matters, such as actual aircraft maintenance doc
 - Is everything in sentence case, with descriptive headings and links?
 - Did you run Orwell's six rules and six questions over the draft, and hunt the four habits?
 - Have you cleared the LLM tics: dense punctuation, "not X but Y", jargon, self-reference to earlier decisions, stacked qualifiers, false balance and throat-clearing openers?
-- If the mode gate sent you to Simplified Technical English, does the text comply with it, and did you flag anything you left unsimplified?
+- Does the text comply with Simplified Technical English, and did you flag anything you left unsimplified?
+- Did you announce that you wrote to Simplified Technical English, and offer to switch it off?
 - Could you cut any more words without losing meaning? If yes, cut them.
 
 ## Note on this skill's own scope

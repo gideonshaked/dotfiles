@@ -129,5 +129,5 @@ Three words appear on both lists, which makes them the safest to cut on sight: p
 ## Sources
 
 - [GOV.UK A to Z style guide](https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/style-guides/a-to-z-style-guide/) and the [GOV.UK style guides](https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/style-guides/) index, published by the Government Digital Service under the Open Government Licence.
-- [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/), Issue 9 (January 2025). The rules above paraphrase the public rule categories, by way of the [asd-ste100-skill](https://github.com/danyuchn/asd-ste100-skill) by Dustin Yuchen Teng, MIT license.
+- [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/), Issue 9 (January 2025). The rules above paraphrase its Section 1 and Section 3 rules.
 - George Orwell, ['Politics and the English Language'](https://www.orwellfoundation.com/the-orwell-foundation/orwell/essays-and-other-works/politics-and-the-english-language/) (1946), for the overlap noted above.

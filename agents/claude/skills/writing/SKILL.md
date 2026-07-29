@@ -109,48 +109,70 @@ ASD-STE100 is a controlled-language standard built by the aerospace and defense 
 
 This skill applies that discipline to everything it writes. The reader it protects is anyone who cannot ask you a follow-up question, which covers a non-native English speaker, a translation pipeline, someone reading in a hurry, and an agent or downstream system parsing your output. If a maintenance technician can misread "close the valve" as an adjective, meaning the valve that is near, instead of as a command, so can a reader under time pressure, and so can a language model.
 
-### Core rules
+The rules below run from the word up to the whole text, which is the order you meet them while writing.
 
-| Rule | Do | Don't |
-|---|---|---|
-| One word, one meaning | Pick one verb for one action and reuse it every time (always "check", never mix "check"/"verify"/"confirm" for the same action) | Rotate synonyms for the same idea across a document |
-| One part of speech per word | "Apply oil to the valve" (oil = noun) | "Oil the valve" (oil = verb), if "oil" is only approved as a noun |
-| Precise verb meaning | "Obey the safety instructions." | "Follow the safety instructions.", where "follow" can also mean "come after" |
-| Active voice | "The agent deletes the file." | "The file is deleted (by the agent).", unless the actor is genuinely unknown or irrelevant |
-| Simple tenses only | "We received the report." (simple past) | "We have received the report." (present perfect) |
-| One instruction per sentence | One instruction per sentence, unless two or more actions genuinely happen at the same time. "Open the file. Read line 3." | "Open the file and read line 3, then check if it matches." |
-| Sentence length | 20 words or fewer for instructions and procedures, 25 or fewer for descriptions | Long compound or subordinate-clause sentences |
-| Noun clusters | 3 words or fewer stacked as a noun phrase ("fuel pump valve"). Where a technical noun runs longer than 3 words, write it out in full instead of stacking it | Stacks of 4 or more words ("high pressure fuel pump inlet valve assembly") |
-| No ellipsis | Keep the subject, verb, and article explicit even if it reads longer | Drop words to save space ("Files not backed up will be lost" leaves it ambiguous which files) |
-| Paragraph limits | One topic per paragraph, 6 sentences or fewer | Multi-topic paragraphs |
-| Lists for sequences | Use a numbered or bulleted list for 3 or more steps or conditions | Bury a sequence inside one prose sentence |
-| Domain terms | Keep necessary technical nouns and verbs, but define them once if not common English | Use jargon without ever defining it |
+### How to write this way
 
-Also from the standard: the permitted verb forms are the infinitive, imperative, simple present, simple past, simple future, and the past participle used only as an adjective. Use "-ing" forms only as a technical noun or as part of one, never as a verb form.
+Apply the rules as you draft, so the first version already reads this way and you never translate a finished draft into it.
 
-### Words and terminology
+- Fix the verb for each recurring action before you start, then reuse it. Choosing once is far less work than retrofitting consistency later.
+- Write the sentence you mean, then check its length. Where it runs past the cap, find the second idea inside it and give that idea its own sentence.
+- Never trade away precision to satisfy a rule. Where keeping a condition, a scope qualifier or a number costs you a longer sentence, keep the longer sentence.
+- Edit in place. Change the sentence and carry on. Do not produce a violations report, a before and after table, or a list of the rules an earlier draft broke, unless the author asks to see the changes.
 
-- Reach outside the approved vocabulary only for a genuine technical noun or technical verb. That is the single exception, not a general license to pick a better word.
+### Words
+
+- Use a word only in the part of speech and the meaning it is approved for. A word approved as a noun stays a noun, so write "apply oil to the valve", not "oil the valve".
+- One word carries one meaning. Do not lean on the surrounding sentence to tell the reader which sense you meant.
+- Prefer the plain, short, common word to the formal or rare one.
+- Name each action with one term and reuse it everywhere. Write "check" throughout rather than rotating check, verify and confirm for the same act.
+- Reach outside the approved vocabulary only for a genuine technical noun or technical verb. That is the one exception, not a general license to pick a better word.
 - Do not press a technical noun into service as a verb, and do not turn a technical verb into a noun. Each word keeps the role it was approved for.
-- Where you must choose a technical noun, pick the short, easy one over the impressive one.
-- Never use a regional word, a slang word or a jargon word as a technical noun.
-- Use one technical noun per item. Do not call the same thing by two names anywhere in a document.
-- Use American spelling. See the spelling entry under balancing the two standards for the two exemptions.
+- Where you must choose a technical noun, pick the short, easy one over the impressive one, and never a regional, slang or jargon word.
+- Give each item one name. Do not call the same thing by two names anywhere in a document.
+- Define any technical term that is not common English, once, at first use.
+- Stack at most 3 words into a noun phrase, so "fuel pump valve" is fine. Where a technical noun runs longer than that, write it out in full instead of stacking it, rather than producing "high pressure fuel pump inlet valve assembly".
+- Use American spelling. The spelling entry under balancing the two standards carries the two exemptions.
+
+### Verbs and tense
+
+- Use only the verb forms the dictionary gives, which are the infinitive, the imperative, the simple present, the simple past and the simple future.
+- Use a past participle only as an adjective.
+- Do not build a compound construction out of auxiliary verbs. Write "we received the report", not "we have received the report".
+- Use an "-ing" form only as a technical noun, or as a modifier inside one. Never as a verb form.
+- Use the active voice. Passive is allowed in description only, and only where the actor is genuinely unknown or does not matter to the reader. Write "the agent deletes the file", not "the file is deleted".
+- Name an action with a verb, not with a noun or some other part of speech.
+- Choose the verb with a single reading. Write "obey the safety instructions", because "follow" can also mean "come after".
+- Do not build a phrasal verb by pairing a verb with a particle. Use the single verb that means the thing.
 
 ### Sentences
 
-- Do not drop words to shorten a sentence, and do not use contractions to shorten one either. A shorter sentence bought this way reads as ambiguous rather than crisp.
-- Keep the article or the demonstrative adjective where one applies. Write "the valve" or "this valve", not a bare "valve", because the bare noun leaves the reader guessing which one you mean.
+- Keep sentences short and clear. Use at most 20 words in an instruction and at most 25 in description.
+- Write one instruction per sentence, unless two or more actions genuinely happen at the same time. Write "Open the file. Read line 3.", not "Open the file and read line 3, then check if it matches."
+- Do not drop words to shorten a sentence, and do not use contractions to shorten one either. A sentence bought that way reads as ambiguous rather than crisp, so "files not backed up will be lost" leaves the reader guessing which files.
+- Keep the article or the demonstrative adjective where one applies. Write "the valve" or "this valve", not a bare "valve".
 - Use connecting words and phrases so the reader can follow how one sentence bears on the next.
-- Use a vertical list whenever the text turns complex, not only when it is a numbered sequence.
+- Recast the sentence when a word-for-word fix will not comply. Changing the construction beats forcing the original shape.
 
-### Rules by text type
+### Paragraphs and lists
 
-The standard splits its remaining rules by what you are writing.
+- Use a paragraph to group information that belongs together.
+- Give each paragraph one topic, and stop at 6 sentences.
+- Go vertical whenever the text turns complex, and for any sequence of 3 or more steps or conditions. Do not bury a sequence inside one prose sentence.
 
-Instructions and steps:
+### Punctuation and word count
 
-- Write instructions in the imperative. "Open the file", not "the file should be opened".
+- Use any standard English punctuation mark except the semicolon, which the standard excludes outright.
+- Use hyphens to join words that are directly related.
+- Counting words against the caps above: a number, a number with its unit, an abbreviation, an alphanumeric identifier, quoted text, a title or label, and a proper noun each count as one word. So does a hyphenated word, and so does a parenthetical. In a vertical list, a colon counts like a period.
+
+### Instructions, description, and safety
+
+The standard treats these three separately, because the reader is doing something different in each.
+
+Instructions:
+
+- Write them in the imperative. "Open the file", not "the file should be opened".
 - Where the reader must know a condition first, open the sentence with that condition. Write "If the strategy allows automatic resolution, the tool resolves the conflict." Do not hang the condition off the end.
 - Use a note to give information only. Never put an instruction inside a note.
 
@@ -158,35 +180,12 @@ Description, meaning prose the reader reads rather than follows:
 
 - Introduce information in stages. This is the inverted pyramid again: the conclusion first, then detail as the reader needs it, rather than one dense passage carrying everything.
 - Use key words and repeated phrases to give the text a structure the reader can follow.
-- Use a paragraph to group information that belongs together. The one-topic and 6-sentence limits are in the table above.
 
 Safety instructions:
 
 - Open with a signal word naming the level of risk, such as warning or caution.
 - Follow it with a clear, accurate command or condition.
 - Explain the risk or the possible result, so the reader knows why the instruction matters.
-
-### Punctuation and counting
-
-- Use any standard English punctuation mark except the semicolon, which the standard excludes outright.
-- Use hyphens to join words that are directly related.
-- Counting words against the caps above: a number, a number with its unit, an abbreviation, an alphanumeric identifier, quoted text, a title or label, and a proper noun each count as one word. So does a hyphenated word, and so does a parenthetical. In a vertical list, a colon counts like a period.
-
-### Other practices
-
-- Recast the sentence when a word-for-word fix will not comply. Changing the construction beats forcing the original shape.
-- Do not build a phrasal verb by pairing a verb with a particle. Use the single verb that means the thing.
-- Keep terminology and wording consistent once you have chosen it.
-
-### Writing this way from the start
-
-These rules are for composing. Apply them as you draft, so the first version already reads this way and you never translate a finished draft into it.
-
-- Fix the verb for each recurring action before you start, then reuse it. Choosing once is far less work than retrofitting consistency across a finished draft.
-- Write the sentence you mean, then check its length. If it runs past the cap, find the second idea inside it and give that idea its own sentence.
-- Never trade away precision to satisfy a rule. Where keeping a condition, a scope qualifier or a number costs you a longer sentence, keep the longer sentence.
-
-Edit the same way. Change the sentence in place and carry on. Do not produce a violations report, a before and after table, or a list of the rules an earlier draft broke, unless the author asks to see the changes.
 
 ### Limits
 
@@ -272,5 +271,5 @@ The "no bold" and formatting rules apply to the prose you produce (reports, guid
 One entry per source, in the order the sections appear above.
 
 - GOV.UK house style, from the [GOV.UK style guides](https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/style-guides/) and the [GOV.UK A to Z style guide](https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/style-guides/a-to-z-style-guide/), published by the Government Digital Service.
-- Simplified Technical English, from [ASD-STE100](https://www.asd-ste100.org/), Issue 9 (January 2025), free to download. That section is adapted from the [asd-ste100-skill](https://github.com/danyuchn/asd-ste100-skill) by Dustin Yuchen Teng, MIT license. It paraphrases the rule categories and does not reproduce the standard or its dictionary of approved words. It also departs from the standard in one place, dropping the terminology allowance that lets a project approve technical words of its own beyond the base dictionary.
+- Simplified Technical English, from [ASD-STE100](https://www.asd-ste100.org/), Issue 9 (January 2025), free to download. That section paraphrases the rules across its nine sections and does not reproduce the standard or its dictionary of approved words. It departs from the standard in one place, dropping the terminology allowance that lets a project approve technical words of its own beyond the base dictionary.
 - Orwell's rules, from ['Politics and the English Language'](https://www.orwellfoundation.com/the-orwell-foundation/orwell/essays-and-other-works/politics-and-the-english-language/) (1946), full text at the Orwell Foundation. The six rules and the six questions are quoted from it, though the original numbers the rules with roman numerals. The example words and phrases are a short selection from his longer lists. The plain verbs and the present-day cliches are this skill's additions, not his.

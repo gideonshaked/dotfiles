@@ -88,6 +88,7 @@ This fits front-loading: the main idea leads, and the link carries the reader on
 - Avoid metaphors and clichés: drive, unlock, deep dive, robust, key, ring-fence, hub, portal, landscape, ecosystem, going forward.
 - Address the reader as "you". Write about yourself or the organization as "we". Use "they", "them" and "their" rather than gendered pronouns. Write "disabled people", not "the disabled".
 - Contractions are fine for a warmer tone (we'll, you'll), but avoid negative contractions — write "cannot", not "can't" — and avoid "should've", "could've", "would've".
+- A word on any avoid list stays available when it is the exact technical term for the thing and the plain alternative would be vaguer or simply wrong. Write "deploy" for a software release, "leverage" for the financial instrument, "robust" for the statistical property, "impact" for a physical collision. The test is whether the word carries meaning the reader needs, not whether it appears on a list. Where you keep one this way, keep it because it is the term of art, not because it sounds better.
 
 ### Formatting
 
@@ -200,7 +201,7 @@ George Orwell set out six rules in 'Politics and the English Language' (1946).
 5. Never use a foreign phrase, a scientific word, or a jargon word if you can think of an everyday English equivalent.
 6. Break any of these rules sooner than say anything outright barbarous.
 
-Rule 6 is the one people drop. The rules serve clarity, so break one when following it would make a sentence clumsy or change its meaning. It applies to the two standards above as well as to Orwell's own five rules.
+Rule 6 is the one people drop. The rules serve clarity, so break one when following it would make a sentence clumsy or change its meaning. It applies to the two standards above as well as to Orwell's own five rules, and it is what licenses keeping a word off an avoid list when that word is the right technical term. A rule that has started fighting the meaning has stopped doing its job.
 
 ### The four habits to hunt
 
@@ -262,8 +263,6 @@ The "no bold" and formatting rules apply to the prose you produce (reports, guid
 
 ## Sources
 
-One entry per source, in the order the sections appear above.
-
-- GOV.UK house style, from the [GOV.UK style guides](https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/style-guides/) and the [GOV.UK A to Z style guide](https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/style-guides/a-to-z-style-guide/), published by the Government Digital Service.
-- Simplified Technical English, from [ASD-STE100](https://www.asd-ste100.org/), Issue 9 (January 2025), free to download. That section paraphrases the rules across its nine sections and does not reproduce the standard or its dictionary of approved words. It departs from the standard in one place, dropping the terminology allowance that lets a project approve technical words of its own beyond the base dictionary.
-- Orwell's rules, from ['Politics and the English Language'](https://www.orwellfoundation.com/the-orwell-foundation/orwell/essays-and-other-works/politics-and-the-english-language/) (1946), full text at the Orwell Foundation. The six rules and the six questions are quoted from it, though the original numbers the rules with roman numerals. The example words and phrases are a short selection from his longer lists. The plain verbs and the present-day cliches are this skill's additions, not his.
+- [GOV.UK style guides](https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/style-guides/) and the [GOV.UK A to Z style guide](https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/style-guides/a-to-z-style-guide/), published by the Government Digital Service.
+- [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/), Issue 9 (January 2025).
+- George Orwell, ['Politics and the English Language'](https://www.orwellfoundation.com/the-orwell-foundation/orwell/essays-and-other-works/politics-and-the-english-language/) (1946). The present-day cliches and the plain-verb replacements are this skill's, not his.

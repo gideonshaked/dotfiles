@@ -74,17 +74,6 @@
           }
         ]
       }
-    ],
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash /Users/gideon/.ai-dev-kit/repo/.claude-plugin/check_update.sh",
-            "timeout": 5
-          }
-        ]
-      }
     ]
   },
   "statusLine": {
@@ -110,7 +99,8 @@
     "octant-chem-utils@octant-agent-plugin-marketplace": true,
     "octant-comp-chem@octant-agent-plugin-marketplace": true,
     "pyright-lsp@claude-plugins-official": true,
-    "octomind-rolling@octant-agent-plugin-marketplace": true
+    "octomind-rolling@octant-agent-plugin-marketplace": true,
+    "databricks@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "agentic-peer-review": {

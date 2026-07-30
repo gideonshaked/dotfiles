@@ -1,6 +1,6 @@
 # Word choice
 
-Read this when a word is in dispute. It has two sections. The GOV.UK words are listed here in full. The Simplified Technical English words are looked up in the local copy of the standard, which is linked below.
+Read this when a word is in dispute. It has two sections. The GOV.UK words are listed here in full. The Simplified Technical English words are in `ste100-words.txt` next to this file, which you grep for the word rather than read.
 
 Do not open this on every draft. The plain English section of the skill covers the common cases. Come here when the author questions a word, asks why you picked it, or challenges the register.
 
@@ -10,7 +10,7 @@ Work through these in order and stop at the first one that decides it.
 
 1. Check whether the word is the term of art. A word on an avoid list stays available when it is the exact technical term and the plain alternative would be vaguer or wrong, as with "deploy" for a software release or "robust" for the statistical property. Keep it, and say which domain it is the term in. Orwell's sixth rule is what licenses this.
 2. Check the GOV.UK tables below. If the word sits in an Avoid column and step 1 did not save it, the house style has settled it. Make the swap and name the entry.
-3. Look the word up in the local copy of the standard, following the instructions in the second section. That is the only authority on whether a word is approved and in which sense.
+3. Grep the word in `ste100-words.txt`, as the second section explains. That file is the authority on whether a word is approved and in which sense.
 4. Check whether you rotated synonyms. If one action appears as check in one place and verify in another, pick one and use it throughout.
 5. If nothing above decides it, the choice was a judgment call. Say so, give your reason, and defer to the author.
 
@@ -79,32 +79,32 @@ Listed here in full, from the [GOV.UK A to Z style guide](https://guidance.publi
 
 ## Simplified Technical English words
 
-Look these up in the local copy of the standard.
+The whole word list from Part 2, Dictionary, of [ASD-STE100](https://www.asd-ste100.org/) Issue 9 sits in `ste100-words.txt`, next to this file. It holds 2,198 entries, one per line. Search it, do not read it. The standard is the authority, so follow the link when an entry looks wrong.
 
-### The local copy
+### Searching the word list
 
-- [ASD-STE100_ISSUE9.txt](file:///Users/gideon/.claude/reference/ASD-STE100_ISSUE9.txt), a text extraction, best for searching
-
-Read them at these paths:
+Grep for the word with a trailing space, so you match the entry and not a mention of the word in someone else's entry:
 
 ```
-~/.claude/reference/ASD-STE100_ISSUE9.txt
+grep -i "^work " references/ste100-words.txt
 ```
 
-### How to read an entry
-
-- Case carries the verdict. A word printed in UPPERCASE is approved. A word printed in lowercase is not approved.
-- Each entry pairs an approved example against a rejected one. The word list's third column holds the STE example and the fourth holds the non-STE example.
-
-### Where to look
-
-Search the text rather than trusting page numbers, which move between issues.
+That returns every entry for that spelling, in either verdict:
 
 ```
-grep -n "List of approved verbs" ~/.claude/reference/ASD-STE100_ISSUE9.txt
+WORK (n) | approved | that which you do when you use physical strength, or mental power | -
+work (v) | not approved | - | WORK (n)
 ```
 
-The document has two parts. Part 1, Writing rules, holds nine sections: Words, Multi-word nouns, Verbs, Sentences, Procedural writing, Descriptive writing, Safety instructions, Punctuation and word count, and Writing practices. Part 2, Dictionary, holds an introduction, the alphabetical word list, and a standalone list of approved verbs that Issue 9 added to that introduction. For a question about a verb, search that list first, since it is far shorter than the full word list.
+The fields are the word with its part of speech, the verdict, the approved meaning, and what to use instead. A dash means the field does not apply. The file's own header carries the same key.
+
+Three things the entries turn on:
+
+- The part of speech is part of the verdict. A word approved as a noun is not approved as a verb, so WORK (n) tells you nothing about "work" as a verb. Each part of speech gets its own line.
+- The approved meaning is part of the verdict. Where a word is approved in one sense only, the fourth field gives what to use for the other senses, as with ABOUT (prep), which is approved for "concerned with" but not for "approximately".
+- (TN) marks a technical noun and (TV) a technical verb. These name a category rather than a word: the standard leaves them open for the terms your own subject needs, on the conditions in the rules below.
+
+Where a word is not approved and the standard gives no substitute, the fourth field carries its guidance instead, as with "except", which asks you to recast the sentence. The standard's example sentences are not reproduced.
 
 ### The rules behind the entries
 

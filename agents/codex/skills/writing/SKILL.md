@@ -40,7 +40,7 @@ Simplified Technical English is deliberately flat and literal. When the text is 
 
 ### When a word choice is questioned
 
-`references/word-choice.md` holds the word choice reference. It has two sections. The GOV.UK words to avoid are listed there in full with their plain replacements. The Simplified Technical English words are looked up in a local copy of the standard, which the file links and gives search instructions for.
+`references/word-choice.md` holds the word choice reference. It has two sections. The GOV.UK words to avoid are listed there in full with their plain replacements. The Simplified Technical English words are in `references/ste100-words.txt`, the whole word list from Part 2 of the standard, one entry per line. Grep that file for the word rather than reading it, and read word-choice.md for how to read a hit.
 
 Read it when the author questions a word you used, asks why you chose it, or challenges the register. Do not open it on every draft, because the plain English section below covers the common cases. Reach for it when a specific choice is in dispute, and quote the rule that settles it rather than restating your preference. If no rule settles it, say the choice was a judgment call and defer to the author rather than inventing an authority.
 

@@ -1,6 +1,6 @@
 ---
 name: writing
-description: Use when drafting or editing any prose or copy — reports, research write-ups, guidance, documentation, READMEs, emails, announcements, summaries, blog posts, marketing or product copy, or any text meant to be read. Triggers whenever the user asks to draft, write, rewrite, or polish copy. Applies GOV.UK / GDS house style, favoring plain English, active voice, front-loaded content, sentence case, and no bold or italics for emphasis. Balances that house style against ASD-STE100 Simplified Technical English, then runs Orwell's rules from 'Politics and the English Language' over the result. Simplified Technical English stays on for all prose unless the author explicitly asks for it to be switched off, and Claude announces that it is in use and offers to switch it off. Use it to compose new prose and to keep editing, not to audit finished text.
+description: Use when drafting or editing prose or copy, including reports, research write-ups, guidance, documentation, READMEs, emails, announcements, summaries, blog posts, marketing copy, product copy, or any text meant to be read. Triggers whenever the user asks to draft, write, rewrite, edit, or polish copy. Applies GOV.UK and GDS house style, favoring plain English, active voice, front-loaded content, sentence case, and no bold or italics for emphasis. Balances that house style against ASD-STE100 Simplified Technical English, then runs Orwell's rules from 'Politics and the English Language' over the result. Simplified Technical English stays on for all prose unless the author explicitly asks for it to be switched off, and the agent announces that it is in use and offers to switch it off. Use it to compose new prose and to keep editing, not to audit finished text.
 user-invokable: true
 args:
   - name: target
@@ -8,7 +8,7 @@ args:
     required: false
 ---
 
-Open the content up so anyone can understand it the first time they read it — without losing any of the substance, nuance or precision. The goal is to open up, not to dumb down. This skill applies the GOV.UK style guide and the Government Digital Service (GDS) content design principles. It is based on the GOV.UK A to Z style guide and writing guidelines (guidance.publishing.service.gov.uk).
+Open the content up so anyone can understand it the first time they read it, without losing any of the substance, nuance or precision. The goal is to open up, not to dumb down. This skill applies the GOV.UK style guide and the Government Digital Service (GDS) content design principles. It is based on the GOV.UK A to Z style guide and writing guidelines (guidance.publishing.service.gov.uk).
 
 Apply it to reports, research write-ups, guidance and any prose meant to be read. When you write a report, default to this style. When you brief a research agent, pass this skill so its report follows the same style.
 
@@ -45,7 +45,7 @@ Simplified Technical English is deliberately flat and literal. When the text is 
 
 ### When a word choice is questioned
 
-`references/word-choice.md` holds the word choice reference. It has two sections. The GOV.UK words to avoid are listed there in full with their plain replacements. The Simplified Technical English words are looked up in a local copy of the standard, which the file links and gives search instructions for.
+`references/word-choice.md` holds the word choice reference. It has two sections. The GOV.UK words to avoid are listed there in full with their plain replacements. The Simplified Technical English words are in `references/ste100-words.txt`, the whole word list from Part 2 of the standard, one entry per line. Grep that file for the word rather than reading it, and read word-choice.md for how to read a hit.
 
 Read it when the author questions a word you used, asks why you chose it, or challenges the register. Do not open it on every draft, because the plain English section below covers the common cases. Reach for it when a specific choice is in dispute, and quote the rule that settles it rather than restating your preference. If no rule settles it, say the choice was a judgment call and defer to the author rather than inventing an authority.
 
@@ -54,7 +54,7 @@ Read it when the author questions a word you used, asks why you chose it, or cha
 ### Content design principles
 
 - Start from the user need. Write what the reader needs to know to do or decide something, not what you want to say.
-- Front-load everything. Put the most important point first — in the document, each section, each paragraph and each sentence. Use the inverted pyramid: conclusion first, then detail, then background.
+- Front-load everything. Put the most important point first in the document, each section, each paragraph and each sentence. Use the inverted pyramid: conclusion first, then detail, then background.
 - One idea per sentence. One topic per paragraph. If a sentence has more than one idea, split it.
 - Be specific and concrete. Give the number, the name, the date. Cut vague abstractions ("a range of", "going forward", "in terms of").
 - Cut everything that does not add meaning. Shorter is clearer. Remove duplication.
@@ -72,9 +72,9 @@ This fits front-loading: the main idea leads, and the link carries the reader on
 
 ### Plain English
 
-- Open it up, do not dumb it down. Keep all the substance, nuance and precision. Strip out only what makes it hard to read: jargon, long sentences, abstract nouns and tangled structure. A non-specialist and an expert should both grasp it on first read. Plain English carries complex ideas better, not worse — even experts read faster and prefer it.
+- Open it up, do not dumb it down. Keep all the substance, nuance and precision. Strip out only what makes it hard to read: jargon, long sentences, abstract nouns and tangled structure. A non-specialist and an expert should both grasp it on first read. Plain English carries complex ideas better, not worse, and even experts read faster and prefer it.
 - Use the active voice. Say who does what. Write "We reviewed the data", not "The data was reviewed".
-- Keep sentences short — about 15 to 20 words, never more than about 25. Keep paragraphs short.
+- Keep sentences short, about 15 to 20 words, never more than about 25. Keep paragraphs short.
 - Use everyday words. Replace jargon and "government-speak" with plain alternatives:
   - use, not utilize or leverage
   - help, not facilitate or empower
@@ -90,17 +90,17 @@ This fits front-loading: the main idea leads, and the link carries the reader on
   - effect on, not impact on (do not use impact as a verb)
 - Avoid metaphors and clichés: drive, unlock, deep dive, robust, key, ring-fence, hub, portal, landscape, ecosystem, going forward.
 - Address the reader as "you". Write about yourself or the organization as "we". Use "they", "them" and "their" rather than gendered pronouns. Write "disabled people", not "the disabled".
-- Contractions are fine for a warmer tone (we'll, you'll), but avoid negative contractions — write "cannot", not "can't" — and avoid "should've", "could've", "would've".
+- Contractions are fine for a warmer tone (we'll, you'll), but avoid negative contractions. Write "cannot", not "can't". Avoid "should've", "could've", "would've".
 - A word on any avoid list stays available when it is the exact technical term for the thing and the plain alternative would be vaguer or simply wrong. Write "deploy" for a software release, "leverage" for the financial instrument, "robust" for the statistical property, "impact" for a physical collision. The test is whether the word carries meaning the reader needs, not whether it appears on a list. Where you keep one this way, keep it because it is the term of art, not because it sounds better.
 
 ### Formatting
 
 - Do not use bold or italics for emphasis. Plain words and good structure carry the meaning. Bold is only acceptable to name a literal interface element in an instruction, for example: select Save. Use single quotation marks for the titles of schemes or documents, not italics.
-- Use sentence case everywhere — headings, titles, table headers, the lot. Capitalize only proper nouns.
+- Use sentence case everywhere, including headings, titles, and table headers. Capitalize only proper nouns.
 - Headings: front-load them, keep them under about 65 characters, make them unique and descriptive. No period, dash, slash or question mark. Use them to let people skim.
 - Bullet points: introduce the list with a lead-in line that ends in a colon. Start each bullet lowercase. Keep each to one idea. No "and"/"or" after each item, no semicolons, no period after the last bullet (unless a bullet is itself a full sentence).
 - Numbered steps: use a numbered list only for a sequence the reader follows in order. Steps are full sentences and end with a period. No lead-in colon needed.
-- Links: use descriptive link text that says where the link goes — front-load the key words. Never write "click here" or "read more". The link text should make sense out of context.
+- Links: use descriptive link text that says where the link goes, and front-load the key words. Never write "click here" or "read more". The link text should make sense out of context.
 - Do not use Latin abbreviations. Write "for example" not "eg", "that is" not "ie", "and so on" or "such as" not "etc". They confuse screen readers and some readers.
 - Ampersands: write "and", not "&" (except in a registered name or logo).
 - Numbers: write "one" but use numerals from 2 upwards (2, 9, 25). Use the % symbol with numerals (50%). Use $ with no decimals unless there are cents ($75, $75.50). Spell out millions and billions ($5 million, not $5m). Write ranges with "to", not a hyphen (10 to 20, Monday to Friday).
@@ -262,7 +262,7 @@ Work down the list in order. It follows the two layers, standards first, then th
 
 ## Note on this skill's own scope
 
-The "no bold" and formatting rules apply to the prose you produce (reports, guidance, summaries). Code, data tables and direct quotations keep their own conventions. Markdown headings and lists are fine — they are structure, not emphasis.
+The "no bold" and formatting rules apply to the prose you produce (reports, guidance, summaries). Code, data tables and direct quotations keep their own conventions. Markdown headings and lists are structure, not emphasis.
 
 ## Sources
 

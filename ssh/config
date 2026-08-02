@@ -12,7 +12,7 @@ Host github.com
 	# otherwise offers the read-only octomind deploy key and breaks pushes.
 	IdentitiesOnly yes
 	IdentityAgent none
-	IdentityFile ~/.ssh/id_ed25519_octant_github
+	IdentityFile ~/.ssh/id_ed25519_github
 
 
 ########

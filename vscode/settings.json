@@ -85,7 +85,6 @@
 	"material-icon-theme.folders.theme": "specific",
 	"vscode-json-editor.theme": "dark",
 	"C_Cpp.enhancedColorization": "enabled",
-	"workbench.colorTheme": "Syntax Material Dark Level 1 (beta)",
 	"C_Cpp.intelliSenseEngine": "disabled",
 	"latex-utilities.message.update.show": false,
 	"latex-utilities.countWord.format": "${words} Words, ${chars} Chars",
@@ -179,5 +178,6 @@
 		"**/.gitea/workflows/*.yaml",
 		"**/.forgejo/workflows/*.yml",
 		"**/.forgejo/workflows/*.yaml"
-	]
+	],
+	"workbench.colorTheme": "Monokai Dimmed"
 }

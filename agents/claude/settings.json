@@ -100,7 +100,8 @@
     "octant-comp-chem@octant-agent-plugin-marketplace": true,
     "pyright-lsp@claude-plugins-official": true,
     "octomind-rolling@octant-agent-plugin-marketplace": true,
-    "databricks@claude-plugins-official": true
+    "databricks@claude-plugins-official": true,
+    "i-have-adhd@i-have-adhd": true
   },
   "extraKnownMarketplaces": {
     "agentic-peer-review": {
@@ -151,6 +152,12 @@
         "repo": "octantbio/octant-agent-plugin-marketplace"
       },
       "autoUpdate": true
+    },
+    "i-have-adhd": {
+      "source": {
+        "source": "github",
+        "repo": "ayghri/i-have-adhd"
+      }
     }
   },
   "spinnerTipsEnabled": false,

@@ -5,8 +5,9 @@
     "pr": ""
   },
   "permissions": {
-    "defaultMode": "bypassPermissions"
+    "defaultMode": "auto"
   },
+  "model": "opus[1m]",
   "hooks": {
     "PostToolUse": [
       {
@@ -193,6 +194,8 @@
   },
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
+  "skipAutoPermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
   "theme": "dark",
   "preferredNotifChannel": "kitty",
   "autoCompactEnabled": false,

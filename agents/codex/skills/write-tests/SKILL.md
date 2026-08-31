@@ -111,6 +111,7 @@ Before finishing, check each test against these criteria:
 ```python
 import pytest
 
+
 class TestCalculateTax:
     def test_calculates_tax_for_positive_amount(self):
         result = calculate_tax(amount=100, rate=0.08)
@@ -124,11 +125,14 @@ class TestCalculateTax:
         with pytest.raises(ValueError, match="must be positive"):
             calculate_tax(amount=-100, rate=0.08)
 
-    @pytest.mark.parametrize("amount,rate,expected", [
-        (100, 0.10, 10.0),
-        (200, 0.05, 10.0),
-        (0, 0.10, 0.0),
-    ])
+    @pytest.mark.parametrize(
+        "amount,rate,expected",
+        [
+            (100, 0.10, 10.0),
+            (200, 0.05, 10.0),
+            (0, 0.10, 0.0),
+        ],
+    )
     def test_calculates_correctly_for_various_inputs(self, amount, rate, expected):
         assert calculate_tax(amount, rate) == expected
 ```

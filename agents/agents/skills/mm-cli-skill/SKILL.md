@@ -197,19 +197,19 @@ Create a `.py` file in `python/mm/encoders/image/`, `python/mm/encoders/video/` 
 from pathlib import Path
 from mm.encoders import register_encoder
 
+
 @register_encoder(media_types=("image",))
 def my_custom(path: Path, **kw):
     """Registered as 'my-custom' (auto-named from function)."""
     import base64, io
     from PIL import Image
+
     img = Image.open(path)
     img.thumbnail((1024, 1024))
     buf = io.BytesIO()
     img.save(buf, "JPEG", quality=90)
     b64 = base64.b64encode(buf.getvalue()).decode()
-    yield {"role": "user", "content": [
-        {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{b64}"}}
-    ]}
+    yield {"role": "user", "content": [{"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{b64}"}}]}
 ```
 
 ### Python API
@@ -218,13 +218,14 @@ def my_custom(path: Path, **kw):
 from mm import process_image, process_image_tiled, process_video, process_document
 from pathlib import Path
 
-msg = process_image(Path("photo.png"), max_width=1024)       # Single Message dict
+msg = process_image(Path("photo.png"), max_width=1024)  # Single Message dict
 tiles = list(process_image_tiled(Path("scan.png"), tile_size=1024))  # Multiple Messages
-chunks = list(process_video(Path("video.mp4")))               # Multiple Messages
-pages = list(process_document(Path("doc.pdf")))               # Multiple Messages
+chunks = list(process_video(Path("video.mp4")))  # Multiple Messages
+pages = list(process_document(Path("doc.pdf")))  # Multiple Messages
 
 # Via Context
 from mm import Context
+
 ctx = Context("~/data")
 messages = ctx.encode("photo.png", strategy="resize")
 ```

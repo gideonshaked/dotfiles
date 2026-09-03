@@ -30,6 +30,7 @@
   "enabledPlugins": {
     "beads@beads-marketplace": true,
     "context7@claude-plugins-official": true,
+    "impeccable@impeccable": true,
     "playwright@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true
   },
@@ -44,6 +45,12 @@
       "source": {
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "impeccable": {
+      "source": {
+        "source": "github",
+        "repo": "pbakaus/impeccable"
       }
     }
   },

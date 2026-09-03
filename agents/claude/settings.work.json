@@ -29,15 +29,16 @@
   },
   "enabledPlugins": {
     "beads@beads-marketplace": true,
-    "context7@claude-plugins-official": true,
-    "playwright@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true,
     "cdd-utils@octant-agent-plugin-marketplace": true,
+    "context7@claude-plugins-official": true,
+    "databricks@claude-plugins-official": true,
+    "impeccable@impeccable": true,
     "octant-app-store@octant-agent-plugin-marketplace": true,
     "octant-chem-utils@octant-agent-plugin-marketplace": true,
     "octant-comp-chem@octant-agent-plugin-marketplace": true,
     "octomind-rolling@octant-agent-plugin-marketplace": true,
-    "databricks@claude-plugins-official": true
+    "playwright@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "beads-marketplace": {
@@ -50,6 +51,12 @@
       "source": {
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "impeccable": {
+      "source": {
+        "source": "github",
+        "repo": "pbakaus/impeccable"
       }
     },
     "octant-agent-plugin-marketplace": {

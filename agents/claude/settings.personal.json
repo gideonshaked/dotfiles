@@ -29,7 +29,6 @@
   },
   "enabledPlugins": {
     "beads@beads-marketplace": true,
-    "context7@claude-plugins-official": true,
     "impeccable@impeccable": true,
     "playwright@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true

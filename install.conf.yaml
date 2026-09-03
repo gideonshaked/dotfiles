@@ -54,6 +54,9 @@
 
     # Agents
     ## Claude
+    ~/.claude/CLAUDE.md:
+      path: agents/claude/CLAUDE.md
+      force: true
     ~/.claude/settings.json:
       path: agents/claude/settings.personal.json
       force: true

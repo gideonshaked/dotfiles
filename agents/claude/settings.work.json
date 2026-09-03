@@ -30,7 +30,6 @@
   "enabledPlugins": {
     "beads@beads-marketplace": true,
     "cdd-utils@octant-agent-plugin-marketplace": true,
-    "context7@claude-plugins-official": true,
     "databricks@claude-plugins-official": true,
     "impeccable@impeccable": true,
     "octant-app-store@octant-agent-plugin-marketplace": true,

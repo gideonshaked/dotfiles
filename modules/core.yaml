@@ -1,0 +1,42 @@
+# Core: every machine, every profile.
+
+- defaults:
+    link:
+      relink: true
+      create: true
+
+- clean: ["~", "~/.claude"]
+
+- link:
+    # Shell, shared by zsh and bash
+    ~/.shell-common: term/common.sh
+    ~/.config/starship.toml: term/starship.toml
+    ~/.bashrc.dotfiles:
+      path: term/bashrc
+      force: true
+    ~/.bash_prompt:
+      path: term/bash_prompt.bash
+      force: true
+
+    # Git and SSH
+    ~/.gitalias.txt: git/gitalias.txt
+    ~/.gitignore: git/gitignore
+    ~/.ssh/config: ssh/config
+
+    ~/bin:
+      path: bin
+      force: true
+      backup: true
+
+- shell:
+    - description: Hooking into .bashrc and .bash_profile
+      command: scripts/configure-bash-hooks
+      quiet: true
+      stdout: true
+      stderr: true
+
+    - description: Configuring git aliases
+      command: scripts/configure-git
+      quiet: true
+      stdout: true
+      stderr: true

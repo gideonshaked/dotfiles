@@ -2,13 +2,6 @@
 
 set -euo pipefail
 
-# Full-install only; the minimal install uses bash and does not source the zsh
-# interactive config that depends on these tools.
-if [ "${DOTFILES_INSTALL_MODE:-full}" = "minimal" ]; then
-    echo "shell tools skipped (minimal install)"
-    exit 0
-fi
-
 if ! command -v brew >/dev/null 2>&1; then
     echo "brew not found, skipping shell tools (non-fatal)"
     exit 0

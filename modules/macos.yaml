@@ -1,0 +1,23 @@
+# macOS desktop: zsh interactive setup, GUI apps, Homebrew.
+
+- link:
+    ~/.zshrc: term/zshrc
+    ~/.zshenv:
+      path: term/zshenv
+      force: true
+    ~/.hushlogin:
+      path: term/hushlogin
+      force: true
+
+    ~/.gitconfig: git/gitconfig
+    ~/.gitattributes: git/gitattributes
+
+    ~/Library/Application Support/Code/User/settings.json: vscode/settings.json
+    ~/Library/Application Support/Code/User/keybindings.json: vscode/keybindings.json
+
+- shell:
+    - description: Installing shell tools (optional)
+      command: scripts/install-shell-tools
+      quiet: true
+      stdout: true
+      stderr: true

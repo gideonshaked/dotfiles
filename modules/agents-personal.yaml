@@ -1,0 +1,6 @@
+# Personal Claude settings: no work plugins.
+
+- link:
+    ~/.claude/settings.json:
+      path: agents/claude/settings.personal.json
+      force: true

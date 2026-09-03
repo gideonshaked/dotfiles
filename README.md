@@ -6,7 +6,7 @@
   </a>
 </p>
 
-My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https://www.anishathalye.com/2014/08/03/managing-your-dotfiles/#dotfiles-are-not-meant-to-be-forked). That being said, this repository contains lots of useful things ([shell functions](https://github.com/gideonshaked/dotfiles/blob/master/term/zsh/functions.zsh), [scripts](https://github.com/gideonshaked/dotfiles/tree/master/bin), [gitconfig](https://github.com/gideonshaked/dotfiles/blob/master/git/gitconfig)) that you can add to your personal setup. As such, I encourage anyone that thinks these dotfiles look useful to try to understand them first and then copy the parts that stand out to them.
+My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https://www.anishathalye.com/2014/08/03/managing-your-dotfiles/#dotfiles-are-not-meant-to-be-forked). That being said, this repository contains lots of useful things ([shell config](https://github.com/gideonshaked/dotfiles/blob/master/term/common.sh), [scripts](https://github.com/gideonshaked/dotfiles/tree/master/bin), [gitconfig](https://github.com/gideonshaked/dotfiles/blob/master/git/gitconfig)) that you can add to your personal setup. As such, I encourage anyone that thinks these dotfiles look useful to try to understand them first and then copy the parts that stand out to them.
 
 <p align="center">
   <a href="#install">Install</a> &bull;
@@ -26,7 +26,6 @@ My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https
 - `jq`
 - `uv`
 - Claude Code
-- Codex CLI
 
 #### Install command
 
@@ -34,28 +33,36 @@ My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https
 git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install
 ```
 
-### Minimal install (suitable for Linux and macOS)
+### Profiles
 
-A minimal installation intended primarily for headless linux servers.
-Installs a portable bash config (prompt, aliases, functions), SSH config, agent configs, ccstatusline, user-local npx via nvm, and git aliases without overwriting the existing shell config. The install owns `~/bin`; an existing `~/bin` is backed up before the repo bin is linked.
+A profile is a list of modules under `modules/`. The chosen profile is remembered in
+`~/.dotfiles-profile`, so a later bare `./install` repeats it.
+
+| Profile | For | Modules |
+|---------|-----|---------|
+| `personal` | personal Mac (default) | core, macos, agents, agents-personal |
+| `work` | work Mac | core, macos, agents, agents-work |
+| `server` | headless Linux | core, agents, agents-personal |
 
 ```bash
-git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install --minimal
+./install --profile server   # headless server: bash, SSH, git, agent config, no macOS bits
+./install --list             # show profiles and their modules
 ```
+
+The install owns `~/bin`; an existing `~/bin` is backed up first.
 
 ## Contents
 
 ```text
-├── agents      <- Claude and Codex config, skills, and agent plugin settings
-├── bin         <- Personal scripts (s, dotfiles, git-nuke, sshkey, claude-validate)
-├── clang       <- clang-format and clangd config
+├── agents      <- Claude config: memory, skills, commands, per-profile settings
+├── bin         <- Personal scripts (s, dotfiles, agent-usage, claude-validate)
 ├── dotbot      <- Dotbot installer submodule
 ├── git         <- Git configuration files (aliases, custom formatting, etc.)
-├── install.conf.yaml <- Dotbot install config for both full and minimal installs
+├── modules     <- Dotbot config, one file per module; profiles compose these
 ├── manifest    <- Brewfile
 ├── scripts     <- Repo maintenance scripts and install helpers
 ├── ssh         <- SSH config file
-├── term        <- Shell configuration (zsh, bash, starship)
+├── term        <- Shell configuration (common.sh, zsh, bash, starship)
 └── vscode      <- VS Code configuration and extensions list
 ```
 
@@ -65,7 +72,7 @@ After install, use the [`dotfiles`](./bin/dotfiles) utility:
 
 ```bash
 dotfiles update              # Pull latest changes and run install
-dotfiles update --minimal    # Same, but minimal install
+dotfiles sync                # Sync shared settings between Claude profiles
 dotfiles brewfile            # Update Homebrew package manifest
 dotfiles brew                # Install all packages from the manifest
 dotfiles brew --only-plugins # Install just the tracked VS Code extensions

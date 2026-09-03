@@ -1,0 +1,6 @@
+# Work Claude settings: adds the Octant and Databricks plugins.
+
+- link:
+    ~/.claude/settings.json:
+      path: agents/claude/settings.work.json
+      force: true

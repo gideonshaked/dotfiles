@@ -73,6 +73,9 @@ main() {
         "update_brewfile"|"brewfile")
             update_brewfile
             ;;
+        "sync_settings"|"sync")
+            "$DOTFILES/scripts/sync-settings"
+            ;;
         "install_brew"|"brew")
             shift
             install_brew "$@"
@@ -85,14 +88,15 @@ main() {
             dfu "$@"
             ;;
         *)
-            echo "Usage: dotfiles {brewfile|brew|dotbot|update}"
+            echo "Usage: dotfiles {brewfile|brew|sync|dotbot|update}"
             echo ""
             echo "Available functions:"
             echo "  update_brewfile, brewfile  - Update Homebrew package manifest"
+            echo "  sync_settings, sync        - Sync shared settings between Claude profiles"
             echo "  install_brew, brew         - Install packages from the manifest"
             echo "                               (--only-plugins for just VS Code extensions)"
             echo "  update_dotbot, dotbot      - Update Dotbot submodule"
-            echo "  dfu, update                - Update dotfiles and run install"
+            echo "  dfu, update                - Update dotfiles and run install (current profile)"
             exit 1
             ;;
     esac

@@ -12,8 +12,9 @@ Claude Code is the only supported agent. Codex support was removed.
 
 **Install/update dotfiles:**
 ```bash
-./install            # Full install (macOS)
-./install --minimal  # Minimal install (remote servers)
+./install                     # use the saved profile, or personal
+./install --profile server    # use and remember a profile
+./install --list              # show profiles and their modules
 ```
 
 The installer only needs `git` and `python3` to create symlinks. The post-link agent steps additionally use `npx`, `jq`, `uv`, and `claude`; each step is failure-tolerant and skips (printing a `non-fatal` message) when its tool is missing.
@@ -21,7 +22,6 @@ The installer only needs `git` and `python3` to create symlinks. The post-link a
 **Manage dotfiles:**
 ```bash
 dotfiles update              # Pull latest changes and run install
-dotfiles update --minimal    # Same, but minimal install
 dotfiles brewfile            # Update Homebrew package manifest
 dotfiles dotbot              # Update Dotbot submodule
 ```
@@ -41,7 +41,26 @@ uv run pytest tests/ -q
 
 ## Architecture
 
-The install script initializes the Dotbot submodule and runs Dotbot with `install.conf.yaml`. The `--minimal` flag sets `DOTFILES_INSTALL_MODE=minimal`, and the same YAML file conditionally skips the full macOS links. Links are gated per-mode with `scripts/is-full-install` / `scripts/is-minimal-install` (both read `DOTFILES_INSTALL_MODE`).
+### Profiles and modules
+
+A profile is an ordered list of module files under `modules/`, passed to Dotbot as several `-c` arguments. Dotbot accepts multiple config files natively, so composition needs no custom machinery, and no module contains a conditional.
+
+| Profile | Modules |
+|---------|---------|
+| `personal` | core, macos, agents, agents-personal |
+| `work` | core, macos, agents, agents-work |
+| `server` | core, agents, agents-personal |
+
+| Module | Contents |
+|--------|----------|
+| `core` | Shared shell config, bash, git aliases and ignore, SSH config, `~/bin` |
+| `macos` | zsh, `zshenv`, `hushlogin`, gitconfig, VS Code, Homebrew shell tools |
+| `agents` | Claude memory, skills, commands, ccstatusline, and the agent install steps |
+| `agents-personal` / `agents-work` | Only the `~/.claude/settings.json` link |
+
+The map lives in the `profile_modules` function in `install`. Adding a machine class means adding one `case` arm, not editing existing entries. It is a `case` statement rather than an associative array because macOS ships bash 3.2, which predates `declare -A`, and the bootstrap runs before Homebrew exists.
+
+The chosen profile is remembered in `~/.dotfiles-profile`, so a bare `./install` repeats it. `--profile` overrides and updates the marker; `--dry-run` changes nothing. An unknown profile fails loudly rather than falling back to a default.
 
 ### Shell configuration
 
@@ -79,9 +98,11 @@ A plugin enabled in `~/.claude/settings.json` cannot be disabled per-project ([c
 
 `tests/test_settings_split.py` asserts the two files differ **only** in `enabledPlugins`, `extraKnownMarketplaces`, and `pluginConfigs`. Add a shared setting to one file and not the other and the test fails. Do not weaken the allowlist to make a test pass.
 
-### Minimal install
+The drift has one routine cause: `/config` and `/model` write to `~/.claude/settings.json`, which links to whichever profile is installed, so the other profile falls behind. Run `dotfiles sync` after changing settings through the Claude Code UI. It copies every non-profile-specific key from the active profile to the other.
 
-For remote servers. Installs: SSH config, Claude agent config, ccstatusline, user-local npx via nvm, git aliases, and the shared shell config plus `term/bashrc`. Appends a source line to both `.bashrc` and `.bash_profile` for login shell compatibility (e.g. tcsh exec-to-bash). The install owns `~/bin`; an existing `~/bin` is backed up before the repo bin is linked. Guarded against double-sourcing.
+### The server profile
+
+Drops the `macos` module and keeps everything else. `scripts/configure-bash-hooks` appends a source line to both `.bashrc` and `.bash_profile` for login-shell compatibility (e.g. tcsh exec-to-bash), guarded against double-sourcing. The install owns `~/bin`; an existing `~/bin` is backed up first.
 
 ### SSH wrapper (`bin/s`)
 
@@ -89,6 +110,6 @@ The `s` script is an SSH wrapper that uses the Kitty SSH kitten when available, 
 
 ### Symlink mappings
 
-Read `install.conf.yaml`. It is the source of truth and a copy here would drift.
+Read the files under `modules/`. They are the source of truth and a copy here would drift.
 
 There is currently no global instructions file. `agents/shared/instructions.md` was deleted; recover it from commit `94feb3d` if a replacement is wanted.

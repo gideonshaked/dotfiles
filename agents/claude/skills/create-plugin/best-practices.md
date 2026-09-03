@@ -1,1 +1,0 @@
-../../../shared/skills/create-plugin/best-practices.md

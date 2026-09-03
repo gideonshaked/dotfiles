@@ -1,0 +1,103 @@
+{
+  "skillListingBudgetFraction": 0.015,
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "model": "opus",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-validate",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "beads@beads-marketplace": true,
+    "context7@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "cdd-utils@octant-agent-plugin-marketplace": true,
+    "octant-app-store@octant-agent-plugin-marketplace": true,
+    "octant-chem-utils@octant-agent-plugin-marketplace": true,
+    "octant-comp-chem@octant-agent-plugin-marketplace": true,
+    "octomind-rolling@octant-agent-plugin-marketplace": true,
+    "databricks@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "beads-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "steveyegge/beads"
+      }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "octant-agent-plugin-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "octantbio/octant-agent-plugin-marketplace"
+      }
+    }
+  },
+  "spinnerTipsEnabled": false,
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "Sacrificing a rubber duck to the code gods",
+      "Committing crimes against clean code",
+      "Doing unspeakable things to your codebase",
+      "Making the linter cry",
+      "Violating every best practice known to man",
+      "Making you regret every decision that led to this moment",
+      "Turning your code into a dumpster fire",
+      "Killing all of the joy in your life, one line of code at a time",
+      "Quiet quitting"
+    ]
+  },
+  "autoUpdatesChannel": "latest",
+  "tui": "fullscreen",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "autoMemoryEnabled": false,
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark",
+  "preferredNotifChannel": "kitty",
+  "autoCompactEnabled": true,
+  "remoteControlAtStartup": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true,
+  "pluginConfigs": {
+    "octomind-rolling@octant-agent-plugin-marketplace": {
+      "options": {
+        "user_name": "Gideon",
+        "slack_username": "gideon",
+        "email": "gideon@octant.bio"
+      }
+    }
+  }
+}

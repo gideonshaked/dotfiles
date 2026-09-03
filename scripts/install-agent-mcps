@@ -2,16 +2,11 @@
 
 set -euo pipefail
 
-CODEX_CONFIG="${CODEX_HOME:-${HOME}/.codex}/config.toml"
-CODEX_AGENTS="${CODEX_HOME:-${HOME}/.codex}/AGENTS.md"
-CONTEXT7_SECRETS="${HOME}/.zsh/secrets.zsh"
+CONTEXT7_SECRETS="${HOME}/.shell-secrets"
 EXA_URL="https://mcp.exa.ai/mcp"
 GCLOUD_PACKAGE="@google-cloud/gcloud-mcp"
 NPX_CMD="${DOTFILES_NPX:-${HOME}/bin/dotfiles-npx}"
 GCLOUD_MCP_COMMAND='exec "$HOME/bin/dotfiles-npx" -y @google-cloud/gcloud-mcp'
-AWS_API_PACKAGE="awslabs.aws-api-mcp-server"
-AWS_PRICING_PACKAGE="awslabs.aws-pricing-mcp-server"
-AWS_KNOWLEDGE_URL="https://knowledge-mcp.global.api.aws"
 PATH="${HOME}/bin:${HOME}/.local/bin:${HOME}/.bun/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
 export PATH
 
@@ -26,89 +21,29 @@ claude_has() {
     claude mcp get "$1" 2>/dev/null | grep -qF "$2"
 }
 
-codex_has() {
-    codex mcp get "$1" --json 2>/dev/null | grep -qF "$2"
-}
-
-replace_file() {
-    local file="$1"
-    local tmp="$2"
-    local target
-
-    if [ -L "$file" ]; then
-        target="$(readlink "$file")"
-        case "$target" in
-            /*) ;;
-            *) target="$(dirname "$file")/$target" ;;
-        esac
-        mv -f "$tmp" "$target"
-    else
-        mv -f "$tmp" "$file"
-    fi
-}
-
 install_claude_mcp() {
     if ! which claude >/dev/null 2>&1; then
-        echo "claude CLI not found, skipping Claude MCPs (non-fatal)"
+        echo "claude CLI not found, skipping MCPs (non-fatal)"
         return 0
     fi
 
     if ! claude_has exa "URL: $EXA_URL"; then
         claude mcp remove exa -s user >/dev/null 2>&1 || true
-        claude mcp add --scope user --transport http exa "$EXA_URL" >/dev/null 2>&1 || echo "Claude Exa MCP setup failed (non-fatal)"
+        claude mcp add --scope user --transport http exa "$EXA_URL" >/dev/null 2>&1 || echo "Exa MCP setup failed (non-fatal)"
     fi
 
     if ! claude_has gcloud "dotfiles-npx" || ! claude_has gcloud "$GCLOUD_PACKAGE"; then
         claude mcp remove gcloud -s user >/dev/null 2>&1 || true
-        claude mcp add --scope user gcloud -- bash -lc "$GCLOUD_MCP_COMMAND" >/dev/null 2>&1 || echo "Claude gcloud MCP setup failed (non-fatal)"
-    fi
-
-    if ! claude_has aws-api "$AWS_API_PACKAGE"; then
-        claude mcp remove aws-api -s user >/dev/null 2>&1 || true
-        claude mcp add --scope user aws-api -- uvx "${AWS_API_PACKAGE}@latest" >/dev/null 2>&1 || echo "Claude aws-api MCP setup failed (non-fatal)"
-    fi
-
-    if ! claude_has aws-pricing "$AWS_PRICING_PACKAGE"; then
-        claude mcp remove aws-pricing -s user >/dev/null 2>&1 || true
-        claude mcp add --scope user aws-pricing -- uvx "${AWS_PRICING_PACKAGE}@latest" >/dev/null 2>&1 || echo "Claude aws-pricing MCP setup failed (non-fatal)"
-    fi
-
-    if ! claude_has aws-knowledge "URL: $AWS_KNOWLEDGE_URL"; then
-        claude mcp remove aws-knowledge -s user >/dev/null 2>&1 || true
-        claude mcp add --scope user --transport http aws-knowledge "$AWS_KNOWLEDGE_URL" >/dev/null 2>&1 || echo "Claude aws-knowledge MCP setup failed (non-fatal)"
+        claude mcp add --scope user gcloud -- bash -lc "$GCLOUD_MCP_COMMAND" >/dev/null 2>&1 || echo "gcloud MCP setup failed (non-fatal)"
     fi
 }
 
-install_codex_mcp() {
-    if ! which codex >/dev/null 2>&1; then
-        echo "codex CLI not found, skipping Codex MCPs (non-fatal)"
-        return 0
-    fi
-
-    if ! codex_has exa "\"url\": \"$EXA_URL\""; then
-        codex mcp remove exa >/dev/null 2>&1 || true
-        codex mcp add exa --url "$EXA_URL" >/dev/null 2>&1 || echo "Codex Exa MCP setup failed (non-fatal)"
-    fi
-
-    if ! codex_has gcloud "dotfiles-npx" || ! codex_has gcloud "$GCLOUD_PACKAGE"; then
-        codex mcp remove gcloud >/dev/null 2>&1 || true
-        codex mcp add gcloud -- bash -lc "$GCLOUD_MCP_COMMAND" >/dev/null 2>&1 || echo "Codex gcloud MCP setup failed (non-fatal)"
-    fi
-
-    if ! codex_has aws-api "$AWS_API_PACKAGE"; then
-        codex mcp remove aws-api >/dev/null 2>&1 || true
-        codex mcp add aws-api -- uvx "${AWS_API_PACKAGE}@latest" >/dev/null 2>&1 || echo "Codex aws-api MCP setup failed (non-fatal)"
-    fi
-
-    if ! codex_has aws-pricing "$AWS_PRICING_PACKAGE"; then
-        codex mcp remove aws-pricing >/dev/null 2>&1 || true
-        codex mcp add aws-pricing -- uvx "${AWS_PRICING_PACKAGE}@latest" >/dev/null 2>&1 || echo "Codex aws-pricing MCP setup failed (non-fatal)"
-    fi
-
-    if ! codex_has aws-knowledge "\"url\": \"$AWS_KNOWLEDGE_URL\""; then
-        codex mcp remove aws-knowledge >/dev/null 2>&1 || true
-        codex mcp add aws-knowledge --url "$AWS_KNOWLEDGE_URL" >/dev/null 2>&1 || echo "Codex aws-knowledge MCP setup failed (non-fatal)"
-    fi
+# Remove MCP servers that are no longer part of this configuration.
+prune_retired_mcps() {
+    which claude >/dev/null 2>&1 || return 0
+    for server in aws-api aws-pricing aws-knowledge; do
+        claude mcp remove "$server" -s user >/dev/null 2>&1 || true
+    done
 }
 
 write_context7_secret() {
@@ -128,104 +63,6 @@ write_context7_secret() {
     chmod 600 "$CONTEXT7_SECRETS"
 }
 
-static_context7_key() {
-    local config="$1"
-
-    [ -f "$config" ] || return 0
-
-    awk '
-        $0 == "[mcp_servers.context7.http_headers]" {
-            in_context7_headers = 1
-            next
-        }
-        in_context7_headers && $0 ~ /^\[/ {
-            in_context7_headers = 0
-        }
-        in_context7_headers && $0 ~ /^CONTEXT7_API_KEY[[:space:]]*=/ {
-            sub(/^[^=]*=[[:space:]]*"/, "")
-            sub(/".*$/, "")
-            print
-            exit
-        }
-    ' "$config"
-}
-
-normalize_codex_context7() {
-    local config="$1"
-    local key
-    local tmp
-
-    [ -f "$config" ] || return 0
-
-    key="$(static_context7_key "$config")"
-    if [ -n "$key" ] && [ -z "${CONTEXT7_API_KEY:-}" ]; then
-        write_context7_secret "$key"
-        echo "Moved Context7 API key to ~/.zsh/secrets.zsh"
-    fi
-
-    tmp="$(mktemp)"
-    awk '
-        $0 == "[mcp_servers.context7.http_headers]" {
-            print "[mcp_servers.context7.env_http_headers]"
-            in_context7_headers = 1
-            wrote_key = 0
-            next
-        }
-        in_context7_headers && $0 ~ /^\[/ {
-            if (!wrote_key) {
-                print "CONTEXT7_API_KEY = \"CONTEXT7_API_KEY\""
-            }
-            in_context7_headers = 0
-        }
-        in_context7_headers && $0 ~ /^CONTEXT7_API_KEY[[:space:]]*=/ {
-            if (!wrote_key) {
-                print "CONTEXT7_API_KEY = \"CONTEXT7_API_KEY\""
-                wrote_key = 1
-            }
-            next
-        }
-        {
-            print
-        }
-        END {
-            if (in_context7_headers && !wrote_key) {
-                print "CONTEXT7_API_KEY = \"CONTEXT7_API_KEY\""
-            }
-        }
-    ' "$config" > "$tmp"
-    replace_file "$config" "$tmp"
-}
-
-remove_generated_context7_rule() {
-    local file="$1"
-    local tmp
-
-    [ -f "$file" ] || return 0
-
-    tmp="$(mktemp)"
-    awk '
-        /^<!-- context7 -->$/ {
-            skip = !skip
-            next
-        }
-        skip {
-            next
-        }
-        /^[[:space:]]*$/ {
-            pending_blank++
-            next
-        }
-        {
-            while (pending_blank > 0) {
-                print ""
-                pending_blank--
-            }
-            print
-        }
-    ' "$file" > "$tmp"
-    replace_file "$file" "$tmp"
-}
-
 install_context7() {
     if [ "${DOTFILES_INSTALL_CONTEXT7:-}" != "1" ] && [ -z "${CONTEXT7_API_KEY:-}" ]; then
         echo "Context7 setup skipped. Set DOTFILES_INSTALL_CONTEXT7=1 or CONTEXT7_API_KEY to run it."
@@ -238,16 +75,15 @@ install_context7() {
     fi
 
     if [ -n "${CONTEXT7_API_KEY:-}" ]; then
-        "$NPX_CMD" -y ctx7@latest setup --claude --codex --mcp --yes --api-key "$CONTEXT7_API_KEY" >/dev/null 2>&1 || echo "Context7 setup failed (non-fatal)"
+        write_context7_secret "$CONTEXT7_API_KEY"
+        "$NPX_CMD" -y ctx7@latest setup --claude --mcp --yes --api-key "$CONTEXT7_API_KEY" >/dev/null 2>&1 || echo "Context7 setup failed (non-fatal)"
     else
-        "$NPX_CMD" -y ctx7@latest setup --claude --codex --mcp --yes || echo "Context7 setup failed (non-fatal)"
+        "$NPX_CMD" -y ctx7@latest setup --claude --mcp --yes || echo "Context7 setup failed (non-fatal)"
     fi
 }
 
 install_claude_mcp
-install_codex_mcp
+prune_retired_mcps
 install_context7
-normalize_codex_context7 "$CODEX_CONFIG"
-remove_generated_context7_rule "$CODEX_AGENTS"
 
 echo "Agent MCPs OK"

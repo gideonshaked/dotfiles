@@ -15,3 +15,5 @@ ssh/config.d/
 # ~/.databricks/aitools/skills by the Databricks CLI, so machine-local
 agents/*/skills/databricks-*
 agents/*/skills/spark-python-data-source
+tests/
+.pytest_cache/

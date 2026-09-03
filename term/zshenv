@@ -5,3 +5,8 @@
 # Disable Apple Terminal's shell session save/restore (the "Restored session:"
 # line). Must be set here because /etc/zshrc_Apple_Terminal runs before ~/.zshrc.
 export SHELL_SESSIONS_DISABLE=1
+
+# rustup writes this file directly on install; sourcing it here keeps that
+# working while the dotfiles symlink stays in place. PATH is also handled in
+# common.sh, so this is belt and braces.
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"

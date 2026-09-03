@@ -164,12 +164,11 @@
 	"claudeCode.allowDangerouslySkipPermissions": true,
 	"docker.extension.enableComposeLanguageServer": false,
 	"docker.extension.dockerEngineAvailabilityPrompt": false,
-	"gitlens.ai.model": "vscode",
-	"gitlens.ai.vscode.model": "copilot:gpt-4.1",
 	"claudeCode.useTerminal": true,
 	"editor.wordWrap": "on",
 	"remote.SSH.remotePlatform": {
-		"nubio": "linux"
+		"nubio": "linux",
+		"genomicsbench": "linux"
 	},
 	"yaml.disableSchemaDetection": [
 		"**/.github/workflows/*.yml",

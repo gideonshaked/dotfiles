@@ -1,1 +1,0 @@
-../../../shared/skills/tufte-viz/preferences.md

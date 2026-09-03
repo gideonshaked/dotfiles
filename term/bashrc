@@ -1,0 +1,61 @@
+#
+# ~/.bashrc.dotfiles: bash configuration.
+# Sourced from ~/.bashrc and ~/.bash_profile; does not replace either.
+#
+
+# Interactive shells only
+case $- in
+    *i*) ;;
+    *) return ;;
+esac
+
+# Only run once per shell
+[ -n "$__DOTFILES_BASHRC" ] && return
+__DOTFILES_BASHRC=1
+
+## Shared POSIX configuration: environment, PATH, aliases, ssh-agent, secrets.
+[ -f "$HOME/.shell-common" ] && . "$HOME/.shell-common"
+
+## ── Options ───────────────────────────────────────────────────────────────
+
+shopt -s checkwinsize            # update LINES/COLUMNS after each command
+shopt -s globstar 2>/dev/null    # ** recursive glob, bash 4+
+shopt -s nocaseglob              # case insensitive globbing
+shopt -s cdspell                 # correct minor cd typos
+shopt -s no_empty_cmd_completion # do not complete on an empty line
+shopt -s histappend              # append rather than overwrite
+
+HISTSIZE=10000
+HISTFILESIZE=10000
+HISTCONTROL=ignoreboth:erasedups
+
+## ── Completion ────────────────────────────────────────────────────────────
+
+if [ -r /opt/homebrew/etc/profile.d/bash_completion.sh ]; then
+    . /opt/homebrew/etc/profile.d/bash_completion.sh
+elif [ -r /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+elif [ -r /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+## ── Tools ─────────────────────────────────────────────────────────────────
+## Same stack as zsh where the tool supports bash.
+
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init bash)"
+else
+    # Portable fallback prompt for hosts without starship
+    [ -f "$HOME/.bash_prompt" ] && . "$HOME/.bash_prompt"
+fi
+
+# fzf key bindings: Ctrl-T file picker, Alt-C cd picker.
+# Atuin takes over Ctrl-R below.
+for _fzf in /opt/homebrew/opt/fzf/shell/key-bindings.bash \
+            /usr/share/fzf/key-bindings.bash \
+            /usr/share/doc/fzf/examples/key-bindings.bash; do
+    [ -f "$_fzf" ] && { . "$_fzf"; break; }
+done
+unset _fzf
+
+command -v atuin >/dev/null 2>&1 && eval "$(atuin init bash --disable-up-arrow)"

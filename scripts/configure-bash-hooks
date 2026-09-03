@@ -2,11 +2,6 @@
 
 set -euo pipefail
 
-if [ "${DOTFILES_INSTALL_MODE:-full}" != "minimal" ]; then
-    echo "bash hooks skipped"
-    exit 0
-fi
-
 SOURCE_LINE='[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"'
 
 add_source_line() {

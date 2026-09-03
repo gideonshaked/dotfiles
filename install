@@ -1,23 +1,86 @@
 #!/usr/bin/env bash
+#
+# Install dotfiles for a named profile.
+#
+#   ./install                     # use the saved profile, or personal
+#   ./install --profile server    # use and remember a profile
+#   ./install --list              # show available profiles
+#
+# A profile is a list of module files under modules/. Adding a machine class
+# means adding one arm to the case below, not editing every existing entry.
 
 set -e
 
-CONFIG="install.conf.yaml"
-MODE="full"
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTBOT_DIR="dotbot"
 DOTBOT_BIN="bin/dotbot"
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROFILE_MARKER="${HOME}/.dotfiles-profile"
 
-# Parse flags: strip our own args, pass the rest to dotbot
-ARGS=()
-for arg in "$@"; do
-    case "$arg" in
-        --minimal) MODE="minimal" ;;
-        *) ARGS+=("$arg") ;;
+# Associative arrays need bash 4; macOS ships 3.2 and this must run on a fresh
+# machine before Homebrew exists. A case statement is portable and reads better.
+profile_modules() {
+    case "$1" in
+        personal) echo "core macos agents agents-personal" ;;
+        work)     echo "core macos agents agents-work" ;;
+        server)   echo "core agents agents-personal" ;;
+        *)        return 1 ;;
     esac
+}
+
+PROFILES="personal work server"
+
+usage() {
+    echo "usage: ./install [--profile <name>] [--list] [dotbot args...]"
+    echo
+    echo "profiles:"
+    for p in $PROFILES; do
+        printf "  %-10s %s\n" "$p" "$(profile_modules "$p")"
+    done
+    echo
+    echo "The chosen profile is remembered in ${PROFILE_MARKER}."
+}
+
+PROFILE=""
+DRY_RUN=0
+ARGS=()
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --profile) PROFILE="${2:-}"; shift 2 ;;
+        --profile=*) PROFILE="${1#*=}"; shift ;;
+        --list|-l) usage; exit 0 ;;
+        --help|-h) usage; exit 0 ;;
+        --dry-run|-n) DRY_RUN=1; ARGS+=("$1"); shift ;;
+        *) ARGS+=("$1"); shift ;;
+    esac
+done
+
+# Precedence: flag, then saved marker, then default.
+if [ -z "$PROFILE" ] && [ -r "$PROFILE_MARKER" ]; then
+    PROFILE="$(tr -d '[:space:]' < "$PROFILE_MARKER")"
+fi
+[ -n "$PROFILE" ] || PROFILE="personal"
+
+MODULES="$(profile_modules "$PROFILE")" || {
+    echo "unknown profile: ${PROFILE}" >&2
+    echo >&2
+    usage >&2
+    exit 1
+}
+
+CONFIGS=()
+for m in $MODULES; do
+    f="${BASEDIR}/modules/${m}.yaml"
+    [ -f "$f" ] || { echo "missing module: modules/${m}.yaml" >&2; exit 1; }
+    CONFIGS+=("$f")
 done
 
 cd "${BASEDIR}"
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
-DOTFILES_INSTALL_MODE="${MODE}" "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${ARGS[@]}"
+echo "profile: ${PROFILE} (${MODULES})"
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIGS[@]}" "${ARGS[@]}"
+
+# A dry run must not change machine state, marker included.
+if [ "$DRY_RUN" -eq 0 ]; then
+    printf '%s\n' "$PROFILE" > "$PROFILE_MARKER"
+fi

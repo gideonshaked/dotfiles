@@ -1,0 +1,43 @@
+# Claude Code configuration common to every profile.
+# The settings.json link lives in agents-<profile>.yaml.
+
+- link:
+    ~/.claude/CLAUDE.md:
+      path: agents/claude/CLAUDE.md
+      force: true
+    ~/.config/ccstatusline/settings.json:
+      path: agents/claude/ccstatusline-settings.json
+      force: true
+    ~/.claude/skills:
+      path: agents/claude/skills
+      glob: false
+      force: true
+    ~/.claude/commands:
+      path: agents/claude/commands
+      glob: false
+      force: true
+
+- shell:
+    - description: Installing npx with nvm if needed (optional)
+      command: scripts/ensure-npx
+      quiet: true
+      stdout: true
+      stderr: true
+
+    - description: Installing ccstatusline (optional)
+      command: scripts/install-ccstatusline
+      quiet: true
+      stdout: true
+      stderr: true
+
+    - description: Installing and updating Claude plugins (optional)
+      command: scripts/install-claude-plugins
+      quiet: true
+      stdout: true
+      stderr: true
+
+    - description: Installing agent MCPs (optional)
+      command: scripts/install-agent-mcps
+      quiet: true
+      stdout: true
+      stderr: true

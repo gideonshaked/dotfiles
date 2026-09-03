@@ -44,11 +44,11 @@ case "$action" in
         ssh "$@" bash << 'EOF'
 if [ -d ~/dotfiles ]; then
     echo "Updating dotfiles..."
-    cd ~/dotfiles && bin/dotfiles update --minimal
+    cd ~/dotfiles && bin/dotfiles update
 else
     echo "Installing dotfiles..."
     git clone https://github.com/gideonshaked/dotfiles ~/dotfiles
-    cd ~/dotfiles && ./install --minimal
+    cd ~/dotfiles && ./install --profile server
 fi
 EOF
         ;;
@@ -57,13 +57,13 @@ EOF
 echo "Reinstalling dotfiles..."
 rm -rf ~/dotfiles
 git clone https://github.com/gideonshaked/dotfiles ~/dotfiles
-cd ~/dotfiles && ./install --minimal
+cd ~/dotfiles && ./install --profile server
 EOF
         ;;
     update)
         ssh "$@" bash << 'EOF'
 if [ -d ~/dotfiles ]; then
-    cd ~/dotfiles && bin/dotfiles update --minimal
+    cd ~/dotfiles && bin/dotfiles update
 else
     echo "Dotfiles not installed on this host"
 fi

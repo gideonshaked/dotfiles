@@ -2,62 +2,92 @@
 
 set -euo pipefail
 
-DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-BREWFILE="$DOTFILES_DIR/manifest/Brewfile"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck disable=SC1091
+. "$SCRIPT_DIR/lib/path.sh"
 
-# Homebrew builds bottles only for these prefixes. An install anywhere else
-# compiles every formula from source, which takes hours.
-BREW_PREFIXES="/opt/homebrew /usr/local /home/linuxbrew/.linuxbrew"
-BREW_INSTALLER="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+DOTFILES_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+BREWFILE="$DOTFILES_DIR/manifest/Brewfile"
+LOCAL_BIN="$HOME/.local/bin"
+
+have() { command -v "$1" >/dev/null 2>&1; }
+
+## macOS ─────────────────────────────────────────────────────────────────────
 
 find_brew() {
-    if command -v brew >/dev/null 2>&1; then
-        command -v brew
-        return 0
-    fi
-    for prefix in $BREW_PREFIXES; do
-        if [ -x "$prefix/bin/brew" ]; then
-            echo "$prefix/bin/brew"
-            return 0
-        fi
+    have brew && { command -v brew; return 0; }
+    for prefix in /opt/homebrew /usr/local; do
+        [ -x "$prefix/bin/brew" ] && { echo "$prefix/bin/brew"; return 0; }
     done
     return 1
 }
 
-# The Linux installer writes to /home/linuxbrew, which needs root. Without a
-# password-less sudo it would block waiting for input that no one can type.
-can_install_linux() {
-    [ "$(uname -s)" != Linux ] && return 0
-    sudo -n true 2>/dev/null
+install_macos() {
+    local brew
+    brew="$(find_brew || true)"
+
+    if [ -z "$brew" ]; then
+        have curl || { echo "curl not found, cannot install Homebrew (non-fatal)"; return 0; }
+        echo "Installing Homebrew"
+        NONINTERACTIVE=1 /bin/bash -c \
+            "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
+            || { echo "Homebrew install failed (non-fatal)"; return 0; }
+        brew="$(find_brew || true)"
+        [ -n "$brew" ] || { echo "no brew binary after install (non-fatal)"; return 0; }
+    fi
+
+    eval "$("$brew" shellenv)"
+    HOMEBREW_NO_AUTO_UPDATE=1 brew bundle install --file "$BREWFILE" \
+        || echo "some packages failed to install (non-fatal)"
 }
 
-install_homebrew() {
-    command -v curl >/dev/null 2>&1 || {
-        echo "curl not found, cannot install Homebrew (non-fatal)"
-        return 1
-    }
-    can_install_linux || {
-        echo "Homebrew on Linux needs password-less sudo for /home/linuxbrew (non-fatal)"
-        return 1
-    }
-    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL "$BREW_INSTALLER")" || return 1
+## Linux ─────────────────────────────────────────────────────────────────────
+#
+# Homebrew is deliberately not used here. It ships bottles only for
+# /home/linuxbrew/.linuxbrew, which needs root to create; at any prefix a user
+# can write, every formula is compiled from source. These machines often have
+# no sudo, so each tool is fetched as a released binary under $HOME instead.
+#
+# Only what terminal/shellrc sources is installed. Everything else in the
+# Brewfile is a cask or an editor extension, and the steps that want jq or npx
+# already skip cleanly when they are absent.
+
+install_starship() {
+    have starship && return 0
+    curl -fsSL https://starship.rs/install.sh \
+        | sh -s -- --yes --bin-dir "$LOCAL_BIN" >/dev/null 2>&1 \
+        || echo "starship install failed (non-fatal)"
 }
 
-BREW="$(find_brew || true)"
-if [ -z "$BREW" ]; then
-    echo "Installing Homebrew"
-    install_homebrew || exit 0
-    BREW="$(find_brew || true)"
-    [ -n "$BREW" ] || {
-        echo "Homebrew install did not produce a brew binary (non-fatal)"
-        exit 0
-    }
-fi
+# The installer's --bin mode fetches the binary and nothing else: no shell rc
+# edits, which terminal/shellrc handles itself.
+install_fzf() {
+    have fzf && return 0
+    [ -d "$HOME/.fzf" ] || git clone --depth 1 https://github.com/junegunn/fzf "$HOME/.fzf" >/dev/null 2>&1
+    "$HOME/.fzf/install" --bin >/dev/null 2>&1 || { echo "fzf install failed (non-fatal)"; return 0; }
+    ln -sf "$HOME/.fzf/bin/fzf" "$LOCAL_BIN/fzf"
+}
 
-eval "$("$BREW" shellenv)"
+install_atuin() {
+    have atuin && return 0
+    curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh >/dev/null 2>&1 \
+        || echo "atuin install failed (non-fatal)"
+}
 
-if HOMEBREW_NO_AUTO_UPDATE=1 brew bundle install --file "$BREWFILE"; then
-    echo "packages OK"
+install_linux() {
+    have curl || { echo "curl not found, cannot install anything (non-fatal)"; return 0; }
+    mkdir -p "$LOCAL_BIN"
+    install_starship
+    install_fzf
+    install_atuin
+}
+
+## ───────────────────────────────────────────────────────────────────────────
+
+if [ "$(uname -s)" = Darwin ]; then
+    install_macos
 else
-    echo "some packages failed to install (non-fatal)"
+    install_linux
 fi
+
+echo "packages OK"

@@ -4,9 +4,9 @@ set -euo pipefail
 
 SECRETS="${HOME}/.shell-secrets"
 
-# Dotbot runs this without a login shell, so PATH has to be built by hand.
-PATH="${HOME}/.local/bin:${HOME}/.bun/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:/home/linuxbrew/.linuxbrew/bin:${PATH}"
-export PATH
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck disable=SC1091
+. "$SCRIPT_DIR/lib/path.sh"
 
 # `mcp get` prints the stored command, so matching against it detects a server
 # registered from an older definition and forces a re-add.
@@ -39,6 +39,10 @@ gcloud_mcp() {
 # server the skill installs and every tool it references is absent.
 ssh_mcp() {
     local package="slepp-ssh-mcp"
+    command -v uvx >/dev/null 2>&1 || {
+        echo "uvx not found, skipping ssh-mcp (non-fatal)"
+        return 0
+    }
     registered_with ssh-mcp "$package" && return 0
     register ssh-mcp -- uvx --from "$package" ssh-mcp
 }

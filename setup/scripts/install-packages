@@ -68,9 +68,12 @@ install_fzf() {
     ln -sf "$HOME/.fzf/bin/fzf" "$LOCAL_BIN/fzf"
 }
 
+# Without --non-interactive the installer looks for a tty and gives up when
+# dotbot runs it without one. It lands in ~/.atuin/bin.
 install_atuin() {
     have atuin && return 0
-    curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh >/dev/null 2>&1 \
+    curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh \
+        | sh -s -- --non-interactive >/dev/null 2>&1 \
         || echo "atuin install failed (non-fatal)"
 }
 
@@ -94,8 +97,20 @@ install_jq() {
 # npx runs ccstatusline and the gcloud MCP server. The release index names the
 # current LTS, so nothing here pins a version that goes stale. It is read with
 # jq, which is why this runs after install_jq.
+#
+# A distro node is not enough: Ubuntu 24.04 ships v18, and ctx7 needs the JSON
+# import attributes added in v20. Presence alone would have skipped this.
+NODE_MINIMUM_MAJOR=20
+
+node_new_enough() {
+    have node || return 1
+    local major
+    major="$(node --version 2>/dev/null | sed 's/^v\([0-9]*\).*/\1/')"
+    [ -n "$major" ] && [ "$major" -ge "$NODE_MINIMUM_MAJOR" ]
+}
+
 install_node() {
-    have npx && return 0
+    node_new_enough && return 0
     have jq || { echo "jq missing, skipping node (non-fatal)"; return 0; }
 
     local version url

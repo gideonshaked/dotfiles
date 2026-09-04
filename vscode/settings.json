@@ -163,7 +163,8 @@
 	"remote.SSH.logLevel": "trace",
 	"remote.SSH.remotePlatform": {
 		"nubio": "linux",
-		"genomicsbench": "linux"
+		"genomicsbench": "linux",
+		"omicsbench": "linux"
 	},
 	"remote.SSH.showLoginTerminal": true,
 	"remote.SSH.useExecServer": false,

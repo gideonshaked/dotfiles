@@ -5,7 +5,6 @@
       path: term/zshenv
       force: true
     ~/.gitconfig: git/gitconfig
-    ~/.gitattributes: git/gitattributes
 
     ~/Library/Application Support/Code/User/settings.json: vscode/settings.json
     ~/Library/Application Support/Code/User/keybindings.json: vscode/keybindings.json

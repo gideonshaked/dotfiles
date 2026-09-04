@@ -1,0 +1,14 @@
+# Vendor-installed skills. These are written here by their own tooling on every
+# install, so tracking them means committing someone else's artifact and taking
+# churn whenever the vendor updates it.
+#
+# context7-mcp is installed by `ctx7 setup --claude`, which
+# scripts/install-agent-mcps runs. Each machine gets the current version.
+context7-mcp/
+
+# Databricks AI tools skills, symlinked in from ~/.databricks/aitools/skills by
+# the Databricks CLI, so machine-local (work laptop only).
+databricks*/
+*mlflow*/
+agent-evaluation/
+spark-python-data-source/

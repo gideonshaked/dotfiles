@@ -22,34 +22,34 @@ non-negotiable.
 
 ---
 
-# Personal preferences
+## Personal preferences
 
 Personal overrides and house style for data visualization. These take
 precedence over the generic Tufte material below when they conflict, but should
 not contradict graphical integrity (lie factor, honest scales, etc.).
 
-## Stack and tooling
+### Stack and tooling
 
 - Python: prefer seaborn over matplotlib-only, pandas .plot, plotly, or other alternatives. Drop down to matplotlib only for fine-grained control seaborn cannot give.
 - R: prefer ggplot2 over base R graphics or lattice. Stay in the tidyverse/ggplot grammar; reach for extensions (patchwork, ggrepel, cowplot) before reverting to base R.
 - Before writing non-trivial plotting code, use Context7 (`resolve-library-id` then `query-docs`) to confirm current API for the chosen library. Do not rely on memory for argument names or defaults.
 
-## Typography
+### Typography
 
 - **Titles are never bold.** This is the most common offender and the strictest version of the no-bold rule. Plot titles, axis titles, and facet/panel titles all stay at regular weight (e.g., in seaborn/matplotlib never pass `fontweight="bold"`; in ggplot2 do not set `face = "bold"` in `element_text` for titles, and override any theme default that does).
 - No bold anywhere else either: axis labels, tick labels, annotations, legend titles, captions. Use weight only when it carries information (e.g., highlighting one series among many), not for emphasis.
 - No stacked subtitles or stat-strips on the plot itself for things like Pearson r, Spearman rho, n, p-values, R^2. Those belong in the figure caption or accompanying slide bullets, not as a subtitle.
 
-## Axes, grids, frames
+### Axes, grids, frames
 
 - Drop the top and right spines on regression plots, dot plots, line plots, and similar Cartesian plots. Keep only the bottom and left spines.
 - No horizontal or vertical rules across the plotting area unless they genuinely enhance viewer clarity (e.g., a reference line at y=0, a meaningful threshold, a date marker that the reader needs to locate). Default is no rules.
 
-## Chart-type defaults
+### Chart-type defaults
 
 - Barplots: always print the exact value of each bar on top of (or just above) the bar. This is a specific exception to the general "no on-plot text" rule; bar height is hard to read precisely, so the number earns its ink.
 
-## Annotation and labeling
+### Annotation and labeling
 
 - No added text on the plot unless it serves a specific purpose. Rule of thumb: the text must need to be on the plot to add something.
   - Good: a label next to a circled point of interest; identifying an outlier; calling out a regime change directly on the data it refers to.
@@ -58,11 +58,11 @@ not contradict graphical integrity (lie factor, honest scales, etc.).
 - Prefer direct labels on series over a separate legend when there are few series.
 - Statistical summaries (r, rho, n, p, R^2) live in the figure caption or surrounding prose by default.
 
-## Output and sizing
+### Output and sizing
 
 - Always render and export figures at 300 DPI. In matplotlib/seaborn, set both `figure.dpi` and `savefig.dpi` (e.g., `plt.rcParams.update({"figure.dpi": 300, "savefig.dpi": 300})`) so on-screen and saved figures match.
 
-## Anti-preferences
+### Anti-preferences
 
 - No bold text for emphasis.
 - No subtitles used as stat-strips.
@@ -72,9 +72,9 @@ not contradict graphical integrity (lie factor, honest scales, etc.).
 
 ---
 
-# Workflow
+## Workflow
 
-## For new visualizations
+### For new visualizations
 
 1. **Clarify the data story**
    - What comparisons matter?
@@ -94,7 +94,7 @@ not contradict graphical integrity (lie factor, honest scales, etc.).
 
 4. **Apply the Tufte test** (below)
 
-## For critiquing visualizations
+### For critiquing visualizations
 
 1. **Check graphical integrity**
    - Calculate lie factor if proportions seem off
@@ -115,11 +115,11 @@ not contradict graphical integrity (lie factor, honest scales, etc.).
 
 ---
 
-# Tufte's principles
+## Tufte's principles
 
 From *The Visual Display of Quantitative Information* (1983).
 
-## 1. Graphical Excellence
+### 1. Graphical Excellence
 
 Excellence in statistical graphics consists of complex ideas communicated with clarity, precision, and efficiency.
 
@@ -139,7 +139,7 @@ Excellence in statistical graphics consists of complex ideas communicated with c
 - Does it encourage thinking about content over decoration?
 - Can the viewer compare data elements easily?
 
-## 2. Graphical Integrity
+### 2. Graphical Integrity
 
 Graphics must tell the truth about the data.
 
@@ -165,7 +165,7 @@ Lie Factor = Size of effect shown in graphic / Size of effect in data
 - Area/volume encoding of linear data
 - Missing context or baselines
 
-## 3. Data-Ink Ratio
+### 3. Data-Ink Ratio
 
 The data-ink ratio is the proportion of a graphic's ink devoted to the non-redundant display of data-information.
 
@@ -188,23 +188,23 @@ Data-Ink Ratio = Data-ink / Total ink used in graphic
 
 **The eraser test:** If you can erase something without losing data information, erase it.
 
-## 4. Chartjunk
+### 4. Chartjunk
 
 Chartjunk is the interior decoration of graphics that does not convey information.
 
 **Three categories of chartjunk:**
 
-### A. Unintentional optical art (moire vibration)
+#### A. Unintentional optical art (moire vibration)
 - Busy patterns that create visual noise
 - Cross-hatching that vibrates
 - Competing visual frequencies
 
-### B. The Grid
+#### B. The Grid
 - Heavy grids compete with data
 - Grids should be muted or eliminated
 - If needed, use light gray or dotted lines
 
-### C. The Duck (self-promoting graphics)
+#### C. The Duck (self-promoting graphics)
 - Graphics that draw attention to their own design
 - Decoration masquerading as information
 - Style over substance
@@ -215,7 +215,7 @@ Chartjunk is the interior decoration of graphics that does not convey informatio
 - 3D effects, shadows, gradients without purpose
 - Clip art, icons, or illustrations that don't carry data
 
-## 5. Small Multiples
+### 5. Small Multiples
 
 Small multiples are series of graphics showing the same combination of variables, indexed by changes in another variable.
 
@@ -239,7 +239,7 @@ Small multiples are series of graphics showing the same combination of variables
 - Clear labeling of what varies
 - Tight spacing (data should dominate)
 
-## 6. Data Density & Information Resolution
+### 6. Data Density & Information Resolution
 
 **Data density = numbers plotted per unit area**
 
@@ -255,7 +255,7 @@ High data density is a sign of graphical quality. Maps and time-series can achie
 - Can we show more data in the same space?
 - Are we wasting white space?
 
-## 7. Multifunctioning Graphical Elements
+### 7. Multifunctioning Graphical Elements
 
 Every graphical element should serve multiple purposes when possible.
 
@@ -270,7 +270,7 @@ Every graphical element should serve multiple purposes when possible.
 - Axis that is also a data series
 - Range frames (axis shows data range, not arbitrary extent)
 
-## 8. Aesthetics and Technique
+### 8. Aesthetics and Technique
 
 **Balance complexity and simplicity:**
 - Simple design, complex data
@@ -294,7 +294,7 @@ Every graphical element should serve multiple purposes when possible.
 
 ---
 
-# Analytical design, sparklines, and layering
+## Analytical design, sparklines, and layering
 
 Extends the principles above with material from *Envisioning Information*
 (1990), *Visual Explanations* (1997), and *Beautiful Evidence* (2006).
@@ -302,7 +302,7 @@ Extends the principles above with material from *Envisioning Information*
 Consult when designing dashboards, dense displays, sparklines, or explanatory
 graphics.
 
-## 1. The Six Principles of Analytical Design
+### 1. The Six Principles of Analytical Design
 
 From *Beautiful Evidence*. The most actionable framework Tufte produced -- applies to any analytical presentation, not just charts.
 
@@ -326,7 +326,7 @@ From *Beautiful Evidence*. The most actionable framework Tufte produced -- appli
 
 **Use in critique:** walk through all six. The lowest-scoring principle is usually the biggest improvement opportunity.
 
-## 2. Sparklines
+### 2. Sparklines
 
 Word-sized, data-intense graphics. Tufte's signature *Beautiful Evidence* invention.
 
@@ -352,7 +352,7 @@ Word-sized, data-intense graphics. Tufte's signature *Beautiful Evidence* invent
 - When precise readings matter -- sparklines show shape, not value
 - For categorical or part-to-whole data
 
-## 3. Layering and Separation
+### 3. Layering and Separation
 
 From *Envisioning Information*. The most useful concept for dense displays.
 
@@ -366,7 +366,7 @@ From *Envisioning Information*. The most useful concept for dense displays.
 
 **Test:** squint at the graphic. The most important data should remain visible; chartjunk should disappear first.
 
-## 4. Micro/Macro Design
+### 4. Micro/Macro Design
 
 Distinct from raw data density. A micro/macro graphic reveals **different stories at different viewing distances**.
 
@@ -380,7 +380,7 @@ Distinct from raw data density. A micro/macro graphic reveals **different storie
 
 **Design implication:** don't choose between overview and detail -- show both simultaneously by layering.
 
-## 5. Escaping Flatland
+### 5. Escaping Flatland
 
 The 2D page/screen is inherently flat; good information design adds dimensions *without* 3D gimmicks.
 
@@ -394,7 +394,7 @@ The 2D page/screen is inherently flat; good information design adds dimensions *
 
 **Anti-pattern:** 3D bar charts, pie charts with depth, isometric projections that distort proportions. These add visual dimension without adding information dimension -- pure chartjunk.
 
-## 6. Range-Frame and Dot-Dash Plot
+### 6. Range-Frame and Dot-Dash Plot
 
 Tufte's signature reinventions of standard chart elements. Direct applications of data-ink maximization.
 
@@ -410,7 +410,7 @@ Tufte's signature reinventions of standard chart elements. Direct applications o
 
 **Pattern:** every standard chart element (axis, tick, gridline) can be redesigned to carry data.
 
-## 7. Confections, Parallelism, Narrative
+### 7. Confections, Parallelism, Narrative
 
 From *Visual Explanations*.
 
@@ -420,7 +420,7 @@ From *Visual Explanations*.
 
 **Narrative graphics of space and time:** combine spatial and temporal dimensions in one frame. Minard's Napoleon graphic encodes troop size, geography, direction, temperature, and time simultaneously.
 
-## 8. Cause and Effect
+### 8. Cause and Effect
 
 From *Visual Explanations*. Causality is hard to visualize because it requires showing both the variables and the mechanism linking them.
 
@@ -434,7 +434,7 @@ From *Visual Explanations*. Causality is hard to visualize because it requires s
 
 ---
 
-# The Tufte test
+## The Tufte test
 
 Questions 1-7 come from the core principles; 8-14 extend them with the
 analytical design material.
@@ -454,7 +454,7 @@ analytical design material.
 13. **Layering:** Do important elements dominate; do secondary elements recede?
 14. **Micro/macro:** Does the display reward both a glance and a close read?
 
-# Quick checklist
+## Quick checklist
 
 - [ ] Lie Factor approx 1.0 (no visual distortion)
 - [ ] Maximum data-ink ratio

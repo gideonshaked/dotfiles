@@ -29,11 +29,6 @@ if [ ! -d "$DOTFILES" ]; then
     fi
 fi
 
-# Update file that tracks installed Homebrew packages
-update_brewfile() {
-    brew bundle dump --force --file "$DOTFILES/manifest/Brewfile"
-}
-
 # Install packages from the manifest. With --only-plugins, install just the
 # tracked VS Code extensions; otherwise install everything via brew bundle.
 install_brew() {
@@ -70,9 +65,6 @@ dfu() {
 # Main function to run appropriate function based on argument
 main() {
     case "$1" in
-        "update_brewfile"|"brewfile")
-            update_brewfile
-            ;;
         "sync_settings"|"sync")
             "$DOTFILES/setup/scripts/sync-settings"
             ;;
@@ -88,10 +80,9 @@ main() {
             dfu "$@"
             ;;
         *)
-            echo "Usage: dotfiles {brewfile|brew|sync|dotbot|update}"
+            echo "Usage: dotfiles {brew|sync|dotbot|update}"
             echo ""
             echo "Available functions:"
-            echo "  update_brewfile, brewfile  - Update Homebrew package manifest"
             echo "  sync_settings, sync        - Sync shared settings between Claude profiles"
             echo "  install_brew, brew         - Install packages from the manifest"
             echo "                               (--only-plugins for just VS Code extensions)"

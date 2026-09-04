@@ -10,29 +10,6 @@ Claude Code is the only supported agent. Codex support was removed.
 
 ## Commands
 
-### What install-packages provides
-
-macOS installs Homebrew if it is absent and runs `brew bundle`, so the whole
-manifest lands. Linux cannot: Homebrew ships bottles only for
-`/home/linuxbrew/.linuxbrew`, which needs root, and at a writable prefix every
-formula compiles from source. Many of these machines have no sudo, so each tool
-is fetched as a released binary under `$HOME` instead.
-
-| Tool | Needed by | Linux source |
-|------|-----------|--------------|
-| starship, fzf, atuin | `terminal/shellrc` | own installers, `~/.local/bin` |
-| `uv` | `uvx`, which runs ssh-mcp | astral installer |
-| `jq` | `install-claude-plugins`, `claude-validate` | static binary from releases |
-| `node` | `npx`, for ccstatusline and the gcloud MCP | current LTS tarball, resolved from the release index |
-| `claude` | everything under `agents/claude/` | `claude.ai/install.sh`, both platforms |
-
-`jq` installs before `node` because the release index is read with it.
-
-Dotbot runs shell steps without a login shell, so they inherit a PATH that
-predates the install. `setup/scripts/lib/path.sh` is sourced by every step that
-needs a tool, and prepends `~/.local/bin` and both Homebrew prefixes. Without
-it a tool installed seconds earlier is invisible.
-
 **Install/update dotfiles:**
 ```bash
 ./install                     # use the saved profile, or personal
@@ -100,6 +77,29 @@ fzf-tab, autosuggestions, and syntax-highlighting are zsh-only because no bash e
 
 Secrets live at `~/.shell-secrets`, **outside the repository**, so they cannot be committed by accident.
 
+### What install-packages provides
+
+macOS installs Homebrew if it is absent and runs `brew bundle`, so the whole
+manifest lands. Linux cannot: Homebrew ships bottles only for
+`/home/linuxbrew/.linuxbrew`, which needs root, and at a writable prefix every
+formula compiles from source. Many of these machines have no sudo, so each tool
+is fetched as a released binary under `$HOME` instead.
+
+| Tool | Needed by | Linux source |
+|------|-----------|--------------|
+| starship, fzf, atuin | `terminal/shellrc` | own installers, `~/.local/bin` |
+| `uv` | `uvx`, which runs ssh-mcp | astral installer |
+| `jq` | `install-claude-plugins`, `claude-validate` | static binary from releases |
+| `node` | `npx`, for ccstatusline and the gcloud MCP | current LTS tarball, resolved from the release index |
+| `claude` | everything under `agents/claude/` | `claude.ai/install.sh`, both platforms |
+
+`jq` installs before `node` because the release index is read with it.
+
+Dotbot runs shell steps without a login shell, so they inherit a PATH that
+predates the install. `setup/scripts/lib/path.sh` is sourced by every step that
+needs a tool, and prepends `~/.local/bin` and both Homebrew prefixes. Without
+it a tool installed seconds earlier is invisible.
+
 ### Agent provisioning
 
 `bin/` holds only commands meant to be typed: `dotfiles` and `s`. What
@@ -107,9 +107,9 @@ Secrets live at `~/.shell-secrets`, **outside the repository**, so they cannot b
 location instead, since the repository's own path differs per machine:
 `agents/claude/hooks/claude-validate` to `~/.claude/hooks/`.
 
-npx comes from Homebrew's `node`, listed in the manifest. There is no nvm
-wrapper: the statusLine and the gcloud MCP both run through `bash -lc`, which
-sources the login shell and so has Homebrew on PATH.
+npx comes from `node`: the manifest on macOS, the LTS tarball on Linux. There
+is no nvm wrapper. The statusLine and the gcloud MCP both run through
+`bash -lc`, which sources the login shell and so has the real PATH.
 
 `install-claude-plugins` reads `extraKnownMarketplaces` and `enabledPlugins` from the linked `~/.claude/settings.json` (via `jq`) and adds/installs each marketplace and plugin.
 

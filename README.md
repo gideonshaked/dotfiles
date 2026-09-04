@@ -1,8 +1,8 @@
 <h1 align="center">Dotfiles</h1>
 
 <p align="center">
-  <a href="https://results.pre-commit.ci/latest/github/gideonshaked/dotfiles/master">
-    <img alt="pre-commit.ci status" src="https://results.pre-commit.ci/badge/github/gideonshaked/dotfiles/master.svg">
+  <a href="https://github.com/gideonshaked/dotfiles/actions/workflows/lint.yml">
+    <img alt="lint status" src="https://github.com/gideonshaked/dotfiles/actions/workflows/lint.yml/badge.svg">
   </a>
 </p>
 
@@ -16,54 +16,51 @@ My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https
 
 ## Install
 
-### Full install (macOS)
-
-#### Prerequisites
-
-- `git`
-- `python3`
-- `npx`
-- `jq`
-- `uv`
-- Claude Code
-
-#### Install command
-
 ```bash
 git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install
 ```
 
+Only `git` and `python3` are needed to create the symlinks; both ship with
+macOS and every Linux this targets. Everything else the configuration depends
+on is installed by the run itself, including Claude Code.
+
 ### Profiles
 
-A profile is a list of modules under `setup/modules/`. The chosen profile is remembered in
+A profile is an ordered list of modules under `setup/modules/`, passed to
+Dotbot as several `-c` arguments. The chosen profile is remembered in
 `~/.dotfiles-profile`, so a later bare `./install` repeats it.
 
 | Profile | For | Modules |
 |---------|-----|---------|
-| `personal` | personal Mac (default) | core, macos, agents, agents-personal |
-| `work` | work Mac | core, macos, agents, agents-work |
-| `server` | headless Linux | core, agents, agents-personal |
+| `personal` | personal Mac (default) | settings-personal, core, macos |
+| `work` | work Mac | settings-work, core, macos |
+| `server` | headless Linux | settings-personal, core |
 
 ```bash
-./install --profile server   # headless server: bash, SSH, git, agent config, no macOS bits
+./install --profile server   # headless Linux: shell, git, SSH, Claude, no macOS bits
 ./install --list             # show profiles and their modules
+./install --dry-run          # report what would change, touch nothing
 ```
 
 The install owns `~/bin`; an existing `~/bin` is backed up first.
 
+macOS gets its packages from Homebrew and the Brewfile. Linux cannot use
+Homebrew, which needs root for the only prefix with prebuilt bottles, so the
+tools it needs are fetched as released binaries under `$HOME` and no step
+requires sudo.
+
 ## Contents
 
 ```text
-├── agents      <- Claude config: memory, skills, commands, per-profile settings
+├── agents      <- Claude config: memory, skills, commands, hooks, per-profile settings
 ├── bin         <- Commands meant to be typed (s, dotfiles)
 ├── dotbot      <- Dotbot installer submodule
 ├── git         <- Git configuration (gitconfig, global gitignore)
-├── modules     <- Dotbot config, one file per module; profiles compose these
-├── manifest    <- Brewfile
-├── scripts     <- Repo maintenance scripts and install helpers
-├── ssh         <- SSH config file
-├── term        <- Shell configuration (one shellrc for zsh and bash, starship)
-└── vscode      <- VS Code configuration and extensions list
+├── manifest    <- Brewfile: what this repo's configuration depends on
+├── setup       <- The installer: modules/ compose profiles, scripts/ run after linking
+├── ssh         <- SSH config; host files are gitignored and stay out of this repo
+├── terminal    <- Shell configuration (one shellrc for zsh and bash, starship)
+└── vscode      <- VS Code settings, keybindings and extension list
 ```
 
 ## Dotfile management
@@ -72,8 +69,7 @@ After install, use the [`dotfiles`](./bin/dotfiles) utility:
 
 ```bash
 dotfiles update              # Pull latest changes and run install
-dotfiles brew                # Install all packages from the manifest
-dotfiles brew --only-plugins # Install just the tracked VS Code extensions
+dotfiles brew                # Install everything in the manifest
 dotfiles dotbot              # Update Dotbot submodule
 ```
 

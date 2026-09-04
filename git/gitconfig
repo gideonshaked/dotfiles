@@ -2,25 +2,20 @@
 	email = gideonshaked@gmail.com
 	name = Gideon Shaked
 
-[credential]
-	helper = osxkeychain
-
-[include]
-	path = ~/.gitalias.txt  # https://github.com/GitAlias/gitalias
-
-[alias]
-	nuke = !git-nuke
-	tag = tag -s
-
 [core]
 	attributesfile = ~/.gitattributes
 	excludesfile = ~/.gitignore
 
-[gpg]
-	program = gpg
+[credential]
+	helper = osxkeychain
 
-[safe]
-    directory = *
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
 
 [filter "lfs"]
 	process = git-lfs filter-process
@@ -34,36 +29,11 @@
 [push]
 	default = upstream
 
-[color]
-	branch = auto
-	diff = auto
-	status = auto
-    showbranch = auto
-	ui = true
+# Disables git's dubious-ownership check everywhere. Added to silence errors on
+# shared or container-mounted repos; it is a real security tradeoff.
+[safe]
+	directory = *
 
-[color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
-
-[color "diff"]
-	meta = yellow bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
-
-[color "status"]
-	added = green
-	changed = yellow
-	untracked = cyan
-
+# Global log format. Affects every `git log` including scripts that parse it.
 [format]
-    pretty = %C(yellow)%h%Creset %C(magenta)%cd%Creset %an <%ae> %C(cyan)%s%Creset%C(yellow)%d%Creset%n
-[init]
-	defaultBranch = master
-[credential "https://github.com"]
-	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	pretty = %C(yellow)%h%Creset %C(magenta)%cd%Creset %an <%ae> %C(cyan)%s%Creset%C(yellow)%d%Creset%n

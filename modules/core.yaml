@@ -23,7 +23,6 @@
     ~/.config/starship.toml: term/starship.toml
 
     # Git and SSH
-    ~/.gitalias.txt: git/gitalias.txt
     ~/.gitignore: git/gitignore
     ~/.ssh/config: ssh/config
 
@@ -55,7 +54,7 @@
       stdout: true
       stderr: true
 
-    - description: Configuring git aliases
+    - description: Configuring git
       command: scripts/configure-git
       quiet: true
       stdout: true

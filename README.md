@@ -57,7 +57,7 @@ The install owns `~/bin`; an existing `~/bin` is backed up first.
 ├── agents      <- Claude config: memory, skills, commands, per-profile settings
 ├── bin         <- Personal scripts (s, dotfiles, agent-usage, claude-validate)
 ├── dotbot      <- Dotbot installer submodule
-├── git         <- Git configuration files (aliases, custom formatting, etc.)
+├── git         <- Git configuration (gitconfig, global gitignore, gitattributes)
 ├── modules     <- Dotbot config, one file per module; profiles compose these
 ├── manifest    <- Brewfile
 ├── scripts     <- Repo maintenance scripts and install helpers

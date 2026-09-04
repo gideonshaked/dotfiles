@@ -2,12 +2,16 @@
 
 set -euo pipefail
 
-if ! git config --global --get-all include.path 2>/dev/null | grep -qF 'gitalias.txt'; then
-    git config --global --add include.path ~/.gitalias.txt
-fi
-
+# On macOS ~/.gitconfig is symlinked to git/gitconfig, which already sets this.
+# On servers it is the user's own file, so add the pointer without touching
+# anything else they have configured.
 if ! git config --global --get core.excludesfile >/dev/null 2>&1; then
     git config --global core.excludesfile ~/.gitignore
+fi
+
+# Drop the alias include left by earlier installs; git/gitalias.txt is gone.
+if git config --global --get-all include.path 2>/dev/null | grep -qF 'gitalias.txt'; then
+    git config --global --unset-all include.path '.*gitalias\.txt' || true
 fi
 
 echo "git config OK"

@@ -112,14 +112,20 @@ value it sees for each keyword:
 
 | Directory | Tracked | Contents |
 |-----------|---------|----------|
-| `~/.ssh/private.d/` | no, and it lives outside the repo | Every host: `umich`, `ucla`, `tau`, `octant`, `afterquery`. First, so it overrides anything managed. |
+| `~/.ssh/private.d/` | no, gitignored | Every host: `umich`, `ucla`, `tau`, `octant`, `afterquery`. First, so it overrides anything managed. |
 | `~/.ssh/config.d/` | yes, `ssh/config.d/` | `01-github` only. Linked by `core`. |
 | `~/.ssh/platform.d/` | yes, `ssh/platform.d/` | `Host *` blocks. Last, so every specific host wins. `01-macos`, linked by the `macos` module. |
 
 Only github and the macOS platform block are tracked. Everything naming a real
 host is private: the repository is public, and the host files carry usernames,
-internal hostnames, an EC2 instance id and a GCP project. A new machine needs
-`~/.ssh/private.d` populated by hand.
+internal hostnames, an EC2 instance id and a GCP project.
+
+The private files still live in the repo, at `ssh/private.d/`, gitignored and
+symlinked as a directory. They are edited alongside everything else and dotbot
+owns the link, but git never sees them. Two consequences: they are the only
+copy, so `git clean -fdx` destroys them, and a fresh clone has no
+`ssh/private.d` at all. The link carries `ignore-missing` for that reason, so
+the install succeeds on a machine that has not been given them yet.
 
 The numbers carry no meaning beyond keeping a listing stable. The `Host *`
 block is deliberately not among them: it lives in its own directory included

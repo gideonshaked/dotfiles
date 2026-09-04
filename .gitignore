@@ -3,7 +3,10 @@ __pycache__/
 .ruff_cache/
 .vscode/
 
-# Machine-local SSH hosts live in ~/.ssh/local.d, outside the repo entirely.
+# SSH host files, symlinked into ~/.ssh/private.d. Never committed: this repo
+# is public and they carry usernames, internal hostnames, an EC2 instance id
+# and a GCP project. They are the only copy, so `git clean -fdx` destroys them.
+ssh/private.d/
 
 # Beads / Dolt files (added by bd init)
 .dolt/

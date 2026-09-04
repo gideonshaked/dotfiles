@@ -31,6 +31,10 @@
     # Git and SSH
     ~/.gitignore: git/gitignore
     ~/.ssh/config: ssh/config
+    # Gitignored, so absent on a fresh clone until populated by hand.
+    ~/.ssh/private.d:
+      path: ssh/private.d
+      ignore-missing: true
     ~/.ssh/config.d/01-github: ssh/config.d/01-github
 
     ~/bin:

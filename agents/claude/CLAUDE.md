@@ -1,6 +1,8 @@
 # CLAUDE.md
 
-## Scope
+## General rules
+
+### Scope
 
 Do the simplest thing that works. Don't add features, refactor, or introduce
 abstractions beyond what the task requires: a bug fix doesn't need surrounding
@@ -20,7 +22,7 @@ When I'm describing a problem, asking a question, or thinking out loud rather
 than asking for a change, the deliverable is your assessment. Report what you
 found and stop.
 
-## Delegation
+### Delegation
 
 Parallelize by default. Any subtask that does not depend on another's output
 should run as a subagent while you keep working, and independent agents go out
@@ -39,7 +41,7 @@ self-critique, because it cannot inherit the assumption that produced the bug.
 The exception is cost. When I say to conserve usage, or to keep it cheap or
 light, do the work inline instead.
 
-## Comments
+### Comments
 
 Write for someone reading the file a year from now who has no idea it was ever
 changed. A comment explains the code and the constraints it lives under, never
@@ -73,7 +75,7 @@ Bad, because it is about a decision rather than the code:
 Rationale, alternatives and history belong in the commit message instead.
 Use ASCII punctuation only.
 
-## Reporting
+### Reporting
 
 Before claiming progress, check each claim against a tool result from this
 session. Say plainly what you have not verified.
@@ -84,13 +86,14 @@ you built up while working: no arrow chains, no hyphen-stacked compounds, no
 labels you invented earlier. Give each file, flag or commit its own plain
 clause.
 
-## Requirements
+## Specific rules
 
-Specific, checkable rules. These are not defaults to weigh against other
-considerations.
+Checkable requirements rather than defaults to weigh against other
+considerations. This is the last section; new rules are added as headings here.
 
-1. **Markdown heading hierarchy.** Exactly one `#` heading per file, and it
-   comes first. Every heading after it is at most one level deeper than the
-   heading above it, so an `###` never follows an `#`. When merging documents
-   that each had their own `#`, the merged file keeps one title and the rest
-   become `##`.
+### Markdown heading hierarchy
+
+Exactly one `#` heading per file, and it comes first. Every heading after it is
+at most one level deeper than the heading above it, so an `###` never follows
+an `#`. When merging documents that each had their own `#`, the merged file
+keeps one title and the rest become `##`.

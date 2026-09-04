@@ -26,14 +26,6 @@ dotfiles brewfile            # Update Homebrew package manifest
 dotfiles dotbot              # Update Dotbot submodule
 ```
 
-**Inspect agent usage:**
-```bash
-agent-usage                  # Skill invocations and MCP tool calls across all transcripts
-agent-usage --since 2026-08-01
-```
-
-Every pruning decision in this repo rests on that measurement. Use it before adding or removing a skill, plugin, or MCP server, and again afterwards to check the change did what you expected.
-
 **Run tests:**
 ```bash
 uv run pytest tests/ -q

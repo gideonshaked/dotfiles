@@ -1,0 +1,28 @@
+name: lint
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: pre-commit/action@v3.0.1
+
+  shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # The installer and the setup scripts are the parts that break silently,
+      # and both shells parse terminal/shellrc in full, so it has to satisfy
+      # each of them even where a branch never runs.
+      - run: find install bin setup/scripts -type f -print0 | xargs -0 shellcheck
+      - run: bash -n terminal/shellrc
+      - run: sudo apt-get update && sudo apt-get install -y zsh
+      - run: zsh -n terminal/shellrc

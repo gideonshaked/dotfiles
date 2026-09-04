@@ -90,7 +90,7 @@ sources the login shell and so has Homebrew on PATH.
 
 `install-claude-plugins` reads `extraKnownMarketplaces` and `enabledPlugins` from the linked `~/.claude/settings.json` (via `jq`) and adds/installs each marketplace and plugin.
 
-`install-agent-mcps` registers `exa` (HTTP), `gcloud` (npx) and `ssh-mcp` (uvx) with `claude mcp`, and prunes the retired AWS servers. Context7 setup is opt-in (`DOTFILES_INSTALL_CONTEXT7=1` or `CONTEXT7_API_KEY`); when run it writes the key to `~/.shell-secrets`.
+`install-agent-mcps` registers `exa` (HTTP), `gcloud` (npx) and `ssh-mcp` (uvx) with `claude mcp`. Context7 setup is opt-in (`DOTFILES_INSTALL_CONTEXT7=1` or `CONTEXT7_API_KEY`); when run it writes the key to `~/.shell-secrets`.
 
 **Tool budget is a scarce shared resource.** Claude Code defers every MCP tool behind `ToolSearch` once tool definitions exceed 10% of the context window, which hides low-tool-count servers like exa behind higher-count ones. Adding an MCP server means checking afterwards whether deferral has kicked in.
 

@@ -22,7 +22,6 @@ The installer only needs `git` and `python3` to create symlinks. The post-link a
 **Manage dotfiles:**
 ```bash
 dotfiles update              # Pull latest changes and run install
-dotfiles brewfile            # Update Homebrew package manifest
 dotfiles dotbot              # Update Dotbot submodule
 ```
 
@@ -142,6 +141,21 @@ directories is fine.
 ### SSH wrapper (`bin/s`)
 
 The `s` script is an SSH wrapper that uses the Kitty SSH kitten when available, falling back to plain ssh. Dotfiles management on remotes is opt-in via flags: `--install-dotfiles`, `--reinstall-dotfiles`, `--update-dotfiles`. Default is just SSH with no dotfiles action.
+
+### The Homebrew manifest
+
+`manifest/Brewfile` lists dependencies of this repository's configuration and
+nothing else: 12 formulae, 2 casks, and the VS Code extensions. Every entry is
+required by a file in this repo, and each carries a comment naming the file
+that needs it.
+
+Nothing regenerates it. `brew bundle dump` writes the machine's full inventory,
+which was 52 formulae and 82 casks, so the `dotfiles brewfile` subcommand that
+called it is gone. `dotfiles brew` still installs from the manifest.
+
+That means the manifest is no longer a machine backup. Adding a package to a
+machine does not add it here; it belongs here only when something in the repo
+starts depending on it.
 
 ### Symlink mappings
 

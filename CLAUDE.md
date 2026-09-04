@@ -1,12 +1,10 @@
 # CLAUDE.md
 
-Guidance for Claude Code when working in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Overview
 
-Personal dotfiles repository using [Dotbot](https://github.com/anishathalye/dotbot) for installation and symlink management. Configuration files are organized by tool/purpose and symlinked to their expected locations.
-
-Claude Code is the only supported agent. Codex support was removed.
+Personal dotfiles using [Dotbot](https://github.com/anishathalye/dotbot) for symlink management. Configuration is grouped by tool and linked to where each tool expects it. Claude Code is the only agent this repository configures.
 
 ## Commands
 
@@ -22,8 +20,18 @@ The installer only needs `git` and `python3` to create symlinks. The post-link s
 **Manage dotfiles:**
 ```bash
 dotfiles update              # Pull latest changes and run install
+dotfiles brew                # Install everything in the manifest
 dotfiles dotbot              # Update Dotbot submodule
 ```
+
+**Lint:**
+```bash
+pre-commit run --all-files                        # what CI runs
+shellcheck install bin/* setup/scripts/*          # not in pre-commit; run it by hand
+bash -n terminal/shellrc && zsh -n terminal/shellrc
+```
+
+`.github/workflows/lint.yml` runs pre-commit on push and pull request. There are no tests.
 
 ## Architecture
 
@@ -41,7 +49,7 @@ A profile is an ordered list of module files under `setup/modules/`, passed to D
 |--------|----------|
 | `settings-personal` / `settings-work` | Only the `~/.claude/settings.json` link |
 | `core` | Everything every machine gets: shell config, git, SSH, `~/bin`, Claude memory/skills/commands, and all install steps |
-| `macos` | zshenv, gitconfig, VS Code, Homebrew shell tools, hushlogin |
+| `macos` | zshenv, the macOS half of the gitconfig, the 1Password SSH block, VS Code, hushlogin |
 
 **Module order matters.** The settings module is listed first because
 `setup/scripts/install-claude-plugins` reads `~/.claude/settings.json` and skips
@@ -87,8 +95,16 @@ is fetched as a released binary under `$HOME` instead.
 | `jq` | `install-claude-plugins`, `claude-validate` | static binary from releases |
 | `node` | `npx`, for ccstatusline and the gcloud MCP | current LTS tarball, resolved from the release index |
 | `claude` | everything under `agents/claude/` | `claude.ai/install.sh`, both platforms |
+| `ruff` | `claude-validate`, for edited Python | `uv tool install` |
+| `pre-commit` | this repository's git hooks | `uv tool install` |
+| `bd`, `dolt` | the issue database in `.beads` | release tarballs |
 
-`jq` installs before `node` because the release index is read with it.
+`jq` installs before `node` and `bd` because both resolve their version from a
+release index read with it.
+
+Every Linux installer is guarded by `have <tool> && return 0`, so it installs
+what is missing and never upgrades. `brew bundle` does upgrade, so the two
+platforms can drift; a clean machine cannot hit this.
 
 Dotbot runs shell steps without a login shell, so they inherit a PATH that
 predates the install. `setup/scripts/lib/path.sh` is sourced by every step that
@@ -110,7 +126,11 @@ is no nvm wrapper. The statusLine and the gcloud MCP both run through
 
 `install-mcps` holds one function per server: `exa` (HTTP), `gcloud` (npx through `bash -lc`), `ssh-mcp` (uvx) and `context7`. Each checks what is already registered and re-adds only when the stored command no longer matches, so an older definition is replaced rather than kept.
 
-Context7 always installs. It works without an API key at a lower rate limit; when `CONTEXT7_API_KEY` is set the key raises the limit and is written to `~/.shell-secrets`.
+Context7 is registered directly over HTTP rather than through `ctx7 setup`,
+which opens an OAuth device flow and waits for a browser that a server does not
+have, ignoring `--yes`. The endpoint is the same with or without a key; when
+`CONTEXT7_API_KEY` is set it becomes an `Authorization` header and is written to
+`~/.shell-secrets`.
 
 **Tool budget is a scarce shared resource.** Claude Code defers every MCP tool behind `ToolSearch` once tool definitions exceed 10% of the context window, which hides low-tool-count servers like exa behind higher-count ones. Adding an MCP server means checking afterwards whether deferral has kicked in.
 
@@ -170,7 +190,7 @@ The `s` script is an SSH wrapper that uses the Kitty SSH kitten when available, 
 ### The Homebrew manifest
 
 `manifest/Brewfile` lists dependencies of this repository's configuration and
-nothing else: 12 formulae, 2 casks, and the VS Code extensions. Every entry is
+nothing else: 16 formulae, 3 casks, and the VS Code extensions. Every entry is
 required by a file in this repo, and each carries a comment naming the file
 that needs it.
 
@@ -182,8 +202,21 @@ That means the manifest is no longer a machine backup. Adding a package to a
 machine does not add it here; it belongs here only when something in the repo
 starts depending on it.
 
+### Git configuration
+
+`git/gitconfig` is linked by `core` and ends with an include of
+`~/.gitconfig.local`, which the `macos` module points at `git/gitconfig-macos`.
+Git ignores a missing include, so Linux simply gets the shared half. That split
+exists because `osxkeychain` is macOS-only; the `gh` credential helper is
+written as `!command -v gh ... && gh auth git-credential` so it works anywhere
+and exits quietly when `gh` is absent.
+
+### Vendor-installed skills
+
+`agents/claude/skills/.gitignore` excludes skills that other tooling writes into
+that directory on every install. Tracking them would mean committing someone
+else's artifact and taking churn on every vendor update.
+
 ### Symlink mappings
 
 Read the files under `setup/modules/`. They are the source of truth and a copy here would drift.
-
-There is currently no global instructions file. `agents/shared/instructions.md` was deleted; recover it from commit `94feb3d` if a replacement is wanted.

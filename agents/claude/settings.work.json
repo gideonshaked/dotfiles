@@ -53,6 +53,27 @@
       }
     }
   },
+  "enabledPlugins": {
+    "beads@beads-marketplace": true,
+    "impeccable@impeccable": true,
+    "playwright@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "cdd-utils@octant-agent-plugin-marketplace": true,
+    "octant-app-store@octant-agent-plugin-marketplace": true,
+    "octant-chem-utils@octant-agent-plugin-marketplace": true,
+    "octant-comp-chem@octant-agent-plugin-marketplace": true,
+    "octomind-rolling@octant-agent-plugin-marketplace": true,
+    "databricks@claude-plugins-official": true
+  },
+  "pluginConfigs": {
+    "octomind-rolling@octant-agent-plugin-marketplace": {
+      "options": {
+        "user_name": "Gideon",
+        "slack_username": "gideon",
+        "email": "gideon@octant.bio"
+      }
+    }
+  },
   "spinnerTipsEnabled": false,
   "spinnerVerbs": {
     "mode": "replace",
@@ -84,5 +105,10 @@
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "modelSettings": {
+    "claude-opus-5": {
+      "effortLevel": "high"
+    }
+  }
 }

@@ -91,6 +91,7 @@ not contradict graphical integrity (lie factor, honest scales, etc.).
 
 - **Titles are never bold.** This is the most common offender and the strictest version of the no-bold rule. Plot titles, axis titles, and facet/panel titles all stay at regular weight (e.g., in seaborn/matplotlib never pass `fontweight="bold"`; in ggplot2 do not set `face = "bold"` in `element_text` for titles, and override any theme default that does).
 - No bold anywhere else either: axis labels, tick labels, annotations, legend titles, captions. Use weight only when it carries information (e.g., highlighting one series among many), not for emphasis.
+- The one exception is a multi-panel figure's panel letters, which are lowercase bold. See Journal figures below.
 - No stacked subtitles or stat-strips on the plot itself for things like Pearson r, Spearman rho, n, p-values, R^2. Those belong in the figure caption or accompanying slide bullets, not as a subtitle.
 
 ### Axes, grids, frames
@@ -117,7 +118,7 @@ not contradict graphical integrity (lie factor, honest scales, etc.).
 
 ### Anti-preferences
 
-- No bold text for emphasis.
+- No bold text for emphasis. Panel letters are the exception; they carry structure, not emphasis.
 - No subtitles used as stat-strips.
 - No top/right spines on standard 2D plots.
 - No horizontal/vertical rules without a clarity reason.

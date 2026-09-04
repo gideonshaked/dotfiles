@@ -47,16 +47,22 @@ A profile is an ordered list of module files under `modules/`, passed to Dotbot 
 
 | Profile | Modules |
 |---------|---------|
-| `personal` | core, macos, agents, agents-personal |
-| `work` | core, macos, agents, agents-work |
-| `server` | core, agents, agents-personal |
+| `personal` | settings-personal, core, macos |
+| `work` | settings-work, core, macos |
+| `server` | settings-personal, core |
 
 | Module | Contents |
 |--------|----------|
-| `core` | Shared shell config, bash, git aliases and ignore, SSH config, `~/bin` |
-| `macos` | zsh, `zshenv`, `hushlogin`, gitconfig, VS Code, Homebrew shell tools |
-| `agents` | Claude memory, skills, commands, ccstatusline, and the agent install steps |
-| `agents-personal` / `agents-work` | Only the `~/.claude/settings.json` link |
+| `settings-personal` / `settings-work` | Only the `~/.claude/settings.json` link |
+| `core` | Everything every machine gets: shell config, git, SSH, `~/bin`, Claude memory/skills/commands, and all install steps |
+| `macos` | zshenv, gitconfig, VS Code, Homebrew shell tools, hushlogin |
+
+**Module order matters.** The settings module is listed first because
+`scripts/install-claude-plugins` reads `~/.claude/settings.json` and skips
+silently when it is absent. Dotbot processes `-c` files left to right, so the
+link must be created in an earlier module than the step that reads it. Putting
+the settings link last meant a fresh machine installed zero plugins on its
+first run.
 
 The map lives in the `profile_modules` function in `install`. Adding a machine class means adding one `case` arm, not editing existing entries. It is a `case` statement rather than an associative array because macOS ships bash 3.2, which predates `declare -A`, and the bootstrap runs before Homebrew exists.
 

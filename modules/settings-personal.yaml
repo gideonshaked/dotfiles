@@ -1,4 +1,7 @@
 # Personal Claude settings: no work plugins.
+#
+# Listed first in the profile so the link exists before core's install steps
+# read it.
 
 - link:
     ~/.claude/settings.json:

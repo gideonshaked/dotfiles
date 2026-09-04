@@ -8,6 +8,9 @@
 #
 # A profile is a list of module files under modules/. Adding a machine class
 # means adding one arm to the case below, not editing every existing entry.
+#
+# Module order matters: the settings module comes first because core's install
+# steps read ~/.claude/settings.json.
 
 set -e
 
@@ -20,9 +23,9 @@ PROFILE_MARKER="${HOME}/.dotfiles-profile"
 # machine before Homebrew exists. A case statement is portable and reads better.
 profile_modules() {
     case "$1" in
-        personal) echo "core macos agents agents-personal" ;;
-        work)     echo "core macos agents agents-work" ;;
-        server)   echo "core agents agents-personal" ;;
+        personal) echo "settings-personal core macos" ;;
+        work)     echo "settings-work core macos" ;;
+        server)   echo "settings-personal core" ;;
         *)        return 1 ;;
     esac
 }

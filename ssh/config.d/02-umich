@@ -1,11 +1,5 @@
 # University of Michigan.
 
-Host caen
-	HostName login.engin.umich.edu
-	User gshaked
-	ControlMaster auto
-	ControlPath ~/.ssh/master-%r@%h:%p
-
 Host psoriasis
 	HostName psoriasis.sph.umich.edu
 	User gshaked

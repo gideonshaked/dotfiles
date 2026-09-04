@@ -177,5 +177,6 @@
 		"**/.forgejo/workflows/*.yml",
 		"**/.forgejo/workflows/*.yaml"
 	],
+	"workbench.iconTheme": "material-icon-theme",
 	"workbench.colorTheme": "Monokai Dimmed"
 }

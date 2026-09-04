@@ -94,8 +94,8 @@
       stdout: true
       stderr: true
 
-    - description: Installing agent MCPs (optional)
-      command: setup/scripts/install-agent-mcps
+    - description: Installing MCP servers (optional)
+      command: setup/scripts/install-mcps
       quiet: true
       stdout: true
       stderr: true

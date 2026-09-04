@@ -51,9 +51,6 @@ dfu() {
 # Main function to run appropriate function based on argument
 main() {
     case "$1" in
-        "sync_settings"|"sync")
-            "$DOTFILES/setup/scripts/sync-settings"
-            ;;
         "install_brew"|"brew")
             install_brew
             ;;
@@ -65,12 +62,10 @@ main() {
             dfu "$@"
             ;;
         *)
-            echo "Usage: dotfiles {brew|sync|dotbot|update}"
+            echo "Usage: dotfiles {brew|dotbot|update}"
             echo ""
             echo "Available functions:"
-            echo "  sync_settings, sync        - Sync shared settings between Claude profiles"
-            echo "  install_brew, brew         - Install packages from the manifest"
-            echo "                               (--only-plugins for just VS Code extensions)"
+                echo "  install_brew, brew         - Install packages from the manifest"
             echo "  update_dotbot, dotbot      - Update Dotbot submodule"
             echo "  dfu, update                - Update dotfiles and run install (current profile)"
             exit 1

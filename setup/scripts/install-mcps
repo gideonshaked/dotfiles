@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SECRETS="${HOME}/.shell-secrets"
+
+# Dotbot runs this without a login shell, so PATH has to be built by hand.
+PATH="${HOME}/.local/bin:${HOME}/.bun/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:/home/linuxbrew/.linuxbrew/bin:${PATH}"
+export PATH
+
+# `mcp get` prints the stored command, so matching against it detects a server
+# registered from an older definition and forces a re-add.
+registered_with() {
+    claude mcp get "$1" 2>/dev/null | grep -qF "$2"
+}
+
+register() {
+    local name="$1"
+    shift
+    claude mcp remove "$name" -s user >/dev/null 2>&1 || true
+    claude mcp add --scope user "$name" "$@" >/dev/null 2>&1 \
+        || echo "${name} setup failed (non-fatal)"
+}
+
+exa() {
+    local url="https://mcp.exa.ai/mcp"
+    registered_with exa "URL: $url" && return 0
+    register exa --transport http "$url"
+}
+
+gcloud_mcp() {
+    local package="@google-cloud/gcloud-mcp"
+    registered_with gcloud "$package" && return 0
+    # bash -lc so npx resolves through the login shell's PATH.
+    register gcloud -- bash -lc "exec npx -y $package"
+}
+
+# agents/claude/skills/ssh names seven mcp__ssh-mcp__* tools. Without this
+# server the skill installs and every tool it references is absent.
+ssh_mcp() {
+    local package="slepp-ssh-mcp"
+    registered_with ssh-mcp "$package" && return 0
+    register ssh-mcp -- uvx --from "$package" ssh-mcp
+}
+
+# Context7 works without an API key at a lower rate limit, so this always runs.
+# A key only raises the limit, and is persisted for the shell to export.
+context7() {
+    command -v npx >/dev/null 2>&1 || {
+        echo "npx not found, skipping Context7 (non-fatal)"
+        return 0
+    }
+
+    if [ -n "${CONTEXT7_API_KEY:-}" ]; then
+        store_secret CONTEXT7_API_KEY "$CONTEXT7_API_KEY"
+        npx -y ctx7@latest setup --claude --mcp --yes --api-key "$CONTEXT7_API_KEY" >/dev/null 2>&1 \
+            || echo "Context7 setup failed (non-fatal)"
+    else
+        npx -y ctx7@latest setup --claude --mcp --yes >/dev/null 2>&1 \
+            || echo "Context7 setup failed (non-fatal)"
+    fi
+}
+
+store_secret() {
+    local name="$1" value="$2" tmp
+
+    mkdir -p "$(dirname "$SECRETS")"
+    touch "$SECRETS"
+    chmod 600 "$SECRETS"
+
+    tmp="$(mktemp)"
+    grep -v "^export ${name}=" "$SECRETS" >"$tmp" || true
+    printf 'export %s=%q\n' "$name" "$value" >>"$tmp"
+    mv -f "$tmp" "$SECRETS"
+    chmod 600 "$SECRETS"
+}
+
+command -v claude >/dev/null 2>&1 || {
+    echo "claude not found, skipping MCPs (non-fatal)"
+    exit 0
+}
+
+exa
+gcloud_mcp
+ssh_mcp
+context7
+
+echo "MCPs OK"

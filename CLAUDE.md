@@ -90,7 +90,9 @@ sources the login shell and so has Homebrew on PATH.
 
 `install-claude-plugins` reads `extraKnownMarketplaces` and `enabledPlugins` from the linked `~/.claude/settings.json` (via `jq`) and adds/installs each marketplace and plugin.
 
-`install-agent-mcps` registers `exa` (HTTP), `gcloud` (npx) and `ssh-mcp` (uvx) with `claude mcp`. Context7 setup is opt-in (`DOTFILES_INSTALL_CONTEXT7=1` or `CONTEXT7_API_KEY`); when run it writes the key to `~/.shell-secrets`.
+`install-mcps` holds one function per server: `exa` (HTTP), `gcloud` (npx through `bash -lc`), `ssh-mcp` (uvx) and `context7`. Each checks what is already registered and re-adds only when the stored command no longer matches, so an older definition is replaced rather than kept.
+
+Context7 always installs. It works without an API key at a lower rate limit; when `CONTEXT7_API_KEY` is set the key raises the limit and is written to `~/.shell-secrets`.
 
 **Tool budget is a scarce shared resource.** Claude Code defers every MCP tool behind `ToolSearch` once tool definitions exceed 10% of the context window, which hides low-tool-count servers like exa behind higher-count ones. Adding an MCP server means checking afterwards whether deferral has kicked in.
 
@@ -104,7 +106,7 @@ A plugin enabled in `~/.claude/settings.json` cannot be disabled per-project ([c
 
 `tests/test_settings_split.py` asserts the two files differ **only** in `enabledPlugins`, `extraKnownMarketplaces`, and `pluginConfigs`. Add a shared setting to one file and not the other and the test fails. Do not weaken the allowlist to make a test pass.
 
-The drift has one routine cause: `/config` and `/model` write to `~/.claude/settings.json`, which links to whichever profile is installed, so the other profile falls behind. Run `dotfiles sync` after changing settings through the Claude Code UI. It copies every non-profile-specific key from the active profile to the other.
+`/config` and `/model` write to `~/.claude/settings.json`, which links to whichever profile is installed, so the other profile falls behind. Keeping them in step is a manual edit; `tests/test_settings_split.py` is what catches the drift.
 
 ### The server profile
 

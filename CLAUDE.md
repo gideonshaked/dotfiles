@@ -115,21 +115,20 @@ sees for each keyword:
 
 | Directory | Tracked | Contents |
 |-----------|---------|----------|
-| `~/.ssh/local.d/` | no, and it lives outside the repo | Machine-local hosts. First, so it overrides anything managed. |
-| `~/.ssh/config.d/` | yes, `ssh/config.d/` | One file per site: `01-github`, `02-umich`, `03-ucla`, `04-tau`, `05-nubio`. Linked by `core`. |
+| `~/.ssh/private.d/` | no, and it lives outside the repo | Anything that must not be public, work hosts included. First, so it overrides anything managed. |
+| `~/.ssh/config.d/` | yes, `ssh/config.d/` | One file per site: `01-github`, `02-umich`, `03-ucla`, `04-tau`. Linked by `core`. |
 | `~/.ssh/platform.d/` | yes, `ssh/platform.d/` | `Host *` blocks. Last, so every specific host wins. Only `macos` so far, linked by the `macos` module. |
 
-The numbers keep the `config.d` listing stable; they carry no meaning beyond
-that, since the files define disjoint hosts. What the numbers deliberately do
-**not** do is order the `Host *` block: that lives in its own directory,
-included after the glob, so a future `06-` file can never sort past it.
+The numbers keep the `config.d` listing stable and carry no other meaning: the
+files define disjoint hosts. The `Host *` block is deliberately not among them.
+It lives in its own directory included after the glob, so a future `06-` file
+cannot sort past it and start winning over specific hosts.
 
-`platform.d/macos` is the reason the split exists. It points `IdentityAgent` at
-the 1Password socket under `~/Library/Group Containers/`, a path that cannot
-exist on Linux. Before the split, `core` linked one `ssh/config` to every
-profile, so the server profile got it.
+`platform.d/macos` is why the split exists. It points `IdentityAgent` at the
+1Password socket under `~/Library/Group Containers/`, a path that cannot exist
+on Linux, and `core` used to link one `ssh/config` to every profile.
 
-Work hosts are **not** in the repo. `~/.ssh/local.d/octant` carries an EC2
+Work hosts are not in the repo. `~/.ssh/private.d/octant` carries an EC2
 instance id, an internal GCP project name, and a colleague's username; this
 repository is public. A fresh work laptop needs that file copied over by hand.
 

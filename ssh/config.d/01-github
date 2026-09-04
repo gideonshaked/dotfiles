@@ -2,8 +2,8 @@ Host github.com
 	IgnoreUnknown UseKeychain
 	AddKeysToAgent yes
 	UseKeychain yes
-	# Pin to this key and opt out of the 1Password agent, which otherwise
-	# offers a read-only deploy key first and breaks pushes.
+	# The 1Password agent offers a read-only deploy key first, which breaks
+	# pushes, so this host uses the key on disk.
 	IdentitiesOnly yes
 	IdentityAgent none
 	IdentityFile ~/.ssh/id_ed25519_github

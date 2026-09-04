@@ -26,6 +26,9 @@ brew "jq"
 # uvx runs the ssh-mcp server registered by setup/scripts/install-agent-mcps.
 brew "uv"
 
+# npx runs ccstatusline for the Claude statusLine and the gcloud MCP server.
+brew "node"
+
 # git/gitconfig uses `gh auth git-credential` as the GitHub credential helper.
 brew "gh"
 

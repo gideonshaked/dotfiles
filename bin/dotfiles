@@ -29,27 +29,13 @@ if [ ! -d "$DOTFILES" ]; then
     fi
 fi
 
-# Install packages from the manifest. With --only-plugins, install just the
-# tracked VS Code extensions; otherwise install everything via brew bundle.
+# Install everything in the manifest, VS Code extensions included.
 install_brew() {
-    local brewfile="$DOTFILES/manifest/Brewfile"
-
-    if [ "${1:-}" = "--only-plugins" ]; then
-        if ! command -v code >/dev/null 2>&1; then
-            echo "code CLI not found, cannot install plugins" >&2
-            exit 1
-        fi
-        grep -E '^vscode "' "$brewfile" | sed -E 's/^vscode "([^"]*)".*/\1/' | while read -r ext; do
-            [ -n "$ext" ] && code --install-extension "$ext"
-        done
-        return
-    fi
-
     if ! command -v brew >/dev/null 2>&1; then
         echo "brew not found" >&2
         exit 1
     fi
-    brew bundle install --file "$brewfile"
+    brew bundle install --file "$DOTFILES/manifest/Brewfile"
 }
 
 # Update Dotbot
@@ -69,8 +55,7 @@ main() {
             "$DOTFILES/setup/scripts/sync-settings"
             ;;
         "install_brew"|"brew")
-            shift
-            install_brew "$@"
+            install_brew
             ;;
         "update_dotbot"|"dotbot")
             update_dotbot

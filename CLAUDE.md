@@ -17,7 +17,7 @@ Claude Code is the only supported agent. Codex support was removed.
 ./install --list              # show profiles and their modules
 ```
 
-The installer only needs `git` and `python3` to create symlinks. The post-link agent steps additionally use `npx`, `jq`, `uv`, and `claude`; each step is failure-tolerant and skips (printing a `non-fatal` message) when its tool is missing.
+The installer only needs `git` and `python3` to create symlinks. The post-link steps additionally use `brew`, `npx`, `jq`, `uv`, and `claude`; each step is failure-tolerant and skips (printing a `non-fatal` message) when its tool is missing.
 
 **Manage dotfiles:**
 ```bash
@@ -79,20 +79,18 @@ Secrets live at `~/.shell-secrets`, **outside the repository**, so they cannot b
 
 ### Agent provisioning
 
-`setup/scripts/dotfiles-npx` activates nvm-managed npx on demand; the Claude
-statusLine, the gcloud MCP registration and `install-ccstatusline` call it
-rather than a system `npx`, because none of them run under a login shell.
+`bin/` holds only commands meant to be typed: `dotfiles` and `s`. What
+`~/.claude/settings.json` names by absolute path is linked to a fixed `$HOME`
+location instead, since the repository's own path differs per machine:
+`agents/claude/hooks/claude-validate` to `~/.claude/hooks/`.
 
-`bin/` holds only commands meant to be typed: `dotfiles` and `s`. Anything
-`~/.claude/settings.json` names by absolute path is linked to a stable
-`$HOME` location instead, since the repository's own path differs per machine:
-`agents/claude/hooks/claude-validate` to `~/.claude/hooks/`, and
-`dotfiles-npx` to `~/.claude/bin/`. Both resolve their own symlink before
-looking for anything beside them.
+npx comes from Homebrew's `node`, listed in the manifest. There is no nvm
+wrapper: the statusLine and the gcloud MCP both run through `bash -lc`, which
+sources the login shell and so has Homebrew on PATH.
 
 `install-claude-plugins` reads `extraKnownMarketplaces` and `enabledPlugins` from the linked `~/.claude/settings.json` (via `jq`) and adds/installs each marketplace and plugin.
 
-`install-agent-mcps` registers `exa` (HTTP) and `gcloud` (via `dotfiles-npx`) with `claude mcp`, and prunes the retired AWS servers. Context7 setup is opt-in (`DOTFILES_INSTALL_CONTEXT7=1` or `CONTEXT7_API_KEY`); when run it writes the key to `~/.shell-secrets`.
+`install-agent-mcps` registers `exa` (HTTP), `gcloud` (npx) and `ssh-mcp` (uvx) with `claude mcp`, and prunes the retired AWS servers. Context7 setup is opt-in (`DOTFILES_INSTALL_CONTEXT7=1` or `CONTEXT7_API_KEY`); when run it writes the key to `~/.shell-secrets`.
 
 **Tool budget is a scarce shared resource.** Claude Code defers every MCP tool behind `ToolSearch` once tool definitions exceed 10% of the context window, which hides low-tool-count servers like exa behind higher-count ones. Adding an MCP server means checking afterwards whether deferral has kicked in.
 

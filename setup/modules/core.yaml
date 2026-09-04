@@ -55,13 +55,12 @@
       path: agents/claude/commands
       glob: false
       force: true
-    # settings.json names these by absolute path, so they need a stable home
+    # settings.json names this by absolute path, so it needs a stable home
     # that does not depend on where the repo is cloned.
     ~/.claude/hooks:
       path: agents/claude/hooks
       glob: false
       force: true
-    ~/.claude/bin/dotfiles-npx: setup/scripts/dotfiles-npx
 
 - shell:
     # ssh does not create the ControlPath directory, and multiplexing fails
@@ -85,12 +84,6 @@
 
     - description: Configuring git
       command: setup/scripts/configure-git
-      quiet: true
-      stdout: true
-      stderr: true
-
-    - description: Installing npx with nvm if needed (optional)
-      command: setup/scripts/ensure-npx
       quiet: true
       stdout: true
       stderr: true

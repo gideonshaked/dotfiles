@@ -32,9 +32,12 @@ exa() {
 
 gcloud_mcp() {
     local package="@google-cloud/gcloud-mcp"
-    registered_with gcloud "$package" && return 0
-    # bash -lc so npx resolves through the login shell's PATH.
-    register gcloud -- bash -lc "exec npx -y $package"
+    # bash -lc so npx resolves through the login shell's PATH. Matching the
+    # whole command, not just the package, so a registration naming an older
+    # wrapper is replaced rather than accepted.
+    local command="exec npx -y $package"
+    registered_with gcloud "$command" && return 0
+    register gcloud -- bash -lc "$command"
 }
 
 # agents/claude/skills/ssh names seven mcp__ssh-mcp__* tools. Without this

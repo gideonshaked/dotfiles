@@ -20,3 +20,11 @@ Host armis2
 	HostName armis2.arc-ts.umich.edu
 	User gshaked
 	PubkeyAuthentication no
+
+Host nubio
+	HostName nubio-ssh.gideonshaked.com
+	User gshaked
+	IdentityFile ~/.ssh/id_ed25519_nubio
+	# ProxyCommand inherits the PATH of whatever launched ssh, which for a GUI
+	# editor may not include Homebrew. The path is macOS-specific.
+	ProxyCommand /opt/homebrew/bin/cloudflared access ssh --hostname %h

@@ -1,7 +1,5 @@
-# Tel Aviv University.
-#
-# The wildcard block comes first so it applies to every rack below: these
-# hosts are password-only and drop idle connections aggressively.
+# Tel Aviv University. These hosts are password-only and drop idle
+# connections aggressively.
 
 Host shamir* elkon* davidlasry hagai-shamir3
 	PubkeyAuthentication no

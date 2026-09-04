@@ -1,8 +1,4 @@
-# macOS only: keys live in the 1Password agent. Linked by the macos module, so
-# a Linux machine never sees this path.
-#
-# This is a Host * block and is included last, so any specific host above can
-# opt out (github.com does, with IdentityAgent none).
+# The 1Password agent socket. This path exists only on macOS.
 
 Host *
 	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"

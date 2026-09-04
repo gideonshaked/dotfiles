@@ -1,18 +1,12 @@
-# Entry point. Everything else is an include, so a machine gets host
-# definitions by which files its profile links, not by editing this file.
+# Include order is precedence order: OpenSSH takes the first value it sees for
+# each keyword.
 #
-# OpenSSH takes the FIRST value it sees for each keyword, so include order is
-# precedence order. The three directories below encode that:
+#   private.d   untracked hosts. First, so it overrides anything below.
+#   config.d    one file per site.
+#   platform.d  Host * blocks. Last, so a specific host above wins.
 #
-#   local.d     machine-local, never tracked. First, so it wins over anything
-#               managed. Put hosts here that should not be in a public repo.
-#   config.d    managed host definitions, one file per site. Numbered only to
-#               keep the listing stable; the files do not overlap, so the
-#               order among them does not actually matter.
-#   platform.d  Host * blocks. Last, so every specific host above wins.
-#
-# A glob that matches nothing is not an error, so a missing directory is fine.
+# A glob that matches nothing is not an error.
 
-Include ~/.ssh/local.d/*
+Include ~/.ssh/private.d/*
 Include ~/.ssh/config.d/*
 Include ~/.ssh/platform.d/*

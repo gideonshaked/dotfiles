@@ -29,7 +29,6 @@
     ~/.ssh/config.d/02-umich: ssh/config.d/02-umich
     ~/.ssh/config.d/03-ucla: ssh/config.d/03-ucla
     ~/.ssh/config.d/04-tau: ssh/config.d/04-tau
-    ~/.ssh/config.d/05-nubio: ssh/config.d/05-nubio
 
     ~/bin:
       path: bin

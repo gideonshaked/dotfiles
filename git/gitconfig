@@ -5,15 +5,6 @@
 [core]
 	excludesfile = ~/.gitignore
 
-[credential]
-	helper = osxkeychain
-
-[credential "https://github.com"]
-	helper = !/opt/homebrew/bin/gh auth git-credential
-
-[credential "https://gist.github.com"]
-	helper = !/opt/homebrew/bin/gh auth git-credential
-
 [pull]
 	ff = only
 
@@ -24,3 +15,16 @@
 # shared or container-mounted repos; it is a real security tradeoff.
 [safe]
 	directory = *
+
+# git runs a helper beginning with ! through sh and appends "$@", so the
+# operation still reaches gh. When gh is absent the helper exits non-zero and
+# git falls through to the next one.
+[credential "https://github.com"]
+	helper = "!command -v gh >/dev/null 2>&1 && gh auth git-credential"
+
+[credential "https://gist.github.com"]
+	helper = "!command -v gh >/dev/null 2>&1 && gh auth git-credential"
+
+# Platform and machine-local settings. Git ignores a missing include.
+[include]
+	path = ~/.gitconfig.local

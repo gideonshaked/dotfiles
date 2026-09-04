@@ -1,0 +1,3 @@
+# osxkeychain ships with the git that Apple's command line tools install.
+[credential]
+	helper = osxkeychain

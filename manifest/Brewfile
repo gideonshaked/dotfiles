@@ -36,27 +36,34 @@ brew "cloudflared"
 # bashIde.shellcheckPath at this.
 brew "shellcheck"
 
-# vscode/settings.json sets editor.fontFamily to "Hack Nerd Font".
-cask "font-hack-nerd-font"
+# Casks and editor extensions exist only on macOS; a Brewfile is Ruby, so the
+# Linux install skips this block rather than failing on it.
+if OS.mac?
+  # vscode/settings.json sets editor.fontFamily to "Hack Nerd Font".
+  cask "font-hack-nerd-font"
 
-# The editor whose settings and keybindings this repo links.
-cask "visual-studio-code"
+  # The editor whose settings and keybindings this repo links.
+  cask "visual-studio-code"
 
-vscode "davidanson.vscode-markdownlint"
-vscode "james-yu.latex-workshop"
-vscode "mads-hartmann.bash-ide-vscode"
-vscode "mousavian.ssh-config-syntax-highlighter"
-vscode "ms-python.debugpy"
-vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
-vscode "ms-python.vscode-python-envs"
-vscode "ms-toolsai.jupyter"
-vscode "ms-toolsai.jupyter-keymap"
-vscode "ms-toolsai.jupyter-renderers"
-vscode "ms-toolsai.vscode-jupyter-cell-tags"
-vscode "ms-toolsai.vscode-jupyter-slideshow"
-vscode "pkief.material-icon-theme"
-vscode "tamasfe.even-better-toml"
-vscode "timonwong.shellcheck"
-vscode "yzane.markdown-pdf"
-vscode "yzhang.markdown-all-in-one"
+  # ssh/platform.d/01-macos points IdentityAgent at this app's agent socket.
+  cask "1password"
+
+  vscode "davidanson.vscode-markdownlint"
+  vscode "james-yu.latex-workshop"
+  vscode "mads-hartmann.bash-ide-vscode"
+  vscode "mousavian.ssh-config-syntax-highlighter"
+  vscode "ms-python.debugpy"
+  vscode "ms-python.python"
+  vscode "ms-python.vscode-pylance"
+  vscode "ms-python.vscode-python-envs"
+  vscode "ms-toolsai.jupyter"
+  vscode "ms-toolsai.jupyter-keymap"
+  vscode "ms-toolsai.jupyter-renderers"
+  vscode "ms-toolsai.vscode-jupyter-cell-tags"
+  vscode "ms-toolsai.vscode-jupyter-slideshow"
+  vscode "pkief.material-icon-theme"
+  vscode "tamasfe.even-better-toml"
+  vscode "timonwong.shellcheck"
+  vscode "yzane.markdown-pdf"
+  vscode "yzhang.markdown-all-in-one"
+end

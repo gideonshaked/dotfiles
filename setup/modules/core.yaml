@@ -12,12 +12,6 @@
 
 - clean: ["~", "~/.claude", "~/.ssh/config.d"]
 
-# ssh does not create the ControlPath directory, and multiplexing fails
-# without it.
-- create:
-    ~/.ssh/sockets:
-      mode: 0700
-
 - link:
     # One shell config, symlinked to both shells' rc files
     ~/.zshrc:
@@ -30,6 +24,10 @@
 
     # Git and SSH
     ~/.gitignore: git/gitignore
+    ~/.gitconfig:
+      path: git/gitconfig
+      force: true
+      backup: true
     ~/.ssh/config: ssh/config
     # Gitignored, so absent on a fresh clone until populated by hand.
     ~/.ssh/private.d:
@@ -59,6 +57,19 @@
       force: true
 
 - shell:
+    # ssh does not create the ControlPath directory, and multiplexing fails
+    # without it. dotbot's create only applies mode when it makes the
+    # directory, so an existing one keeps its own permissions.
+    - description: Preparing the SSH control socket directory
+      command: mkdir -p ~/.ssh/sockets && chmod 700 ~/.ssh/sockets
+      quiet: true
+
+    - description: Installing packages (optional)
+      command: setup/scripts/install-packages
+      quiet: true
+      stdout: true
+      stderr: true
+
     - description: Hooking into .bashrc and .bash_profile
       command: setup/scripts/configure-bash-hooks
       quiet: true

@@ -5,6 +5,7 @@
 # Homebrew, that PATH predates it and nothing brew provides is findable.
 #
 # Both Homebrew prefixes are listed because the Linux one differs from macOS,
-# and ~/.local/bin because the Claude Code native installer puts claude there.
-PATH="${HOME}/.local/bin:${HOME}/.bun/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:/home/linuxbrew/.linuxbrew/bin:${PATH}"
+# ~/.local/bin because the Claude Code native installer puts claude there, and
+# ~/.atuin/bin because atuin's installer uses its own prefix.
+PATH="${HOME}/.local/bin:${HOME}/.atuin/bin:${HOME}/.bun/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:/home/linuxbrew/.linuxbrew/bin:${PATH}"
 export PATH

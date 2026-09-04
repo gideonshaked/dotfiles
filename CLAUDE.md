@@ -66,13 +66,13 @@ zsh and bash are equal first-class citizens. **One file configures both.**
 
 | File | Role |
 |------|------|
-| `term/shellrc` | Symlinked to both `~/.zshrc` and `~/.bashrc.dotfiles`. A shared POSIX section, then a zsh branch and a bash branch, then a shared tools section. |
-| `term/zshenv` | Loaded before `/etc/zshrc`, which is the only reason it is separate. Disables Apple Terminal session restore; sources `~/.cargo/env` because rustup writes that file directly. |
-| `term/starship.toml` | Prompt config, a different format. |
+| `terminal/shellrc` | Symlinked to both `~/.zshrc` and `~/.bashrc.dotfiles`. A shared POSIX section, then a zsh branch and a bash branch, then a shared tools section. |
+| `terminal/zshenv` | Loaded before `/etc/zshrc`, which is the only reason it is separate. Disables Apple Terminal session restore; sources `~/.cargo/env` because rustup writes that file directly. |
+| `terminal/starship.toml` | Prompt config, a different format. |
 
 `shellrc` sets `$__shell` to `zsh` or `bash` once, near the top. That is what makes the tools section shared rather than duplicated: `starship init "$__shell"`, `atuin init "$__shell"`, and the fzf key-bindings path are each written once and work in both.
 
-**Both shells parse the entire file**, so zsh-only syntax must stay syntactically valid to bash even though it never executes there. Array assignment, `setopt`, `zstyle`, and `autoload` all satisfy that; a zsh glob such as `~/.ssh/^(config)` would not. Check with `bash -n term/shellrc && zsh -n term/shellrc` after editing.
+**Both shells parse the entire file**, so zsh-only syntax must stay syntactically valid to bash even though it never executes there. Array assignment, `setopt`, `zstyle`, and `autoload` all satisfy that; a zsh glob such as `~/.ssh/^(config)` would not. Check with `bash -n terminal/shellrc && zsh -n terminal/shellrc` after editing.
 
 fzf-tab, autosuggestions, and syntax-highlighting are zsh-only because no bash equivalent exists. Every plugin source is guarded with a file test, so a machine without them still starts cleanly.
 

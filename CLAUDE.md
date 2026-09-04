@@ -25,11 +25,6 @@ dotfiles update              # Pull latest changes and run install
 dotfiles dotbot              # Update Dotbot submodule
 ```
 
-**Run tests:**
-```bash
-uv run pytest tests/ -q
-```
-
 ## Architecture
 
 ### Profiles and modules
@@ -127,9 +122,7 @@ They are separate files rather than a base plus an overlay because Claude Code h
 
 A plugin enabled in `~/.claude/settings.json` cannot be disabled per-project ([claude-code#34415](https://github.com/anthropics/claude-code/issues/34415), closed as duplicate, no workaround), so work plugins must be absent from the personal profile rather than merely overridden.
 
-`tests/test_settings_split.py` asserts the two files differ **only** in `enabledPlugins`, `extraKnownMarketplaces`, and `pluginConfigs`. Add a shared setting to one file and not the other and the test fails. Do not weaken the allowlist to make a test pass.
-
-`/config` and `/model` write to `~/.claude/settings.json`, which links to whichever profile is installed, so the other profile falls behind. Keeping them in step is a manual edit; `tests/test_settings_split.py` is what catches the drift.
+`/config` and `/model` write to `~/.claude/settings.json`, which links to whichever profile is installed, so the other profile falls behind. Keeping them in step is a manual edit.
 
 ### The server profile
 

@@ -49,35 +49,21 @@ ssh_mcp() {
     register ssh-mcp -- uvx --from "$package" ssh-mcp
 }
 
-# Context7 works without an API key at a lower rate limit, so this always runs.
-# A key only raises the limit, and is persisted for the shell to export.
-#
-# ctx7 setup ignores --yes and waits on a prompt when it has no tty, which is
-# how dotbot runs it, so stdin is closed and the call is bounded.
-CTX7_TIMEOUT=120
-
-ctx7_setup() {
-    if have_timeout; then
-        timeout "$CTX7_TIMEOUT" npx -y ctx7@latest setup --claude --mcp --yes "$@" \
-            </dev/null >/dev/null 2>&1
-    else
-        npx -y ctx7@latest setup --claude --mcp --yes "$@" </dev/null >/dev/null 2>&1
-    fi
-}
-
-have_timeout() { command -v timeout >/dev/null 2>&1; }
-
+# Context7 serves the same HTTP endpoint with or without a key; a key only
+# raises the rate limit. Registering it directly avoids `ctx7 setup`, which
+# opens an OAuth device flow and waits for a browser that a server does not
+# have, ignoring --yes.
 context7() {
-    have npx || {
-        echo "npx not found, skipping Context7 (non-fatal)"
-        return 0
-    }
+    local url="https://mcp.context7.com/mcp"
 
     if [ -n "${CONTEXT7_API_KEY:-}" ]; then
         store_secret CONTEXT7_API_KEY "$CONTEXT7_API_KEY"
-        ctx7_setup --api-key "$CONTEXT7_API_KEY" || echo "Context7 setup failed (non-fatal)"
+        registered_with context7 "Bearer ${CONTEXT7_API_KEY}" && return 0
+        register context7 --transport http "$url" \
+            --header "Authorization: Bearer ${CONTEXT7_API_KEY}"
     else
-        ctx7_setup || echo "Context7 setup failed (non-fatal)"
+        registered_with context7 "URL: $url" && return 0
+        register context7 --transport http "$url"
     fi
 }
 

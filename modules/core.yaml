@@ -32,9 +32,6 @@
     ~/.gitignore: git/gitignore
     ~/.ssh/config: ssh/config
     ~/.ssh/config.d/01-github: ssh/config.d/01-github
-    ~/.ssh/config.d/02-umich: ssh/config.d/02-umich
-    ~/.ssh/config.d/03-ucla: ssh/config.d/03-ucla
-    ~/.ssh/config.d/04-tau: ssh/config.d/04-tau
 
     ~/bin:
       path: bin

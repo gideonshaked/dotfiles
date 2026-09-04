@@ -117,7 +117,7 @@ sees for each keyword:
 |-----------|---------|----------|
 | `~/.ssh/private.d/` | no, and it lives outside the repo | Anything that must not be public, work hosts included. First, so it overrides anything managed. |
 | `~/.ssh/config.d/` | yes, `ssh/config.d/` | One file per site: `01-github`, `02-umich`, `03-ucla`, `04-tau`. Linked by `core`. |
-| `~/.ssh/platform.d/` | yes, `ssh/platform.d/` | `Host *` blocks. Last, so every specific host wins. Only `macos` so far, linked by the `macos` module. |
+| `~/.ssh/platform.d/` | yes, `ssh/platform.d/` | `Host *` blocks. Last, so every specific host wins. Only `01-macos` so far, linked by the `macos` module. |
 
 The numbers keep the `config.d` listing stable and carry no other meaning: the
 files define disjoint hosts. The `Host *` block is deliberately not among them.

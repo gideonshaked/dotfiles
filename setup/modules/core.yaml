@@ -82,12 +82,6 @@
       stdout: true
       stderr: true
 
-    - description: Configuring git
-      command: setup/scripts/configure-git
-      quiet: true
-      stdout: true
-      stderr: true
-
     - description: Installing ccstatusline (optional)
       command: setup/scripts/install-ccstatusline
       quiet: true

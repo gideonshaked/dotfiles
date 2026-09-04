@@ -38,14 +38,6 @@ install_claude_mcp() {
     fi
 }
 
-# Remove MCP servers that are no longer part of this configuration.
-prune_retired_mcps() {
-    which claude >/dev/null 2>&1 || return 0
-    for server in aws-api aws-pricing aws-knowledge; do
-        claude mcp remove "$server" -s user >/dev/null 2>&1 || true
-    done
-}
-
 write_context7_secret() {
     local key="$1"
     local tmp
@@ -83,7 +75,6 @@ install_context7() {
 }
 
 install_claude_mcp
-prune_retired_mcps
 install_context7
 
 echo "Agent MCPs OK"

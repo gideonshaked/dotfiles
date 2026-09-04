@@ -292,6 +292,18 @@ Every graphical element should serve multiple purposes when possible.
 - Horizontal text when possible
 - Labels close to data they describe
 
+### Quick Reference: The Tufte Test
+
+For any visualization, ask:
+
+1. **Data-Ink:** Can I erase any element without losing data? (Erase it)
+2. **Integrity:** Does the visual effect match the data effect? (Lie Factor approx 1)
+3. **Chartjunk:** Does any element exist for decoration only? (Remove it)
+4. **Excellence:** Does it reveal the data at multiple levels? (Broad + detailed)
+5. **Comparison:** Can the viewer easily compare data elements? (Enable it)
+6. **Density:** Could this show more data in the same space? (Condense)
+7. **Context:** Is all necessary context provided? (Labels, sources, scales)
+
 ---
 
 ## Analytical design, sparklines, and layering
@@ -432,20 +444,10 @@ From *Visual Explanations*. Causality is hard to visualize because it requires s
 
 **Worked example:** Challenger O-ring decision. The available data, plotted against temperature, showed catastrophic risk -- but the engineers presented it in a way that hid the causal relationship. Tufte's redesign makes the causality unavoidable.
 
----
+### Quick Reference: Extended Tufte Test
 
-## The Tufte test
+After applying the standard 7-question test above, add:
 
-Questions 1-7 come from the core principles; 8-14 extend them with the
-analytical design material.
-
-1. **Data-Ink:** Can I erase any element without losing data? (Erase it)
-2. **Integrity:** Does the visual effect match the data effect? (Lie Factor approx 1)
-3. **Chartjunk:** Does any element exist for decoration only? (Remove it)
-4. **Excellence:** Does it reveal the data at multiple levels? (Broad + detailed)
-5. **Comparison:** Can the viewer easily compare data elements? (Enable it)
-6. **Density:** Could this show more data in the same space? (Condense)
-7. **Context:** Is all necessary context provided? (Labels, sources, scales)
 8. **Comparison:** Does the graphic answer "compared to what?"
 9. **Causality:** Is the mechanism or explanation visible, not just the pattern?
 10. **Multivariate:** Are interactions among variables shown, or has the problem been over-reduced?

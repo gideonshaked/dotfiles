@@ -6,7 +6,7 @@
   </a>
 </p>
 
-My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https://www.anishathalye.com/2014/08/03/managing-your-dotfiles/#dotfiles-are-not-meant-to-be-forked). That being said, this repository contains lots of useful things ([shell config](https://github.com/gideonshaked/dotfiles/blob/master/term/common.sh), [scripts](https://github.com/gideonshaked/dotfiles/tree/master/bin), [gitconfig](https://github.com/gideonshaked/dotfiles/blob/master/git/gitconfig)) that you can add to your personal setup. As such, I encourage anyone that thinks these dotfiles look useful to try to understand them first and then copy the parts that stand out to them.
+My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https://www.anishathalye.com/2014/08/03/managing-your-dotfiles/#dotfiles-are-not-meant-to-be-forked). That being said, this repository contains lots of useful things ([shell config](https://github.com/gideonshaked/dotfiles/blob/master/term/shellrc), [scripts](https://github.com/gideonshaked/dotfiles/tree/master/bin), [gitconfig](https://github.com/gideonshaked/dotfiles/blob/master/git/gitconfig)) that you can add to your personal setup. As such, I encourage anyone that thinks these dotfiles look useful to try to understand them first and then copy the parts that stand out to them.
 
 <p align="center">
   <a href="#install">Install</a> &bull;
@@ -62,7 +62,7 @@ The install owns `~/bin`; an existing `~/bin` is backed up first.
 ├── manifest    <- Brewfile
 ├── scripts     <- Repo maintenance scripts and install helpers
 ├── ssh         <- SSH config file
-├── term        <- Shell configuration (common.sh, zsh, bash, starship)
+├── term        <- Shell configuration (one shellrc for zsh and bash, starship)
 └── vscode      <- VS Code configuration and extensions list
 ```
 

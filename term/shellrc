@@ -1,0 +1,187 @@
+#
+# ~/.shellrc — interactive configuration for zsh and bash.
+#
+# Symlinked to both ~/.zshrc and ~/.bashrc.dotfiles. The shared section is
+# POSIX and runs in both shells; the two branches configure the same concerns
+# in each shell's own dialect.
+#
+# Both shells parse this entire file, so zsh-only syntax must remain
+# syntactically valid to bash even though it never executes there. Array
+# assignment, setopt, zstyle and autoload all satisfy that.
+#
+
+[ -n "$__DOTFILES_SHELLRC" ] && return
+__DOTFILES_SHELLRC=1
+
+if [ -n "$ZSH_VERSION" ]; then
+    __shell=zsh
+elif [ -n "$BASH_VERSION" ]; then
+    __shell=bash
+else
+    __shell=sh
+fi
+
+# ══ Shared ════════════════════════════════════════════════════════════════
+
+## ── Environment ───────────────────────────────────────────────────────────
+
+export DEV="$HOME/Documents/personal/dev"
+export DOTFILES="$DEV/dotfiles"
+export CV="$DEV/resume"
+export WEBSITE="$DEV/gideonshaked.github.io"
+
+export EDITOR="micro"
+export MICRO_TRUECOLOR=1
+export BUN_INSTALL="$HOME/.bun"
+export ENABLE_LSP_TOOLS=1        # Claude Code LSP tools
+
+# Required for git commit signing
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# Colored man pages
+export LESS=-R
+export LESS_TERMCAP_mb=$(printf '\033[01;32m')
+export LESS_TERMCAP_md=$(printf '\033[01;32m')
+export LESS_TERMCAP_me=$(printf '\033[0m')
+export LESS_TERMCAP_se=$(printf '\033[0m')
+export LESS_TERMCAP_so=$(printf '\033[01;47;34m')
+export LESS_TERMCAP_ue=$(printf '\033[0m')
+export LESS_TERMCAP_us=$(printf '\033[01;36m')
+
+## ── PATH ──────────────────────────────────────────────────────────────────
+
+# Prepend a directory if it exists and is not already present.
+_path_prepend() {
+    [ -d "$1" ] || return 0
+    case ":$PATH:" in
+        *":$1:"*) ;;
+        *) PATH="$1${PATH:+:$PATH}" ;;
+    esac
+}
+
+_path_prepend /opt/homebrew/bin
+_path_prepend "$BUN_INSTALL/bin"
+_path_prepend "$HOME/.cargo/bin"
+_path_prepend "$HOME/.local/bin"
+_path_prepend "$HOME/bin"
+export PATH
+
+## ── Aliases ───────────────────────────────────────────────────────────────
+
+alias ls="ls --color=auto"
+alias df="df -h"
+
+## ── SSH agent ─────────────────────────────────────────────────────────────
+## Reuse an existing agent rather than spawning one per shell.
+
+if [ -z "$SSH_AUTH_SOCK" ] && command -v ssh-agent >/dev/null 2>&1; then
+    eval "$(ssh-agent -s)" >/dev/null 2>&1
+    find "$HOME/.ssh" -maxdepth 1 -type f \
+        ! -name '*.pub' ! -name 'config' ! -name 'known_hosts*' \
+        -exec ssh-add {} + >/dev/null 2>&1
+fi
+
+## ── Secrets ───────────────────────────────────────────────────────────────
+## API keys and anything else that must never be committed.
+
+[ -f "$HOME/.shell-secrets" ] && . "$HOME/.shell-secrets"
+
+# ══ zsh ═══════════════════════════════════════════════════════════════════
+
+if [ "$__shell" = zsh ]; then
+    typeset -U path              # keep $path deduplicated for the session
+
+    ## Options
+    setopt extendedglob          # regular expressions in globs
+    setopt nocaseglob            # case insensitive globbing
+    setopt numericglobsort       # sort filenames numerically where sensible
+    setopt rcexpandparam         # array expansion with parameters
+    setopt autocd                # a bare directory path means cd there
+    setopt nocheckjobs           # no warning about running jobs on exit
+    setopt nobeep
+    setopt inc_append_history    # append immediately rather than on exit
+    setopt histignorealldups     # a repeat replaces the older entry
+    setopt histignorespace       # a leading space keeps it out of history
+
+    HISTSIZE=10000
+    SAVEHIST=10000
+
+    ## Completion — fpath and zstyles must be set before compinit
+    fpath=(/opt/homebrew/share/zsh-completions $fpath)
+
+    zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+    zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+    zstyle ':completion:*' rehash true
+    zstyle ':completion:*' use-cache on
+    zstyle ':completion:*' cache-path ~/.cache/zsh
+    zstyle ':completion:*' menu no    # required by fzf-tab
+
+    # -u skips the security check on /opt/homebrew/share, which Homebrew
+    # intentionally leaves group-writable.
+    autoload -Uz compinit && compinit -u
+
+    ## Plugins — fzf-tab after compinit, syntax-highlighting last.
+    ## No bash equivalent exists for these three.
+    if [ -f /opt/homebrew/share/fzf-tab/fzf-tab.zsh ]; then
+        . /opt/homebrew/share/fzf-tab/fzf-tab.zsh
+        zstyle ':completion:*:git-checkout:*' sort false
+        zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -1 --color=always $realpath 2>/dev/null'
+        zstyle ':fzf-tab:*' switch-group '<' '>'
+    fi
+
+    [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] &&
+        . /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+    [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] &&
+        . /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# ══ bash ══════════════════════════════════════════════════════════════════
+
+if [ "$__shell" = bash ]; then
+    ## Interactive shells only
+    case $- in
+        *i*) ;;
+        *) return ;;
+    esac
+
+    ## Options
+    shopt -s checkwinsize            # update LINES/COLUMNS after each command
+    shopt -s globstar 2>/dev/null    # ** recursive glob, bash 4+
+    shopt -s nocaseglob              # case insensitive globbing
+    shopt -s cdspell                 # correct minor cd typos
+    shopt -s no_empty_cmd_completion # do not complete on an empty line
+    shopt -s histappend              # append rather than overwrite
+
+    HISTSIZE=10000
+    HISTFILESIZE=10000
+    HISTCONTROL=ignoreboth:erasedups
+
+    ## Completion
+    for _bc in /opt/homebrew/etc/profile.d/bash_completion.sh \
+               /usr/share/bash-completion/bash_completion \
+               /etc/bash_completion; do
+        [ -r "$_bc" ] && { . "$_bc"; break; }
+    done
+    unset _bc
+fi
+
+# ══ Tools ═════════════════════════════════════════════════════════════════
+# Identical for both shells; only the init argument differs.
+
+command -v starship >/dev/null 2>&1 && eval "$(starship init "$__shell")"
+
+# fzf key bindings only: Ctrl-T file picker, Alt-C cd picker. Its completion
+# script is skipped deliberately in zsh; it rebinds Tab and clashes with
+# fzf-tab. Atuin takes over Ctrl-R below.
+for _fzf in "/opt/homebrew/opt/fzf/shell/key-bindings.${__shell}" \
+            "/usr/share/fzf/key-bindings.${__shell}" \
+            "/usr/share/doc/fzf/examples/key-bindings.${__shell}"; do
+    [ -f "$_fzf" ] && { . "$_fzf"; break; }
+done
+unset _fzf
+
+command -v atuin >/dev/null 2>&1 && eval "$(atuin init "$__shell" --disable-up-arrow)"
+
+unset __shell

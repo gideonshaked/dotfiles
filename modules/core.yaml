@@ -8,15 +8,14 @@
 - clean: ["~", "~/.claude"]
 
 - link:
-    # Shell, shared by zsh and bash
-    ~/.shell-common: term/common.sh
-    ~/.config/starship.toml: term/starship.toml
+    # One shell config, symlinked to both shells' rc files
+    ~/.zshrc:
+      path: term/shellrc
+      force: true
     ~/.bashrc.dotfiles:
-      path: term/bashrc
+      path: term/shellrc
       force: true
-    ~/.bash_prompt:
-      path: term/bash_prompt.bash
-      force: true
+    ~/.config/starship.toml: term/starship.toml
 
     # Git and SSH
     ~/.gitalias.txt: git/gitalias.txt

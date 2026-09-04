@@ -35,6 +35,9 @@ brew "ruff"
 # .pre-commit-config.yaml drives the repo's git hooks and the lint workflow.
 brew "pre-commit"
 
+# bd, the issue tracker this repo keeps in .beads. Pulls dolt, which backs it.
+brew "beads"
+
 # git/gitconfig uses `gh auth git-credential` as the GitHub credential helper.
 brew "gh"
 

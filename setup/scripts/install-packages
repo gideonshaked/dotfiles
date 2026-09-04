@@ -102,6 +102,33 @@ install_precommit() {
     uv tool install pre-commit >/dev/null 2>&1 || echo "pre-commit install failed (non-fatal)"
 }
 
+# bd, the issue tracker this repo keeps in .beads. Its releases name the
+# version in the asset, so the tag is resolved first; dolt, which backs it,
+# publishes a fixed name and needs no such lookup.
+install_beads() {
+    have bd && return 0
+    have jq || { echo "jq missing, skipping beads (non-fatal)"; return 0; }
+
+    local tag version
+    tag="$(curl -fsSL https://api.github.com/repos/steveyegge/beads/releases/latest \
+        | jq -r .tag_name)" || return 0
+    version="${tag#v}"
+    [ -n "$version" ] && [ "$version" != null ] || { echo "could not resolve beads (non-fatal)"; return 0; }
+
+    curl -fsSL "https://github.com/steveyegge/beads/releases/download/${tag}/beads_${version}_linux_${ARCH_GO}.tar.gz" \
+        | tar -xz -C "$LOCAL_BIN" bd 2>/dev/null \
+        || { echo "beads install failed (non-fatal)"; return 0; }
+    chmod +x "$LOCAL_BIN/bd"
+}
+
+install_dolt() {
+    have dolt && return 0
+    curl -fsSL "https://github.com/dolthub/dolt/releases/latest/download/dolt-linux-${ARCH_GO}.tar.gz" \
+        | tar -xz -C "$LOCAL_BIN" --strip-components=2 --wildcards '*/bin/dolt' 2>/dev/null \
+        || { echo "dolt install failed (non-fatal)"; return 0; }
+    chmod +x "$LOCAL_BIN/dolt"
+}
+
 # A single static binary. install-claude-plugins and the claude-validate hook
 # both parse JSON with it.
 install_jq() {
@@ -162,6 +189,8 @@ install_linux() {
     install_precommit
     install_jq
     install_node
+    install_dolt
+    install_beads
 }
 
 ## Both ──────────────────────────────────────────────────────────────────────

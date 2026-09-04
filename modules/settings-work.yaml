@@ -1,4 +1,7 @@
 # Work Claude settings: adds the Octant and Databricks plugins.
+#
+# Listed first in the profile so the link exists before core's install steps
+# read it.
 
 - link:
     ~/.claude/settings.json:

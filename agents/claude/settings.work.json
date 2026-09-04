@@ -27,18 +27,6 @@
     "command": "$HOME/bin/dotfiles-npx -y ccstatusline@latest",
     "padding": 0
   },
-  "enabledPlugins": {
-    "beads@beads-marketplace": true,
-    "cdd-utils@octant-agent-plugin-marketplace": true,
-    "databricks@claude-plugins-official": true,
-    "impeccable@impeccable": true,
-    "octant-app-store@octant-agent-plugin-marketplace": true,
-    "octant-chem-utils@octant-agent-plugin-marketplace": true,
-    "octant-comp-chem@octant-agent-plugin-marketplace": true,
-    "octomind-rolling@octant-agent-plugin-marketplace": true,
-    "playwright@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true
-  },
   "extraKnownMarketplaces": {
     "beads-marketplace": {
       "source": {
@@ -96,14 +84,5 @@
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true,
-  "pluginConfigs": {
-    "octomind-rolling@octant-agent-plugin-marketplace": {
-      "options": {
-        "user_name": "Gideon",
-        "slack_username": "gideon",
-        "email": "gideon@octant.bio"
-      }
-    }
-  }
+  "voiceEnabled": true
 }

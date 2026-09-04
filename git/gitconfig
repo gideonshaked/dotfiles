@@ -26,7 +26,3 @@
 # shared or container-mounted repos; it is a real security tradeoff.
 [safe]
 	directory = *
-
-# Global log format. Affects every `git log` including scripts that parse it.
-[format]
-	pretty = %C(yellow)%h%Creset %C(magenta)%cd%Creset %an <%ae> %C(cyan)%s%Creset%C(yellow)%d%Creset%n

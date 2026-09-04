@@ -1,7 +1,7 @@
 ---
 name: plotting
-description: "Design, build, and critique data visualizations using the user's personal plotting preferences layered over Edward Tufte's principles."
-when_to_use: "Use on ANY plotting work, however small: writing or editing plotting code (matplotlib, seaborn, ggplot2, plotly, Vega, D3), generating or exporting a figure, adding a panel to a notebook or report, designing a chart, dashboard, or report, choosing between visualization approaches, critiquing or improving an existing visualization, reducing chartjunk or improving data-ink ratio, or planning small multiples or high-density displays."
+description: "Design, build, and critique data visualizations using the user's personal plotting preferences, Nature-family journal figure requirements, and Edward Tufte's principles."
+when_to_use: "Use on ANY plotting work, however small: writing or editing plotting code (matplotlib, seaborn, ggplot2, plotly, Vega, D3), generating or exporting a figure, adding a panel to a notebook or report, designing a chart, dashboard, or report, choosing between visualization approaches, critiquing or improving an existing visualization, reducing chartjunk or improving data-ink ratio, or planning small multiples or high-density displays. Also use for manuscript and publication figures: paper figures, multi-panel journal figures, figure legends, panel layout and alignment, submission export requirements, and Nature-family venues."
 ---
 
 # Plotting
@@ -9,16 +9,26 @@ when_to_use: "Use on ANY plotting work, however small: writing or editing plotti
 Apply Edward Tufte's principles to design clear, honest, high-density data
 visualizations, layered with the user's house style.
 
-This file has two kinds of content, and it matters which is which:
+This file has three kinds of content, and it matters which is which:
 
 - **Personal preferences** -- the user's house style. Their own rules, not
   Tufte's.
+- **Journal figures** -- submission requirements for Nature-family venues,
+  distilled from the nature-figure skill (Yuan1z0825/nature-skills,
+  Apache-2.0).
 - **Tufte's principles** and **Analytical design** -- from Tufte's books,
   cited per section.
 
-The personal preferences override the Tufte material wherever the two conflict,
-except on graphical integrity (lie factor, honest scales, etc.), which is
-non-negotiable.
+Precedence: graphical integrity (lie factor, honest scales) is non-negotiable
+and outranks everything. When the target is a manuscript submission the journal
+requirements bind next, because a figure that violates them is rejected
+regardless of taste. Everywhere else the personal preferences win over the
+Tufte material.
+
+One standing conflict: journal panel letters are lowercase **bold**, which the
+no-bold rule otherwise forbids. A panel letter is a submission requirement
+rather than emphasis, so it is exempt. Nothing else in a journal figure takes
+bold.
 
 ---
 
@@ -112,6 +122,163 @@ not contradict graphical integrity (lie factor, honest scales, etc.).
 - No top/right spines on standard 2D plots.
 - No horizontal/vertical rules without a clarity reason.
 - No on-plot text that does not need to be on the plot.
+
+---
+
+## Journal figures
+
+For manuscript submissions to Nature-family venues. The chart serves the
+scientific logic; polish and layout are subordinate to making the core
+conclusion clear, defensible, and reviewable.
+
+### The figure contract
+
+Settle all of this before writing any plotting code.
+
+1. **Core conclusion.** One sentence with a verb: "Treatment X reduces Y by
+   restoring Z", not "Treatment results". Name the Results-level question it
+   answers. Given data but no claim, infer a provisional claim and confirm it
+   before final styling.
+2. **Evidence chain.** Group tables and experiments by the claims they support,
+   not one panel per source table. Separate primary evidence from controls and
+   robustness.
+3. **Archetype.** Quantitative grid; schematic-led composite, where the
+   schematic takes 35-60% of the area; image plate plus quantification; or
+   asymmetric mixed-modality, where one panel spans rows or columns.
+4. **Export target.** Final dimensions, formats, source data, statistics
+   definitions and image-integrity notes, all fixed before styling.
+
+Write the contract down: conclusion, question, archetype, target size, panel
+map, evidence hierarchy (hero, validation, controls), statistics needed, source
+data, integrity notes, reviewer risk.
+
+Default panel order unless the story demands otherwise: establish the system,
+show the main effect, show mechanism or localization, quantify the
+representative image, then robustness and controls.
+
+Palette discipline: one neutral family, one signal family and one accent family
+per figure, and a condition keeps its color in every panel. The first panel of
+Fig. 1 usually defines the vocabulary -- colors, symbols, direction, scale --
+for everything after it. Blue for the proposed method, green for positive
+variants, red for baselines and neutral for reference is a workable default.
+Reserve green and red for gains, drops and signed direction. Reduce saturation
+before adding categories.
+
+Statistics belong in the figure, not in caption cleanup: `n`, replicate
+definition, center, spread, test, correction, and the exact comparison. Use one
+uncertainty definition across comparable panels or state the exemption. When
+units are matched by subject, seed or split, plot paired differences;
+between-unit spread can hide a strong paired effect behind overlapping
+marginals.
+
+Image integrity is equally part of the figure: crop, contrast, pseudo-color,
+stitching, reuse and scale calibration. Global adjustments are safer than local
+edits. Flag any adjustment that changes the visibility of relevant background
+or bands.
+
+### Physical and typographic specs
+
+| Spec | Value |
+|------|-------|
+| Single-column width | about 89 mm |
+| Double-column width | about 183 mm |
+| Minimum rendered glyph | 5 pt, no exceptions |
+| Body, tick and legend text | 7-9 pt for dense multi-panel at publication width |
+| Panel letters | about 8 pt, lowercase, bold, top left |
+| Axis line width | 0.8-1.2 pt |
+| Plot line width | 2-3 pt |
+| Marker size | 8-12 pt |
+| Raster DPI | 300, or 600 for dense panels |
+
+Fonts: sans-serif, Arial or Helvetica, which is the Nature standard. DejaVu
+Sans and Liberation Sans are the metric-compatible substitutes on Linux. Set
+`svg.fonttype='none'` before any `savefig`; `'path'` converts glyphs to
+outlines and destroys editability.
+
+The 5 pt floor is easy to breach by accident. Mathtext renders scripts at about
+0.7 of the parent, so a 7 pt `$R^2$` yields a 4.9 pt superscript. Prefer a
+Unicode glyph or raise the parent size.
+
+Sequential light-to-dark encodes order or magnitude only, never unrelated
+categories. Diverging is for signed deviation. For grayscale printing add
+hatches rather than relying on hue alone.
+
+SVG or PDF is the primary export and is saved first. PNG is secondary, for
+previews and submission portals.
+
+### Multi-panel architecture and legends
+
+**One figure, one claim.** A figure answers one Results-level question. A panel
+that establishes a separate major claim belongs in another figure; a panel that
+can disappear without weakening the inference should be merged, demoted to
+Extended Data, or deleted.
+
+**Panels take inferential roles, not just different metrics.** Choose the
+smallest sufficient set from: setup or schematic, representative example,
+primary quantitative evidence, baseline or control, decomposition,
+stratification, orthogonal validation, perturbation or stress test, boundary or
+failure case, mechanistic evidence. Four panels showing R2, R2 tests, MAPE and
+MAPE tests are two roles, not four. A second metric does not earn a main panel
+by being another metric.
+
+**Order panels so the claim escalates:** establish, then compare or control,
+then stress-test, then broaden, then bound. Use only the moves the claim needs.
+Across figures, each one should answer the question the previous one raised.
+
+**Prominence tracks argument weight.** Give decisive evidence the hero position
+or the largest area, and keep controls quieter but still large enough to judge.
+Do not force equal panel sizes when inferential importance differs, and do not
+add a schematic panel out of habit. Make a negative result or failure boundary
+visible whenever it changes the figure-level claim.
+
+Panel letters mark reading order only and carry no fixed function: panel `a`
+need not be a schematic.
+
+**Legends** follow a fixed skeleton: `Fig. N |`, then a bold noun-phrase title,
+then per-panel descriptions in present-tense telegraphic style, then the
+statistics (`n =`, error type, test, correction), then data availability.
+Present tense for what is shown, past tense for how it was made.
+
+A legend must be self-contained and readable away from the body text: color and
+shape mappings, sample size and key numeric anchors all live there. It must not
+put results in the title line, and must not replay the Results argument.
+
+Preserve canonical capitalization exactly: `XGBoost`, `RF`, `GPT-5.2`. Never
+apply automatic title-casing, which corrupts them.
+
+Legend length: below 250 words for flagship *Nature*, and 150-250 words for
+*Nature Machine Intelligence*. No cap is established here for *Nature
+Communications* or other subjournals, so check the live instructions for the
+target venue.
+
+### Rendered QA
+
+Inspect panel by panel at final physical size, then the whole figure. Never
+approve from a whole-page glance.
+
+1. **Role.** Each panel answers a unique question. Cover it mentally: if the
+   argument survives, merge or remove it.
+2. **Legibility.** Every glyph at least 5 pt in the exported file, superscripts
+   and subscripts included.
+3. **Panel labels.** Consistent anchor across rows and columns. Offset them by
+   fixed points from the axes corner, not by an axes fraction, which displaces
+   differently on tall and short panels.
+4. **Alignment.** Panels in a row share top and bottom edges and plot-area
+   height; panels in a column share left and right edges and width; equal-span
+   panels in a row share width; repeated gutters are uniform.
+5. **Collisions.** No text overlapping text, and none crossing a line, marker
+   edge or error bar. Nothing clipped at the page edge. Do not mask a crossing
+   with an opaque white box; move the label outside the local data envelope and
+   recompute clearance after adding error bars.
+6. **Comparability.** Axes, terminology, uncertainty and color mapping
+   consistent across panels that invite comparison. Remove arrows or brackets
+   that encode the same gap as an error bar.
+7. **Hierarchy.** After rendering, confirm the hero series is more salient than
+   the neutral baselines. Check grayscale and color-vision robustness.
+8. **Images.** Scale bar present and calibrated, not merely a magnification
+   factor. Raster resolution adequate at final size; line art vector.
+9. **Export.** Open the PDF or SVG: text selectable rather than outlined,
+   nothing overlapping, still readable at final printed size.
 
 ---
 
@@ -470,3 +637,5 @@ After applying the standard 7-question test above, add:
 - [ ] Layering: primary data dominates, secondary recedes
 - [ ] Appropriate data density
 - [ ] Consistent with the personal preferences above
+- [ ] For a submission: contract written, 5 pt floor held, panels aligned,
+      legend self-contained

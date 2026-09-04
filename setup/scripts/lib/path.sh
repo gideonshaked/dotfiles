@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-
+# shellcheck shell=bash
+#
 # Dotbot runs shell steps without a login shell, so they inherit whatever PATH
 # the caller had. On a machine where install-packages has just installed
 # Homebrew, that PATH predates it and nothing brew provides is findable.

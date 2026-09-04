@@ -14,6 +14,9 @@ repos:
     rev: v6.0.0
     hooks:
       - id: check-executables-have-shebangs
+      # The inverse, and the one that actually bit: a script carrying a shebang
+      # but no executable bit runs fine locally and fails on a fresh clone.
+      - id: check-shebang-scripts-are-executable
       - id: check-toml
       - id: check-yaml
       - id: end-of-file-fixer

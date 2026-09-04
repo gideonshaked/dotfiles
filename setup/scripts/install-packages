@@ -74,12 +74,70 @@ install_atuin() {
         || echo "atuin install failed (non-fatal)"
 }
 
+# uv brings uvx, which runs the ssh-mcp server.
+install_uv() {
+    have uv && return 0
+    curl -LsSf https://astral.sh/uv/install.sh | sh >/dev/null 2>&1 \
+        || echo "uv install failed (non-fatal)"
+}
+
+# A single static binary. install-claude-plugins and the claude-validate hook
+# both parse JSON with it.
+install_jq() {
+    have jq && return 0
+    curl -fsSL -o "$LOCAL_BIN/jq" \
+        "https://github.com/jqlang/jq/releases/latest/download/jq-linux-${ARCH_GO}" >/dev/null 2>&1 \
+        && chmod +x "$LOCAL_BIN/jq" \
+        || echo "jq install failed (non-fatal)"
+}
+
+# npx runs ccstatusline and the gcloud MCP server. The release index names the
+# current LTS, so nothing here pins a version that goes stale. It is read with
+# jq, which is why this runs after install_jq.
+install_node() {
+    have npx && return 0
+    have jq || { echo "jq missing, skipping node (non-fatal)"; return 0; }
+
+    local version url
+    version="$(curl -fsSL https://nodejs.org/dist/index.json \
+        | jq -r '[.[] | select(.lts != false)][0].version')" || return 0
+    [ -n "$version" ] && [ "$version" != null ] || { echo "could not resolve node LTS (non-fatal)"; return 0; }
+
+    url="https://nodejs.org/dist/${version}/node-${version}-linux-${ARCH_NODE}.tar.xz"
+    mkdir -p "$HOME/.local/node"
+    curl -fsSL "$url" | tar -xJ -C "$HOME/.local/node" --strip-components=1 2>/dev/null \
+        || { echo "node install failed (non-fatal)"; return 0; }
+    ln -sf "$HOME/.local/node/bin/node" "$HOME/.local/node/bin/npm" \
+        "$HOME/.local/node/bin/npx" "$LOCAL_BIN/"
+}
+
 install_linux() {
     have curl || { echo "curl not found, cannot install anything (non-fatal)"; return 0; }
     mkdir -p "$LOCAL_BIN"
+
+    case "$(uname -m)" in
+        x86_64)  ARCH_GO=amd64; ARCH_NODE=x64 ;;
+        aarch64) ARCH_GO=arm64; ARCH_NODE=arm64 ;;
+        *)       echo "unsupported architecture $(uname -m) (non-fatal)"; return 0 ;;
+    esac
+
     install_starship
     install_fzf
     install_atuin
+    install_uv
+    install_jq
+    install_node
+}
+
+## Both ──────────────────────────────────────────────────────────────────────
+
+# Nothing else installs Claude Code, and the profile links its settings, skills,
+# hooks and commands regardless.
+install_claude_code() {
+    have claude && return 0
+    have curl || return 0
+    curl -fsSL https://claude.ai/install.sh | bash >/dev/null 2>&1 \
+        || echo "Claude Code install failed (non-fatal)"
 }
 
 ## ───────────────────────────────────────────────────────────────────────────
@@ -89,5 +147,7 @@ if [ "$(uname -s)" = Darwin ]; then
 else
     install_linux
 fi
+
+install_claude_code
 
 echo "packages OK"

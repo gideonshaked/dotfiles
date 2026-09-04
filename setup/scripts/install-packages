@@ -68,13 +68,18 @@ install_fzf() {
     ln -sf "$HOME/.fzf/bin/fzf" "$LOCAL_BIN/fzf"
 }
 
-# Without --non-interactive the installer looks for a tty and gives up when
-# dotbot runs it without one. It lands in ~/.atuin/bin.
+# setup.atuin.sh appends an init line to every shell rc it finds. ~/.zshrc is a
+# symlink into this repository, so it edited the tracked terminal/shellrc and
+# left a hardcoded `atuin init zsh` that bash then evaluated. The released
+# binary is taken directly instead; shellrc does its own init.
 install_atuin() {
     have atuin && return 0
-    curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh \
-        | sh -s -- --non-interactive >/dev/null 2>&1 \
-        || echo "atuin install failed (non-fatal)"
+    local url="https://github.com/atuinsh/atuin/releases/latest/download"
+    url="${url}/atuin-${ARCH_RUST}-unknown-linux-musl.tar.gz"
+    curl -fsSL "$url" \
+        | tar -xz -C "$LOCAL_BIN" --strip-components=1 --wildcards '*/atuin' 2>/dev/null \
+        || { echo "atuin install failed (non-fatal)"; return 0; }
+    chmod +x "$LOCAL_BIN/atuin"
 }
 
 # uv brings uvx, which runs the ssh-mcp server.
@@ -138,8 +143,8 @@ install_linux() {
     mkdir -p "$LOCAL_BIN"
 
     case "$(uname -m)" in
-        x86_64)  ARCH_GO=amd64; ARCH_NODE=x64 ;;
-        aarch64) ARCH_GO=arm64; ARCH_NODE=arm64 ;;
+        x86_64)  ARCH_GO=amd64; ARCH_NODE=x64;   ARCH_RUST=x86_64 ;;
+        aarch64) ARCH_GO=arm64; ARCH_NODE=arm64; ARCH_RUST=aarch64 ;;
         *)       echo "unsupported architecture $(uname -m) (non-fatal)"; return 0 ;;
     esac
 

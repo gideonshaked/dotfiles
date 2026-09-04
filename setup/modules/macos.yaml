@@ -7,7 +7,7 @@
     ~/.zshenv:
       path: terminal/zshenv
       force: true
-    ~/.gitconfig: git/gitconfig
+    ~/.gitconfig.local: git/gitconfig-macos
 
     ~/Library/Application Support/Code/User/settings.json: vscode/settings.json
     ~/Library/Application Support/Code/User/keybindings.json: vscode/keybindings.json
@@ -16,9 +16,3 @@
     - description: Silencing the login banner
       command: touch ~/.hushlogin
       quiet: true
-
-    - description: Installing shell tools (optional)
-      command: setup/scripts/install-shell-tools
-      quiet: true
-      stdout: true
-      stderr: true

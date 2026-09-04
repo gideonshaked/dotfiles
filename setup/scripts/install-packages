@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+BREWFILE="$DOTFILES_DIR/manifest/Brewfile"
+
+# Homebrew builds bottles only for these prefixes. An install anywhere else
+# compiles every formula from source, which takes hours.
+BREW_PREFIXES="/opt/homebrew /usr/local /home/linuxbrew/.linuxbrew"
+BREW_INSTALLER="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+
+find_brew() {
+    if command -v brew >/dev/null 2>&1; then
+        command -v brew
+        return 0
+    fi
+    for prefix in $BREW_PREFIXES; do
+        if [ -x "$prefix/bin/brew" ]; then
+            echo "$prefix/bin/brew"
+            return 0
+        fi
+    done
+    return 1
+}
+
+# The Linux installer writes to /home/linuxbrew, which needs root. Without a
+# password-less sudo it would block waiting for input that no one can type.
+can_install_linux() {
+    [ "$(uname -s)" != Linux ] && return 0
+    sudo -n true 2>/dev/null
+}
+
+install_homebrew() {
+    command -v curl >/dev/null 2>&1 || {
+        echo "curl not found, cannot install Homebrew (non-fatal)"
+        return 1
+    }
+    can_install_linux || {
+        echo "Homebrew on Linux needs password-less sudo for /home/linuxbrew (non-fatal)"
+        return 1
+    }
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL "$BREW_INSTALLER")" || return 1
+}
+
+BREW="$(find_brew || true)"
+if [ -z "$BREW" ]; then
+    echo "Installing Homebrew"
+    install_homebrew || exit 0
+    BREW="$(find_brew || true)"
+    [ -n "$BREW" ] || {
+        echo "Homebrew install did not produce a brew binary (non-fatal)"
+        exit 0
+    }
+fi
+
+eval "$("$BREW" shellenv)"
+
+if HOMEBREW_NO_AUTO_UPDATE=1 brew bundle install --file "$BREWFILE"; then
+    echo "packages OK"
+else
+    echo "some packages failed to install (non-fatal)"
+fi

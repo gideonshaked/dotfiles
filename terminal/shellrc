@@ -60,7 +60,18 @@ _path_prepend() {
     esac
 }
 
-_path_prepend /opt/homebrew/bin
+# Homebrew's prefix differs by platform: /opt/homebrew on Apple silicon,
+# /usr/local on Intel, /home/linuxbrew/.linuxbrew on Linux. Everything below
+# that lives under it is written once against $__brew.
+for _p in /opt/homebrew /usr/local /home/linuxbrew/.linuxbrew "$HOME/.linuxbrew"; do
+    if [ -x "$_p/bin/brew" ]; then
+        __brew="$_p"
+        break
+    fi
+done
+__brew="${__brew:-/opt/homebrew}"
+
+_path_prepend "$__brew/bin"
 _path_prepend "$BUN_INSTALL/bin"
 _path_prepend "$HOME/.cargo/bin"
 _path_prepend "$HOME/.local/bin"
@@ -108,7 +119,7 @@ if [ "$__shell" = zsh ]; then
     SAVEHIST=10000
 
     ## Completion — fpath and zstyles must be set before compinit
-    fpath=(/opt/homebrew/share/zsh-completions $fpath)
+    fpath=("$__brew/share/zsh-completions" $fpath)
 
     zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
     zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
@@ -117,24 +128,24 @@ if [ "$__shell" = zsh ]; then
     zstyle ':completion:*' cache-path ~/.cache/zsh
     zstyle ':completion:*' menu no    # required by fzf-tab
 
-    # -u skips the security check on /opt/homebrew/share, which Homebrew
+    # -u skips the security check on Homebrew's share directory, which it
     # intentionally leaves group-writable.
     autoload -Uz compinit && compinit -u
 
     ## Plugins — fzf-tab after compinit, syntax-highlighting last.
     ## No bash equivalent exists for these three.
-    if [ -f /opt/homebrew/share/fzf-tab/fzf-tab.zsh ]; then
-        . /opt/homebrew/share/fzf-tab/fzf-tab.zsh
+    if [ -f "$__brew/share/fzf-tab/fzf-tab.zsh" ]; then
+        . "$__brew/share/fzf-tab/fzf-tab.zsh"
         zstyle ':completion:*:git-checkout:*' sort false
         zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -1 --color=always $realpath 2>/dev/null'
         zstyle ':fzf-tab:*' switch-group '<' '>'
     fi
 
-    [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] &&
-        . /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    [ -f "$__brew/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] &&
+        . "$__brew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-    [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] &&
-        . /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    [ -f "$__brew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] &&
+        . "$__brew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 
 # ══ bash ══════════════════════════════════════════════════════════════════
@@ -159,7 +170,7 @@ if [ "$__shell" = bash ]; then
     HISTCONTROL=ignoreboth:erasedups
 
     ## Completion
-    for _bc in /opt/homebrew/etc/profile.d/bash_completion.sh \
+    for _bc in "$__brew/etc/profile.d/bash_completion.sh" \
                /usr/share/bash-completion/bash_completion \
                /etc/bash_completion; do
         [ -r "$_bc" ] && { . "$_bc"; break; }
@@ -175,7 +186,7 @@ command -v starship >/dev/null 2>&1 && eval "$(starship init "$__shell")"
 # fzf key bindings only: Ctrl-T file picker, Alt-C cd picker. Its completion
 # script is skipped deliberately in zsh; it rebinds Tab and clashes with
 # fzf-tab. Atuin takes over Ctrl-R below.
-for _fzf in "/opt/homebrew/opt/fzf/shell/key-bindings.${__shell}" \
+for _fzf in "$__brew/opt/fzf/shell/key-bindings.${__shell}" \
             "/usr/share/fzf/key-bindings.${__shell}" \
             "/usr/share/doc/fzf/examples/key-bindings.${__shell}"; do
     [ -f "$_fzf" ] && { . "$_fzf"; break; }
@@ -184,4 +195,4 @@ unset _fzf
 
 command -v atuin >/dev/null 2>&1 && eval "$(atuin init "$__shell" --disable-up-arrow)"
 
-unset __shell
+unset __shell __brew _p

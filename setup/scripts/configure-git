@@ -2,9 +2,8 @@
 
 set -euo pipefail
 
-# On macOS ~/.gitconfig is symlinked to git/gitconfig, which already sets this.
-# On servers it is the user's own file, so add the pointer without touching
-# anything else they have configured.
+# git/gitconfig sets this, and every profile links it. The guard covers a
+# machine whose ~/.gitconfig predates that link and was backed up instead.
 if ! git config --global --get core.excludesfile >/dev/null 2>&1; then
     git config --global core.excludesfile ~/.gitignore
 fi

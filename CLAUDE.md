@@ -64,19 +64,21 @@ The chosen profile is remembered in `~/.dotfiles-profile`, so a bare `./install`
 
 ### Shell configuration
 
-zsh and bash are equal first-class citizens. Neither borrows from the other.
+zsh and bash are equal first-class citizens. **One file configures both.**
 
 | File | Role |
 |------|------|
-| `term/common.sh` | POSIX configuration shared by both shells: environment, PATH, aliases, ssh-agent, secrets. Must stay POSIX-compatible: no arrays, no `[[ ]]`, no zsh globs, no bashisms. |
-| `term/zshrc` | Sources `common.sh`, then zsh-only concerns: options, completion, fzf-tab, autosuggestions, syntax-highlighting. |
-| `term/bashrc` | Sources `common.sh`, then bash-only concerns: shopt, bash completion, prompt fallback. |
-| `term/bash_prompt.bash` | Pure-bash prompt, used only when starship is absent. |
-| `term/zshenv` | Loaded before `/etc/zshrc`. Disables Apple Terminal session restore; sources `~/.cargo/env` because rustup writes that file directly. |
+| `term/shellrc` | Symlinked to both `~/.zshrc` and `~/.bashrc.dotfiles`. A shared POSIX section, then a zsh branch and a bash branch, then a shared tools section. |
+| `term/zshenv` | Loaded before `/etc/zshrc`, which is the only reason it is separate. Disables Apple Terminal session restore; sources `~/.cargo/env` because rustup writes that file directly. |
+| `term/starship.toml` | Prompt config, a different format. |
 
-Both shells get starship, atuin, and fzf key bindings. fzf-tab, autosuggestions, and syntax-highlighting are zsh-only because no bash equivalent is wired up.
+`shellrc` sets `$__shell` to `zsh` or `bash` once, near the top. That is what makes the tools section shared rather than duplicated: `starship init "$__shell"`, `atuin init "$__shell"`, and the fzf key-bindings path are each written once and work in both.
 
-Secrets live at `~/.shell-secrets`, **outside the repository**, so they cannot be committed by accident. `common.sh` sources it if present.
+**Both shells parse the entire file**, so zsh-only syntax must stay syntactically valid to bash even though it never executes there. Array assignment, `setopt`, `zstyle`, and `autoload` all satisfy that; a zsh glob such as `~/.ssh/^(config)` would not. Check with `bash -n term/shellrc && zsh -n term/shellrc` after editing.
+
+fzf-tab, autosuggestions, and syntax-highlighting are zsh-only because no bash equivalent exists. Every plugin source is guarded with a file test, so a machine without them still starts cleanly.
+
+Secrets live at `~/.shell-secrets`, **outside the repository**, so they cannot be committed by accident.
 
 ### Agent provisioning
 

@@ -60,37 +60,37 @@
 
 - shell:
     - description: Hooking into .bashrc and .bash_profile
-      command: scripts/configure-bash-hooks
+      command: setup/scripts/configure-bash-hooks
       quiet: true
       stdout: true
       stderr: true
 
     - description: Configuring git
-      command: scripts/configure-git
+      command: setup/scripts/configure-git
       quiet: true
       stdout: true
       stderr: true
 
     - description: Installing npx with nvm if needed (optional)
-      command: scripts/ensure-npx
+      command: setup/scripts/ensure-npx
       quiet: true
       stdout: true
       stderr: true
 
     - description: Installing ccstatusline (optional)
-      command: scripts/install-ccstatusline
+      command: setup/scripts/install-ccstatusline
       quiet: true
       stdout: true
       stderr: true
 
     - description: Installing and updating Claude plugins (optional)
-      command: scripts/install-claude-plugins
+      command: setup/scripts/install-claude-plugins
       quiet: true
       stdout: true
       stderr: true
 
     - description: Installing agent MCPs (optional)
-      command: scripts/install-agent-mcps
+      command: setup/scripts/install-agent-mcps
       quiet: true
       stdout: true
       stderr: true

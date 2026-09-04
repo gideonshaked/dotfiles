@@ -1,7 +1,4 @@
 Host github.com
-	IgnoreUnknown UseKeychain
-	AddKeysToAgent yes
-	UseKeychain yes
 	# The 1Password agent offers a read-only deploy key first, which breaks
 	# pushes, so this host uses the key on disk.
 	IdentitiesOnly yes

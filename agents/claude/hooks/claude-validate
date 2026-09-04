@@ -4,11 +4,14 @@
 
 set -o pipefail
 
+command -v jq >/dev/null 2>&1 || exit 0
+
 f="$(jq -r '.tool_input.file_path // empty')"
 [ -z "$f" ] || [ ! -f "$f" ] && exit 0
 
 case "$f" in
     *.py)
+        command -v ruff >/dev/null 2>&1 || exit 0
         ruff check --select E9,F63,F7,F82 --no-fix "$f" 2>&1
         ;;
     *.json)
@@ -25,6 +28,7 @@ except yaml.YAMLError as e:
 " "$f"
         ;;
     *.r|*.R)
+        command -v Rscript >/dev/null 2>&1 || exit 0
         Rscript -e "tryCatch(parse(commandArgs(TRUE)[1]), error=function(e) cat('R parse error:', conditionMessage(e), '\n'))" --args "$f" 2>/dev/null
         ;;
 esac

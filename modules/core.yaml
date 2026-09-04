@@ -15,12 +15,12 @@
 - link:
     # One shell config, symlinked to both shells' rc files
     ~/.zshrc:
-      path: term/shellrc
+      path: terminal/shellrc
       force: true
     ~/.bashrc.dotfiles:
-      path: term/shellrc
+      path: terminal/shellrc
       force: true
-    ~/.config/starship.toml: term/starship.toml
+    ~/.config/starship.toml: terminal/starship.toml
 
     # Git and SSH
     ~/.gitignore: git/gitignore

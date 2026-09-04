@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # macOS: Homebrew installs everything, including the zsh-only plugins that
-# term/shellrc sources.
+# terminal/shellrc sources.
 if command -v brew >/dev/null 2>&1; then
     TOOLS=(
         fzf-tab
@@ -24,7 +24,7 @@ fi
 
 # Elsewhere (servers): install starship only. It is the prompt for both shells,
 # and without it bash falls back to the bare default. The zsh plugins are not
-# installed here; term/shellrc guards every source with a file test.
+# installed here; terminal/shellrc guards every source with a file test.
 if command -v starship >/dev/null 2>&1; then
     echo "starship already installed"
     exit 0

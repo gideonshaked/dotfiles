@@ -27,7 +27,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -lc 'exec npx -y ccstatusline@latest' --hook"
+            "command": "bash -lc 'exec npx -y ccstatusline@latest --hook'"
           }
         ],
         "matcher": "Skill"
@@ -39,7 +39,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -lc 'exec npx -y ccstatusline@latest' --hook"
+            "command": "bash -lc 'exec npx -y ccstatusline@latest --hook'"
           }
         ]
       }

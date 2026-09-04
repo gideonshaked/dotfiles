@@ -55,7 +55,7 @@ The install owns `~/bin`; an existing `~/bin` is backed up first.
 
 ```text
 ├── agents      <- Claude config: memory, skills, commands, per-profile settings
-├── bin         <- Personal scripts (s, dotfiles, claude-validate)
+├── bin         <- Commands meant to be typed (s, dotfiles)
 ├── dotbot      <- Dotbot installer submodule
 ├── git         <- Git configuration (gitconfig, global gitignore)
 ├── modules     <- Dotbot config, one file per module; profiles compose these

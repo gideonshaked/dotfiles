@@ -10,6 +10,29 @@ Claude Code is the only supported agent. Codex support was removed.
 
 ## Commands
 
+### What install-packages provides
+
+macOS installs Homebrew if it is absent and runs `brew bundle`, so the whole
+manifest lands. Linux cannot: Homebrew ships bottles only for
+`/home/linuxbrew/.linuxbrew`, which needs root, and at a writable prefix every
+formula compiles from source. Many of these machines have no sudo, so each tool
+is fetched as a released binary under `$HOME` instead.
+
+| Tool | Needed by | Linux source |
+|------|-----------|--------------|
+| starship, fzf, atuin | `terminal/shellrc` | own installers, `~/.local/bin` |
+| `uv` | `uvx`, which runs ssh-mcp | astral installer |
+| `jq` | `install-claude-plugins`, `claude-validate` | static binary from releases |
+| `node` | `npx`, for ccstatusline and the gcloud MCP | current LTS tarball, resolved from the release index |
+| `claude` | everything under `agents/claude/` | `claude.ai/install.sh`, both platforms |
+
+`jq` installs before `node` because the release index is read with it.
+
+Dotbot runs shell steps without a login shell, so they inherit a PATH that
+predates the install. `setup/scripts/lib/path.sh` is sourced by every step that
+needs a tool, and prepends `~/.local/bin` and both Homebrew prefixes. Without
+it a tool installed seconds earlier is invisible.
+
 **Install/update dotfiles:**
 ```bash
 ./install                     # use the saved profile, or personal

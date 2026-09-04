@@ -12,6 +12,12 @@
 
 - clean: ["~", "~/.claude", "~/.ssh/config.d"]
 
+# ssh does not create the ControlPath directory, and multiplexing fails
+# without it.
+- create:
+    ~/.ssh/sockets:
+      mode: 0700
+
 - link:
     # One shell config, symlinked to both shells' rc files
     ~/.zshrc:

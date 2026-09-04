@@ -74,6 +74,7 @@ __brew="${__brew:-/opt/homebrew}"
 _path_prepend "$__brew/bin"
 _path_prepend "$BUN_INSTALL/bin"
 _path_prepend "$HOME/.cargo/bin"
+_path_prepend "$HOME/.atuin/bin"
 _path_prepend "$HOME/.local/bin"
 _path_prepend "$HOME/bin"
 export PATH
@@ -187,6 +188,7 @@ command -v starship >/dev/null 2>&1 && eval "$(starship init "$__shell")"
 # script is skipped deliberately in zsh; it rebinds Tab and clashes with
 # fzf-tab. Atuin takes over Ctrl-R below.
 for _fzf in "$__brew/opt/fzf/shell/key-bindings.${__shell}" \
+            "$HOME/.fzf/shell/key-bindings.${__shell}" \
             "/usr/share/fzf/key-bindings.${__shell}" \
             "/usr/share/doc/fzf/examples/key-bindings.${__shell}"; do
     [ -f "$_fzf" ] && { . "$_fzf"; break; }

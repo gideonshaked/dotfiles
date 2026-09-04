@@ -74,7 +74,6 @@ __brew="${__brew:-/opt/homebrew}"
 _path_prepend "$__brew/bin"
 _path_prepend "$BUN_INSTALL/bin"
 _path_prepend "$HOME/.cargo/bin"
-_path_prepend "$HOME/.atuin/bin"
 _path_prepend "$HOME/.local/bin"
 _path_prepend "$HOME/bin"
 export PATH

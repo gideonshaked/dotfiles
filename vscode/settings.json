@@ -81,7 +81,6 @@
 		"default": "right",
 		"jupyter-notebook": "left"
 	},
-	"workbench.iconTheme": "material-icon-theme",
 	"material-icon-theme.folders.theme": "specific",
 	"vscode-json-editor.theme": "dark",
 	"C_Cpp.enhancedColorization": "enabled",

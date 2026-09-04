@@ -32,6 +32,9 @@ brew "node"
 # agents/claude/hooks/claude-validate checks edited Python with it.
 brew "ruff"
 
+# .pre-commit-config.yaml drives the repo's git hooks and the lint workflow.
+brew "pre-commit"
+
 # git/gitconfig uses `gh auth git-credential` as the GitHub credential helper.
 brew "gh"
 

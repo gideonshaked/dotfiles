@@ -96,6 +96,12 @@ install_ruff() {
     uv tool install ruff >/dev/null 2>&1 || echo "ruff install failed (non-fatal)"
 }
 
+# Drives this repository's git hooks.
+install_precommit() {
+    have pre-commit && return 0
+    uv tool install pre-commit >/dev/null 2>&1 || echo "pre-commit install failed (non-fatal)"
+}
+
 # A single static binary. install-claude-plugins and the claude-validate hook
 # both parse JSON with it.
 install_jq() {
@@ -153,6 +159,7 @@ install_linux() {
     install_atuin
     install_uv
     install_ruff
+    install_precommit
     install_jq
     install_node
 }

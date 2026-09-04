@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+# The line goes into .bashrc verbatim, so it must not expand here.
+# shellcheck disable=SC2016
 SOURCE_LINE='[ -f "$HOME/.bashrc.dotfiles" ] && . "$HOME/.bashrc.dotfiles"'
 
 add_source_line() {

@@ -84,6 +84,13 @@ install_uv() {
         || echo "uv install failed (non-fatal)"
 }
 
+# The claude-validate hook checks edited Python with it. uv is already here,
+# and `uv tool` puts the shim in ~/.local/bin.
+install_ruff() {
+    have ruff && return 0
+    uv tool install ruff >/dev/null 2>&1 || echo "ruff install failed (non-fatal)"
+}
+
 # A single static binary. install-claude-plugins and the claude-validate hook
 # both parse JSON with it.
 install_jq() {
@@ -140,6 +147,7 @@ install_linux() {
     install_fzf
     install_atuin
     install_uv
+    install_ruff
     install_jq
     install_node
 }

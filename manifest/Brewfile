@@ -29,6 +29,9 @@ brew "uv"
 # npx runs ccstatusline for the Claude statusLine and the gcloud MCP server.
 brew "node"
 
+# agents/claude/hooks/claude-validate checks edited Python with it.
+brew "ruff"
+
 # git/gitconfig uses `gh auth git-credential` as the GitHub credential helper.
 brew "gh"
 

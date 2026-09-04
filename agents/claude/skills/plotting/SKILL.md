@@ -22,6 +22,49 @@ non-negotiable.
 
 ---
 
+## Workflow
+
+### For new visualizations
+
+1. **Clarify the data story**
+   - What comparisons matter?
+   - What is the key insight to communicate?
+   - Who is the audience?
+
+2. **Select an approach** using Tufte principles plus the personal preferences below:
+   - High comparison need -> small multiples
+   - Dense data -> data tables, sparklines
+   - Time series -> line charts with minimal grid
+   - Part-to-whole -> avoid pie charts; prefer bar or table
+
+3. **Design with data-ink in mind**
+   - Start minimal, add only what is necessary
+   - Every element must earn its ink
+   - Default to grayscale; use color purposefully (subject to the preferences below)
+
+4. **Apply the Tufte test** (below)
+
+### For critiquing visualizations
+
+1. **Check graphical integrity**
+   - Calculate lie factor if proportions seem off
+   - Verify baselines and scales
+   - Look for 3D distortion
+
+2. **Identify chartjunk**
+   - Decorative elements
+   - Heavy grids
+   - Unnecessary 3D effects
+   - Moire patterns
+
+3. **Evaluate data-ink ratio**
+   - What can be erased?
+   - What is redundant?
+
+4. **Suggest improvements** with specific before/after recommendations, aligned with the personal preferences below.
+
+---
+
 ## Personal preferences
 
 Personal overrides and house style for data visualization. These take
@@ -69,49 +112,6 @@ not contradict graphical integrity (lie factor, honest scales, etc.).
 - No top/right spines on standard 2D plots.
 - No horizontal/vertical rules without a clarity reason.
 - No on-plot text that does not need to be on the plot.
-
----
-
-## Workflow
-
-### For new visualizations
-
-1. **Clarify the data story**
-   - What comparisons matter?
-   - What is the key insight to communicate?
-   - Who is the audience?
-
-2. **Select an approach** using Tufte principles plus the personal preferences above:
-   - High comparison need -> small multiples
-   - Dense data -> data tables, sparklines
-   - Time series -> line charts with minimal grid
-   - Part-to-whole -> avoid pie charts; prefer bar or table
-
-3. **Design with data-ink in mind**
-   - Start minimal, add only what is necessary
-   - Every element must earn its ink
-   - Default to grayscale; use color purposefully (subject to the preferences above)
-
-4. **Apply the Tufte test** (below)
-
-### For critiquing visualizations
-
-1. **Check graphical integrity**
-   - Calculate lie factor if proportions seem off
-   - Verify baselines and scales
-   - Look for 3D distortion
-
-2. **Identify chartjunk**
-   - Decorative elements
-   - Heavy grids
-   - Unnecessary 3D effects
-   - Moire patterns
-
-3. **Evaluate data-ink ratio**
-   - What can be erased?
-   - What is redundant?
-
-4. **Suggest improvements** with specific before/after recommendations, aligned with the personal preferences above.
 
 ---
 

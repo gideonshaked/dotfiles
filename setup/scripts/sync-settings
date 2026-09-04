@@ -12,7 +12,7 @@ import json
 import pathlib
 import sys
 
-REPO = pathlib.Path(__file__).resolve().parent.parent
+REPO = pathlib.Path(__file__).resolve().parent.parent.parent
 PROFILES = {
     "personal": REPO / "agents" / "claude" / "settings.personal.json",
     "work": REPO / "agents" / "claude" / "settings.work.json",

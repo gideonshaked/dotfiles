@@ -241,3 +241,5 @@ __pycache__/
 .ruff_cache/
 .pytest_cache/
 .venv/
+
+**/.claude/settings.local.json

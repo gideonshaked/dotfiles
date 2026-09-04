@@ -11,9 +11,5 @@ ssh/config.d/
 *.db
 .beads-credential-key
 
-# Databricks AI tools skills, symlinked into the skill directories from
-# ~/.databricks/aitools/skills by the Databricks CLI, so machine-local
-agents/*/skills/databricks-*
-agents/*/skills/spark-python-data-source
 tests/
 .pytest_cache/

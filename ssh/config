@@ -1,106 +1,18 @@
-Include config.d/*
+# Entry point. Everything else is an include, so a machine gets host
+# definitions by which files its profile links, not by editing this file.
+#
+# OpenSSH takes the FIRST value it sees for each keyword, so include order is
+# precedence order. The three directories below encode that:
+#
+#   local.d     machine-local, never tracked. First, so it wins over anything
+#               managed. Put hosts here that should not be in a public repo.
+#   config.d    managed host definitions, one file per site. Numbered only to
+#               keep the listing stable; the files do not overlap, so the
+#               order among them does not actually matter.
+#   platform.d  Host * blocks. Last, so every specific host above wins.
+#
+# A glob that matches nothing is not an error, so a missing directory is fine.
 
-
-###################
-# Special Purpose #
-###################
-Host github.com
-	IgnoreUnknown UseKeychain
-	AddKeysToAgent yes
-	UseKeychain yes
-	# Pin to the octant user key and opt out of the 1Password agent, which
-	# otherwise offers the read-only octomind deploy key and breaks pushes.
-	IdentitiesOnly yes
-	IdentityAgent none
-	IdentityFile ~/.ssh/id_ed25519_github
-
-
-########
-# UofM #
-########
-Host caen
-	HostName login.engin.umich.edu
-	User gshaked
-	ControlMaster auto
-	ControlPath ~/.ssh/master-%r@%h:%p
-
-Host psoriasis
-	HostName psoriasis.sph.umich.edu
-	User gshaked
-	PubkeyAuthentication no
-
-Host greatlakes
-	HostName greatlakes.arc-ts.umich.edu
-	User gshaked
-	PubkeyAuthentication no
-
-Host armis2
-	HostName armis2.arc-ts.umich.edu
-	User gshaked
-	PubkeyAuthentication no
-
-Host nubio
-	HostName nubio-ssh.gideonshaked.com
-	User gshaked
-	IdentityFile ~/.ssh/id_ed25519_nubio
-	ProxyCommand /opt/homebrew/bin/cloudflared access ssh --hostname %h
-
-
-########
-# UCLA #
-########
-Host hoffman2
-	HostName hoffman2.idre.ucla.edu
-	User gshaked
-	IdentityFile ~/.ssh/id_ed25519_hoffman
-
-
-#######
-# TAU #
-#######
-Host shamir* elkon* davidlasry hagai-shamir3
-	PubkeyAuthentication no
-	ServerAliveInterval 30
-	ServerAliveCountMax 3
-
-Host hagai-shamir3
-	HostName rack-shamir3.cs.tau.ac.il
-	User hagailevi
-
-Host shamir3
-	HostName rack-shamir3.cs.tau.ac.il
-	User gshaked
-
-Host shamir4
-	HostName rack-shamir4.cs.tau.ac.il
-	User gshaked
-
-Host shamir5
-	HostName rack-shamir5.cs.tau.ac.il
-	User gshaked
-
-Host shamir6
-	HostName rack-shamir6.cs.tau.ac.il
-	User gshaked
-
-Host shamir8
-	HostName rack-shamir8.cs.tau.ac.il
-	User gshaked
-
-Host elkon1
-	HostName rack-elkon-01.cs.tau.ac.il
-	User gshaked
-
-Host elkon2
-	HostName rack-elkon-02.cs.tau.ac.il
-	User gshaked
-
-Host elkon3
-	HostName rack-elkon-03.cs.tau.ac.il
-	User gshaked
-
-Host davidlasry
-	HostName rack-elkon-03.cs.tau.ac.il
-	User davidlasry
-Host *
-	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+Include ~/.ssh/local.d/*
+Include ~/.ssh/config.d/*
+Include ~/.ssh/platform.d/*

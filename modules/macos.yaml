@@ -1,6 +1,9 @@
 # macOS desktop: zsh interactive setup, GUI apps, Homebrew.
 
 - link:
+    # 1Password SSH agent. macOS-only path, so it is not in core.
+    ~/.ssh/platform.d/macos: ssh/platform.d/macos
+
     ~/.zshenv:
       path: terminal/zshenv
       force: true

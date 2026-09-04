@@ -1,0 +1,49 @@
+# Tel Aviv University.
+#
+# The wildcard block comes first so it applies to every rack below: these
+# hosts are password-only and drop idle connections aggressively.
+
+Host shamir* elkon* davidlasry hagai-shamir3
+	PubkeyAuthentication no
+	ServerAliveInterval 30
+	ServerAliveCountMax 3
+
+Host hagai-shamir3
+	HostName rack-shamir3.cs.tau.ac.il
+	User hagailevi
+
+Host shamir3
+	HostName rack-shamir3.cs.tau.ac.il
+	User gshaked
+
+Host shamir4
+	HostName rack-shamir4.cs.tau.ac.il
+	User gshaked
+
+Host shamir5
+	HostName rack-shamir5.cs.tau.ac.il
+	User gshaked
+
+Host shamir6
+	HostName rack-shamir6.cs.tau.ac.il
+	User gshaked
+
+Host shamir8
+	HostName rack-shamir8.cs.tau.ac.il
+	User gshaked
+
+Host elkon1
+	HostName rack-elkon-01.cs.tau.ac.il
+	User gshaked
+
+Host elkon2
+	HostName rack-elkon-02.cs.tau.ac.il
+	User gshaked
+
+Host elkon3
+	HostName rack-elkon-03.cs.tau.ac.il
+	User gshaked
+
+Host davidlasry
+	HostName rack-elkon-03.cs.tau.ac.il
+	User davidlasry

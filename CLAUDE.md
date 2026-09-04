@@ -79,7 +79,16 @@ Secrets live at `~/.shell-secrets`, **outside the repository**, so they cannot b
 
 ### Agent provisioning
 
-`bin/dotfiles-npx` is a wrapper that activates nvm-managed npx on demand; agent scripts call it rather than a system `npx`.
+`setup/scripts/dotfiles-npx` activates nvm-managed npx on demand; the Claude
+statusLine, the gcloud MCP registration and `install-ccstatusline` call it
+rather than a system `npx`, because none of them run under a login shell.
+
+`bin/` holds only commands meant to be typed: `dotfiles` and `s`. Anything
+`~/.claude/settings.json` names by absolute path is linked to a stable
+`$HOME` location instead, since the repository's own path differs per machine:
+`agents/claude/hooks/claude-validate` to `~/.claude/hooks/`, and
+`dotfiles-npx` to `~/.claude/bin/`. Both resolve their own symlink before
+looking for anything beside them.
 
 `install-claude-plugins` reads `extraKnownMarketplaces` and `enabledPlugins` from the linked `~/.claude/settings.json` (via `jq`) and adds/installs each marketplace and plugin.
 

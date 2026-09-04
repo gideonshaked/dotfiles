@@ -10,6 +10,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # `mcp get` prints the stored command, so matching against it detects a server
 # registered from an older definition and forces a re-add.
+have() { command -v "$1" >/dev/null 2>&1; }
+
 registered_with() {
     claude mcp get "$1" 2>/dev/null | grep -qF "$2"
 }
@@ -39,7 +41,7 @@ gcloud_mcp() {
 # server the skill installs and every tool it references is absent.
 ssh_mcp() {
     local package="slepp-ssh-mcp"
-    command -v uvx >/dev/null 2>&1 || {
+    have uvx || {
         echo "uvx not found, skipping ssh-mcp (non-fatal)"
         return 0
     }
@@ -49,19 +51,33 @@ ssh_mcp() {
 
 # Context7 works without an API key at a lower rate limit, so this always runs.
 # A key only raises the limit, and is persisted for the shell to export.
+#
+# ctx7 setup ignores --yes and waits on a prompt when it has no tty, which is
+# how dotbot runs it, so stdin is closed and the call is bounded.
+CTX7_TIMEOUT=120
+
+ctx7_setup() {
+    if have_timeout; then
+        timeout "$CTX7_TIMEOUT" npx -y ctx7@latest setup --claude --mcp --yes "$@" \
+            </dev/null >/dev/null 2>&1
+    else
+        npx -y ctx7@latest setup --claude --mcp --yes "$@" </dev/null >/dev/null 2>&1
+    fi
+}
+
+have_timeout() { command -v timeout >/dev/null 2>&1; }
+
 context7() {
-    command -v npx >/dev/null 2>&1 || {
+    have npx || {
         echo "npx not found, skipping Context7 (non-fatal)"
         return 0
     }
 
     if [ -n "${CONTEXT7_API_KEY:-}" ]; then
         store_secret CONTEXT7_API_KEY "$CONTEXT7_API_KEY"
-        npx -y ctx7@latest setup --claude --mcp --yes --api-key "$CONTEXT7_API_KEY" >/dev/null 2>&1 \
-            || echo "Context7 setup failed (non-fatal)"
+        ctx7_setup --api-key "$CONTEXT7_API_KEY" || echo "Context7 setup failed (non-fatal)"
     else
-        npx -y ctx7@latest setup --claude --mcp --yes >/dev/null 2>&1 \
-            || echo "Context7 setup failed (non-fatal)"
+        ctx7_setup || echo "Context7 setup failed (non-fatal)"
     fi
 }
 
@@ -79,7 +95,7 @@ store_secret() {
     chmod 600 "$SECRETS"
 }
 
-command -v claude >/dev/null 2>&1 || {
+have claude || {
     echo "claude not found, skipping MCPs (non-fatal)"
     exit 0
 }

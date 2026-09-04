@@ -12,4 +12,3 @@ ssh/private.d/
 .dolt/
 *.db
 .beads-credential-key
-

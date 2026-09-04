@@ -1,0 +1,6 @@
+# UCLA.
+
+Host hoffman2
+	HostName hoffman2.idre.ucla.edu
+	User gshaked
+	IdentityFile ~/.ssh/id_ed25519_hoffman

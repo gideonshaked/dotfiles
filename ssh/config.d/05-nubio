@@ -1,0 +1,10 @@
+# Personal server, reached through a Cloudflare tunnel rather than an open
+# port. The absolute cloudflared path is deliberate: ProxyCommand inherits the
+# PATH of whatever launched ssh, which for a GUI editor may not include
+# Homebrew. On Linux this host is unreachable until that path is adjusted.
+
+Host nubio
+	HostName nubio-ssh.gideonshaked.com
+	User gshaked
+	IdentityFile ~/.ssh/id_ed25519_nubio
+	ProxyCommand /opt/homebrew/bin/cloudflared access ssh --hostname %h

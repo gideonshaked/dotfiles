@@ -1,0 +1,22 @@
+# University of Michigan.
+
+Host caen
+	HostName login.engin.umich.edu
+	User gshaked
+	ControlMaster auto
+	ControlPath ~/.ssh/master-%r@%h:%p
+
+Host psoriasis
+	HostName psoriasis.sph.umich.edu
+	User gshaked
+	PubkeyAuthentication no
+
+Host greatlakes
+	HostName greatlakes.arc-ts.umich.edu
+	User gshaked
+	PubkeyAuthentication no
+
+Host armis2
+	HostName armis2.arc-ts.umich.edu
+	User gshaked
+	PubkeyAuthentication no

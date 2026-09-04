@@ -1,4 +1,4 @@
-# Global instructions
+# CLAUDE.md
 
 ## Scope
 

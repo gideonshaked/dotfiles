@@ -107,30 +107,28 @@ Drops the `macos` module and keeps everything else. `scripts/configure-bash-hook
 ### SSH config
 
 `~/.ssh/config` is an entry point holding three `Include` lines and nothing
-else. Hosts come from whichever files a profile links, so adding a machine
-class never means editing a shared file.
-
-Include order is precedence order, because OpenSSH takes the **first** value it
-sees for each keyword:
+else. Include order is precedence order, because OpenSSH takes the **first**
+value it sees for each keyword:
 
 | Directory | Tracked | Contents |
 |-----------|---------|----------|
-| `~/.ssh/private.d/` | no, and it lives outside the repo | Anything that must not be public, work hosts included. First, so it overrides anything managed. |
-| `~/.ssh/config.d/` | yes, `ssh/config.d/` | One file per site: `01-github`, `02-umich`, `03-ucla`, `04-tau`. Linked by `core`. |
-| `~/.ssh/platform.d/` | yes, `ssh/platform.d/` | `Host *` blocks. Last, so every specific host wins. Only `01-macos` so far, linked by the `macos` module. |
+| `~/.ssh/private.d/` | no, and it lives outside the repo | Every host: `umich`, `ucla`, `tau`, `octant`, `afterquery`. First, so it overrides anything managed. |
+| `~/.ssh/config.d/` | yes, `ssh/config.d/` | `01-github` only. Linked by `core`. |
+| `~/.ssh/platform.d/` | yes, `ssh/platform.d/` | `Host *` blocks. Last, so every specific host wins. `01-macos`, linked by the `macos` module. |
 
-The numbers keep the `config.d` listing stable and carry no other meaning: the
-files define disjoint hosts. The `Host *` block is deliberately not among them.
-It lives in its own directory included after the glob, so a future `06-` file
-cannot sort past it and start winning over specific hosts.
+Only github and the macOS platform block are tracked. Everything naming a real
+host is private: the repository is public, and the host files carry usernames,
+internal hostnames, an EC2 instance id and a GCP project. A new machine needs
+`~/.ssh/private.d` populated by hand.
 
-`platform.d/macos` is why the split exists. It points `IdentityAgent` at the
+The numbers carry no meaning beyond keeping a listing stable. The `Host *`
+block is deliberately not among them: it lives in its own directory included
+after the glob, so a later file cannot sort past it and start winning over
+specific hosts.
+
+`platform.d/01-macos` is why the split exists. It points `IdentityAgent` at the
 1Password socket under `~/Library/Group Containers/`, a path that cannot exist
 on Linux, and `core` used to link one `ssh/config` to every profile.
-
-Work hosts are not in the repo. `~/.ssh/private.d/octant` carries an EC2
-instance id, an internal GCP project name, and a colleague's username; this
-repository is public. A fresh work laptop needs that file copied over by hand.
 
 A glob matching nothing is not an error, so a machine missing any of the three
 directories is fine.

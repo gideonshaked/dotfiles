@@ -2,33 +2,52 @@
 
 set -euo pipefail
 
-PATH="${HOME}/bin:${HOME}/.local/bin:${HOME}/.bun/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
+# Dotbot runs this without a login shell, so PATH has to be built by hand.
+PATH="${HOME}/.local/bin:${HOME}/.bun/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:/home/linuxbrew/.linuxbrew/bin:${PATH}"
 export PATH
 
-if ! which claude >/dev/null 2>&1; then
-    echo "claude CLI not found, skipping plugins (non-fatal)"
-    exit 0
-fi
-
-if ! which jq >/dev/null 2>&1; then
-    echo "jq not found, skipping plugins (non-fatal)"
-    exit 0
-fi
-
 SETTINGS="${HOME}/.claude/settings.json"
-if [ ! -f "$SETTINGS" ]; then
-    echo "settings.json not found, skipping plugins (non-fatal)"
-    exit 0
-fi
 
-jq -r '.extraKnownMarketplaces // {} | to_entries[] | .value.source.repo' "$SETTINGS" | while read -r repo; do
-    [ -n "$repo" ] || continue
-    claude plugins marketplace add "$repo" >/dev/null 2>&1 || true
-done
+# Every prerequisite is optional: a machine without one still installs, it just
+# gets no plugins. The settings file is a symlink created by an earlier module,
+# so a profile that lists this one first would find nothing here.
+prerequisites_met() {
+    local missing=""
 
-jq -r '.enabledPlugins // {} | to_entries[] | select(.value == true) | .key' "$SETTINGS" | while read -r plugin; do
-    [ -n "$plugin" ] || continue
-    claude plugins install "$plugin" >/dev/null 2>&1 || claude plugins update "$plugin" >/dev/null 2>&1 || true
-done
+    command -v claude >/dev/null 2>&1 || missing="claude"
+    command -v jq >/dev/null 2>&1 || missing="${missing:+$missing, }jq"
+    [ -f "$SETTINGS" ] || missing="${missing:+$missing, }${SETTINGS/#$HOME/\~}"
+
+    [ -z "$missing" ] && return 0
+    echo "missing ${missing}, skipping plugins (non-fatal)"
+    return 1
+}
+
+# A marketplace is the repo a plugin is fetched from. Adding one twice is a
+# no-op, so this runs unconditionally rather than checking what is registered.
+add_marketplaces() {
+    local repo
+    while read -r repo; do
+        [ -n "$repo" ] || continue
+        claude plugins marketplace add "$repo" >/dev/null 2>&1 || true
+    done < <(jq -r '.extraKnownMarketplaces // {} | to_entries[] | .value.source.repo' "$SETTINGS")
+}
+
+# install fails when the plugin is already present, so fall through to update.
+# Neither is fatal: one unreachable marketplace should not stop the rest.
+install_plugins() {
+    local plugin
+    while read -r plugin; do
+        [ -n "$plugin" ] || continue
+        claude plugins install "$plugin" >/dev/null 2>&1 \
+            || claude plugins update "$plugin" >/dev/null 2>&1 \
+            || echo "  ${plugin} failed (non-fatal)"
+    done < <(jq -r '.enabledPlugins // {} | to_entries[] | select(.value == true) | .key' "$SETTINGS")
+}
+
+prerequisites_met || exit 0
+
+add_marketplaces
+install_plugins
 
 echo "Claude plugins OK"

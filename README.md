@@ -72,7 +72,6 @@ After install, use the [`dotfiles`](./bin/dotfiles) utility:
 
 ```bash
 dotfiles update              # Pull latest changes and run install
-dotfiles sync                # Sync shared settings between Claude profiles
 dotfiles brew                # Install all packages from the manifest
 dotfiles brew --only-plugins # Install just the tracked VS Code extensions
 dotfiles dotbot              # Update Dotbot submodule

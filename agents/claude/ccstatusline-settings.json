@@ -9,6 +9,9 @@
         "rawValue": true,
         "metadata": {
           "inverse": "true"
+        },
+        "numberFormat": {
+          "style": "whole"
         }
       },
       {
@@ -37,6 +40,9 @@
         "merge": true,
         "metadata": {
           "invert": "true"
+        },
+        "numberFormat": {
+          "style": "compact"
         }
       },
       {
@@ -45,6 +51,9 @@
         "rawValue": false,
         "metadata": {
           "invert": "true"
+        },
+        "numberFormat": {
+          "style": "compact"
         }
       },
       {

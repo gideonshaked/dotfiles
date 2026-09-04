@@ -35,7 +35,7 @@ git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install
 
 ### Profiles
 
-A profile is a list of modules under `modules/`. The chosen profile is remembered in
+A profile is a list of modules under `setup/modules/`. The chosen profile is remembered in
 `~/.dotfiles-profile`, so a later bare `./install` repeats it.
 
 | Profile | For | Modules |
@@ -73,9 +73,9 @@ After install, use the [`dotfiles`](./bin/dotfiles) utility:
 ```bash
 dotfiles update              # Pull latest changes and run install
 dotfiles sync                # Sync shared settings between Claude profiles
-dotfiles brewfile            # Update Homebrew package manifest
 dotfiles brew                # Install all packages from the manifest
 dotfiles brew --only-plugins # Install just the tracked VS Code extensions
+dotfiles brewfile            # Update Homebrew package manifest
 dotfiles dotbot              # Update Dotbot submodule
 ```
 

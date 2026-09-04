@@ -6,7 +6,7 @@
 #   ./install --profile server    # use and remember a profile
 #   ./install --list              # show available profiles
 #
-# A profile is a list of module files under modules/. Adding a machine class
+# A profile is a list of module files under setup/modules/. Adding a machine class
 # means adding one arm to the case below, not editing every existing entry.
 #
 # Module order matters: the settings module comes first because core's install
@@ -72,8 +72,8 @@ MODULES="$(profile_modules "$PROFILE")" || {
 
 CONFIGS=()
 for m in $MODULES; do
-    f="${BASEDIR}/modules/${m}.yaml"
-    [ -f "$f" ] || { echo "missing module: modules/${m}.yaml" >&2; exit 1; }
+    f="${BASEDIR}/setup/modules/${m}.yaml"
+    [ -f "$f" ] || { echo "missing module: setup/modules/${m}.yaml" >&2; exit 1; }
     CONFIGS+=("$f")
 done
 

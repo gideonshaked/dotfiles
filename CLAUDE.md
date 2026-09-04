@@ -35,7 +35,7 @@ uv run pytest tests/ -q
 
 ### Profiles and modules
 
-A profile is an ordered list of module files under `modules/`, passed to Dotbot as several `-c` arguments. Dotbot accepts multiple config files natively, so composition needs no custom machinery, and no module contains a conditional.
+A profile is an ordered list of module files under `setup/modules/`, passed to Dotbot as several `-c` arguments. Dotbot accepts multiple config files natively, so composition needs no custom machinery, and no module contains a conditional.
 
 | Profile | Modules |
 |---------|---------|
@@ -50,7 +50,7 @@ A profile is an ordered list of module files under `modules/`, passed to Dotbot 
 | `macos` | zshenv, gitconfig, VS Code, Homebrew shell tools, hushlogin |
 
 **Module order matters.** The settings module is listed first because
-`scripts/install-claude-plugins` reads `~/.claude/settings.json` and skips
+`setup/scripts/install-claude-plugins` reads `~/.claude/settings.json` and skips
 silently when it is absent. Dotbot processes `-c` files left to right, so the
 link must be created in an earlier module than the step that reads it. Putting
 the settings link last meant a fresh machine installed zero plugins on its
@@ -102,7 +102,7 @@ The drift has one routine cause: `/config` and `/model` write to `~/.claude/sett
 
 ### The server profile
 
-Drops the `macos` module and keeps everything else. `scripts/configure-bash-hooks` appends a source line to both `.bashrc` and `.bash_profile` for login-shell compatibility (e.g. tcsh exec-to-bash), guarded against double-sourcing. The install owns `~/bin`; an existing `~/bin` is backed up first.
+Drops the `macos` module and keeps everything else. `setup/scripts/configure-bash-hooks` appends a source line to both `.bashrc` and `.bash_profile` for login-shell compatibility (e.g. tcsh exec-to-bash), guarded against double-sourcing. The install owns `~/bin`; an existing `~/bin` is backed up first.
 
 ### SSH config
 
@@ -145,6 +145,6 @@ The `s` script is an SSH wrapper that uses the Kitty SSH kitten when available, 
 
 ### Symlink mappings
 
-Read the files under `modules/`. They are the source of truth and a copy here would drift.
+Read the files under `setup/modules/`. They are the source of truth and a copy here would drift.
 
 There is currently no global instructions file. `agents/shared/instructions.md` was deleted; recover it from commit `94feb3d` if a replacement is wanted.

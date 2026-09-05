@@ -15,27 +15,7 @@ usage() {
     echo "  --install-dotfiles    Install dotfiles (or update if already present)"
     echo "  --reinstall-dotfiles  Delete existing dotfiles and reinstall from scratch"
     echo "  --update-dotfiles     Pull latest changes and re-run install"
-    echo "  --install-terminfo    Copy this terminal's terminfo entry to the host"
     echo "  -h, --help            Show this help message"
-}
-
-# Terminfo is installed once per host rather than shipped on every connection.
-# A per-connection wrapper (kitty's ssh kitten, ghostty's ssh-terminfo) only
-# fires when it wraps the literal ssh command, so `gcloud compute ssh`, a
-# cloudflared ProxyCommand and any jump host bypass it and leave the remote
-# with an unknown TERM. An entry under ~/.terminfo is found however the
-# connection is made.
-install_terminfo() {
-    if [ -z "$TERM" ] || [ "$TERM" = "dumb" ]; then
-        echo "No usable TERM to install" >&2
-        return 0
-    fi
-    echo "Installing $TERM terminfo..."
-    if infocmp -x "$TERM" | ssh "$@" 'mkdir -p ~/.terminfo && tic -x -o ~/.terminfo -'; then
-        echo "terminfo OK"
-    else
-        echo "terminfo install failed; remote TUIs may render poorly" >&2
-    fi
 }
 
 action=""
@@ -46,7 +26,6 @@ for arg in "$@"; do
         --install-dotfiles) action="install" ;;
         --reinstall-dotfiles) action="reinstall" ;;
         --update-dotfiles) action="update" ;;
-        --install-terminfo) action="terminfo" ;;
         --*) echo "Unknown option: $arg" >&2; usage >&2; exit 1 ;;
         *) args+=("$arg") ;;
     esac
@@ -60,7 +39,6 @@ fi
 
 case "$action" in
     install)
-        install_terminfo "$@"
         ssh "$@" bash << 'EOF'
 if [ -d ~/dotfiles ]; then
     echo "Updating dotfiles..."
@@ -73,7 +51,6 @@ fi
 EOF
         ;;
     reinstall)
-        install_terminfo "$@"
         ssh "$@" bash << 'EOF'
 echo "Reinstalling dotfiles..."
 rm -rf ~/dotfiles
@@ -89,10 +66,6 @@ else
     echo "Dotfiles not installed on this host"
 fi
 EOF
-        ;;
-    terminfo)
-        install_terminfo "$@"
-        exit 0
         ;;
 esac
 

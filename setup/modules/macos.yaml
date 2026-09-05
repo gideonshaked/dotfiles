@@ -10,8 +10,8 @@
     ~/.gitconfig.local: git/gitconfig-macos
 
     # cmux links libghostty and reads the Ghostty config rather than its own.
-    ~/.config/ghostty/config: ghostty/config
-    ~/.config/cmux/cmux.json: cmux/cmux.json
+    ~/.config/ghostty/config: terminal/ghostty.config
+    ~/.config/cmux/cmux.json: terminal/cmux.json
 
     ~/Library/Application Support/Code/User/settings.json: vscode/settings.json
     ~/Library/Application Support/Code/User/keybindings.json: vscode/keybindings.json

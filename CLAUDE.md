@@ -71,6 +71,8 @@ zsh and bash are equal first-class citizens. **One file configures both.**
 | `terminal/shellrc` | Symlinked to both `~/.zshrc` and `~/.bashrc.dotfiles`. A shared POSIX section, then a zsh branch and a bash branch, then a shared tools section. |
 | `terminal/zshenv` | Loaded before `/etc/zshrc`, which is the only reason it is separate. Disables Apple Terminal session restore; sources `~/.cargo/env` because rustup writes that file directly. |
 | `terminal/starship.toml` | Prompt config, a different format. |
+| `terminal/ghostty.config` | Terminal rendering. cmux links libghostty and reads the Ghostty config rather than shipping its own, so this is cmux's renderer config. |
+| `terminal/cmux.json` | Everything cmux-specific: sidebar, notifications, automation. JSONC. cmux resolves symlinks before an atomic write, so a linked file survives being saved from its UI. |
 
 `shellrc` sets `$__shell` to `zsh` or `bash` once, near the top. That is what makes the tools section shared rather than duplicated: `starship init "$__shell"`, `atuin init "$__shell"`, and the fzf key-bindings path are each written once and work in both.
 

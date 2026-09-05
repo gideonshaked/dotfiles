@@ -59,7 +59,7 @@ requires sudo.
 ├── manifest    <- Brewfile: what this repo's configuration depends on
 ├── setup       <- The installer: modules/ compose profiles, scripts/ run after linking
 ├── ssh         <- SSH config; host files are gitignored and stay out of this repo
-├── terminal    <- Shell configuration (one shellrc for zsh and bash, starship)
+├── terminal    <- Shell and terminal config (one shellrc for zsh and bash, starship, cmux)
 └── vscode      <- VS Code settings, keybindings and extension list
 ```
 

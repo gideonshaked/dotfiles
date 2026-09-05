@@ -185,7 +185,19 @@ directories is fine.
 
 ### SSH wrapper (`bin/s`)
 
-The `s` script is an SSH wrapper that uses the Kitty SSH kitten when available, falling back to plain ssh. Dotfiles management on remotes is opt-in via flags: `--install-dotfiles`, `--reinstall-dotfiles`, `--update-dotfiles`. Default is just SSH with no dotfiles action.
+The `s` script is a plain `ssh` wrapper. Remote work is opt-in via flags:
+`--install-dotfiles`, `--reinstall-dotfiles`, `--update-dotfiles`, and
+`--install-terminfo`. Default is just SSH with no action.
+
+`--install-terminfo` pipes `infocmp -x "$TERM"` into `tic -x -o ~/.terminfo`
+on the remote, and the two dotfiles-installing flags do it as well. It runs
+once per host rather than on every connection, which is the whole point: a
+per-connection wrapper such as the Kitty SSH kitten or Ghostty's
+`shell-integration-features = ssh-terminfo` only fires when it wraps the
+literal `ssh` command, so `gcloud compute ssh`, a cloudflared `ProxyCommand`
+and any jump host bypass it and leave the remote guessing at an unknown
+`TERM`. An entry compiled into `~/.terminfo` is found however the connection
+is made.
 
 ### The Homebrew manifest
 

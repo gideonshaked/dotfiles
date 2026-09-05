@@ -83,6 +83,10 @@ export PATH
 alias ls="ls --color=auto"
 alias df="df -h"
 
+# Skips the per-tool permission prompt. An alias rather than a wrapper script,
+# so `type claude` shows the flag and `command claude` still prompts normally.
+alias claude="claude --dangerously-skip-permissions"
+
 ## ── SSH agent ─────────────────────────────────────────────────────────────
 ## Reuse an existing agent rather than spawning one per shell.
 

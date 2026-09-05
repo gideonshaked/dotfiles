@@ -60,6 +60,10 @@ if OS.mac?
   # ssh/platform.d/01-macos points IdentityAgent at this app's agent socket.
   cask "1password"
 
+  # The terminal. Reads ghostty/config for rendering and cmux/cmux.json for
+  # everything else, both linked by the macos module.
+  cask "cmux"
+
   vscode "davidanson.vscode-markdownlint"
   vscode "james-yu.latex-workshop"
   vscode "mads-hartmann.bash-ide-vscode"

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#
+# Surfaces this session in the cmux sidebar.
+#
+# On the Mac, cmux's own claude wrapper already injects hooks, so this exits at
+# the socket test only when cmux is absent. On a remote reached with `cmux ssh`
+# that wrapper does not run: the relay daemon bootstraps a `cmux` on the remote
+# whose calls execute against the local instance, but nothing wires Claude Code
+# to it. This is that wiring, and it is why the hook lives in the repo rather
+# than being left to the wrapper.
+
+set -o pipefail
+
+command -v cmux >/dev/null 2>&1 || exit 0
+command -v jq >/dev/null 2>&1 || exit 0
+
+event="$(cat)"
+
+case "$(printf '%s' "$event" | jq -r '.hook_event_name // ""')" in
+    Stop)
+        cmux notify --title "Claude Code" --body "Turn complete" >/dev/null 2>&1
+        ;;
+    Notification)
+        body="$(printf '%s' "$event" | jq -r '.message // "Needs input"')"
+        cmux notify --title "Claude Code" --body "$body" >/dev/null 2>&1
+        ;;
+esac
+
+exit 0

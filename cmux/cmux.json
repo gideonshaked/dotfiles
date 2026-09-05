@@ -1,0 +1,48 @@
+{
+  "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
+  "schemaVersion": 1,
+
+  "notifications": {
+    // The only class that blocks an agent, so it is never batched or delayed.
+    "agentPermissionPrompt": true,
+    // whenIdle: a finished agent is only worth interrupting for if nothing
+    // else is already holding attention.
+    "agentTurnComplete": "whenIdle",
+    "agentIdleReminder": true,
+    "unreadPaneRing": true,
+    "dockBadge": true,
+    "showInMenuBar": true,
+    "sound": "default"
+  },
+
+  "sidebar": {
+    "showAgentActivity": true,
+    "showNotificationMessage": true,
+    "notificationMessageLineLimit": 12,
+    "showPullRequests": true,
+    "showPorts": true,
+    "showLog": true,
+    "showProgress": true,
+    "branchLayout": "vertical"
+  },
+
+  "app": {
+    // Whatever needs a human rises to the top of the list on its own.
+    "reorderOnNotification": true,
+    "newWorkspacePlacement": "afterCurrent"
+  },
+
+  "terminal": {
+    "autoResumeAgentSessions": true,
+    "copyOnSelect": false,
+    "showScrollBar": true
+  },
+
+  "automation": {
+    "claudeCodeIntegration": true,
+    // A subagent finishing is the orchestrator's business, not the user's.
+    "suppressSubagentNotifications": true,
+    "socketControlMode": "cmuxOnly",
+    "workspaceAutoNaming": false
+  }
+}

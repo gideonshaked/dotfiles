@@ -1,0 +1,18 @@
+# Terminal rendering for cmux, which links libghostty and reads this file
+# rather than shipping its own renderer config.
+#
+# sidebar-font-size, surface-tab-bar-font-size and split-divider-color are
+# cmux additions; the rest is stock Ghostty.
+
+font-family = Hack Nerd Font
+font-size = 13
+theme = Monokai Pro
+
+# Sidebar carries one row per agent, so it reads at a slightly larger size
+# than the panes it indexes.
+sidebar-font-size = 14
+surface-tab-bar-font-size = 11
+
+# Bytes, not lines. An agent run producing a long build log still scrolls back
+# to its start.
+scrollback-limit = 50000000

@@ -23,7 +23,19 @@
     ],
     "PreToolUse": [
       {
-        "matcher": "Skill",
+        "_tag": "ccstatusline-managed",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -lc 'exec npx -y ccstatusline@latest --hook'"
+          }
+        ],
+        "matcher": "Skill"
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "_tag": "ccstatusline-managed",
         "hooks": [
           {
             "type": "command",
@@ -32,12 +44,26 @@
         ]
       }
     ],
-    "UserPromptSubmit": [
+    "Stop": [
       {
+        "matcher": "",
         "hooks": [
           {
             "type": "command",
-            "command": "bash -lc 'exec npx -y ccstatusline@latest --hook'"
+            "command": "$HOME/.claude/hooks/cmux-notify",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/cmux-notify",
+            "timeout": 5
           }
         ]
       }

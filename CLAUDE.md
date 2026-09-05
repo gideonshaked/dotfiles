@@ -185,19 +185,18 @@ directories is fine.
 
 ### SSH wrapper (`bin/s`)
 
-The `s` script is a plain `ssh` wrapper. Remote work is opt-in via flags:
-`--install-dotfiles`, `--reinstall-dotfiles`, `--update-dotfiles`, and
-`--install-terminfo`. Default is just SSH with no action.
+The `s` script is a plain `ssh` wrapper. Dotfiles management on remotes is
+opt-in via flags: `--install-dotfiles`, `--reinstall-dotfiles`,
+`--update-dotfiles`. Default is just SSH with no dotfiles action.
 
-`--install-terminfo` pipes `infocmp -x "$TERM"` into `tic -x -o ~/.terminfo`
-on the remote, and the two dotfiles-installing flags do it as well. It runs
-once per host rather than on every connection, which is the whole point: a
-per-connection wrapper such as the Kitty SSH kitten or Ghostty's
-`shell-integration-features = ssh-terminfo` only fires when it wraps the
-literal `ssh` command, so `gcloud compute ssh`, a cloudflared `ProxyCommand`
-and any jump host bypass it and leave the remote guessing at an unknown
-`TERM`. An entry compiled into `~/.terminfo` is found however the connection
-is made.
+Nothing here ships terminfo to the remote. cmux reports `TERM=xterm-256color`,
+which every host already has, so plain `ssh` renders correctly. A terminal
+that advertises an exotic `TERM` instead (`xterm-kitty`, `xterm-ghostty`)
+would need its entry compiled into `~/.terminfo` on each host once; do not
+reach for a per-connection wrapper such as the Kitty SSH kitten to do it,
+because those only fire when wrapping the literal `ssh` command and are
+bypassed by `gcloud compute ssh`, a cloudflared `ProxyCommand` and any jump
+host.
 
 ### The Homebrew manifest
 

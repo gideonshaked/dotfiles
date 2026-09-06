@@ -98,7 +98,7 @@ not contradict graphical integrity (lie factor, honest scales, etc.).
 
 - Drop the top and right spines on regression plots, dot plots, line plots, and similar Cartesian plots. Keep only the bottom and left spines.
 - No horizontal or vertical rules across the plotting area unless they genuinely enhance viewer clarity (e.g., a reference line at y=0, a meaningful threshold, a date marker that the reader needs to locate). Default is no rules.
-- Logarithmic axes: major ticks at the decades only, no minor ticks, and labels written as plain magnitudes (100, 1K, 10K, 100K, 1M, 10M), never as powers of ten (10^3) or scientific notation. The axis title names the quantity; the labels carry the scale.
+- Logarithmic axes: major ticks at the decades only, no minor ticks. Labels are either plain magnitudes (100, 1K, 10K, 1M) or powers of ten (10^3, 10^6); both are acceptable and the choice is mine per figure, so ask which one is wanted when it has not been stated. The axis title names the quantity; the labels carry the scale.
 
 ### Chart-type defaults
 

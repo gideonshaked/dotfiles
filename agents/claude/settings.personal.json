@@ -70,7 +70,8 @@
   "statusLine": {
     "type": "command",
     "command": "bash -lc 'exec npx -y ccstatusline@latest'",
-    "padding": 0
+    "padding": 0,
+    "refreshInterval": 10
   },
   "enabledPlugins": {
     "beads@beads-marketplace": true,

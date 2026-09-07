@@ -92,5 +92,9 @@
     "theme": "custom",
     "autoAlign": true,
     "continueThemeAcrossLines": false
+  },
+  "installation": {
+    "method": "auto-update",
+    "packageManager": "npm"
   }
 }

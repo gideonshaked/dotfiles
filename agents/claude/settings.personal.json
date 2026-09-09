@@ -132,6 +132,7 @@
   "preferredNotifChannel": "kitty",
   "autoCompactEnabled": true,
   "remoteControlAtStartup": true,
+  "crossSessionInbound": "accept",
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,

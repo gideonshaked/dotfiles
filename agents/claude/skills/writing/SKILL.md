@@ -1,6 +1,6 @@
 ---
 name: writing
-description: "Apply George Orwell's rules from 'Politics and the English Language' to prose: cut stale metaphors, long words, padding, the passive and jargon, and break any rule sooner than write something ugly."
+description: "Orwell's rules from 'Politics and the English Language', applied to prose. Cuts stale metaphors, long words, padding, the passive and jargon. Also bans em dashes and semicolons outright, and allows a colon only before a list."
 when_to_use: "Use when drafting or editing anything meant to be read: reports, research write-ups, documentation, READMEs, emails, announcements, summaries, blog posts, copy. Triggers on write, draft, rewrite, edit, polish, tighten, or make this clearer. Use it while composing and while revising, not as an audit of finished text."
 ---
 
@@ -46,12 +46,31 @@ Then two more:
 
 The point of the exercise is to start from the meaning and then choose the words. The four habits work the other way round, letting the ready-made phrase arrive first and decide what you meant.
 
+## Punctuation
+
+Three marks are banned outright. Unlike the six rules, rule 6 does not license
+breaking these.
+
+- No em dashes. Write two sentences, or use a comma.
+- No semicolons. Write two sentences.
+- No colons, except to introduce a list.
+
+A colon before a list is the only permitted use. Not before an explanation, not
+before an example, not to set up a definition, not for emphasis. If a colon is
+holding two halves of a sentence together, the sentence wants to be two
+sentences.
+
+Each of these marks bolts a second clause onto a finished thought. The full
+stop already does that job, and it makes the writer decide what the second
+clause actually is.
+
 ## Before you finish
 
 - Could a reader understand every sentence on first read?
 - Is every image fresh, or is it one you have seen in print?
 - Is every sentence active unless the passive earns its place?
 - Could you cut any more words without losing meaning? If yes, cut them.
+- Are there any em dashes, semicolons, or colons that do not introduce a list?
 - Is anything avoidably ugly? Fix it, even if a rule above told you to write it.
 
 ## Source

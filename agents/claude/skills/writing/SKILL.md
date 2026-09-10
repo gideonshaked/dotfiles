@@ -1,6 +1,6 @@
 ---
 name: writing
-description: "Orwell's rules from 'Politics and the English Language', applied to prose. Cuts stale metaphors, long words, padding, the passive and jargon. Also bans em dashes and semicolons outright, and allows a colon only before a list."
+description: "Orwell's rules from 'Politics and the English Language', applied to prose. Cuts stale metaphors, long words, padding, the passive and jargon. Bans em dashes and semicolons outright and allows a colon only before a list. Also fixes the shape that gives machine-written prose away once the diction is clean: uniform sentence length, resultative tails, clefts, and copula-only paragraphs."
 when_to_use: "Use when drafting or editing anything meant to be read: reports, research write-ups, documentation, READMEs, emails, announcements, summaries, blog posts, copy. Triggers on write, draft, rewrite, edit, polish, tighten, or make this clearer. Use it while composing and while revising, not as an audit of finished text."
 ---
 
@@ -64,6 +64,39 @@ Each of these marks bolts a second clause onto a finished thought. The full
 stop already does that job, and it makes the writer decide what the second
 clause actually is.
 
+## Shape
+
+Orwell judges words and sentences one at a time. This section judges the shape
+of the whole draft, which is what gives machine-written prose away once the
+diction is already clean.
+
+A passage can be fluent, take a position, carry real detail, use no filler and
+no banned punctuation, and still read as machine-written. The tell is usually
+that every sentence is the same length.
+
+- Vary sentence length. Model prose collapses into a band of roughly 12 to 26
+  words and stays there. Write some sentences of eight words or fewer. Let
+  others run long. A draft where nothing is short has a problem no word choice
+  will fix.
+- Cut resultative tails. These are the comma-plus-participle endings bolted
+  onto a finished sentence, such as ", making it easier to scale" or
+  ", ensuring consistency". Stop at the finished sentence, or make the
+  consequence its own sentence.
+- Unstage clefts. "What actually mattered was the cost." "It is the timing that
+  breaks this." Both delay the subject to build suspense the sentence has not
+  earned. Write "The cost mattered."
+- Kill copula-only paragraphs. A paragraph where every verb is a form of "to
+  be" describes a state and reports no event. Find the thing that happens and
+  put it in a verb.
+- Vary paragraph length too. Uniform paragraphs are the same tell one level up.
+
+Put the verdict first. Model prose builds to its conclusion, so the reader
+meets the reasoning before the point. Lead with what you concluded, then say
+why.
+
+Concessions should be short and lopsided. Giving each side equal space reads as
+a refusal to decide.
+
 ## Before you finish
 
 - Could a reader understand every sentence on first read?
@@ -71,8 +104,16 @@ clause actually is.
 - Is every sentence active unless the passive earns its place?
 - Could you cut any more words without losing meaning? If yes, cut them.
 - Are there any em dashes, semicolons, or colons that do not introduce a list?
+- Are any sentences eight words or fewer, or is everything the same length?
+- Any resultative tails, clefts, or paragraphs where every verb is "to be"?
 - Is anything avoidably ugly? Fix it, even if a rule above told you to write it.
 
 ## Source
 
 George Orwell, ['Politics and the English Language'](https://www.orwellfoundation.com/the-orwell-foundation/orwell/essays-and-other-works/politics-and-the-english-language/) (1946). The present-day cliches and the plain-verb replacements are this skill's, not his.
+
+The Shape section is not Orwell. It comes from measurements reported by
+[human-voice](https://github.com/stephenoffer/human-voice), which ranked the
+patterns that catch prose a current model writes: participial tails, sentence
+shape, paragraph uniformity, burstiness, and clefts. Word-level checks caught
+none of it.

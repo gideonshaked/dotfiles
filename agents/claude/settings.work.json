@@ -20,11 +20,34 @@
           }
         ]
       }
+    ],
+    "PreToolUse": [
+      {
+        "_tag": "ccstatusline-managed",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y ccstatusline@latest --hook"
+          }
+        ],
+        "matcher": "Skill"
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "_tag": "ccstatusline-managed",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y ccstatusline@latest --hook"
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
     "type": "command",
-    "command": "bash -lc 'exec npx -y ccstatusline@latest'",
+    "command": "npx -y ccstatusline@latest",
     "padding": 0,
     "refreshInterval": 10
   },

@@ -97,3 +97,13 @@ Exactly one `#` heading per file, and it comes first. Every heading after it is
 at most one level deeper than the heading above it, so an `###` never follows
 an `#`. When merging documents that each had their own `#`, the merged file
 keeps one title and the rest become `##`.
+
+### Commands for me to run
+
+Any command I am meant to run in my own terminal goes on my clipboard with
+pbcopy, in addition to being shown in the reply. Before handing a command over,
+try running it yourself, including logins and other auth flows. Run them the
+way I would from my own terminal, so the browser opens on my machine and I
+complete the steps there; do not switch to device-code or no-browser modes that
+leave me waiting on you. Background the command, and ask me only for whatever
+code, approval or secret it needs.

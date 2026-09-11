@@ -20,27 +20,6 @@
           }
         ]
       }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "Skill",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash -lc 'exec npx -y ccstatusline@latest --hook'"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash -lc 'exec npx -y ccstatusline@latest --hook'"
-          }
-        ]
-      }
     ]
   },
   "statusLine": {

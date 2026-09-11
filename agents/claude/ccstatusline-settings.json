@@ -34,6 +34,19 @@
         }
       },
       {
+        "id": "785d542b-a495-4ef3-b604-412041384d17",
+        "type": "reset-timer",
+        "rawValue": false,
+        "metadata": {
+          "invert": "true"
+        }
+      },
+      {
+        "id": "048e444f-8812-4699-8c9c-8b3dd7675c78",
+        "type": "session-usage",
+        "merge": true
+      },
+      {
         "id": "d8a41fc7-109d-4f23-b053-7304b438975d",
         "type": "weekly-usage",
         "numberFormat": {
@@ -53,7 +66,8 @@
         },
         "rawValue": false,
         "metadata": {
-          "invert": "true"
+          "invert": "true",
+          "display": "time"
         }
       },
       {

@@ -41,30 +41,6 @@
           }
         ]
       }
-    ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/cmux-notify",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/cmux-notify",
-            "timeout": 5
-          }
-        ]
-      }
     ]
   },
   "statusLine": {
@@ -129,7 +105,7 @@
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "dark",
-  "preferredNotifChannel": "kitty",
+  "preferredNotifChannel": "ghostty",
   "autoCompactEnabled": true,
   "remoteControlAtStartup": true,
   "crossSessionInbound": "accept",

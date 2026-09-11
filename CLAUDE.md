@@ -136,6 +136,23 @@ have, ignoring `--yes`. The endpoint is the same with or without a key; when
 
 **Tool budget is a scarce shared resource.** Claude Code defers every MCP tool behind `ToolSearch` once tool definitions exceed 10% of the context window, which hides low-tool-count servers like exa behind higher-count ones. Adding an MCP server means checking afterwards whether deferral has kicked in.
 
+### Claude Code notifications in cmux
+
+Locally, cmux's own Claude wrapper (`automation.claudeCodeIntegration` in
+`terminal/cmux.json`) launches `claude` with a `--settings` payload that
+injects its Stop, Notification, Feed and session-restore hooks and sets
+`preferredNotifChannel` to `notifications_disabled`. Nothing in this repository
+duplicates that; a Stop hook here would notify twice.
+
+Over plain `ssh` no wrapper runs, so both profiles set `preferredNotifChannel`
+to `ghostty`. Claude Code then writes an OSC 777 `notify` sequence to its own
+terminal, which travels back through ssh and lands on the cmux pane it came
+from. `--settings` outranks `~/.claude/settings.json`, so one file serves both
+cases. Claude sends these about 6 s into a permission prompt and 60 s after a
+turn ends with no keypress (`messageIdleNotifThresholdMs` in `~/.claude.json`),
+and cmux withholds the banner while that pane is focused, so test from another
+workspace.
+
 ### Claude settings: personal and work profiles
 
 `agents/claude/settings.personal.json` and `agents/claude/settings.work.json` are two complete files, one of which is symlinked to `~/.claude/settings.json`.

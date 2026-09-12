@@ -29,7 +29,8 @@
             "type": "command",
             "command": "bash -lc 'exec npx -y ccstatusline@latest --hook'"
           }
-        ]
+        ],
+        "_tag": "ccstatusline-managed"
       }
     ],
     "UserPromptSubmit": [
@@ -39,7 +40,8 @@
             "type": "command",
             "command": "bash -lc 'exec npx -y ccstatusline@latest --hook'"
           }
-        ]
+        ],
+        "_tag": "ccstatusline-managed"
       }
     ]
   },

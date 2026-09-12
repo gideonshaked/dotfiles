@@ -38,13 +38,23 @@
         "type": "reset-timer",
         "rawValue": false,
         "metadata": {
-          "invert": "true"
+          "display": "time",
+          "absolute": "false"
+        },
+        "numberFormat": {
+          "style": "compact"
         }
       },
       {
         "id": "048e444f-8812-4699-8c9c-8b3dd7675c78",
         "type": "session-usage",
-        "merge": true
+        "merge": true,
+        "metadata": {
+          "invert": "true"
+        },
+        "numberFormat": {
+          "style": "compact"
+        }
       },
       {
         "id": "d8a41fc7-109d-4f23-b053-7304b438975d",

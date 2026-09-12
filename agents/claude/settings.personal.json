@@ -7,7 +7,7 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "fable",
+  "model": "opus",
   "hooks": {
     "PostToolUse": [
       {
@@ -23,19 +23,17 @@
     ],
     "PreToolUse": [
       {
-        "_tag": "ccstatusline-managed",
+        "matcher": "Skill",
         "hooks": [
           {
             "type": "command",
             "command": "bash -lc 'exec npx -y ccstatusline@latest --hook'"
           }
-        ],
-        "matcher": "Skill"
+        ]
       }
     ],
     "UserPromptSubmit": [
       {
-        "_tag": "ccstatusline-managed",
         "hooks": [
           {
             "type": "command",
@@ -94,7 +92,7 @@
   },
   "modelSettings": {
     "claude-opus-5": {
-      "effortLevel": "high"
+      "effortLevel": "medium"
     }
   },
   "autoUpdatesChannel": "latest",

@@ -107,3 +107,22 @@ way I would from my own terminal, so the browser opens on my machine and I
 complete the steps there; do not switch to device-code or no-browser modes that
 leave me waiting on you. Background the command, and ask me only for whatever
 code, approval or secret it needs.
+
+### Stacked pull requests
+
+When a change is better reviewed as several dependent pull requests, use `spr`
+rather than hand-managed branches. It submits one pull request per commit, so a
+stack is a run of commits on one branch: amend a commit and `spr diff` updates
+only that pull request, and `spr land` merges the bottom of the stack.
+
+A commit that deletes something belongs above the commit that replaces it, never
+below. Rebasing a stack can otherwise land a removal while its replacement is
+still in review.
+
+`bin/spr` wraps the Homebrew binary to supply the GitHub token, reading it from
+gh's keychain per call rather than from git config, because every git config
+file on this machine is a symlink into this repo and would commit the secret. It
+supplies one only when nothing else does, so an explicit flag or a repo-level
+setting still wins. Everything else is spr's own behaviour. The non-secret
+settings `spr.branchPrefix`, `spr.githubRepository` and `spr.githubMasterBranch`
+live in each repository's `.git/config`, which git never tracks.

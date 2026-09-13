@@ -7,6 +7,5 @@
 export SHELL_SESSIONS_DISABLE=1
 
 # rustup writes this file directly on install; sourcing it here keeps that
-# working while the dotfiles symlink stays in place. PATH is also handled in
-# common.sh, so this is belt and braces.
+# working while the dotfiles symlink stays in place.
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"

@@ -15,7 +15,9 @@ Personal dotfiles using [Dotbot](https://github.com/anishathalye/dotbot) for sym
 ./install --list              # show profiles and their modules
 ```
 
-The installer only needs `git` and `python3` to create symlinks. The post-link steps additionally use `brew`, `npx`, `jq`, `uv`, and `claude`; each step is failure-tolerant and skips (printing a `non-fatal` message) when its tool is missing.
+The installer only needs `git` and `python3` to create symlinks. The post-link steps additionally use `curl`, `brew`, `npx`, `jq`, `uv`/`uvx`, and `claude`; each step is failure-tolerant and skips (printing a `non-fatal` message) when its tool is missing.
+
+On Apple Silicon, `python3` must be an arm64 build. Dotbot runs under it and every step inherits its architecture, so an Intel Python puts the whole install under Rosetta, where `brew bundle` refuses to run against `/opt/homebrew`.
 
 **Manage dotfiles:**
 ```bash
@@ -31,11 +33,13 @@ often dirty and a plain `--ff-only` pull aborts before the install ever runs.
 **Lint:**
 ```bash
 pre-commit run --all-files                        # what CI runs
-shellcheck install bin/* setup/scripts/*          # not in pre-commit; run it by hand
+shellcheck install bin/* setup/scripts/install-* setup/scripts/configure-bash-hooks setup/scripts/lib/path.sh  # not in pre-commit
 bash -n terminal/shellrc && zsh -n terminal/shellrc
 ```
 
-`.github/workflows/lint.yml` runs pre-commit on push and pull request. There are no tests.
+`.github/workflows/lint.yml` runs pre-commit on pushes to `master` and on pull requests. There are no tests.
+
+`core.hooksPath` points at `.beads/hooks`, which holds both the beads hooks and the pre-commit hook.
 
 ## Architecture
 
@@ -52,8 +56,8 @@ A profile is an ordered list of module files under `setup/modules/`, passed to D
 | Module | Contents |
 |--------|----------|
 | `settings-personal` / `settings-work` | Only the `~/.claude/settings.json` link |
-| `core` | Everything every machine gets: shell config, git, SSH, `~/bin`, Claude memory/skills/commands, and all install steps |
-| `macos` | zshenv, the macOS half of the gitconfig, the 1Password SSH block, VS Code, hushlogin |
+| `core` | Everything every machine gets: shell and starship config, git, SSH and its control socket directory, `~/bin`, Claude memory/skills/commands/hooks, the ccstatusline config, and every install step. Also cleans dead links in `~`, `~/.claude` and `~/.ssh/config.d`. |
+| `macos` | zshenv, the macOS half of the gitconfig, the 1Password SSH block, the Ghostty and cmux configs, VS Code, hushlogin |
 
 **Module order matters.** The settings module is listed first because
 `setup/scripts/install-claude-plugins` reads `~/.claude/settings.json` and skips
@@ -96,7 +100,9 @@ is fetched as a released binary under `$HOME` instead.
 
 | Tool | Needed by | Linux source |
 |------|-----------|--------------|
-| starship, fzf, atuin | `terminal/shellrc` | own installers, `~/.local/bin` |
+| starship | `terminal/shellrc` | its own installer, into `~/.local/bin` |
+| fzf | `terminal/shellrc` | cloned to `~/.fzf`, binary linked into `~/.local/bin` |
+| atuin | `terminal/shellrc` | release tarball, into `~/.local/bin` |
 | `uv` | `uvx`, which runs ssh-mcp | astral installer |
 | `jq` | `install-claude-plugins`, `claude-validate` | static binary from releases |
 | `node` | `npx`, for ccstatusline and the gcloud MCP | current LTS tarball, resolved from the release index |
@@ -109,24 +115,33 @@ is fetched as a released binary under `$HOME` instead.
 release index read with it.
 
 Every Linux installer is guarded by `have <tool> && return 0`, so it installs
-what is missing and never upgrades. `brew bundle` does upgrade, so the two
-platforms can drift; a clean machine cannot hit this.
+what is missing and never upgrades. Node is the exception: it reinstalls when
+the node on PATH is older than v20, because Ubuntu ships v18. `brew bundle`
+does upgrade, so the two platforms can drift; a clean machine cannot hit this.
 
 Dotbot runs shell steps without a login shell, so they inherit a PATH that
 predates the install. `setup/scripts/lib/path.sh` is sourced by every step that
-needs a tool, and prepends `~/.local/bin` and both Homebrew prefixes. Without
-it a tool installed seconds earlier is invisible.
+needs a tool, and prepends `~/.local/bin`, `~/.bun/bin`, `~/.cargo/bin` and
+all three Homebrew prefixes. Without it a tool installed seconds earlier is
+invisible.
 
 ### Agent provisioning
 
 `bin/` holds only commands meant to be typed: `dotfiles` and `s`. What
 `~/.claude/settings.json` names by absolute path is linked to a fixed `$HOME`
-location instead, since the repository's own path differs per machine:
-`agents/claude/hooks/claude-validate` to `~/.claude/hooks/`.
+location instead, since the repository's own path differs per machine: the
+`agents/claude/hooks/` directory to `~/.claude/hooks/`, which holds
+`claude-validate`.
 
 npx comes from `node`: the manifest on macOS, the LTS tarball on Linux. There
-is no nvm wrapper. The statusLine and the gcloud MCP both run through
-`bash -lc`, which sources the login shell and so has the real PATH.
+is no nvm wrapper. The statusLine, ccstatusline's two hooks and the gcloud MCP
+all run through `bash -lc`, which sources the login shell and so has the real
+PATH. On Linux a bare `npx` can resolve the distribution's older node in
+`/usr/bin` ahead of the one under `~/.local/bin`. ccstatusline's own installer
+writes bare `npx` commands, so wrap them again after running it.
+
+`install-ccstatusline` runs the package once through npx so it is cached before
+the first status line render.
 
 `install-claude-plugins` reads `extraKnownMarketplaces` and `enabledPlugins` from the linked `~/.claude/settings.json` (via `jq`) and adds/installs each marketplace and plugin.
 
@@ -171,7 +186,9 @@ A plugin enabled in `~/.claude/settings.json` cannot be disabled per-project ([c
 
 ### The server profile
 
-Drops the `macos` module and keeps everything else. `setup/scripts/configure-bash-hooks` appends a source line to both `.bashrc` and `.bash_profile` for login-shell compatibility (e.g. tcsh exec-to-bash), guarded against double-sourcing. The install owns `~/bin`; an existing `~/bin` is backed up first.
+Drops the `macos` module and keeps everything else.
+
+`setup/scripts/configure-bash-hooks` runs on every profile, not only this one. It appends a source line to both `.bashrc` and `.bash_profile` for login-shell compatibility (e.g. tcsh exec-to-bash), guarded against double-sourcing. The install owns `~/bin`; an existing `~/bin` is backed up first.
 
 ### SSH config
 
@@ -181,7 +198,7 @@ value it sees for each keyword:
 
 | Directory | Tracked | Contents |
 |-----------|---------|----------|
-| `~/.ssh/private.d/` | no, gitignored | Every host: `umich`, `ucla`, `tau`, `octant`, `afterquery`. First, so it overrides anything managed. |
+| `~/.ssh/private.d/` | no, gitignored | Every host: `umich`, `ucla`, `tau`, `afterquery`. First, so it overrides anything managed. |
 | `~/.ssh/config.d/` | yes, `ssh/config.d/` | `01-github` only. Linked by `core`. |
 | `~/.ssh/platform.d/` | yes, `ssh/platform.d/` | `Host *` blocks. Last, so every specific host wins. `01-macos`, linked by the `macos` module. |
 
@@ -226,7 +243,7 @@ host.
 ### The Homebrew manifest
 
 `manifest/Brewfile` lists dependencies of this repository's configuration and
-nothing else: 16 formulae, 3 casks, and the VS Code extensions. Every entry is
+nothing else: 16 formulae, 4 casks, and the VS Code extensions. Every entry is
 required by a file in this repo, and each carries a comment naming the file
 that needs it.
 

@@ -26,6 +26,10 @@ brew "jq"
 # uvx runs the ssh-mcp server registered by setup/scripts/install-mcps.
 brew "uv"
 
+# bin/spr wraps this binary to supply a GitHub token from gh's keychain, since
+# no git config file here can hold one without committing it.
+brew "spr"
+
 # npx runs ccstatusline for the Claude statusLine and the gcloud MCP server.
 brew "node"
 

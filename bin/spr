@@ -1,0 +1,44 @@
+#!/bin/sh
+# Wrapper around Homebrew's spr, supplying only the GitHub token.
+#
+# spr reads its token from git config `spr.githubAuthToken`, but every git
+# config file on this machine is a symlink into the tracked dotfiles repo, so
+# writing it there would commit a secret. Instead it is read from gh's keychain
+# per invocation and passed as a flag. spr uses libgit2, which ignores
+# GIT_CONFIG_COUNT, so ephemeral git config is not available and the argument
+# list is the only channel.
+#
+# Every other behaviour is spr's own. The token is supplied only when nothing
+# else provides one, so an explicit flag or a repo-level config still wins, and
+# any failure to obtain one falls through to spr's own error rather than this
+# script's. spr.branchPrefix, spr.githubRepository and spr.githubMasterBranch
+# are non-secret and live in each repo's .git/config, which git never tracks.
+
+set -eu
+
+real_spr=/opt/homebrew/bin/spr
+
+# spr's --cd is consumed before its config is read, so honour it here too.
+dir=.
+prev=
+for arg in "$@"; do
+    if [ "$prev" = "--cd" ]; then
+        dir=$arg
+    fi
+    case $arg in
+        --github-auth-token | --github-auth-token=*) exec "$real_spr" "$@" ;;
+        --cd=*) dir=${arg#--cd=} ;;
+    esac
+    prev=$arg
+done
+
+if git -C "$dir" config --get spr.githubAuthToken >/dev/null 2>&1; then
+    exec "$real_spr" "$@"
+fi
+
+command -v gh >/dev/null 2>&1 || exec "$real_spr" "$@"
+
+token=$(gh auth token 2>/dev/null) || token=''
+[ -n "$token" ] || exec "$real_spr" "$@"
+
+exec "$real_spr" --github-auth-token "$token" "$@"

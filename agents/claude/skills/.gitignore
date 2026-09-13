@@ -7,8 +7,10 @@
 context7-mcp/
 
 # Databricks AI tools skills, symlinked in from ~/.databricks/aitools/skills by
-# the Databricks CLI, so machine-local (work laptop only).
-databricks*/
+# the Databricks CLI, so machine-local (work laptop only). The entries without a
+# trailing slash arrive as symlinks, and git matches a symlink as a file, so a
+# "dir/" pattern misses them and leaves them untracked.
+databricks*
 *mlflow*/
 agent-evaluation/
-spark-python-data-source/
+spark-python-data-source

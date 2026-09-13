@@ -24,6 +24,10 @@ dotfiles brew                # Install everything in the manifest
 dotfiles dotbot              # Update Dotbot submodule
 ```
 
+`update` pulls with `--ff-only --autostash`. Several tracked files are symlinked
+live into Claude Code and VS Code, which rewrite them in place, so this tree is
+often dirty and a plain `--ff-only` pull aborts before the install ever runs.
+
 **Lint:**
 ```bash
 pre-commit run --all-files                        # what CI runs
@@ -125,6 +129,8 @@ is no nvm wrapper. The statusLine and the gcloud MCP both run through
 `bash -lc`, which sources the login shell and so has the real PATH.
 
 `install-claude-plugins` reads `extraKnownMarketplaces` and `enabledPlugins` from the linked `~/.claude/settings.json` (via `jq`) and adds/installs each marketplace and plugin.
+
+It snapshots that file first and puts it back afterwards. `claude plugins` rewrites the settings file as a side effect, reordering keys and dropping fields it does not recognise, ccstatusline's `_tag` markers among them. Because the file is a symlink into this repo, an install that did not restore it left the tree dirty every time, which is a different thing from the `/config` and `/model` edits the symlink exists to capture.
 
 `install-mcps` holds one function per server: `exa` (HTTP), `gcloud` (npx through `bash -lc`), `ssh-mcp` (uvx) and `context7`. Each checks what is already registered and re-adds only when the stored command no longer matches, so an older definition is replaced rather than kept.
 

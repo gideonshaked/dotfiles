@@ -45,7 +45,10 @@ update_dotbot() {
 
 # Update dotfiles
 dfu() {
-    cd "$DOTFILES" && git pull --ff-only && ./install "$@"
+    # Tracked files here are symlinked live into Claude Code and VS Code, which
+    # rewrite them in place, so this tree is almost never clean. Without
+    # --autostash an ordinary settings toggle aborts the pull and no install runs.
+    cd "$DOTFILES" && git pull --ff-only --autostash && ./install "$@"
 }
 
 # Main function to run appropriate function based on argument

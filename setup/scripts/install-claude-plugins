@@ -47,7 +47,18 @@ install_plugins() {
 
 prerequisites_met || exit 0
 
+# `claude plugins` rewrites the settings file as a side effect: it reorders keys
+# and drops fields it does not recognise, ccstatusline's _tag markers included.
+# The file is a symlink into this repo, so that rewrite leaves the tree dirty and
+# the next update's pull has to stash it. Nothing below reads the rewritten file,
+# so put back exactly what was read.
+SETTINGS_SNAPSHOT="$(mktemp)"
+trap 'rm -f "$SETTINGS_SNAPSHOT"' EXIT
+cp "$SETTINGS" "$SETTINGS_SNAPSHOT"
+
 add_marketplaces
 install_plugins
+
+cmp -s "$SETTINGS_SNAPSHOT" "$SETTINGS" || cp "$SETTINGS_SNAPSHOT" "$SETTINGS"
 
 echo "Claude plugins OK"

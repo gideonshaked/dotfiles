@@ -19,11 +19,11 @@ brew "zsh-syntax-highlighting"
 brew "zsh-completions"
 
 # setup/scripts/install-claude-plugins reads ~/.claude/settings.json with jq,
-# and bin/claude-validate parses its hook payload with it. Without jq, plugins
-# do not install and the PostToolUse hook does nothing.
+# and agents/claude/hooks/claude-validate parses its hook payload with it.
+# Without jq, plugins do not install and the PostToolUse hook does nothing.
 brew "jq"
 
-# uvx runs the ssh-mcp server registered by setup/scripts/install-agent-mcps.
+# uvx runs the ssh-mcp server registered by setup/scripts/install-mcps.
 brew "uv"
 
 # npx runs ccstatusline for the Claude statusLine and the gcloud MCP server.

@@ -135,5 +135,6 @@
     "claude-opus-5": {
       "effortLevel": "high"
     }
-  }
+  },
+  "outputStyle": "Concise"
 }

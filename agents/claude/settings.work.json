@@ -7,7 +7,7 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "opus",
+  "model": "fable",
   "hooks": {
     "PostToolUse": [
       {
@@ -136,5 +136,6 @@
       "effortLevel": "high"
     }
   },
-  "outputStyle": "Concise"
+  "outputStyle": "Concise",
+  "feedbackDrafts": "off"
 }

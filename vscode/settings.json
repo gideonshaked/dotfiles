@@ -178,6 +178,5 @@
 	// --- Noise and telemetry ---
 	"redhat.telemetry.enabled": false,
 	"security.workspace.trust.enabled": false,
-	"update.showReleaseNotes": false,
-	"chat.disableAIFeatures": true
+	"update.showReleaseNotes": false
 }

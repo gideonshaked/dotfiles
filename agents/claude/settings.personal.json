@@ -8,6 +8,7 @@
     "defaultMode": "auto"
   },
   "model": "fable",
+  "fallbackModel": ["claude-opus-5"],
   "hooks": {
     "PostToolUse": [
       {

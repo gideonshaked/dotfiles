@@ -17,18 +17,14 @@ My personal dotfiles. In my opinion, [dotfiles are NOT meant to be forked](https
 ## Install
 
 ```bash
-git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install
+git clone https://github.com/gideonshaked/dotfiles && cd dotfiles && ./install --profile <profile>
 ```
 
-Only `git` and `python3` are needed to create the symlinks; both ship with
-macOS and every Linux this targets. Everything else the configuration depends
-on is installed by the run itself, including Claude Code.
+Only `git` and `python3` are needed to run the install.
+Everything else the configuration depends on is installed by the run itself, including Claude Code.
 
-### Profiles
-
-A profile is an ordered list of modules under `setup/modules/`, passed to
-Dotbot as several `-c` arguments. The chosen profile is remembered in
-`~/.dotfiles-profile`, so a later bare `./install` repeats it.
+Profiles are different versions of my dotfiles, so that they can be used across multiple differing machines (personal laptop, work laptop, linux servers, etc).
+The chosen profile is remembered in `~/.dotfiles-profile`, so a later bare `./install` reinstalls the originally installed profile.
 
 | Profile | For | Modules |
 |---------|-----|---------|
@@ -36,18 +32,15 @@ Dotbot as several `-c` arguments. The chosen profile is remembered in
 | `work` | work Mac | settings-work, core, macos |
 | `server` | headless Linux | settings-personal, core |
 
+## Dotfile management
+
+After install, use the [`dotfiles`](./bin/dotfiles) utility:
+
 ```bash
-./install --profile server   # headless Linux: shell, git, SSH, Claude, no macOS bits
-./install --list             # show profiles and their modules
-./install --dry-run          # report what would change, touch nothing
+dotfiles update              # Pull latest changes and run install
+dotfiles brew                # Install everything in the manifest
+dotfiles dotbot              # Update Dotbot submodule
 ```
-
-The install owns `~/bin`; an existing `~/bin` is backed up first.
-
-macOS gets its packages from Homebrew and the Brewfile. Linux cannot use
-Homebrew, which needs root for the only prefix with prebuilt bottles, so the
-tools it needs are fetched as released binaries under `$HOME` and no step
-requires sudo.
 
 ## Contents
 
@@ -61,16 +54,6 @@ requires sudo.
 ├── ssh         <- SSH config; host files are gitignored and stay out of this repo
 ├── terminal    <- Shell and terminal config (one shellrc for zsh and bash, starship, cmux)
 └── vscode      <- VS Code settings, keybindings and extension list
-```
-
-## Dotfile management
-
-After install, use the [`dotfiles`](./bin/dotfiles) utility:
-
-```bash
-dotfiles update              # Pull latest changes and run install
-dotfiles brew                # Install everything in the manifest
-dotfiles dotbot              # Update Dotbot submodule
 ```
 
 ## Credits

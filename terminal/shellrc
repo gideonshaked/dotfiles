@@ -83,13 +83,6 @@ export PATH
 alias ls="ls --color=auto"
 alias df="df -h"
 
-# Adds bypassPermissions to the shift-tab cycle without activating it, so
-# permissions.defaultMode still decides the mode a session opens in. Only the
-# flag can do this; defaultMode is the sole settings key and it starts in bypass.
-# An alias rather than a wrapper script, so `type claude` shows the flag and
-# `command claude` starts without it.
-alias claude="claude --allow-dangerously-skip-permissions"
-
 ## ── SSH agent ─────────────────────────────────────────────────────────────
 ## Reuse an existing agent rather than spawning one per shell.
 

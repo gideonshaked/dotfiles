@@ -29,7 +29,11 @@
   "app": {
     // Whatever needs a human rises to the top of the list on its own.
     "reorderOnNotification": true,
-    "newWorkspacePlacement": "afterCurrent"
+    "newWorkspacePlacement": "afterCurrent",
+    // An agent is meant to outlive the pane it was started from, so a process
+    // still running is not a reason to stop and ask before closing.
+    "warnBeforeClosingTab": false,
+    "confirmQuit": "never"
   },
 
   "terminal": {

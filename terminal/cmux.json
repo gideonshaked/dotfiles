@@ -42,6 +42,11 @@
     "showScrollBar": true
   },
 
+  "browser": {
+    "openTerminalLinksInCmuxBrowser": false,
+    "interceptTerminalOpenCommandInCmuxBrowser": false
+  },
+
   "automation": {
     "claudeCodeIntegration": true,
     // A subagent finishing is the orchestrator's business, not the user's.

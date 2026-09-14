@@ -122,7 +122,6 @@
     "mode": "hold"
   },
   "autoMemoryEnabled": false,
-  "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "dark",
   "preferredNotifChannel": "ghostty",

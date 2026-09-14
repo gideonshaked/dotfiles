@@ -5,10 +5,11 @@
     "pr": ""
   },
   "permissions": {
-    "defaultMode": "auto"
+    "defaultMode": "bypassPermissions"
   },
   "model": "fable",
   "fallbackModel": ["claude-opus-5"],
+  "skipDangerousModePermissionPrompt": true,
   "hooks": {
     "PostToolUse": [
       {

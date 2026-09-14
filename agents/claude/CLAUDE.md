@@ -126,3 +126,9 @@ supplies one only when nothing else does, so an explicit flag or a repo-level
 setting still wins. Everything else is spr's own behaviour. The non-secret
 settings `spr.branchPrefix`, `spr.githubRepository` and `spr.githubMasterBranch`
 live in each repository's `.git/config`, which git never tracks.
+
+### Line breaks in prose
+
+In Markdown and LaTeX files, start each sentence of prose on a new line, and never wrap a sentence across lines.
+A sentence stays on one line however long it is, so a diff of an edited sentence touches only that line.
+This covers prose only; code blocks, tables, lists and LaTeX environments keep the layout their syntax needs.

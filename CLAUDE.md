@@ -108,6 +108,7 @@ is fetched as a released binary under `$HOME` instead.
 | `node` | `npx`, for ccstatusline and the gcloud MCP | current LTS tarball, resolved from the release index |
 | `claude` | everything under `agents/claude/` | `claude.ai/install.sh`, both platforms |
 | `ruff` | `claude-validate`, for edited Python | `uv tool install` |
+| `pyright` | the `pyright-lsp` Claude plugin, which ships no binary | `uv tool install` |
 | `pre-commit` | this repository's git hooks | `uv tool install` |
 | `bd`, `dolt` | the issue database in `.beads` | release tarballs |
 
@@ -144,6 +145,7 @@ writes bare `npx` commands, so wrap them again after running it.
 the first status line render.
 
 `install-claude-plugins` reads `extraKnownMarketplaces` and `enabledPlugins` from the linked `~/.claude/settings.json` (via `jq`) and adds/installs each marketplace and plugin.
+It refreshes every marketplace, then runs `claude plugins update` on every plugin after `install`, because `install` exits 0 without changing anything when the plugin is already present.
 
 It snapshots that file first and puts it back afterwards. `claude plugins` rewrites the settings file as a side effect, reordering keys and dropping fields it does not recognise, ccstatusline's `_tag` markers among them. Because the file is a symlink into this repo, an install that did not restore it left the tree dirty every time, which is a different thing from the `/config` and `/model` edits the symlink exists to capture.
 
@@ -243,7 +245,7 @@ host.
 ### The Homebrew manifest
 
 `manifest/Brewfile` lists dependencies of this repository's configuration and
-nothing else: 16 formulae, 4 casks, and the VS Code extensions. Every entry is
+nothing else: 18 formulae, 4 casks, and the VS Code extensions. Every entry is
 required by a file in this repo, and each carries a comment naming the file
 that needs it.
 

@@ -96,6 +96,13 @@ install_ruff() {
     uv tool install ruff >/dev/null 2>&1 || echo "ruff install failed (non-fatal)"
 }
 
+# The pyright-lsp Claude plugin launches pyright-langserver from PATH and ships
+# no binary of its own.
+install_pyright() {
+    have pyright-langserver && return 0
+    uv tool install pyright >/dev/null 2>&1 || echo "pyright install failed (non-fatal)"
+}
+
 # Drives this repository's git hooks.
 install_precommit() {
     have pre-commit && return 0
@@ -186,6 +193,7 @@ install_linux() {
     install_atuin
     install_uv
     install_ruff
+    install_pyright
     install_precommit
     install_jq
     install_node

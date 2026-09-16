@@ -25,23 +25,29 @@ prerequisites_met() {
 
 # A marketplace is the repo a plugin is fetched from. Adding one twice is a
 # no-op, so this runs unconditionally rather than checking what is registered.
+# Every catalog is then refreshed so the updates below see the newest versions.
 add_marketplaces() {
     local repo
     while read -r repo; do
         [ -n "$repo" ] || continue
         claude plugins marketplace add "$repo" >/dev/null 2>&1 || true
     done < <(jq -r '.extraKnownMarketplaces // {} | to_entries[] | .value.source.repo' "$SETTINGS")
+    claude plugins marketplace update >/dev/null 2>&1 \
+        || echo "  marketplace refresh failed (non-fatal)"
 }
 
-# install fails when the plugin is already present, so fall through to update.
-# Neither is fatal: one unreachable marketplace should not stop the rest.
+# install exits 0 without changing anything when the plugin is already present,
+# so update has to run after it every time or an existing install never moves
+# off its old version. Neither is fatal: one unreachable marketplace should not
+# stop the rest.
 install_plugins() {
     local plugin
     while read -r plugin; do
         [ -n "$plugin" ] || continue
         claude plugins install "$plugin" >/dev/null 2>&1 \
-            || claude plugins update "$plugin" >/dev/null 2>&1 \
-            || echo "  ${plugin} failed (non-fatal)"
+            || { echo "  ${plugin} install failed (non-fatal)"; continue; }
+        claude plugins update "$plugin" >/dev/null 2>&1 \
+            || echo "  ${plugin} update failed (non-fatal)"
     done < <(jq -r '.enabledPlugins // {} | to_entries[] | select(.value == true) | .key' "$SETTINGS")
 }
 

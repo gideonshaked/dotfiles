@@ -36,6 +36,10 @@ brew "node"
 # agents/claude/hooks/claude-validate checks edited Python with it.
 brew "ruff"
 
+# The pyright-lsp plugin enabled in agents/claude/settings.*.json launches
+# pyright-langserver from PATH and ships no binary of its own.
+brew "pyright"
+
 # .pre-commit-config.yaml drives the repo's git hooks and the lint workflow.
 brew "pre-commit"
 

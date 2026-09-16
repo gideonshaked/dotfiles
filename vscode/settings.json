@@ -67,7 +67,7 @@
 		"chat.attach.text"
 	],
 	"github.copilot.editor.enableAutoCompletions": true,
-	"github.copilot.nextEditSuggestions.enabled": true,
+	"github.copilot.nextEditSuggestions.enabled": false,
 	"github.copilot.selectedCompletionModel": "gpt-4o-copilot",
 
 	// --- Python ---
@@ -178,5 +178,12 @@
 	// --- Noise and telemetry ---
 	"redhat.telemetry.enabled": false,
 	"security.workspace.trust.enabled": false,
-	"update.showReleaseNotes": false
+	"update.showReleaseNotes": false,
+	"github.copilot.enable": {
+		"*": false,
+		"plaintext": false,
+		"markdown": false,
+		"scminput": false,
+		"latex": false
+	}
 }

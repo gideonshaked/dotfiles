@@ -14,3 +14,7 @@ databricks*
 *mlflow*/
 agent-evaluation/
 spark-python-data-source
+
+# Skills Claude Code syncs down from the claude.ai account, written per machine
+# under a directory named for the account and organization.
+synced/

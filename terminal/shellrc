@@ -98,6 +98,13 @@ fi
 
 [ -f "$HOME/.shell-secrets" ] && . "$HOME/.shell-secrets"
 
+## ── Mouse tracking ────────────────────────────────────────────────────────
+## Run before every prompt. A full-screen program that dies without cleanup
+## (kill -9, a dropped SSH session) leaves the terminal reporting every mouse
+## move as text.
+
+_reset_mouse() { printf '\e[?1000l\e[?1002l\e[?1003l\e[?1006l'; }
+
 # ══ zsh ═══════════════════════════════════════════════════════════════════
 
 if [ "$__shell" = zsh ]; then
@@ -132,10 +139,6 @@ if [ "$__shell" = zsh ]; then
     # intentionally leaves group-writable.
     autoload -Uz compinit && compinit -u
 
-    ## Mouse tracking
-    # A full-screen program that dies without cleanup (kill -9, a dropped SSH
-    # session) leaves the terminal reporting every mouse move as text.
-    _reset_mouse() { printf '\e[?1000l\e[?1002l\e[?1003l\e[?1006l' }
     autoload -Uz add-zsh-hook && add-zsh-hook precmd _reset_mouse
 
     ## Plugins — fzf-tab after compinit, syntax-highlighting last.
@@ -174,6 +177,8 @@ if [ "$__shell" = bash ]; then
     HISTSIZE=10000
     HISTFILESIZE=10000
     HISTCONTROL=ignoreboth:erasedups
+
+    PROMPT_COMMAND="_reset_mouse${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
 
     ## Completion
     for _bc in "$__brew/etc/profile.d/bash_completion.sh" \

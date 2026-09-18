@@ -132,6 +132,12 @@ if [ "$__shell" = zsh ]; then
     # intentionally leaves group-writable.
     autoload -Uz compinit && compinit -u
 
+    ## Mouse tracking
+    # A full-screen program that dies without cleanup (kill -9, a dropped SSH
+    # session) leaves the terminal reporting every mouse move as text.
+    _reset_mouse() { printf '\e[?1000l\e[?1002l\e[?1003l\e[?1006l' }
+    autoload -Uz add-zsh-hook && add-zsh-hook precmd _reset_mouse
+
     ## Plugins — fzf-tab after compinit, syntax-highlighting last.
     ## No bash equivalent exists for these three.
     if [ -f "$__brew/share/fzf-tab/fzf-tab.zsh" ]; then

@@ -8,7 +8,7 @@
   "permissions": {
     "defaultMode": "bypassPermissions"
   },
-  "model": "opus",
+  "model": "claude-fable-5-1[1m]",
   "fallbackModel": [
     "claude-opus-5"
   ],

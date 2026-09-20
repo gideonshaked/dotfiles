@@ -89,6 +89,22 @@ have claude || {
     exit 0
 }
 
+# `claude mcp add` stores servers in ~/.claude.json, but it also reserialises
+# ~/.claude/settings.json whenever it migrates that file. settings.json is a
+# symlink into this repo, so the rewrite lands as an unrelated dirty diff on a
+# tracked file. Nothing here needs to read settings.json, so snapshot it and put
+# back exactly what was there.
+SETTINGS="${HOME}/.claude/settings.json"
+if [ -f "$SETTINGS" ]; then
+    SETTINGS_SNAPSHOT="$(mktemp)"
+    restore_settings() {
+        cmp -s "$SETTINGS_SNAPSHOT" "$SETTINGS" || cp "$SETTINGS_SNAPSHOT" "$SETTINGS"
+        rm -f "$SETTINGS_SNAPSHOT"
+    }
+    cp "$SETTINGS" "$SETTINGS_SNAPSHOT"
+    trap restore_settings EXIT INT TERM
+fi
+
 exa
 gcloud_mcp
 ssh_mcp

@@ -2,14 +2,17 @@
   "skillListingBudgetFraction": 0.015,
   "attribution": {
     "commit": "",
-    "pr": ""
+    "pr": "",
+    "sessionUrl": false
   },
   "permissions": {
     "defaultMode": "bypassPermissions"
   },
-  "model": "fable",
-  "fallbackModel": ["claude-opus-5"],
-  "skipDangerousModePermissionPrompt": true,
+  "model": "opus",
+  "fallbackModel": [
+    "claude-opus-5"
+  ],
+  "advisorModel": "fable",
   "hooks": {
     "PostToolUse": [
       {
@@ -25,19 +28,17 @@
     ],
     "PreToolUse": [
       {
-        "_tag": "ccstatusline-managed",
+        "matcher": "Skill",
         "hooks": [
           {
             "type": "command",
             "command": "bash -lc 'exec npx -y ccstatusline@latest --hook'"
           }
-        ],
-        "matcher": "Skill"
+        ]
       }
     ],
     "UserPromptSubmit": [
       {
-        "_tag": "ccstatusline-managed",
         "hooks": [
           {
             "type": "command",
@@ -52,6 +53,18 @@
     "command": "bash -lc 'exec npx -y ccstatusline@latest'",
     "padding": 0,
     "refreshInterval": 10
+  },
+  "enabledPlugins": {
+    "beads@beads-marketplace": true,
+    "impeccable@impeccable": true,
+    "playwright@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "cdd-utils@octant-agent-plugin-marketplace": true,
+    "octant-app-store@octant-agent-plugin-marketplace": true,
+    "octant-chem-utils@octant-agent-plugin-marketplace": true,
+    "octant-comp-chem@octant-agent-plugin-marketplace": true,
+    "octomind-rolling@octant-agent-plugin-marketplace": true,
+    "databricks@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "beads-marketplace": {
@@ -79,18 +92,6 @@
       }
     }
   },
-  "enabledPlugins": {
-    "beads@beads-marketplace": true,
-    "impeccable@impeccable": true,
-    "playwright@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true,
-    "cdd-utils@octant-agent-plugin-marketplace": true,
-    "octant-app-store@octant-agent-plugin-marketplace": true,
-    "octant-chem-utils@octant-agent-plugin-marketplace": true,
-    "octant-comp-chem@octant-agent-plugin-marketplace": true,
-    "octomind-rolling@octant-agent-plugin-marketplace": true,
-    "databricks@claude-plugins-official": true
-  },
   "pluginConfigs": {
     "octomind-rolling@octant-agent-plugin-marketplace": {
       "options": {
@@ -100,6 +101,8 @@
       }
     }
   },
+  "outputStyle": "Concise",
+  "feedbackDrafts": "off",
   "spinnerTipsEnabled": false,
   "spinnerVerbs": {
     "mode": "replace",
@@ -115,6 +118,11 @@
       "Quiet quitting"
     ]
   },
+  "modelSettings": {
+    "claude-opus-5": {
+      "effortLevel": "high"
+    }
+  },
   "autoUpdatesChannel": "latest",
   "tui": "fullscreen",
   "voice": {
@@ -122,6 +130,7 @@
     "mode": "hold"
   },
   "autoMemoryEnabled": false,
+  "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "dark",
   "preferredNotifChannel": "ghostty",
@@ -131,12 +140,5 @@
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true,
-  "modelSettings": {
-    "claude-opus-5": {
-      "effortLevel": "high"
-    }
-  },
-  "outputStyle": "Concise",
-  "feedbackDrafts": "off"
+  "voiceEnabled": true
 }

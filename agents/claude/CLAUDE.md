@@ -108,25 +108,6 @@ When you judge that you should not run something, say that you did not run it an
 That is a sentence, not a command block.
 Waiting on my answer is the cost of that judgement, and it is cheaper than me finding the command in your reply and running it blind.
 
-### Stacked pull requests
-
-When a change is better reviewed as several dependent pull requests, use `spr`
-rather than hand-managed branches. It submits one pull request per commit, so a
-stack is a run of commits on one branch: amend a commit and `spr diff` updates
-only that pull request, and `spr land` merges the bottom of the stack.
-
-A commit that deletes something belongs above the commit that replaces it, never
-below. Rebasing a stack can otherwise land a removal while its replacement is
-still in review.
-
-`bin/spr` wraps the Homebrew binary to supply the GitHub token, reading it from
-gh's keychain per call rather than from git config, because every git config
-file on this machine is a symlink into this repo and would commit the secret. It
-supplies one only when nothing else does, so an explicit flag or a repo-level
-setting still wins. Everything else is spr's own behaviour. The non-secret
-settings `spr.branchPrefix`, `spr.githubRepository` and `spr.githubMasterBranch`
-live in each repository's `.git/config`, which git never tracks.
-
 ### Line breaks in prose
 
 In Markdown and LaTeX files, start each sentence of prose on a new line, and never wrap a sentence across lines.

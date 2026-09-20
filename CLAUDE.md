@@ -147,7 +147,16 @@ the first status line render.
 `install-claude-plugins` reads `extraKnownMarketplaces` and `enabledPlugins` from the linked `~/.claude/settings.json` (via `jq`) and adds/installs each marketplace and plugin.
 It refreshes every marketplace, then runs `claude plugins update` on every plugin after `install`, because `install` exits 0 without changing anything when the plugin is already present.
 
-It snapshots that file first and puts it back afterwards. `claude plugins` rewrites the settings file as a side effect, reordering keys and dropping fields it does not recognise, ccstatusline's `_tag` markers among them. Because the file is a symlink into this repo, an install that did not restore it left the tree dirty every time, which is a different thing from the `/config` and `/model` edits the symlink exists to capture.
+`claude plugins` rewrites the settings file as a side effect, reordering keys into its own canonical order.
+That is harmless as long as the tracked file is already in that order, which it is, so this script lets the rewrite stand rather than restoring a snapshot over it.
+A Claude Code release that changes the canonical order will dirty the file once.
+
+`install-mcps` does restore a snapshot, because `claude mcp add` reserialises settings.json whenever it migrates that file even though the servers themselves land in `~/.claude.json`.
+That script never reads settings.json, so there is nothing to gain from letting it write there.
+
+Claude Code round-trips the `hooks` subtree through its own schema, so a key it does not recognise there does not survive any write.
+Unknown keys at the top level do survive.
+That is why ccstatusline's `_tag` markers are not kept in these files: nothing here reads or regenerates them, and any `/config` or `/model` write strips them again.
 
 `install-mcps` holds one function per server: `exa` (HTTP), `gcloud` (npx through `bash -lc`), `ssh-mcp` (uvx) and `context7`. Each checks what is already registered and re-adds only when the stored command no longer matches, so an older definition is replaced rather than kept.
 

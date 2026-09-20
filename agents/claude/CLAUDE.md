@@ -98,15 +98,18 @@ at most one level deeper than the heading above it, so an `###` never follows
 an `#`. When merging documents that each had their own `#`, the merged file
 keeps one title and the rest become `##`.
 
-### Commands for me to run
+### Never hand me a command to run
 
-Any command I am meant to run in my own terminal goes on my clipboard with
-pbcopy, in addition to being shown in the reply. Before handing a command over,
-try running it yourself, including logins and other auth flows. Run them the
-way I would from my own terminal, so the browser opens on my machine and I
-complete the steps there; do not switch to device-code or no-browser modes that
-leave me waiting on you. Background the command, and ask me only for whatever
-code, approval or secret it needs.
+Run it yourself.
+Do not print a command for me to copy, and do not put one on my clipboard.
+
+The sole exception is a command that cannot be driven from your side because the terminal needs me: an interactive prompt, a passphrase, a hardware key, a browser step only I can complete.
+Run those the way I would from my own terminal, so the browser opens on my machine; never switch to device-code or no-browser modes that leave me waiting on you.
+Background the command, and ask me only for the code, approval or secret it needs.
+
+When you judge that you should not run something, say that you did not run it and why, then offer to run it on my go-ahead.
+That is a sentence, not a command block.
+Waiting on my answer is the cost of that judgement, and it is cheaper than me finding the command in your reply and running it blind.
 
 ### Stacked pull requests
 

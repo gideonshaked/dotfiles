@@ -2,6 +2,25 @@
   "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
   "schemaVersion": 1,
 
+  // `claude agents` only reads bypass from its own command line;
+  // permissions.defaultMode in settings.json governs sessions started by hand
+  // and never reaches the children the agent view dispatches.
+  "actions": {
+    "claudeAgents": {
+      "type": "agent",
+      "agent": "claude",
+      "args": ["agents", "--dangerously-skip-permissions"],
+      "title": "Claude agents",
+      "newWorkspaceMenu": true
+    }
+  },
+
+  "ui": {
+    "newWorkspace": {
+      "action": "claudeAgents"
+    }
+  },
+
   "notifications": {
     // The only class that blocks an agent, so it is never batched or delayed.
     "agentPermissionPrompt": true,

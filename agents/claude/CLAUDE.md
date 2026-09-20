@@ -77,9 +77,6 @@ Use ASCII punctuation only.
 
 ### Reporting
 
-Before claiming progress, check each claim against a tool result from this
-session. Say plainly what you have not verified.
-
 When I have not been watching, your final message is my first look at the work,
 so write it as a re-grounding rather than a continuation. Drop the shorthand
 you built up while working: no arrow chains, no hyphen-stacked compounds, no

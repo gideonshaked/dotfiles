@@ -12,7 +12,6 @@
   "fallbackModel": [
     "claude-opus-5"
   ],
-  "advisorModel": "fable",
   "hooks": {
     "PostToolUse": [
       {
@@ -92,15 +91,6 @@
       }
     }
   },
-  "pluginConfigs": {
-    "octomind-rolling@octant-agent-plugin-marketplace": {
-      "options": {
-        "user_name": "Gideon",
-        "slack_username": "gideon",
-        "email": "gideon@octant.bio"
-      }
-    }
-  },
   "outputStyle": "Concise",
   "feedbackDrafts": "off",
   "spinnerTipsEnabled": false,
@@ -121,6 +111,16 @@
   "modelSettings": {
     "claude-opus-5": {
       "effortLevel": "high"
+    }
+  },
+  "advisorModel": "fable",
+  "pluginConfigs": {
+    "octomind-rolling@octant-agent-plugin-marketplace": {
+      "options": {
+        "user_name": "Gideon",
+        "slack_username": "gideon",
+        "email": "gideon@octant.bio"
+      }
     }
   },
   "autoUpdatesChannel": "latest",

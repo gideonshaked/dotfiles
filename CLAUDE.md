@@ -6,6 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Personal dotfiles using [Dotbot](https://github.com/anishathalye/dotbot) for symlink management. Configuration is grouped by tool and linked to where each tool expects it. Claude Code is the only agent this repository configures.
 
+Edit on `master`; do not use a git worktree here.
+Every tracked file is symlinked live from this checkout into `~`, so a change made in a worktree has no effect until the branch lands, and the repository is small enough that the isolation buys nothing.
+
 ## Commands
 
 **Install/update dotfiles:**

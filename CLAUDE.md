@@ -114,6 +114,8 @@ is fetched as a released binary under `$HOME` instead.
 | `pyright` | the `pyright-lsp` Claude plugin, which ships no binary | `uv tool install` |
 | `pre-commit` | this repository's git hooks | `uv tool install` |
 | `bd`, `dolt` | the issue database in `.beads` | release tarballs |
+| `aws` | `aws sso login`, for the credentials the aws-core MCP server resolves | the bundled-runtime installer, into `~/.local/aws-cli` |
+| `gcloud` | the gcloud MCP server, which shells out to it | release tarball, into `~/google-cloud-sdk` |
 
 `jq` installs before `node` and `bd` because both resolve their version from a
 release index read with it.
@@ -262,7 +264,7 @@ host.
 ### The Homebrew manifest
 
 `manifest/Brewfile` lists dependencies of this repository's configuration and
-nothing else: 18 formulae, 4 casks, and the VS Code extensions. Every entry is
+nothing else: 19 formulae, 5 casks, and the VS Code extensions. Every entry is
 required by a file in this repo, and each carries a comment naming the file
 that needs it.
 

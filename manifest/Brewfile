@@ -56,6 +56,11 @@ brew "cloudflared"
 # bashIde.shellcheckPath at this.
 brew "shellcheck"
 
+# `aws sso login` refreshes the profile that the aws-core plugin's MCP server
+# resolves through the default credential chain. Without a live session that
+# server fails its handshake with an invalid-params error.
+brew "awscli"
+
 # Casks and editor extensions exist only on macOS; a Brewfile is Ruby, so the
 # Linux install skips this block rather than failing on it.
 if OS.mac?
@@ -71,6 +76,10 @@ if OS.mac?
   # The terminal. Reads terminal/ghostty.config for rendering and terminal/cmux.json for
   # everything else, both linked by the macos module.
   cask "cmux"
+
+  # The gcloud MCP server registered by setup/scripts/install-mcps shells out
+  # to this binary for every call.
+  cask "gcloud-cli"
 
   vscode "davidanson.vscode-markdownlint"
   vscode "james-yu.latex-workshop"

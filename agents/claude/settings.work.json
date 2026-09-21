@@ -54,6 +54,7 @@
     "refreshInterval": 10
   },
   "enabledPlugins": {
+    "aws-core@claude-plugins-official": true,
     "beads@beads-marketplace": true,
     "impeccable@impeccable": true,
     "playwright@claude-plugins-official": true,

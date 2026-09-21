@@ -172,6 +172,7 @@ have, ignoring `--yes`. The endpoint is the same with or without a key; when
 AWS reaches both profiles through the `aws-core` plugin rather than `install-mcps`.
 The plugin is the Agent Toolkit for AWS, which AWS made the successor to its awslabs MCP servers, and it ships both its skills and an `mcp.json` registering the managed AWS MCP server at `https://aws-mcp.us-east-1.api.aws/mcp` through `uvx mcp-proxy-for-aws-cli`.
 Registering that server here as well would run it twice.
+The proxy resolves credentials through the default chain even though the config passes `--skip-auth`, so a `~/.aws/config` whose `[default]` cannot authenticate fails the MCP handshake with `-32602 Invalid request parameters` rather than a credential error.
 
 **Tool budget is a scarce shared resource.** Claude Code defers every MCP tool behind `ToolSearch` once tool definitions exceed 10% of the context window, which hides low-tool-count servers like exa behind higher-count ones. Adding an MCP server means checking afterwards whether deferral has kicked in.
 

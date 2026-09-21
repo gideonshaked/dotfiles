@@ -178,6 +178,40 @@ install_node() {
         "$HOME/.local/node/bin/npx" "$LOCAL_BIN/"
 }
 
+# The AWS CLI ships its own bundled runtime, so the installer only needs a
+# writable prefix. -i and -b keep both out of /usr/local, which needs root.
+install_awscli() {
+    have aws && return 0
+    have unzip || { echo "unzip missing, skipping awscli (non-fatal)"; return 0; }
+
+    local tmp
+    tmp="$(mktemp -d)" || return 0
+    curl -fsSL -o "$tmp/awscli.zip" \
+        "https://awscli.amazonaws.com/awscli-exe-linux-${ARCH_RUST}.zip" 2>/dev/null \
+        && unzip -q "$tmp/awscli.zip" -d "$tmp" \
+        && "$tmp/aws/install" -i "$HOME/.local/aws-cli" -b "$LOCAL_BIN" >/dev/null 2>&1 \
+        || echo "awscli install failed (non-fatal)"
+    rm -rf "$tmp"
+}
+
+# The gcloud MCP server registered by install-mcps shells out to this. Google
+# names the ARM build "arm" rather than by the uname value, which is why the
+# architecture is spelled out here instead of reusing one of the others.
+install_gcloud() {
+    have gcloud && return 0
+
+    local arch
+    case "$ARCH_GO" in
+        amd64) arch=x86_64 ;;
+        arm64) arch=arm ;;
+    esac
+
+    curl -fsSL "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-${arch}.tar.gz" \
+        | tar -xz -C "$HOME" 2>/dev/null \
+        || { echo "gcloud install failed (non-fatal)"; return 0; }
+    ln -sf "$HOME/google-cloud-sdk/bin/gcloud" "$HOME/google-cloud-sdk/bin/gsutil" "$LOCAL_BIN/"
+}
+
 install_linux() {
     have curl || { echo "curl not found, cannot install anything (non-fatal)"; return 0; }
     mkdir -p "$LOCAL_BIN"
@@ -199,6 +233,8 @@ install_linux() {
     install_node
     install_dolt
     install_beads
+    install_awscli
+    install_gcloud
 }
 
 ## Both ──────────────────────────────────────────────────────────────────────

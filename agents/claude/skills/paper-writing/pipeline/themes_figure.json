@@ -1,0 +1,1046 @@
+[
+ {
+  "theme": "Tick, category and point labels must sit level and unrotated with clear air around them, never overlapping, touching or clipped; widen or heighten the panel to fit them rather than staggering or deleting them, and check the render before sending.",
+  "count": 14,
+  "max_severity": 3,
+  "ns": [
+   50,
+   95,
+   129,
+   144,
+   145,
+   164,
+   179,
+   180,
+   181,
+   500,
+   502,
+   523,
+   555,
+   777
+  ],
+  "quotes": [
+   "[50] Why are you making these plots in these weird dimensions? This plot should be wider, without the weird rotated numbers. Also, I like my CI bars to have the horizontal lines on the ends",
+   "[179] the labels on the x axis of h are not consistently level. I think it might help to just make everything wider?",
+   "[523] the 5 in 165 in C is cut off on the right",
+   "[555] I want to make it as tall as we can, because the current y axis text (the packages) is crushed together"
+  ],
+  "before_after": {
+   "n": 50,
+   "before": "Panel a drawn at narrow dimensions with the printed values rotated and the CI whiskers uncapped.",
+   "after": "A wider panel with values printed horizontally and CI bars with horizontal caps on the ends."
+  }
+ },
+ {
+  "theme": "Every panel and table must earn its place: drop or move to the appendix anything that repeats an earlier figure, shows instrument internals, previews another section's finding, or carries no finding of its own.",
+  "count": 14,
+  "max_severity": 2,
+  "ns": [
+   42,
+   72,
+   75,
+   76,
+   78,
+   80,
+   116,
+   126,
+   186,
+   201,
+   210,
+   318,
+   344,
+   1071
+  ],
+  "quotes": [
+   "[42] Why do we need table 2 if we already have A?",
+   "[201] I am not sure what (a) is showing us that is different from the barplot in the figure for 4.1",
+   "[75] I dont like these panels -- showing the binary pass bc binary is not a good representation of things. Also remember, we do not want to steal other sections' thunder...",
+   "[318] Why do we need PCA for the appendix? I would rather just pick one."
+  ],
+  "before_after": {
+   "n": 42,
+   "before": "Table 2 repeating the values already shown in leaderboard panel A.",
+   "after": "No table in the main text; exact values in the appendix."
+  }
+ },
+ {
+  "theme": "Axis and chart labels name the exact quantity in a short plain phrase ('Mean node score', 'Nodes per question'); no parentheticals, hedges, sub-chart titles or scale notes, with definitions in the caption or a reference table.",
+  "count": 12,
+  "max_severity": 2,
+  "ns": [
+   54,
+   56,
+   87,
+   99,
+   122,
+   124,
+   125,
+   147,
+   148,
+   258,
+   345,
+   385
+  ],
+  "quotes": [
+   "[56] the y-axis should just say mean score actually, we will explain it further in the caption",
+   "[87] so remove estimated",
+   "[125] Instead of saying Nodes it should say Nodes per question",
+   "[147] Is it task category or node category? Should come up with a better name than category, should have the word node in it"
+  ],
+  "before_after": {
+   "n": 87,
+   "before": "Cost axis labelled 'Estimated cost per question (USD)'.",
+   "after": "'Cost per question (USD)', with the estimate caveat in the caption."
+  }
+ },
+ {
+  "theme": "Show a change over turns as the classic line plot: turns on x, score (or delta from turn 1) on y, over the full range of turns, one line per model, starting from the reference point without a marker.",
+  "count": 11,
+  "max_severity": 3,
+  "ns": [
+   225,
+   226,
+   231,
+   232,
+   236,
+   243,
+   244,
+   245,
+   246,
+   247,
+   272
+  ],
+  "quotes": [
+   "[231] Look, the ideal plot that I am looking for is where the x-axis is turns of some kind, and the y axis is a score, or score delta. Even if we can show some kind of effect where it drops off after some amount, I would like this",
+   "[236] is there a way to make this graphic turn by turn? I really want the classic x axis is turns, y axis is score, shows score going down over time, plot",
+   "[245] can you break this out by model?",
+   "[272] you should get rid of the dot at 1 for all models since it is always 0. The lines should just start there"
+  ],
+  "before_after": {
+   "n": 236,
+   "before": "c_propagation panel with upstream score on the x axis rather than turns.",
+   "after": "The classic plot: turns on x, score on y, showing score changing over turns."
+  }
+ },
+ {
+  "theme": "Change only what was asked: do not replace, move, restyle, archive or drop an element the human placed or approved, restore the previous form when a change is rejected, and never reintroduce a rejected element.",
+  "count": 11,
+  "max_severity": 3,
+  "ns": [
+   71,
+   171,
+   174,
+   211,
+   275,
+   393,
+   509,
+   517,
+   518,
+   529,
+   554
+  ],
+  "quotes": [
+   "[529] Get rid of the single pass and gated labels you added at the top, I told you not to do rthat",
+   "[275] No, the barplot should remin as panel d, i was just referring to width",
+   "[211] oh wait I wanted to keep that one plot that showed the lift of multiple turns",
+   "[171] earlier you grouped plots by color to keep the viewer visually engaged, do it again"
+  ],
+  "before_after": {
+   "n": 529,
+   "before": "'Single-pass' and 'Gated' column titles added over Figure 3 panels B to E after the human had declined them.",
+   "after": "Titles removed; mode carried by the hatch alone."
+  }
+ },
+ {
+  "theme": "Figure type must be legible at the width the figure actually gets on the page, just under body-text size: check page layout and margins before touching figure code, size to the house size, and say where every size comes from.",
+  "count": 10,
+  "max_severity": 3,
+  "ns": [
+   360,
+   492,
+   494,
+   497,
+   503,
+   507,
+   511,
+   515,
+   542,
+   577
+  ],
+  "quotes": [
+   "[507] No I want to keep figures in line with the text. Currently a lot of the text is really just too small, its too hard to read. I want to up the text size. It should be around the size of the text in the paper, or actually a little smaller",
+   "[511] where did you get these sizes? They are probably too small. Where did you get 9pt from earlier? I am lost on this",
+   "[494] this might be a latex problem for the figures, it might be that the margins are too big or something, before looking to the code for the figures",
+   "[542] the x axis looks a little small"
+  ],
+  "before_after": {
+   "n": 507,
+   "before": "Recommendation to let figures overhang the text block (text 7 in, figures 7.5 in) to gain legibility.",
+   "after": "Figures kept inside the text width, with figure type raised to just under body-text size."
+  }
+ },
+ {
+  "theme": "Choose histogram bins for readability: consistent widths, enough bins to show the shape, no empty bins or spurious dips, sparse tail collapsed into one open-ended bar labelled 'N+' for counts or '>X' for continuous quantities.",
+  "count": 10,
+  "max_severity": 3,
+  "ns": [
+   119,
+   127,
+   128,
+   133,
+   134,
+   135,
+   136,
+   142,
+   143,
+   146
+  ],
+  "quotes": [
+   "[136] ok again, dataset size needs to have bins with ranges that are the same length",
+   "[128] I just dont love having the random gap at 100 MB. Also I changed my mind I think the bins should be larger and the x labels should say the ranges",
+   "[146] Actually it should say >3GB, only use + for counts",
+   "[142] you do not need bins of equal range, just try to make it look reasonable and interpretable pls"
+  ],
+  "before_after": {
+   "n": 146,
+   "before": "Last bin of the dataset-size histogram labelled '3+ GB'.",
+   "after": "'>3 GB'; '+' reserved for counts."
+  }
+ },
+ {
+  "theme": "Size and place panels by content and importance: the key panel widest as a centrepiece, many-label panels tall enough, no panel wider than its labels need, axes ending just past the data, and never shrink a neighbour below legibility.",
+  "count": 10,
+  "max_severity": 3,
+  "ns": [
+   165,
+   167,
+   168,
+   176,
+   177,
+   182,
+   274,
+   276,
+   311,
+   539
+  ],
+  "quotes": [
+   "[274] I feel like i really want one subpanel to stand out, to act as a centerpiece here. I think that should be score vs turn. It should be proportionally wide compared to dependency chain length",
+   "[177] ok but now d is too small too",
+   "[182] And h is too wide now, bring it down a little",
+   "[167] No it should just be two columns, it just needs to be wide enough"
+  ],
+  "before_after": {
+   "n": 274,
+   "before": "Figure 4 assembled as an even 2x2 grid with no dominant panel.",
+   "after": "Score-vs-turn panel proportionally wider than dependency chain length, as the centrepiece."
+  }
+ },
+ {
+  "theme": "Align elements precisely: centre text and inline marks on their line, band or marker, push bubbles flush to their lane edges symmetrically, keep every glyph inside its box, and derive spacing from measured sizes rather than hard-coded offsets.",
+  "count": 10,
+  "max_severity": 3,
+  "ns": [
+   351,
+   595,
+   596,
+   599,
+   600,
+   601,
+   603,
+   706,
+   707,
+   813
+  ],
+  "quotes": [
+   "[595] the white boxes need to be as close to the right side as the colored boxes are to the left",
+   "[601] the braces stil go too high, they need to be vertically aligned with the text, they should poke the same above as below the text",
+   "[706] fix the flowchart in figure 1a. The files in the green box are poking outside of the green box",
+   "[813] the overall grade text should be in the middle verrtically of the yellow box in fig 1"
+  ],
+  "before_after": {
+   "n": 595,
+   "before": "Agent bubbles not flush with the right edge of their lane while prompt bubbles sit flush left.",
+   "after": "Agent bubbles as close to the right edge as the prompt bubbles are to the left."
+  }
+ },
+ {
+  "theme": "Keep the overview schematic sparse and conventional: one unified top-down drawing, one description per node, no numbering or heading text, data files as pictograms, DAG and unrolled session side by side in framed boxes with straight arrows.",
+  "count": 8,
+  "max_severity": 2,
+  "ns": [
+   569,
+   570,
+   572,
+   575,
+   580,
+   581,
+   590,
+   591
+  ],
+  "quotes": [
+   "[569] there is way too much going on in this diagram. Get rid of the numbers, and combine the two descriptions of what the node is. You should highlight the grader, but it should be in some clear way, it should say Grader type: or something like that, and it should be in its own box highlighted in yellow. Get rid of chain. Get rid of the statement at the top. Try to be intentional about where the user's eye is. The files should be represented clearly in the diagram, in a more graphical way",
+   "[570] get rid of the statement at the top. Also I want you to pick representative logos for the different kinds of files, but overlaid with a file icon or something",
+   "[580] the diagram is really weird right now, can you make it look more normal? Also top data card is out of whack. You can drop the line with human car-t cells",
+   "[572] this is not going to be a multi panel figure, this is going to be just one tikz figure. Or actually what do you recommend?"
+  ],
+  "before_after": {
+   "n": 569,
+   "before": "Panel A with numbered badges, task category plus title on each card, a chain axis, a heading sentence, and files as a text line.",
+   "after": "No numbers, one description per node, grader highlighted in a clearly labelled yellow box, data files drawn graphically."
+  }
+ },
+ {
+  "theme": "Give each variable its own palette and use it consistently across every panel and figure; never reuse a model colour, another panel's palette, a hatch or a fill colour for a different meaning.",
+  "count": 7,
+  "max_severity": 2,
+  "ns": [
+   172,
+   175,
+   273,
+   359,
+   368,
+   379,
+   598
+  ],
+  "quotes": [
+   "[359] we cannot have the same colors as the other panel in this figure, and we cannot use the model colors because that will be confusing to people",
+   "[273] I want the the tries bump to be color coded and separated by harness just like the barplot in the leaderboard. Keep the plot sideways though. The first try and after should be something on top of color, but not the hatching thing -- that is reserved for what we used it for before",
+   "[175] not two types of grey though, I liked the pink. Also this green is too similar to the green in the plot on the top left",
+   "[598] you need to do something graphically to distinguish the overall grade from the rest of the conversation. And the color green as a box backgroudn need to be reserved for the system prompt and the data. The last box should not be green. The grader box should be yellow, I changed my mind"
+  ],
+  "before_after": {
+   "n": 273,
+   "before": "tries_bump panel drawn with dark/light bars, not coloured by model or split by harness.",
+   "after": "Colour by model and blocks by harness as in the leaderboard, with first-try/after encoded by something other than the hatch used elsewhere."
+  }
+ },
+ {
+  "theme": "Use an off-the-shelf, high-contrast standard palette whose colours are clearly distinguishable from each other and from values printed on them; when colours are too similar, switch palettes rather than reshuffle, and pick one rather than offering a menu.",
+  "count": 7,
+  "max_severity": 3,
+  "ns": [
+   173,
+   365,
+   366,
+   367,
+   369,
+   375,
+   376
+  ],
+  "quotes": [
+   "[369] I dont really want any that are being actively filtered by you, I really want a standard palette, so just pick one and go with it",
+   "[366] Cant we just pick a different palette with better contrasting colors?",
+   "[376] This palette is ugly and is not good contrast against the numbers on the bars",
+   "[173] no the colors there are now too similar to each other in that panel. The colors in that one should be a standard palette from a package to maximize contrast, and the other colors should be variants of the green that we were originally using"
+  ],
+  "before_after": {
+   "n": 369,
+   "before": "A menu of three palettes including a custom 'Kelly/Glasbey-style distinct 12' filtered by hand.",
+   "after": "One standard off-the-shelf palette, picked and applied without asking."
+  }
+ },
+ {
+  "theme": "Bars are the same width across every group, axis and sibling figure, as thick as the row allows, with tight even gaps between blocks rather than empty space; check the render, not the intended ratio.",
+  "count": 7,
+  "max_severity": 3,
+  "ns": [
+   53,
+   58,
+   530,
+   532,
+   533,
+   549,
+   1088
+  ],
+  "quotes": [
+   "[53] this is all off, the bar width should be the same across everything here, and you should widen the figure overall so the labels do not need to be twisted like that. The text must also be larger overall, and remember to keep things 300dpi",
+   "[58] The bars are not all the same width between the different harnesses",
+   "[533] the bars can be thicker for D, and that row can be taller",
+   "[549] For S1A, they should be as close to each other as the leaderboard in fig 2"
+  ],
+  "before_after": {
+   "n": 533,
+   "before": "Figure 4 panel D bars at 0.13 in on a 0.27 in pitch after being asked for bars as thick as possible.",
+   "after": "Bars filling the pitch and a taller row."
+  }
+ },
+ {
+  "theme": "Leave clear air between adjacent panels and between rows so nothing touches or overlaps, without wasting bands of page; matching gaps must be equal.",
+  "count": 7,
+  "max_severity": 3,
+  "ns": [
+   501,
+   505,
+   519,
+   521,
+   522,
+   708,
+   787
+  ],
+  "quotes": [
+   "[505] I think the figures are literally overlapping. This is probably because for (c) you unwraped the text. It is very important that there is adequate spacing between subpanels horizontally as well as vertically",
+   "[519] Try to make a little more sace between the plots on the second row and a little more space betwen rows vertically",
+   "[521] there needs to be more space between C and B. I think you can wrap the text in A?",
+   "[787] add a little space between the last agent bubble and the overall grade. The space should be the same as the space between the green bubble and the top of B and C"
+  ],
+  "before_after": {
+   "n": 505,
+   "before": "Figure 2 rebuild with panels overlapping on the top row after panel C labels were unwrapped.",
+   "after": "Adequate horizontal and vertical spacing between subpanels, labels re-wrapped."
+  }
+ },
+ {
+  "theme": "Set figure height from its content and the page: grow the figure when panels or bars are crushed, keep it inside the text block, and when it must shrink take height from slack bands, legend position and bar thickness rather than from dense panels.",
+  "count": 7,
+  "max_severity": 2,
+  "ns": [
+   535,
+   537,
+   594,
+   597,
+   782,
+   784,
+   1087
+  ],
+  "quotes": [
+   "[597] It needs to be a little bit longer. Right now everything is too crushed and I think you have wiggle room",
+   "[782] The issue is that the panels B and C are already pretty packed in. There is a little whitespace in the bottom of B and C before the yellow, you can make the yellow sections at the bottom a little shorter",
+   "[594] the whole figure is too long now, it spills over the page",
+   "[1087] Try to make 5 and 6 even shorter. You can move the legend up in figure 5 and a little in figure 6, and make the bars thinner in both of them"
+  ],
+  "before_after": {
+   "n": 782,
+   "before": "Proposal to shave 2 in from Figure 1 via the vertical gaps between transcript bubbles, the panel A card heights, and the overall grade band.",
+   "after": "Height taken from the yellow footer bands and the slack under B and C, leaving the already-packed panels alone."
+  }
+ },
+ {
+  "theme": "Markers must be readable: distinct silhouettes (no stars), large enough that shape and error bars show, error bars in the marker's colour, slightly transparent with faded lines when series overlap, and identical transparency across sibling panels.",
+  "count": 6,
+  "max_severity": 2,
+  "ns": [
+   100,
+   110,
+   248,
+   249,
+   278,
+   280
+  ],
+  "quotes": [
+   "[110] I think the shapes in the plots are a little too big and the bars coming out of them are too small to be seen. The bars should be colored the same as the shapes. Also, the legend should be separated into three sections",
+   "[100] and the star is not good enough. Do something else. What are my options other than the dot?",
+   "[249] maybe there is a way to increase transparency or something? It is just so crowded",
+   "[280] no the points should be slightly transparent"
+  ],
+  "before_after": {
+   "n": 110,
+   "before": "Oversized markers, thin error bars in a different colour, and a single undivided legend.",
+   "after": "Smaller markers, error bars visible and coloured like their marker, legend split into three titled sections."
+  }
+ },
+ {
+  "theme": "Label single-pass and gated mode once, prominently and unambiguously on every panel, by hatch within each model's colour or one row label per mode, not by repeated lowercase tags or a single distant header.",
+  "count": 6,
+  "max_severity": 3,
+  "ns": [
+   104,
+   105,
+   106,
+   107,
+   108,
+   109
+  ],
+  "quotes": [
+   "[104] I want something better than the current single pass and gated labels, with the lowercase and on the left look",
+   "[106] No this is too unclear. we need a better alternative",
+   "[107] None of these are good. Maybe this plot should be two rows? That way we could have one single pass and one gated label for the rows?",
+   "[109] im not sure that the single pass and gated clearly indicate that they are as such all the way down"
+  ],
+  "before_after": {
+   "n": 104,
+   "before": "Lowercase 'single-pass' / 'gated' tags sitting at the left edge of the panels.",
+   "after": "Prominent, properly capitalised mode labels."
+  }
+ },
+ {
+  "theme": "Iterate on panels with the lightest possible process: one script per panel beside its output, no scaffolding or reusable helpers, PNG only until assembly, one panel at a time, and only the exports asked for at 300 dpi.",
+  "count": 6,
+  "max_severity": 2,
+  "ns": [
+   44,
+   45,
+   52,
+   85,
+   346,
+   347
+  ],
+  "quotes": [
+   "[44] It should be six separate scripts, we are going to modify each of these panels a lot. Also the script should be in the subpanels directory. Get rid of all of the subpanels scaffolding for the panels we havent started yet",
+   "[52] Btw you should not try to do great software engineering here. There is no  need right now as we are experimenting to overly methodize, to break things out so they can be resued, -- speed and iteration is key when doing plot aesthetics/organization",
+   "[45] there is no need to export a pdf of each one",
+   "[346] Ok first of all I just want to draft panel b for now. So get rid of this full on figure draft. I want to keep the short definitions on the figure itself ideally"
+  ],
+  "before_after": {
+   "n": 44,
+   "before": "A single six-panel script plus a shared style module outside the subpanels directory, and scaffolded folders for panels not yet started.",
+   "after": "Six separate scripts inside the subpanels directory and no scaffolding for unstarted panels."
+  }
+ },
+ {
+  "theme": "Use precise domain terminology in figure text: name the measured quantity ('snATAC-seq: chromatin accessibility', not 'gene activity'), spell out acronyms at first use, and label files and chips by what they are.",
+  "count": 6,
+  "max_severity": 2,
+  "ns": [
+   584,
+   585,
+   587,
+   593,
+   602,
+   604
+  ],
+  "quotes": [
+   "[584] do not describe snATAC-seq as \"gene activity\" lol be more specific, ATAC-seq is chromatin accessibility",
+   "[593] it should be like snATAC-seq: chromatin accessibility",
+   "[604] change DAG in the A description to directed acyclic graph (DAG), spell it out",
+   "[602] Or actually change to Node prompt. And change System to System prompt"
+  ],
+  "before_after": {
+   "n": 584,
+   "before": "File label 'snATAC gene activity'.",
+   "after": "'snATAC-seq: chromatin accessibility'."
+  }
+ },
+ {
+  "theme": "Every panel makes one claim a reader grasps at a glance: state the claim before drawing, use few subplots with plain axes, and never ship a panel that reads as texture or needs a new construct explained.",
+  "count": 5,
+  "max_severity": 3,
+  "ns": [
+   67,
+   79,
+   202,
+   207,
+   265
+  ],
+  "quotes": [
+   "[67] wtf is b? The figure is basically just a patchwork, and I am not sure what it is even trying to show",
+   "[79] I think that what b and c are trying to show is good, but they show it in a bad way. Let's back up. What exactly are we trying to show here? What is the point?",
+   "[207] I feel like these plots are way too obtuse for people to get them. Ideally we should have fewer subplots with clearer axes/circumstances. You cannot put plots this involved in a paper like this",
+   "[202] none of this is interesting. These charts are all nitpicky nonsense, too many layers too deep. We need more general plots that show what we are trying to get at"
+  ],
+  "before_after": {
+   "n": 67,
+   "before": "Panel b as a 14 x 97 continuous score heatmap.",
+   "after": "A panel whose claim is visible; the heatmap read as a patchwork with no discernible point."
+  }
+ },
+ {
+  "theme": "Use conventional, defensible chart forms and methods a reader decodes unaided (sorted bars with CIs, t-SNE/PCA/UMAP); no dumbbell plots, compact letter groups, box plots or frontier lines.",
+  "count": 5,
+  "max_severity": 2,
+  "ns": [
+   46,
+   47,
+   83,
+   84,
+   317
+  ],
+  "quotes": [
+   "[46] This leaderboard dumbbell plot is crazy and unconventional. Can you suggest something more conventional?",
+   "[83] i dont know why you are trying to draw a line on the plot. Drop the boxplots as well, forget them i dont like them they are too inexact",
+   "[47] This leaderboard dumbbell plot is crazy and unconventional. Can you suggest something more conventional? Also this groups thing is completely unclear as to what it is. We should ideally drop something this obtuse",
+   "[317] I think T-SNE and PCA are the most defensible. Let's try those alongside UMAP"
+  ],
+  "before_after": {
+   "n": 46,
+   "before": "Panel a leaderboard as a dumbbell plot (open and filled points joined by a lift line).",
+   "after": "A conventional form such as sorted bars with CIs."
+  }
+ },
+ {
+  "theme": "Read the request carefully and answer it directly: confirm which plot or element is meant before acting, say yes or no rather than substituting a different plot, and interpret 'shorter' or 'example figures' as the owner meant them.",
+  "count": 5,
+  "max_severity": 3,
+  "ns": [
+   212,
+   217,
+   239,
+   402,
+   1085
+  ],
+  "quotes": [
+   "[239] wait so can we make the plot I am looking for out of this or not?",
+   "[217] No I meant we do the normalized version, and then show that overall across all nodes 12% get a bump, this would be a different figure design",
+   "[402] Wait, no I meant make example figures so I can look at the aesthetics, not show me the figures from the existing papers",
+   "[1085] forget the caption, try to make fig 5 and 6 shorter so we can fit more on the page beside them"
+  ],
+  "before_after": {
+   "n": 239,
+   "before": "A pairs-separated-by-turns-scored line proposed instead of the requested score-by-turn plot.",
+   "after": "A direct answer to whether the requested plot can be made, and how."
+  }
+ },
+ {
+  "theme": "Place the key at the bottom of the figure, close under the x titles but not touching them, with clear space between swatch and label and between key and plot.",
+  "count": 5,
+  "max_severity": 2,
+  "ns": [
+   387,
+   528,
+   540,
+   546,
+   710
+  ],
+  "quotes": [
+   "[387] The words a prior failure mode should be centered, in line with the other legends. Make sure there is enough distance between the legend and the figure",
+   "[540] the synthetic or placeholder output text is touching the color box to the left. I\n  meant and the legend for fig 5 needs to be farther from the plot",
+   "[546] move the legend a little bit up otherwise looks good",
+   "[710] I think for fig 4 you can make the legend a little closer to the plots, just a little"
+  ],
+  "before_after": {
+   "n": 546,
+   "before": "S1 bottom key placed low in the bottom band.",
+   "after": "Key moved up, close under the x title."
+  }
+ },
+ {
+  "theme": "Never split a locked figure into two numbered figures; a figure too tall for one page is continued over two, filling each page, with one key and one caption at the bottom of the last page.",
+  "count": 5,
+  "max_severity": 2,
+  "ns": [
+   513,
+   556,
+   557,
+   558,
+   955
+  ],
+  "quotes": [
+   "[513] I really do not want to split figure 2.",
+   "[557] It should run the full length of those 2 pages, with a little space at the bottom for a caption, and you should icnrease the dot size to make it more legible. Make the dot size such that the there is only minimal whitespace between the closest dots",
+   "[558] There should also be only 1 legend",
+   "[955] there should only be one caption at the bottom"
+  ],
+  "before_after": {
+   "n": 955,
+   "before": "Two-page dot plot with \\ContinuedFloat on the second page, giving each page a caption.",
+   "after": "One caption at the bottom of the last page."
+  }
+ },
+ {
+  "theme": "Place figures deliberately in the build: pin with [H], keep each figure in the section that cites it, replace placeholders as soon as a panel exists, and treat leftover page whitespace as a layout problem to fix now.",
+  "count": 5,
+  "max_severity": 2,
+  "ns": [
+   567,
+   779,
+   780,
+   781,
+   783
+  ],
+  "quotes": [
+   "[779] yeah I just dont want the figures to be outside of section 2.1",
+   "[781] the issue now is that we have page 4 is like practically empty and 2.1 is already as long as it is going to be",
+   "[783] Just make these figures H again, but keep the imported package incase we wantt o switch back",
+   "[567] Why does it still say figure 1 placeholder?"
+  ],
+  "before_after": {
+   "n": 783,
+   "before": "Results figures switched from [H] to [p] floats with a plan to tune float fractions and allow top placement.",
+   "after": "Figures pinned with [H] again; the float package kept loaded but unused."
+  }
+ },
+ {
+  "theme": "Build the overview schematic on a real, conventional human-genomics question from the released sample, showing inputs at the level a reader needs (raw data plus metadata, labelled by organism, tissue, condition and assay) rather than the package's exact file list.",
+  "count": 4,
+  "max_severity": 2,
+  "ns": [
+   568,
+   578,
+   579,
+   586
+  ],
+  "quotes": [
+   "[568] First off, I want to work off of a real question. Ask the omicsbench-20-sample to find a question of this kind",
+   "[579] Maybe we should use a different task. I dont like the idea of chickens... Let's go with a more conventional human genomics task",
+   "[586] Maybe you can simplify the files a bit, rather than going with the exact files present? We do not need to go this far into the weeds I am more interested in showing the structure of the benchmark, with raw data/metadata provided in a realistic way, but we do not need excessive details",
+   "[578] the literal files are not clear what they are. Group them by conventional and organic and give a little more information than you do now. organic what?"
+  ],
+  "before_after": {
+   "n": 579,
+   "before": "Broiler muscle proteome question h0472 as the Figure 1 exemplar.",
+   "after": "A conventional human genomics question."
+  }
+ },
+ {
+  "theme": "Format legends as a full rectangle with no empty cells, swatches as tall as their text, titled sections kept well apart with tight columns inside, and counts printed after group names.",
+  "count": 4,
+  "max_severity": 2,
+  "ns": [
+   154,
+   299,
+   388,
+   527
+  ],
+  "quotes": [
+   "[154] you should add numbers to the metacategories in the legend, like transcriptomics (x)",
+   "[299] For the legend can you find a config of hxw that makes it rectangular",
+   "[388] The legend should be wider and the colorboxes should be as tall as the text. Also instead of colorboxes you should have the number in a circle with the color. The circle should be solid with the color and the number should be white",
+   "[527] there is not enough space between the differnt legends. You need to shrink the gaps between the columns for the model legend. Also if you are going to reduce spacing between the harness blocks on panel A, then you need to note that spacing and do the same spacing, proportionally, for every other similar plot going forward. You can add a gap if needed but I favor wider bars. Keep that hatch. Make the dots bigger on the paretos"
+  ],
+  "before_after": {
+   "n": 388,
+   "before": "Emergent-mode legend drawn narrow, with colour boxes shorter than the text.",
+   "after": "Wider legend, swatches as tall as the text, and solid coloured circles with white numbers instead of boxes."
+  }
+ },
+ {
+  "theme": "Model figures on peer papers and the existing manuscript: match their density and design (BixBench3 Fig 2), reuse the old manuscript's figure code and layout such as the harness axis break.",
+  "count": 4,
+  "max_severity": 3,
+  "ns": [
+   41,
+   49,
+   55,
+   150
+  ],
+  "quotes": [
+   "[41] This seems somewhat light",
+   "[150] Look at figure 2 of bixbench3. It is just so much better designed than our figure, make it look more like that",
+   "[55] it seems like there is unnecessary space between the different harnesses. I really liked the figure from before in the old paper, can you try to duplicate it better? There should be code for it. Like it had a nice break in the x axis between the harnesses",
+   "[49] I want the bar chart to be vertical. It should also be formatted like the one we currently have in the old manuscript, where we separate by harness"
+  ],
+  "before_after": {
+   "n": 55,
+   "before": "Panel a with wide empty gaps between harness groups instead of the old manuscript's broken-axis layout.",
+   "after": "The old manuscript's broken-axis layout, reusing its existing code."
+  }
+ },
+ {
+  "theme": "Keep tick numbers on every panel even when axes are shared, with the axis title once; on log axes drop unlabeled minor ticks and label a similar number of values on each axis.",
+  "count": 4,
+  "max_severity": 2,
+  "ns": [
+   97,
+   98,
+   103,
+   550
+  ],
+  "quotes": [
+   "[97] the x axes have that weird scaling thing that you do when you do the log scale. Are they log scale?",
+   "[98] Yeah drop the ticks, but I would like more numbers on the x-axis fo each x axis, ideally a simimlar number of ticks",
+   "[103] The mean score y axis needs numbers for both the gated and single pass, just the label can be kept on the far left",
+   "[550] For S1B you got rid of the x axis numbers"
+  ],
+  "before_after": {
+   "n": 103,
+   "before": "Gated scatter panels sharing a y axis with their tick numbers removed.",
+   "after": "Tick numbers on both single-pass and gated panels, axis title once at the far left."
+  }
+ },
+ {
+  "theme": "Wrap long category and axis labels onto two lines rather than letting them protrude, crowd neighbours or force a wider panel or a split figure.",
+  "count": 4,
+  "max_severity": 1,
+  "ns": [
+   153,
+   170,
+   508,
+   516
+  ],
+  "quotes": [
+   "[153] make the bars for d be multiple lines, the text is too long. You should also try to bring in the horizontal width of f",
+   "[170] plot e should have more of its labels made two lines to make them stick out less",
+   "[508] I think it could fit if you properly wrapped the text on panel c, and wrapped the text on panel a?",
+   "[516] Panel D needs text wrapped on ylabels to create more hoironztal width. Panels I and J need to get bigger, leaving only a reasonable gap between them"
+  ],
+  "before_after": {
+   "n": 508,
+   "before": "Proposal to split Figure 2 into two figures for lack of room.",
+   "after": "Labels on panels A and C wrapped so the figure fits as one."
+  }
+ },
+ {
+  "theme": "Adjust spacing in small increments and check the result before sending; do not overshoot in the other direction, and restore the previous layout when a change goes too far.",
+  "count": 4,
+  "max_severity": 3,
+  "ns": [
+   312,
+   389,
+   390,
+   709
+  ],
+  "quotes": [
+   "[389] now it is too far down by a little",
+   "[390] you moved it too far up again",
+   "[312] ok now there is not enough whitespace",
+   "[709] move the rows of fig2 a litle down now, they are too close. Put them back where they were"
+  ],
+  "before_after": {
+   "n": 709,
+   "before": "Figure 2 row gaps cut from 0.66 and 0.70 in to 0.54 and 0.64 in.",
+   "after": "Rows put back where they were."
+  }
+ },
+ {
+  "theme": "A panel must not visually undercut or contradict the claim it supports: if raw levels run the wrong way or the eye reads 'no difference', change what is plotted rather than relying on the caption.",
+  "count": 3,
+  "max_severity": 2,
+  "ns": [
+   216,
+   222,
+   223
+  ],
+  "quotes": [
+   "[216] im worried that now it shows how little gated mode helps - in only 12% of nodes does it make a difference between clearing and not clearing at all... Actually, I think that in another figure this could help a lot. Maybe we make this figure go back to normalized, and we make that former point in another figure?",
+   "[222] doesnt the dependency scatter seem to show the opposite of what we want to show? It looks like nodes that depend score higher?",
+   "[223] this seems to show that they are the same?"
+  ],
+  "before_after": {
+   "n": 222,
+   "before": "b_dependency scatter with every point above the identity line, so dependent nodes appear to score higher.",
+   "after": "A form that does not read as the opposite of the claim; raw levels not plotted."
+  }
+ },
+ {
+  "theme": "Make model identity easy to read on scatter panels: direct name labels if they can be made legible, otherwise consistent per-model colour on every panel including the leaderboard.",
+  "count": 3,
+  "max_severity": 3,
+  "ns": [
+   90,
+   91,
+   96
+  ],
+  "quotes": [
+   "[90] Put the model names on the plots, reading them with the colors is too hard. You just have to make sure to do it in a way that is readable by people. Perhaps we should make this figure wider by putting the different paretos into a 2x2 grid? And we can make text bigger?",
+   "[96] Ok the text is unreadable. Let's go back to the color coding. Lets color code the barplot at the top as well per model, and make 2 barplots at the top, one with single pass and one with gated, side by side. So all single pass on left and all gated on the right."
+  ],
+  "before_after": {
+   "n": 90,
+   "before": "Scatter points coloured per model with a legend and no text labels.",
+   "after": "Model names printed on the plots, figure wider, text bigger."
+  }
+ },
+ {
+  "theme": "Plot the direct quantity (score rising with tries), not a derived or tautological one such as the geometric decay of a per-node pass rate.",
+  "count": 3,
+  "max_severity": 3,
+  "ns": [
+   203,
+   204,
+   209
+  ],
+  "quotes": [
+   "[203] a is stupid and basically just multiplicative probablities, b has some merit, c sucks. Can we make multiple panels out of b? I think tbh that the dependency angle is the right one as opposed to just # of nodes in a question",
+   "[204] c sucks, and again d is just the manifestation of the geometric distribution lol. b is bizarre",
+   "[209] Can we just do some kind of plot showing that the score goes up when given multiple tries? There are some that needed 1 try, some 2, some 3... can we not just show that scores go up with that?"
+  ],
+  "before_after": {
+   "n": 204,
+   "before": "Panel d plotting gate survival by node index.",
+   "after": "Dropped: it is only the geometric decay of a per-node pass rate."
+  }
+ },
+ {
+  "theme": "The schematic must make multi-turn unmistakable: separate prompts and replies in one session, both gated and single-pass shown, wording idiomatic.",
+  "count": 3,
+  "max_severity": 2,
+  "ns": [
+   573,
+   588,
+   589
+  ],
+  "quotes": [
+   "[573] But we need to represent the turn in single pass and gated mode",
+   "[589] We need to burn it into people's minds how this benchmark is multi-turn. A lot of people say that their benchmark is like \"multi-step\" -- but they just mean that the agent has to do multiple things. We need to make it clear as day that we mean multi-turn",
+   "[588] I want the descriptions of each step to be more idiomatic. Also this diagram does not make it clear that these are literally separate prompts in a multi-turn agent session. Lastly the data shouold go in its own box, ideally a different color one, and the arrow should connext to it. And the arrow from the data to the first box is not straight"
+  ],
+  "before_after": {
+   "n": 573,
+   "before": "Plan to draw the gated flow with single-pass noted in one line.",
+   "after": "Both single-pass and gated turns represented explicitly."
+  }
+ },
+ {
+  "theme": "Print values on bars as upright black digits, inside every segment where they fit and on top of leaderboard bars, and size the panel so they fit.",
+  "count": 3,
+  "max_severity": 3,
+  "ns": [
+   297,
+   525,
+   553
+  ],
+  "quotes": [
+   "[297] We are dropping b btw. Try to make the bars bigger, and for all of the segments where it fits I would like the number inside",
+   "[525] I think that for the top row we should keep the numbers on top of the bar, and for the species one. For the rest of them I am debating getting rid of numbers and doing horizontal lines instead",
+   "[553] No their formatting is fucked up. They are rotated sideways, partially into the x axis, and they should be black"
+  ],
+  "before_after": {
+   "n": 553,
+   "before": "S3 printed zeros replaced by small open circles in category colour, rendered rotated and into the x axis.",
+   "after": "Upright black digits above the baseline."
+  }
+ },
+ {
+  "theme": "Set category granularity so the classes of interest are readable: one level of specificity, no 'other' bucket hiding the tail, no dominant trivial bulk in a stacked bar.",
+  "count": 3,
+  "max_severity": 2,
+  "ns": [
+   137,
+   155,
+   286
+  ],
+  "quotes": [
+   "[137] instead of saying assay modality, it should say data modality, and I want to see the long tail of data modalities, do not lump in under other",
+   "[155] the legend for the modalities is all overlapping, and there is no reason for c to be so wide. Also, why don't you see if you can re-consolidate some of the categories in the modalities plot, so that we dont have such a long tail. Try to get all of the categories to about the same amount of detail/specificity",
+   "[286] remove the answer scored below 0.7 it is too hard to read otherwise and ppl are not interested"
+  ],
+  "before_after": {
+   "n": 155,
+   "before": "24-bar modality chart with 11 proteomics sub-modalities (DIA, label-free DDA, AP-MS, TMT, ...).",
+   "after": "Categories re-consolidated to one level of specificity so there is no long tail of singletons."
+  }
+ },
+ {
+  "theme": "Write the harness in parentheses after the model name, e.g. 'Opus 5 (Claude Code)', rather than in a separate legend.",
+  "count": 2,
+  "max_severity": 1,
+  "ns": [
+   92,
+   213
+  ],
+  "quotes": [
+   "[92] You should drop the legend for the harnesses at the bottom. Instead you should have (claude code) and (codex) in the model names. For the opencode ones, note in the cpation markdown that we will not that all of the ones without parenthesis are opencode.",
+   "[213] change the noted harnesses to be in parens after the model"
+  ],
+  "before_after": {
+   "n": 92,
+   "before": "Harness marker legend at the bottom and short tags '(CC)', '(Codex)' in labels.",
+   "after": "'(Claude Code)' and '(Codex)' in the model names, no harness legend, the OpenCode default noted in the caption."
+  }
+ },
+ {
+  "theme": "Do not draw a legend the figure does not need: one figure-level key rather than per-panel legends, and none when a table already carries the colours.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   51,
+   349
+  ],
+  "quotes": [
+   "[51] Also remove the legend here, we will have a single pass/gated legend for the whole figure. And pick colors that are a bit more opposed than the current ones. It should be still wider, and the bars should be wider",
+   "[349] lets drop the legend on the figure. I want to see if there is a way to present the UMAP itself more aesthetically, and also make the numbers for the clusters easier to read"
+  ],
+  "before_after": {
+   "n": 51,
+   "before": "In-panel mode legend on panel a.",
+   "after": "No per-panel legend; one single-pass/gated legend for the whole figure."
+  }
+ },
+ {
+  "theme": "Build sibling panels with the same structure, each scaled to its own data with only the zero line aligned.",
+  "count": 2,
+  "max_severity": 1,
+  "ns": [
+   279,
+   374
+  ],
+  "quotes": [
+   "[279] the scaling on b should not be the same as on a, it should be down to whatever is appropriate, just the 0 should be at the same level",
+   "[374] make it with counts and shares, just like panel a"
+  ],
+  "before_after": {
+   "n": 279,
+   "before": "Panel b y axis forced onto the same range as panel a.",
+   "after": "Panel b scaled to its own data with only the zero line at the same level."
+  }
+ },
+ {
+  "theme": "Order bars deliberately: harness groups OpenCode, Claude Code, Codex; equal counts alphabetically.",
+  "count": 2,
+  "max_severity": 1,
+  "ns": [
+   102,
+   141
+  ],
+  "quotes": [
+   "[102] In the barplot lets put claude code to the left of codex",
+   "[141] when bars are the same number as each other, they should be sorted alphabetically"
+  ],
+  "before_after": {
+   "n": 102,
+   "before": "Harness columns ordered OpenCode, Codex, Claude Code.",
+   "after": "OpenCode, Claude Code, Codex."
+  }
+ },
+ {
+  "theme": "Frame a UMAP tightly on the data with points large enough for clusters to read, and address distracting outliers without compromising the projection.",
+  "count": 2,
+  "max_severity": 1,
+  "ns": [
+   350,
+   536
+  ],
+  "quotes": [
+   "[350] Can we do anything about this outlier group? I do not want to harm the scientific integrity of the UMAP, but it doesnt look great",
+   "[536] I want to try and zoom in on the UMAP as much as is possible, maybe make the points bigger to make the clusters more well-defined"
+  ],
+  "before_after": {
+   "n": 536,
+   "before": "Figure 6 UMAP panel with small points and loosely defined clusters, framed wide.",
+   "after": "Zoomed in on the data as far as possible with larger points."
+  }
+ },
+ {
+  "theme": "Style box plots like the paper's bars: flat fills without outlines, axes sized so no box crosses the y axis.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   548,
+   551
+  ],
+  "quotes": [
+   "[548] Stylistically I am also not a fan of the boxing around the boxes of the boxplot",
+   "[551] no that looks bad you have boxes going over the y axis now"
+  ],
+  "before_after": {
+   "n": 548,
+   "before": "S1A box plot boxes drawn with outlines.",
+   "after": "Flat fills without outlines, matching the paper's bars."
+  }
+ },
+ {
+  "theme": "Panel letters sit at the same height across a row and clear of neighbouring panels.",
+  "count": 2,
+  "max_severity": 3,
+  "ns": [
+   504,
+   538
+  ],
+  "quotes": [
+   "[504] The letters are fucked up on the top row, and you for some reason unwrapped the text for panel c. Also I think with the margin changes the text got smaller again, you need to size up so it is more readable",
+   "[538] the A and B need to be at the same height"
+  ],
+  "before_after": {
+   "n": 538,
+   "before": "Figure 6 panel A letter placed lower than B's because the map is centred in its column.",
+   "after": "A and B letters at the same height."
+  }
+ },
+ {
+  "theme": "Draw diagrams in tooling with relative positioning and self-sizing nodes so they look designed and survive endless tweaking.",
+  "count": 2,
+  "max_severity": 1,
+  "ns": [
+   400,
+   403
+  ],
+  "quotes": [
+   "[400] yeah but we do want nice pretty diagrams...",
+   "[403] And why not draw with tikz? My concern is that I will want to tweak this endlessly"
+  ],
+  "before_after": {
+   "n": 403,
+   "before": "Three hand-authored SVG mockups for Figure 1 chosen over TikZ.",
+   "after": "TikZ, so the figure survives endless tweaking."
+  }
+ }
+]

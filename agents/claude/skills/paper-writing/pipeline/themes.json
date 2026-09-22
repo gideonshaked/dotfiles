@@ -1,0 +1,1228 @@
+[
+ {
+  "theme": "Describe mechanics exactly as they work, from the code or the author's account: when the agent sees a score, that the best attempt is always taken, how one attempt carries several failure modes, that each judge is a separate instance, and who the actor is.",
+  "count": 16,
+  "max_severity": 2,
+  "ns": [
+   60,
+   474,
+   656,
+   663,
+   669,
+   673,
+   674,
+   696,
+   730,
+   978,
+   1147,
+   1178,
+   1197,
+   1198,
+   1224,
+   1225
+  ],
+  "quotes": [
+   "[674] The way you describe it is not strictly correct. We always take the best attempt, regardless of whether any attempts pass, i believe",
+   "[673] note that for gated mode it only gets its score if it is below the gate, otherwise it is like single pass",
+   "[1198] say a judge since there are many other judges. You will also need to update the statement on the third judge call. Like these are separate instantiations of the same model w diff prompts, they are all diff judges.",
+   "[60] We do not have 1 score per question, I thoguht we have 3?"
+  ],
+  "before_after": {
+   "n": 656,
+   "before": "a grader holding an expected answer",
+   "after": "deterministically graded against a ground truth"
+  }
+ },
+ {
+  "theme": "Title each results section with its argument as one short declarative sentence: no colon, one clause, primary claim first, a general point rather than one specific finding.",
+  "count": 16,
+  "max_severity": 2,
+  "ns": [
+   34,
+   35,
+   37,
+   407,
+   408,
+   409,
+   410,
+   412,
+   413,
+   415,
+   416,
+   427,
+   429,
+   431,
+   435,
+   894
+  ],
+  "quotes": [
+   "[409] the names for 2.2 and 2.3 are not descriptive enough. remember, the names should be stating a point, an argument.",
+   "[412] these titles are mostly too long, the should not have colons and stuff, and they should be simple sentences with at most a compound subject or object but not too long",
+   "[416] I dont like the comma and two whole clauses, this is too long for a section title",
+   "[427] The 2.4 title seems overly specific"
+  ],
+  "before_after": {
+   "n": 415,
+   "before": "The benchmark remains unsaturated even as gating lifts every frontier agent",
+   "after": "Frontier models do not saturate, and ... (two compatible clauses, no 'even')"
+  }
+ },
+ {
+  "theme": "Use the manuscript's fixed term for each concept ('dependency chain length', 'failure mode' unhyphenated, 'assign', 'descriptions', 'modalities', 'biological dataset', 'long-horizon') and never a banned word ('depth', 'tag', bare 'modes', 'corpus', 'buy', 'taxonomy', 'LLM judges', 'public', 'analysis' for the work).",
+  "count": 15,
+  "max_severity": 3,
+  "ns": [
+   123,
+   480,
+   493,
+   650,
+   701,
+   713,
+   715,
+   793,
+   801,
+   977,
+   989,
+   1192,
+   1213,
+   1218,
+   1226
+  ],
+  "quotes": [
+   "[123] we should always use dependency chain length instead of \"depth\" or \"question depth\"",
+   "[801] also we are not using the word corpus in this MS< put that in the rules too",
+   "[977] I do not like the word tagging here. We will use assigning",
+   "[989] say assigned failure modes, not bare modes since that could be confused with single pass/gated"
+  ],
+  "before_after": {
+   "n": 123,
+   "before": "depth / question depth",
+   "after": "dependency chain length"
+  }
+ },
+ {
+  "theme": "Keep the Introduction to three or four short paragraphs that open broadly on agents' advancing capabilities, introduce the benchmark near the top, state the gap broadly, and lead each finding with what it reveals about agents, leaving figure citations, run counts, grader details and specific failure modes to later sections.",
+  "count": 14,
+  "max_severity": 2,
+  "ns": [
+   609,
+   610,
+   615,
+   618,
+   622,
+   629,
+   712,
+   721,
+   722,
+   732,
+   733,
+   745,
+   746,
+   747
+  ],
+  "quotes": [
+   "[609] We really only need/want 3 or 4 paragraphs, and they should be relatively short. Get rid of the current MEAL plan, and lets go back to the looser plan from the rest of the rest of the writing plan. Also for the different existing benchmarks, we do not need to list what each one does specifically, we can lump them all in in groups",
+   "[615] you need to soften it with the capabilites of AI agents are advacning rapidly BUT xyz. Do not say on a leaderboard, say in an evaluation environment. Do not mention specific agents. Give me another draft",
+   "[618] maybe we should split into 2 subsections, having a few paragraphs (like 1 or 2) directly under intro, and then a related work subsection? I want to introduce our benchmark close to the top",
+   "[733] I dont care about the scores dropping after the first turn here. Also the annotating failures thing should be turned around. We should emphasize that we \"captured a priori and emergent failure modes\" that find real deficiencies in agents' biological / scientific capabilities -- we do not want to emphaszie the methods aspect of the analysis ther"
+  ],
+  "before_after": {
+   "n": 615,
+   "before": "on a leaderboard",
+   "after": "in an evaluation environment"
+  }
+ },
+ {
+  "theme": "Change only the span the author asked to change; keep their wording, paragraph breaks, numbers, topic sentences and layout, and never reintroduce wording they removed.",
+  "count": 13,
+  "max_severity": 3,
+  "ns": [
+   665,
+   773,
+   798,
+   808,
+   837,
+   929,
+   932,
+   1017,
+   1141,
+   1223,
+   1227,
+   1228,
+   1230
+  ],
+  "quotes": [
+   "[1228] Look at my writing and try to only change what I am asking to be changed, do not change other things",
+   "[1227] oh my fucking god i told you not to say task agnostic or language model",
+   "[837] You took out a lot of my other phrasing",
+   "[1017] you changed my topic sentence. It is super vague. It should say clustering or something, go back to what I had"
+  ],
+  "before_after": {
+   "n": 1227,
+   "before": "'task agnostic' and 'language model' reinserted after the author had cut them",
+   "after": "the author's sentence without them"
+  }
+ },
+ {
+  "theme": "Give each paragraph one distinct job and keep related sentences together: split a paragraph that carries several ideas, fold a minor point into an existing paragraph rather than giving it its own, and place each sentence directly after what it qualifies.",
+  "count": 12,
+  "max_severity": 2,
+  "ns": [
+   635,
+   654,
+   671,
+   727,
+   729,
+   823,
+   826,
+   828,
+   998,
+   1095,
+   1184,
+   1185
+  ],
+  "quotes": [
+   "[635] Wait so then what is the difference between the paragraphs? We need to structure this properly",
+   "[727] Look at my current paragraph 2. It feels disjointed. The bit about the tasks needs to go with the bit about the DAG.",
+   "[823] We do not want to say to within a few hundredths, we actually do not want to emphasize this behavior, so this will be just a quick sentence rather thn a paragraph, tucked away somewhere.",
+   "[1095] For the line you added on 228, I think it should be somewhere in that section that makes more sense, it it quite jarring where it is right now"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Open every paragraph with a topic sentence that states its point directly and bridges from what precedes it, leading with the positive finding and adding nuance after; never open on a procedural detail or a methodological exclusion.",
+  "count": 12,
+  "max_severity": 3,
+  "ns": [
+   660,
+   789,
+   859,
+   895,
+   896,
+   905,
+   909,
+   972,
+   1194,
+   1196,
+   1209,
+   1210
+  ],
+  "quotes": [
+   "[859] P2 is still obtuse. The topic sentence is too far removed from the point we are trying to make",
+   "[905] The short punchy topic sentence is not what I want, I want a gentle lead-in. ALso the message should be that gated improves scores, with some nuance. And make the paragraph shorter",
+   "[1209] No before you had an actual topic sentence, go back to something like that",
+   "[1194] the starting the second sentence here with the second judge call is jarring bc now ppl have to remember that there was a first one"
+  ],
+  "before_after": {
+   "n": 660,
+   "before": "run a question",
+   "after": "To evaluate an agent on a question"
+  }
+ },
+ {
+  "theme": "Use plain, fully spelled-out names in titles: no undefined jargon such as 'gating', no compressed modifiers such as 'later-turn', no opaque coinages, and the method named in full.",
+  "count": 12,
+  "max_severity": 3,
+  "ns": [
+   36,
+   417,
+   418,
+   419,
+   420,
+   421,
+   432,
+   433,
+   434,
+   439,
+   440,
+   1096
+  ],
+  "quotes": [
+   "[417] No this is too obtuse. People dont know what is gating from looking at it off the top. Call it gated retries, and make the structure less complicated",
+   "[419] the term later-turn is unclear. Maybe say in later turns? Also losses is unclear",
+   "[439] unsupervised discovery is vauge. It should say unsupervised failure mode discovery, or something like that",
+   "[1096] make it something more transparent than mechanism-level. Maybe bioinformatics-specific?"
+  ],
+  "before_after": {
+   "n": 417,
+   "before": "gating",
+   "after": "gated retries"
+  }
+ },
+ {
+  "theme": "Write for a reader with no context: define every term inline at first use, expand acronyms, gloss each failure-mode and family name where it appears, and never use an undefined internal term.",
+  "count": 10,
+  "max_severity": 2,
+  "ns": [
+   194,
+   341,
+   613,
+   655,
+   672,
+   962,
+   990,
+   1000,
+   1029,
+   1254
+  ],
+  "quotes": [
+   "[341] Work from the perspective of someone who has no context on any of this. You have to make sure write without introducing random terms (ie \"hits\").",
+   "[672] No we do not want to start defining terms. We want to define terms inline",
+   "[990] you need to define method failure modes, and I do not even really know what that means. the failures we describe in the sentence with all of the eprcentages i would call \"technical failure modes\", and you need to insert that definition",
+   "[1254] you need to be more explicit. What is criterion? What are they applying it to? Make the paragraph a bit longer and more exploratory, assuming someone has not just read the rest of the paper"
+  ],
+  "before_after": {
+   "n": 990,
+   "before": "method failure modes (undefined)",
+   "after": "technical failure modes, with its definition inserted in the text"
+  }
+ },
+ {
+  "theme": "Name failure archetypes in plain language that states the specific decision that failed as cause and effect, give paired vocabularies corresponding terms that state their origin, and put a table of definitions alongside.",
+  "count": 10,
+  "max_severity": 2,
+  "ns": [
+   335,
+   336,
+   337,
+   339,
+   340,
+   342,
+   343,
+   380,
+   381,
+   394
+  ],
+  "quotes": [
+   "[342] many of these descriptions just identify what happened as opposed to the specific way in which the model doing this thing created a failure",
+   "[343] what are \"shape categories\" -- this is jargon, try to use a more plain term\n- You should be more incisive about why these were failures, as opposed to passive about what happened. Each of these should be phrased in a cause-effect framing (not english structure wise, but as the logical outcome of the sentence)\n- no semicolons. Do not be lazy with your writing here. Use proper sentences, use \"so\" nad \"causing\" and \"which caused the...\"",
+   "[340] You can make the names longer btw",
+   "[381] No the names need to clearly indicate what they are about. Like you could say \"emergent\" failure modes vs something else, or \"latent\"? IDK. ALso this has not been promoted to figure yet, keep it in subpanel"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Attach figure and table citations as parentheticals to the claims they support: cite each panel individually, consecutive panels as a letter range, supplementary figures in the same bracket, the specific table behind a panel, and never a sentence announcing that a figure or appendix exists.",
+  "count": 10,
+  "max_severity": 2,
+  "ns": [
+   461,
+   653,
+   760,
+   809,
+   814,
+   861,
+   865,
+   890,
+   1167,
+   1200
+  ],
+  "quotes": [
+   "[653] You are citing the panels all wrong. a is the DAG representation, b is the single pass mode, and c is the gated mode. You should cite b and c specifically in reference to single pass and gated mode.",
+   "[861] You need to combine citations for ranges of letters",
+   "[1167] you should not say things like retry prompts appear verbatim, you should just cite the retry prompts next to saying what the benchmark does that uses the retry prompt",
+   "[809] No A1 should just be cited alongside the I and J, it does not neeed its own sentnce"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Restrict related work to biology-specific benchmarks, split into those that grade isolated chunks and long-horizon ones, cited in groups with every relevant version, with no comparison table and no out-of-scope prior work.",
+  "count": 10,
+  "max_severity": 2,
+  "ns": [
+   475,
+   477,
+   478,
+   479,
+   482,
+   484,
+   487,
+   634,
+   636,
+   641
+  ],
+  "quotes": [
+   "[484] the thing that should separate tier 2 from 1 is data being present to be analyzed as opposed to isolated questions, and the data is present in the form of a file and it is a completely agentic bench",
+   "[636] You do P1, saying all of these benchmarks exist but they do not tell the agent to do multiple things at once at all, they are only a small chunk of work that is never combiend with other chunks. Then P2 is like all of these benchmarks hit the mark, but none of them have the multi-turn, gated aspect that we introduce here",
+   "[478] let's also only restrict ourselves to bio-specific benchmarks. So lets get rid of tier2",
+   "[482] Forget it, I think its just too corny and overdone."
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Check every fact against its source before writing it (counts against the figure's grouping, cross-reference labels, the author's current draft, the repository, the author's account of the run), then propagate the change to every dependent statement.",
+  "count": 10,
+  "max_severity": 2,
+  "ns": [
+   414,
+   703,
+   750,
+   791,
+   874,
+   958,
+   980,
+   1094,
+   1128,
+   1182
+  ],
+  "quotes": [
+   "[874] There are 12 not 10 combos running on opencode, right?",
+   "[791] for the datasets, it is not strictly 15 assay types, as we lump in some under other columns",
+   "[1182] the limit of 5 thing means that the references to the up to 13 need to be changed in the results section now",
+   "[1128] The proxy was just a testing thing, the real run ran with no internet access for real"
+  ],
+  "before_after": {
+   "n": 874,
+   "before": "10 combinations on OpenCode",
+   "after": "12"
+  }
+ },
+ {
+  "theme": "Choose the concrete, precise word: no vague figurative phrases or prepositions, dangling pronouns, conversational transitions, redundant pairings, or historical 'began' openers.",
+  "count": 9,
+  "max_severity": 2,
+  "ns": [
+   637,
+   639,
+   645,
+   718,
+   1211,
+   1229,
+   1231,
+   1234,
+   1247
+  ],
+  "quotes": [
+   "[639] nothing to open is vague terminology",
+   "[1231] predicted in advance is an oxymoron and we cannot use that phrase",
+   "[1211] another what?",
+   "[1247] Can you make the phrasing of whichever way that ends a little more professinal?"
+  ],
+  "before_after": {
+   "n": 1247,
+   "before": "whichever way that ends",
+   "after": "in either case"
+  }
+ },
+ {
+  "theme": "Build results paragraphs from confirmed facts and notable cases that make a point about the field, with enough detail to cover them, not arbitrary named combinations, bare ranges, or derived multipliers.",
+  "count": 9,
+  "max_severity": 2,
+  "ns": [
+   804,
+   841,
+   853,
+   856,
+   862,
+   863,
+   891,
+   965,
+   966
+  ],
+  "quotes": [
+   "[853] I feel like we need to reformulate our points here. What are the facts we are working with that we have confirmed? What are the interesting anecdotes?",
+   "[965] I dont know why we are specifically quoting the stats for gptsol and grok? This just seems arbitrary",
+   "[966] I dont really want to quote random names or give a range. Isn't there something bigger, a point we can make in this paragraph?",
+   "[841] I think we just want to say the boost percentage actually not the raw score, and then say the models for the numbers at the ends of that range"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Describe a category or procedure in one plain clause at the level of what it did, not an enumeration of every mechanism, implementation detail, or internal code organisation.",
+  "count": 8,
+  "max_severity": 3,
+  "ns": [
+   991,
+   1015,
+   1016,
+   1032,
+   1101,
+   1131,
+   1143,
+   1191
+  ],
+  "quotes": [
+   "[1055] method and set selection seem to be one and the same, you should not draw this uselss disinction. Also you could explain the set selection ones much more simply, by simply saying that the agent used improper filtering on its final results, submitting much more or much less than is required? Why the fucking crazy explanation?",
+   "[1016] drop the single sentence detail, just say short written description, and you dont need to say naming no gene etc, just say the judges were instructed to focus on aspects of the trajectory agnostic of the specific biological details",
+   "[1101] I really dont want to talk about grader families btw, I want to talk about graders and how they are specialized, but I do not want to talk about the families, these are more internal code organization things",
+   "[1131] Like we do not want to be exhaustive with how we go through the differences between the question and the diagram, also no semicolons"
+  ],
+  "before_after": {
+   "n": 1015,
+   "before": "a single sentence",
+   "after": "a short written description"
+  }
+ },
+ {
+  "theme": "Order and scope Results along the reader's journey: benchmark composition first, then the leaderboard, then gating, each section owning one finding and handing mechanism, cross-section summaries and grader effects to the section that owns them.",
+  "count": 8,
+  "max_severity": 3,
+  "ns": [
+   14,
+   39,
+   74,
+   77,
+   843,
+   886,
+   887,
+   997
+  ],
+  "quotes": [
+   "[14] the order may not be optimal. Think about a reader's journey, and also think about frontloading the most interesting, relevant parts of the benchmark",
+   "[39] here is the split: 4.1 shows how the benchmark discriominates between models in all respects, 4.3 shows HOW gated mode does the lift, to what extent overall",
+   "[77] I think we definitely need a section of the results with benchmark composistion, how many nodes, etc, and this should be 4.0",
+   "[997] we should probably just add a sentence to P2 with the grok thing. The other stuff is cool but more summative of all of the sections, and it should go in the discussion or something"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Say the same thing in fewer words: keep a results subsection to two or three paragraphs, cut sentences that add nothing or make no sense, and do not belabour what the reader will assume.",
+  "count": 8,
+  "max_severity": 3,
+  "ns": [
+   684,
+   687,
+   702,
+   849,
+   888,
+   996,
+   1199,
+   1205
+  ],
+  "quotes": [
+   "[849] I think we are writing too much tbh. 7 paragraphs is way too long",
+   "[996] Can we include the same information but make it shorter?",
+   "[702] the last sentence of the second to last paragraph makes no fucking sense. I think you could just get rid tbh",
+   "[684] I want to get rid of this harness as a variable stuff, it is basically assumed"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Keep every claim proportionate to the evidence: soften absolutes, write 'many' not 'most', hedge weak relationships, do not call something an exception the numbers do not show, and never build on a difference within noise or speculate about future behaviour.",
+  "count": 8,
+  "max_severity": 2,
+  "ns": [
+   424,
+   620,
+   646,
+   723,
+   724,
+   855,
+   911,
+   999
+  ],
+  "quotes": [
+   "[424] i dont think we can say that model perf varies tbh. it doesnt vary that widely.",
+   "[723] can we soften the statement of no benchmark",
+   "[855] say the rest are largely uncorrelated (dont want to say completely bc it is too strong)",
+   "[999] It is not truly an exception though? 25% is higher than 20 or 13?"
+  ],
+  "before_after": {
+   "n": 646,
+   "before": "most",
+   "after": "many"
+  }
+ },
+ {
+  "theme": "Give every verb and comparative in a title its object or target, state the scope of the measurement, and drop needless quantifiers and the benchmark's name.",
+  "count": 8,
+  "max_severity": 2,
+  "ns": [
+   422,
+   423,
+   425,
+   426,
+   430,
+   437,
+   438,
+   441
+  ],
+  "quotes": [
+   "[422] instead of just saying more revealing, say reveals {what}",
+   "[423] more realistic than what?",
+   "[438] beyond needs to be more specific. How beyond? Why beyond due to unsupervised? Beyond what a prior annotation [what]",
+   "[426] do not put omicsbench in the title. also i do not like \"all\""
+  ],
+  "before_after": {
+   "n": 422,
+   "before": "more revealing",
+   "after": "reveals {what}"
+  }
+ },
+ {
+  "theme": "Once the author has ruled on a phrase, term or fact, write it as ruled and do not relitigate it.",
+  "count": 8,
+  "max_severity": 3,
+  "ns": [
+   717,
+   756,
+   757,
+   766,
+   898,
+   899,
+   1129,
+   1166
+  ],
+  "quotes": [
+   "[756] no the phrase is right.",
+   "[1129] Just write no internet access",
+   "[1166] please for the love of god use that copy not your own. Your own sucks. Rewrite this to be inline with the results section 1 stuff",
+   "[898] I want to say that performance degrades over the course of the session"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Quote in the text only numbers a reader can read off the cited figure, at its printed precision and granularity; exact values from the data are allowed only where a segment is too small to label.",
+  "count": 7,
+  "max_severity": 2,
+  "ns": [
+   810,
+   811,
+   824,
+   831,
+   920,
+   987,
+   1116
+  ],
+  "quotes": [
+   "[810] Do not state exact medians that are not evident visually from the plot",
+   "[831] btw dont give numbers at precision not on the plot",
+   "[987] You can quote those numbers and check the figure even if they are not written because the bar is too small, its fine",
+   "[1116] Also this is a wrong thing to refer to in the context of this graph -- this graph is per question, per model/harness combo, so you should only get into that granularity"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Keep captions as short as the paper's other captions: say what each panel measures with one parenthetical per panel, open by naming the plot, put data caveats there rather than in the body, and never describe encodings the reader can see.",
+  "count": 7,
+  "max_severity": 2,
+  "ns": [
+   676,
+   871,
+   872,
+   873,
+   918,
+   1005,
+   1189
+  ],
+  "quotes": [
+   "[873] you do not need todescribe elements of the plot in the caption that are understandable by looking at it!",
+   "[918] Look at the other captions in this paper. This needs to be wayy shorter. You just need to describe the basic nature of the plots. Only one () per subplot.",
+   "[1005] Look at the other captions first, you tend to write massive caprtions with way more detail than necessary",
+   "[1189] I want the sentence to start with A UMAP of the ..., the current way we explain it is super awkward"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Make an abstract point concrete with one worked example, marked as an example, that is distinctive to this benchmark and actually implemented, rather than cataloguing categories.",
+  "count": 7,
+  "max_severity": 2,
+  "ns": [
+   683,
+   686,
+   689,
+   690,
+   1170,
+   1171,
+   1172
+  ],
+  "quotes": [
+   "[690] I want to change the form. The idea is not to list the different graders, it is to explain why we have them and give 1 example. Write something here first",
+   "[1172] value within tolerance is also something others do. Also I think I want a more exotic example than the marker gene thing. Look for graders that omicsbench offers that are truly something where the grader is doing heavy lifting",
+   "[683] You do not need to add grader families. You should use as an example a gene with multiple names, and you should specifically call out spatialbench as an example of using string matching with lowercase for grading, but launch a subagent to check that github to be sure of this, and note that these kinds of comparisons are commonplace."
+  ],
+  "before_after": {
+   "n": 683,
+   "before": "a list of grader families",
+   "after": "one example: a gene with multiple names"
+  }
+ },
+ {
+  "theme": "Present run parameters (gate threshold, attempt cap, timeout, minimum cluster size) as settings chosen for these runs, stated lightly without rationale and never as inherent properties of the benchmark or algorithm, with exact values kept in Methods.",
+  "count": 6,
+  "max_severity": 2,
+  "ns": [
+   664,
+   667,
+   906,
+   1018,
+   1019,
+   1152
+  ],
+  "quotes": [
+   "[664] note that the gate threshold is arbitrary, we chose 0.7 for this particular run of the benchmark but note that the selection was arbitrary but dont note it too hard",
+   "[906] we cannot say three as if it is foregone conclusion. We need to note that 3 and 0.7 are parameters we chose for this experiment.",
+   "[1018] you can just say dimensionally reduced with UMAP. Also make sure you do not imply that 60 is some kind of inherent param of hdbscan.",
+   "[1152] We are not going to state a rationale for the gate and 0.7, just state that that was what we used along with 1800s timeout"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Give Methods, Discussion and appendix subsections specific, conventional names that say what they contain, using the exact title the author specifies.",
+  "count": 6,
+  "max_severity": 2,
+  "ns": [
+   443,
+   1100,
+   1102,
+   1144,
+   1163,
+   1164
+  ],
+  "quotes": [
+   "[1144] Also what is section mechanism extraction? That is super vague, name it something better. Also remember that the first judge prompt is not just for a priori annotation, we overlapped the judges a bit",
+   "[1100] graders should have a more specific name",
+   "[1164] change it to Omicsbench evaluation procedures"
+  ],
+  "before_after": {
+   "n": 1164,
+   "before": "Evaluation protocols",
+   "after": "Omicsbench evaluation procedures"
+  }
+ },
+ {
+  "theme": "Make coordinated clauses grammatically parallel and complete, each with its own verb and restated object, and place asides where they do not split subject from verb.",
+  "count": 6,
+  "max_severity": 1,
+  "ns": [
+   695,
+   739,
+   740,
+   741,
+   742,
+   797
+  ],
+  "quotes": [
+   "[739] on just the first sentence, we need to make both clauses parallel to each other",
+   "[741] mke the second claude a full sentence not a dependent one",
+   "[695] shouldnt among them come in a diff part of the sentence?"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Never restate what the manuscript has already said: no repeating a topic sentence within its paragraph, no re-explaining a notion the Introduction established, no Methods repeating Results, no Discussion paragraph on a point Results already made.",
+  "count": 6,
+  "max_severity": 2,
+  "ns": [
+   685,
+   759,
+   900,
+   1090,
+   1157,
+   1253
+  ],
+  "quotes": [
+   "[685] You are restating that grading is deterministic",
+   "[900] I do not want to just restate the topic sentence though",
+   "[759] We need to rephrase the benchmark description to avoid repeating ourselves adnauseam, and we need to speed through the parts where we already introduced the notions i question.",
+   "[1157] For zeroeing, we are not even going to acknowledge it, just say that a file that cannot be read properly is counted as 0. Do we need 4.1.1 and 4.1.2? Like if certain details were already covered in the results section explaining things, I do not want to repeat them. We should probably consolidate this a lot."
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Prefer the plain, straightforward statement over a clever or second-order one: state facts straight, use the conventional word, draw simple conclusions, and leave complexity for the Discussion.",
+  "count": 6,
+  "max_severity": 3,
+  "ns": [
+   411,
+   638,
+   803,
+   857,
+   868,
+   967
+  ],
+  "quotes": [
+   "[857] You are making this too complicated. I would like to pursue simple conclusions here",
+   "[868] Stop trying to be clever with this paragraph, just make it a list but make it reasonably long and also easy to interpret with the relevant information on top",
+   "[803] the datasets one is good, but i do not like the phrasing, just vive the facts straight up there",
+   "[411] you probably should use the word saturate on the first one, becauuse now it sounds deliberately obtuse"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Use a connective only where it is earned: 'but' for a real opposition, 'instead' only after a true contrast, 'for example' before an example, and a simple 'Notably' rather than a computed comparison to mark an outlier.",
+  "count": 5,
+  "max_severity": 3,
+  "ns": [
+   693,
+   694,
+   1001,
+   1002,
+   1003
+  ],
+  "quotes": [
+   "[693] Make the phrasing a little better. Use but in the first sentence, and format the second sentence with for example",
+   "[1002] again the usage of instead is wrong. also the 7 and 5% do not clearly refer to anything, making me guess what those numbers refer to",
+   "[1001] half the next lowest is super clunky terminology. You can just begin that sentence with notably or something tbh"
+  ],
+  "before_after": {
+   "n": 1001,
+   "before": "about half the next lowest",
+   "after": "Notably, ..."
+  }
+ },
+ {
+  "theme": "When a passage parallels the reference paper's (BixBench3), mirror its structure, length and phrasing.",
+  "count": 5,
+  "max_severity": 3,
+  "ns": [
+   854,
+   858,
+   866,
+   867,
+   974
+  ],
+  "quotes": [
+   "[866] Ok this paragraph just sucks. I want it to read as a counterpart to the bixbench3 one, but you are phrasing things totally differently",
+   "[867] Oh my god. This is worse. I want you to follow the existing structure. Start with the existing topic sentence type.",
+   "[974] I want to crush this down to 2 paragraphs. Look at how bixbench formats their paragraph for this analysis, I want to do the same kind of thing, but drop the correlations stuff"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Write the paper title as 'Name: a multi-turn benchmark ...', naming AI agents and the distinguishing features (research study-scale, in-context feedback), saying 'bioinformatics', compressed and scientific.",
+  "count": 5,
+  "max_severity": 2,
+  "ns": [
+   1237,
+   1238,
+   1239,
+   1240,
+   1241
+  ],
+  "quotes": [
+   "[1239] you need to include the word benchmark, should be like OMB: a multi-turn ....",
+   "[1238] We shold say research-study scale for sure, and I think that we should also use the in-context feedback, no need to include dependent tasks",
+   "[1241] this is good, but it needs to say AI agents somewhere"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Do not use colons or semicolons in body prose; a colon is allowed only to introduce a list or a verbatim block.",
+  "count": 5,
+  "max_severity": 2,
+  "ns": [
+   621,
+   658,
+   734,
+   1146,
+   1165
+  ],
+  "quotes": [
+   "[621] No colon",
+   "[1165] get rid of the colons in this section 4.1. No colons",
+   "[1146] When you have the appends this block stuff, those lines should end with colons"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Place material by the paper's structure: new tables in the main text beside their figures, supplementary figures first in the appendix, all benchmark prompts in one appendix section and all judge prompts in another, and a dependency graph drawn as a simple diagram.",
+  "count": 5,
+  "max_severity": 2,
+  "ns": [
+   404,
+   405,
+   462,
+   467,
+   1132
+  ],
+  "quotes": [
+   "[404] For the appendix I do not want to include section 3, it is too in the weeds. For section 4 of the appendix, I think we should have that in the main text, next to the relevant figures (two tables). Drop section 5 of the methods.",
+   "[467] for all of the prompts we used in the benchmark, these should be under 1 section in the appendix. The judge prompts for the LLM judges should be another section, it should be centralized, like currently the retry prompt lives in G",
+   "[462] Supp figs should come first  in the appendix",
+   "[1132] The true question DAG should be drawn as a simple tikz diagram, not a table. You do not need to list the graders. The files for the file column should just have the full name including the file ext, get rid of the file extension column. Also, you should not have the parts of the questions interspersed with prose, you should have it all at the top, and you should simply say what each thing in this appendix refers to."
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "When a name, opening or word choice is contested, offer several varied options and let the author choose rather than committing one.",
+  "count": 5,
+  "max_severity": 2,
+  "ns": [
+   444,
+   614,
+   1103,
+   1232,
+   1233
+  ],
+  "quotes": [
+   "[1103] No, lets think about this, give me a couple of options for that section name",
+   "[1232] defined is not good. Give me several options",
+   "[1233] none of these are good give me more"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Keep methods explanation in a Results paragraph to its opening sentences and spend the rest on the outcome; credit borrowed vocabularies only in Methods and state a method's advantage over the alternative once, in the opening paragraph.",
+  "count": 4,
+  "max_severity": 3,
+  "ns": [
+   982,
+   985,
+   1010,
+   1043
+  ],
+  "quotes": [
+   "[985] this is the extent to which we are doing methods explanation here, so finish the paragraph with the remainder of the text for it that describe the general outcome",
+   "[1046] No we are only going to metnion the bixbench3 thing in the methods",
+   "[1010] I dont really want to relate this to the a priori method, except for saying in the first paragraph that this is the benefit of doing this as opposed to just the a priori"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "When writing a new section or the abstract, reuse the terminology the manuscript has already established (Figure 1, the Introduction, the Results) rather than coining a paraphrase.",
+  "count": 4,
+  "max_severity": 3,
+  "ns": [
+   738,
+   1136,
+   1214,
+   1219
+  ],
+  "quotes": [
+   "[1136] You need to use the same terminology for these questions as we use in the rest of the MS. You are using different terminology. Look at figure 1, we use system prompt, not the text that opens the session. Get it right",
+   "[1214] phrsae the gated thing better, it is poorly worded now. Use the term feedback as it appears in the intro",
+   "[1219] Use the terms that were used  in the results sections for the failure mode stuff"
+  ],
+  "before_after": {
+   "n": 1136,
+   "before": "the text that opens the session",
+   "after": "system prompt"
+  }
+ },
+ {
+  "theme": "Match sentence boundaries to ideas: one idea per sentence, split run-ons at their natural boundary, but do not chop one idea into choppy fragments.",
+  "count": 4,
+  "max_severity": 2,
+  "ns": [
+   657,
+   659,
+   661,
+   1183
+  ],
+  "quotes": [
+   "[659] Split the current version into 2 sentences",
+   "[657] you can make this shorter and less complicated",
+   "[1183] No I want the lead in sentence to be one sentence, not 2 choppy ones"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Do not describe cost accounting or the price of the gating lift anywhere; say only that costs are as charged by the OpenRouter API, and compare costs only across single-pass runs.",
+  "count": 4,
+  "max_severity": 2,
+  "ns": [
+   465,
+   878,
+   879,
+   1161
+  ],
+  "quotes": [
+   "[465] I want to drop the cost estimate stuff and just say costs were taken from the openrouter API -- this will be everywhere, i do not want to get in to the cost accounting method at ALL",
+   "[878] I do not want to talk about this gating price. Give me a draft without it",
+   "[1161] Forget the cost and token accounting section too, I do not want to get into that"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Never touch the bibliography file: cite by naming the work in the prose and putting the paper link in parentheses at the end of the sentence, let the author add the bib entry, and keep the natbib default spacing.",
+  "count": 4,
+  "max_severity": 2,
+  "ns": [
+   544,
+   606,
+   640,
+   1186
+  ],
+  "quotes": [
+   "[1186] do not add citations to the paper under any circumstances. If you want to add citations, then add a link to the paper you want to cite, and I will add the citation to the bibfile. Do not touch the bibfile",
+   "[640] you need to put the benchmarks in the text, e.g. like LAB-bench, other bench, etc. And you need to, in place of a cite, put the paper links in a parenthesis at the end of a sentence",
+   "[606] For the current citations, just put the link to the papers in there for now in parenthesis, I will give you an updated bibtex file later"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Treat machine-drafted prose as a placeholder: the author drafts, Claude reviews against Orwell's rules and suggests edits, and never lets a style rule set produce stilted prose.",
+  "count": 4,
+  "max_severity": 3,
+  "ns": [
+   490,
+   607,
+   608,
+   704
+  ],
+  "quotes": [
+   "[607] unload the writing skill, it is making you write inorganically, like crap",
+   "[608] Ok your writing sucks, so I am going to write it from scratch, and then I am going to have you go over the text with orwell's rules to try and suggest a more well-formed writing",
+   "[704] Add a note above all of the paragraphs that you wrote to redo the phrasing to sound nicer, manually."
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "End a results paragraph on its evidence sentence with the figure citation; do not add an interpretive cap or introduce new numbers in a closing sentence.",
+  "count": 3,
+  "max_severity": 2,
+  "ns": [
+   882,
+   988,
+   1031
+  ],
+  "quotes": [
+   "[882] I wanted to drop the muse spark thing. I just wanted a concluding sentence",
+   "[988] The last sentence is confusing. I have decided we will end on the current last sentence, but it is hard to read, also it should cite the figure",
+   "[1031] Deleted the last sentence. You also need to figure out where to reference subplot a vs b, i think maybe a in the first paragraph b in the second?"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Name every model by its full official name with version, or by its provider slug in code font for API models, consistently throughout the paper.",
+  "count": 3,
+  "max_severity": 2,
+  "ns": [
+   82,
+   94,
+   1190
+  ],
+  "quotes": [
+   "[82] it should say GPT-5.6 Sol, not GPT-Sol, this is not correct",
+   "[94] you need to note the version of muse spark throughout the paper as well",
+   "[1190] for the text embedding model, you should give the openrouter model slug, formatted in the code text"
+  ],
+  "before_after": {
+   "n": 82,
+   "before": "GPT-Sol",
+   "after": "GPT-5.6 Sol"
+  }
+ },
+ {
+  "theme": "Do not restate in prose what the reader can see on the plot, and never write 'X is shown in Figure Y'; keep figure-referencing paragraphs very short.",
+  "count": 3,
+  "max_severity": 2,
+  "ns": [
+   700,
+   833,
+   834
+  ],
+  "quotes": [
+   "[700] For the first paragraph, it can be very short, there is no need to repeat ad nauseam what the plots say. Same goes for the last paragraph. Can be v short",
+   "[834] I dont want the top of the field is packed sentence, and I dont want to explicitly say that something is shown in something",
+   "[833] I do not want to obviously restate ad nauseam what is on the plot."
+  ],
+  "before_after": {
+   "n": 834,
+   "before": "Per-question scores behind each mean are shown in \\figref[A]{fig:supp-question-profiles}",
+   "after": "the claim itself, with the figure reference attached as a parenthetical"
+  }
+ },
+ {
+  "theme": "Do not add a table or appendix section that duplicates what a figure already shows, and give a taxonomy table only names and counts.",
+  "count": 3,
+  "max_severity": 2,
+  "ns": [
+   815,
+   816,
+   817
+  ],
+  "quotes": [
+   "[815] I do not want a table D1. Get rid of that table and the reference to it, the names on the plot are enough",
+   "[817] I dont think we need section D at all. Get rid of all of this, including the citations, the graph is enough",
+   "[816] get rid of definition for D1"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "In the abstract, frame each result as evidence for why the benchmark matters and present the failure-mode analysis as a method with its motivation, not as a list of findings.",
+  "count": 3,
+  "max_severity": 2,
+  "ns": [
+   1215,
+   1216,
+   1217
+  ],
+  "quotes": [
+   "[1215] you have to simplify the other two to make more of a case for why this benchmark is useful and important, otherwise these results are curioisites",
+   "[1216] The last sentence could probably be a couple sentences that starts with We additionally..., and it would make sense to back off the specific failure modes we found or families and more tout the general benefits of eg why we did the unsupervised (cuz cant anticipate). Use the term emergent failure modes from clustering, use the word embeddings there.",
+   "[1217] change only recovers part to allows the agent to recover from that loss"
+  ],
+  "before_after": {
+   "n": 1217,
+   "before": "only recovers part",
+   "after": "allows the agent to recover from that loss"
+  }
+ },
+ {
+  "theme": "Describe the a priori annotation and the unsupervised clustering as independent analyses, and attribute any hand grouping to the authors rather than the clustering.",
+  "count": 3,
+  "max_severity": 3,
+  "ns": [
+   736,
+   737,
+   1027
+  ],
+  "quotes": [
+   "[737] No this is still confusing. Like I know that technically we did one pass of LLM judges but the clustering used it in a differnent way. It is entirely different and we should not act like the way we did it was related",
+   "[1027] for the families, you have to say we separated into families, cant present it as an outcome of the clustering",
+   "[736] we do not want to sound like we were clustering the a priori failure modes. Also, trajectory can describe the attempt at a single node as well, if that is what we were annotating"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "State what you did and its argument in your own words, then attach the citation once; never write 'we follow X' or re-cite a work already cited.",
+  "count": 3,
+  "max_severity": 3,
+  "ns": [
+   688,
+   1206,
+   1208
+  ],
+  "quotes": [
+   "[1206] You need to explain what miller argued, and you should not say we just follow miller, you should say what we do and then CITE miller",
+   "[1208] You only need to cite miller once in the paper. Try to reformat the paragraph so all of that reasoning is together",
+   "[688] For the synonym paragraph. You should lead with the other benchmarks. again, do you have to re-cite? You also have a sentence that is wayy too long"
+  ],
+  "before_after": {
+   "n": 1206,
+   "before": "we follow Miller",
+   "after": "what we do and the argument behind it, then a citation to Miller"
+  }
+ },
+ {
+  "theme": "Do not repeat a distinctive word or construction nearby: never the same verb twice in a sentence or paragraph, and never a closing construction the previous paragraph used.",
+  "count": 2,
+  "max_severity": 1,
+  "ns": [
+   913,
+   1221
+  ],
+  "quotes": [
+   "[1221] We use reveal too many times in the abstract, twice in the last sentence.",
+   "[913] rephrase from taken together since I used that in the last one"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Keep statistical machinery out of the Results body: no test statistics, multiple-comparison corrections, or interval computation details.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   822,
+   835
+  ],
+  "quotes": [
+   "[822] forget the holm stuff, this is too complex for this section, along with the other stats.",
+   "[835] we do not need to discuss how CIs are computed in the main text, that is a figure detail"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Format all tables identically and at the same width.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   309,
+   354
+  ],
+  "quotes": [
+   "[309] all tables should be the same width, fix this",
+   "[354] There is a redundant tables added at the bottom by another agent, remove it, but keep the nonredundant description of the fixed failure modes. Get everything into a good form so I can view it, with consistent formatting for both the fixed failure modes and the emergent ones"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Do not introduce or depend on a concept before the section that covers it; each subsection stands alone.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   662,
+   1174
+  ],
+  "quotes": [
+   "[662] We will get to the purpose built graders later, remove it from the 2 paragraph",
+   "[1174] this section should not depend on the synonym matching DBs. That should stand alone. You need to change the last sentence again"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Re-read every sentence after editing part of it so the result stays grammatical and reads smoothly.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   1180,
+   1181
+  ],
+  "quotes": [
+   "[1180] The first sentence of a priori is grammatically incorrect now",
+   "[1181] The first sentence of a priori is grammatically incorrect now, or at least sounds awkward"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "When tightening or rewriting for clarity, keep every claim, citation and detail; restore a crowded-out point as its own short clause.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   668,
+   964
+  ],
+  "quotes": [
+   "[964] Can you bring the A1 bit back in, but without crowding the paragraph or making it hard to read?",
+   "[668] You really shoehorn in multi-turn in the 3rd paragraph, I think you can rewrite that paragraph to be much cleaner and shorter without losing any details"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Never phrase an omitted analysis or future work as a limitation or criticism of the benchmark; keep limitations to one tight paragraph led by the most important point.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   18,
+   1098
+  ],
+  "quotes": [
+   "[18] this kind of detailed analysis is a bit out of scope for the paper. Can we maybe try to reign in the story while keeping the existing analysis, without making it sound limited",
+   "[1098] Drop 3, drop 4, drop 5, drop 6, 7 is good ... #2 is very important, you should drop the criticisms of this bench though ... 2 should come first, then the others. One tight paragraph"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Keep the draft manuscript to the sections currently in progress, retaining only the author block and an abstract stub.",
+  "count": 2,
+  "max_severity": 1,
+  "ns": [
+   25,
+   27
+  ],
+  "quotes": [
+   "[25] get rid of the sections that we are not working on right now. We should just have results sections",
+   "[27] Add the authors back in to the draft, and a stub for the abstract"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Keep section notes complete but brief for the downstream writer: record how each figure was made and the full downselection funnel, without over-specifying mechanics.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   357,
+   386
+  ],
+  "quotes": [
+   "[357] Dont be that specific, it will confuse the paper-writing agent. Just say that it came from the same clustering process that produced the emergent archetypes, but we lifted them as an informal midstep",
+   "[386] no, leave it, we will just explain in the caption. Now I want you to fully design the notes for this one, this is extremely important. You need to combine the existing notes doc with the new one with all of the listed modes, and make sure that all information is up to date. you need to record the process by which each figure was made and how the classified bits were downselected out of the overall sample, being careful to note which parts of the sample (for both kinds of analysis) were left behind and why. Also add the colors to the markdown. Also, I think we should have name on both plots, for consistency"
+  ],
+  "before_after": null
+ },
+ {
+  "theme": "Every quoted number and comparator must say what it refers to and over what set it is measured.",
+  "count": 1,
+  "max_severity": 3,
+  "ns": [
+   1004
+  ],
+  "quotes": [
+   "[1004] at most 5% in what?",
+   "[1067] at most 5% in what?"
+  ],
+  "before_after": null
+ }
+]

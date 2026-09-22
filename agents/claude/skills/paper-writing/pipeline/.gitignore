@@ -1,0 +1,6 @@
+# Derived from private session transcripts; regenerate with run.sh.
+turns.jsonl
+corrections.jsonl
+chunks/
+labels/
+by_domain/

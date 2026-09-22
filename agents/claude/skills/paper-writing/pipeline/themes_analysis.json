@@ -1,0 +1,681 @@
+[
+ {
+  "theme": "Name every category in canonical terms a domain scientist recognises, at one level of specificity: a technique, process or research field, never a tissue or data type, never a vague or opaque name, never two unrelated things joined with 'and', and never two categories that overlap.",
+  "count": 8,
+  "max_severity": 3,
+  "ns": [
+   130,
+   131,
+   132,
+   139,
+   156,
+   157,
+   163,
+   304
+  ],
+  "quotes": [
+   "[130] The biological themes are a little too specific now, its the opposite problem -- these should be terms that are recognizable to scientists",
+   "[131] Stop making the graphs look nice for a second, I am trying to manage content. Ok first the biological theme -- it should be describing not what a question's data is (like connective tissue), but more the nature of the field it is in, what the question asks the model to DO",
+   "[156] the categories of proteomics are really non-canonical here. TSA-seq is 3D genomics I think. try categories like that, that are actually canonical",
+   "[139] ligand receptor is too different from spatial niches to be in the same category. What is gene set scoring, that is vague"
+  ],
+  "before_after": {
+   "n": 156,
+   "before": "Proteomics split into 'global proteomics', 'interaction proteomics', 'cell-surface proteomics', 'extracellular vesicle proteomics', 'ubiquitinome proteomics', with TSA-seq placed under epigenomics",
+   "after": "Canonical field names the field actually uses, e.g. TSA-seq as '3D genomics'"
+  }
+ },
+ {
+  "theme": "Make only the points that add up to the section's thesis: emphasise the one carrying the paper's argument, move findings another section owns to that section, push secondary points to the appendix, and plan enough panels to carry the narrative.",
+  "count": 6,
+  "max_severity": 2,
+  "ns": [
+   195,
+   196,
+   197,
+   199,
+   206,
+   238
+  ],
+  "quotes": [
+   "[196] I do not want to make point #1. Point #2 I want to make. I think point #3 might belong in section 4.3? Are you sure about point #4? Overall, we want to make the points in #2, which should all sum up to: #2's point: turns matter",
+   "[195] The whole point of this section is really just to show the effects of having multiple turns... I think that this is too far into the weeds, really",
+   "[206] Ideally we would emphasize point 3 -- it is our whole these around having a gated mode. point 4 seems like it could go to the appendix or be dropped tbh. Dont care about 5",
+   "[238] This is a niche point though, since the story we want to show is that multi-turn benchmarks are effective in doing something different to models than non-multi-turn, not discriminating between them"
+  ],
+  "before_after": {
+   "n": 196,
+   "before": "Five-point plan for the turns section including #1 'agents do not get worse', #3 'under gating sessions die at node 1', #4 'no model decays'",
+   "after": "Drop #1, move #3 to section 4.3, keep only the points that sum to '#2's point: turns matter'"
+  }
+ },
+ {
+  "theme": "Check every factual assertion against the data and the documented findings before writing or plotting it; when one proves wrong, re-verify every other claim, independently and without priors.",
+  "count": 5,
+  "max_severity": 3,
+  "ns": [
+   224,
+   229,
+   850,
+   851,
+   1150
+  ],
+  "quotes": [
+   "[229] Wait but you literally showed me a barplot earlier with the an inheritance penalty??",
+   "[850] Does cost not also run with score alongside time?",
+   "[851] check your other assertions and make sure they are right",
+   "[1150] This all really does not seem right. Task a subagent with investigating each of these, do not give it priors, let them run"
+  ],
+  "before_after": {
+   "n": 850,
+   "before": "Draft claim \"Time is the one measure that runs loosely with score rather than against it\"",
+   "after": "Cost tracks score (+0.73 single-pass) and time runs mildly against it (-0.11); the sentence reversed and every other assertion re-checked"
+  }
+ },
+ {
+  "theme": "Do not collapse a heterogeneous class into one bar or fold distinct assays under an umbrella name; break every class out to the same level of specificity as its neighbours so a biologist can see the diversity of the data.",
+  "count": 4,
+  "max_severity": 3,
+  "ns": [
+   140,
+   151,
+   158,
+   160
+  ],
+  "quotes": [
+   "[151] ok lol, you have a color for transcriptomics and a bar labeled proteomics. Do you think maybe you could make an agent to break that bar out? proteomics is fairly vague",
+   "[140] the merges you did for cut and tag, snRNA-seq, and scATAC-seq are wrong. Break those back out. Also what is TSA-seq chromatin architecture??",
+   "[160] I think we should frankly not fold in single-method categories under new umbrellas that effectively replicate the structure... that is stupid. propose a structure to this that makes sense. remember the point of all of this is that biologists should be able to look at our thing and say oh how diverse data they work on",
+   "[158] Is there no sensible way to break out the proteomics bar? Also I would like to consolidate some of the others. Propose some categories here"
+  ],
+  "before_after": {
+   "n": 151,
+   "before": "A single 'proteomics' bar beside transcriptomics broken into scRNA-seq, bulk RNA-seq and spatial",
+   "after": "Proteomics broken out into its sub-modalities at the same level as the transcriptomics bars"
+  }
+ },
+ {
+  "theme": "Do not add analyses beyond what the shown figures need: no extra statistical tests, no supplementary agreement statistics, no second-order cross-tabulations of one vocabulary against another, and no new annotation passes the owner has ruled out.",
+  "count": 4,
+  "max_severity": 2,
+  "ns": [
+   16,
+   66,
+   372,
+   1177
+  ],
+  "quotes": [
+   "[66] Ok forget this. I only care about the error bars on the questions. Are you sure this is correct?",
+   "[1177] Forget the kappa stuff --- I only want to use the stuff that we got from the figure shown, not any of the extra crap",
+   "[372] No this is not good or important either. we dont really care about this kind of second order analysis",
+   "[16] the gated i do not care about, inefficient analysis what are you talking about i dont have context here... coverage is ok, dw"
+  ],
+  "before_after": {
+   "n": 66,
+   "before": "Friedman/Kendall's W omnibus digression plus a proposed bootstrap rank interval under each model name",
+   "after": "Only the error bars on the questions, confirmed correct"
+  }
+ },
+ {
+  "theme": "Define the analysed population deliberately: remove the confounding subpopulation rather than declaring a plot impossible, but keep the broadest definition that removes the confound, never cherry-pick models, and do not truncate reasonably populated strata.",
+  "count": 4,
+  "max_severity": 2,
+  "ns": [
+   233,
+   241,
+   242,
+   252
+  ],
+  "quotes": [
+   "[233] No I dont want to cherry-pick models though. Is there any overall claim we can make, however soft, that has a line going down?",
+   "[241] cant you just cut out the questions where the nodes are of the easier kind, and then do it? Would it not work then?",
+   "[242] hang on though, this is a bit too narrow. Can you do a broader definition of this w/ more graders included?",
+   "[252] can you do depth out to 4? 5 would obviously be ridiculous but 4 seems reasonable?"
+  ],
+  "before_after": {
+   "n": 233,
+   "before": "c_fade panel highlighting Grok 4.3 and Qwen3.7-Max drifting from the pack",
+   "after": "A pooled claim across all models, however soft, with a line going down"
+  }
+ },
+ {
+  "theme": "Do not add group sections to a table whose source lists its rows flat; where rows are grouped, repeat the grouping value on every row rather than using spanning cells or italic multicolumn rows, and judge the construct by how it renders.",
+  "count": 4,
+  "max_severity": 3,
+  "ns": [
+   930,
+   942,
+   944,
+   1139
+  ],
+  "quotes": [
+   "[930] The a priori one should not have sections",
+   "[942] is there a better way to do sections for tables than you did? It is very inelegant",
+   "[944] The current way you are grouping just looks bad",
+   "[1139] The harness column should be every line"
+  ],
+  "before_after": {
+   "n": 1139,
+   "before": "Table E1 grouping models under a spanning harness cell",
+   "after": "The harness value repeated on every line"
+  }
+ },
+ {
+  "theme": "Align table cells with the package's facilities, not hand-tuned offsets: text columns left-justified and top-aligned, marks and group labels vertically centred, with each row's color mark level with the text it labels.",
+  "count": 4,
+  "max_severity": 3,
+  "ns": [
+   935,
+   948,
+   949,
+   951
+  ],
+  "quotes": [
+   "[935] all fields in the tables should be fully left justified",
+   "[948] Now it is below. Dont do it manually do it properly. Isnt there like a table class for this kind of thing, or a package? Also for the other columsn be consistent about the vertical justification",
+   "[949] The group and number/color should be vertically centered. The others should be top justificed",
+   "[951] why arent the midlines of the squares at the level of the text in failure mode?"
+  ],
+  "before_after": {
+   "n": 948,
+   "before": "Swatch centred by hand with \"\\rule[-1.6ex]{3.2ex}{3.2ex}\", sitting below the midline, with text columns inconsistently aligned",
+   "after": "Centring done through the table package, with one consistent vertical alignment across the text columns"
+  }
+ },
+ {
+  "theme": "Typeset every table to the paper's convention: body in small type, caption at the size of the other captions with only the 'Table X:' label bold, verified on every table type including longtblr.",
+  "count": 4,
+  "max_severity": 3,
+  "ns": [
+   1133,
+   1134,
+   1137,
+   1138
+  ],
+  "quotes": [
+   "[1133] your table captions do not seem to be the right size or with the requisite bolding",
+   "[1134] Also the bolding of the table titles is still fucked up. the thing that says Table X: should be bolded, the rest should not be. Fix it.",
+   "[1137] the table bodies should be small, not the same size as text in the MS body, make it consistent",
+   "[1138] The harnesses table is still not bolded correctly. You should also make the different cells a bit more spread out so there is not so much space on the right of the table"
+  ],
+  "before_after": {
+   "n": 1134,
+   "before": "Table captions with the bolding wrong after the first fix",
+   "after": "Only the 'Table X:' label bold, the rest of the caption plain"
+  }
+ },
+ {
+  "theme": "Lay out the author block as equally spaced names with emails beneath, numbered affiliations, and one institution line below, balanced symmetrically about the page centre; wrap a long affiliation before 'and Bioinformatics' and separate department from university with a comma.",
+  "count": 4,
+  "max_severity": 3,
+  "ns": [
+   562,
+   563,
+   564,
+   565
+  ],
+  "quotes": [
+   "[562] Right now it looks really ugly, and I want a better design. I have always liked the design where you have a bunch of equally spaced names, with emails below them. For afills you use the numbers, and there is a line of institutions below",
+   "[563] Can you make the affiliations balanced on the page by wrapping the umich one?",
+   "[564] They are still not balanced",
+   "[565] wrap the and bioinformatics to the 2nd line, and use a comma"
+  ],
+  "before_after": {
+   "n": 564,
+   "before": "Affiliation columns spaced by equal gaps so they did not sit under their authors (the Michigan column being wider)",
+   "after": "Two equal half-width columns so each name and its affiliation sit on the quarter points of the page"
+  }
+ },
+ {
+  "theme": "Build the analysis the owner agreed to; do not substitute a different operationalisation of a concept, replace an agreed method with a preferred one, or steer back to a rejected design.",
+  "count": 3,
+  "max_severity": 2,
+  "ns": [
+   263,
+   305,
+   325
+  ],
+  "quotes": [
+   "[263] in terms of reawrd hacking i thought we were going to look at the cases where models did process of elimination on the multiple choice answer...",
+   "[305] I like this, but I really would like to get the clustering visualization. We already did a failure taxonomy, and I really want to get a sense of how unsupervised clustering might bring out better: bring up failure modes and trajectory archetypes that are not pre-supposed",
+   "[325] No I would be fine with our only clustering method giving points multiple memberships, this is ok. How can we do this?"
+  ],
+  "before_after": {
+   "n": 263,
+   "before": "Reward-hacking row built on reasoning-cap 'meltdowns' (a_cap_by_model, b_dose_by_attempt, c_score_talk)",
+   "after": "The agreed analysis of process of elimination on multiple-choice retries"
+  }
+ },
+ {
+  "theme": "Prove a behavioural mechanism before drawing it: state what evidence would prove it and work back to the figure, pair any mechanical heuristic with an LLM judge or a human reading of trajectories, and drop a label such as 'reward hacking' that the evidence does not earn.",
+  "count": 3,
+  "max_severity": 2,
+  "ns": [
+   266,
+   270,
+   271
+  ],
+  "quotes": [
+   "[266] We basically want to show that models are doing process of elimination. How do we prove that? then we can work back from there",
+   "[270] The heuristic is not enough...",
+   "[271] I think that claiming this is reward hacking is a stretch. Let's leave it out of this figure."
+  ],
+  "before_after": {
+   "n": 270,
+   "before": "Tool-call-threshold elimination detector (elimination.py) offered as the classification of retry behaviour, feeding a per-model panel labelled the reward-hacking finding",
+   "after": "The heuristic is not enough; the reward-hacking claim is a stretch and leaves the figure"
+  }
+ },
+ {
+  "theme": "Read the paper's 'accounting for reward hacking' as the closed-choice node exclusion that was actually performed; an anecdotally observed behaviour justifies an exclusion when no quantitative claim is attached, and such rulings go in the project notes.",
+  "count": 3,
+  "max_severity": 2,
+  "ns": [
+   753,
+   754,
+   755
+  ],
+  "quotes": [
+   "[753] I meant the multiple choice nodes we excluded",
+   "[754] I meant that on the multiple choice stuff, that was reward hacking",
+   "[755] No I meant that we could not explicitly prove it, but we are going to say we ruled out the multiple choice nodes because of reward hacking behavior we anecdotally observed. Make note of that in that markdown plz"
+  ],
+  "before_after": {
+   "n": 753,
+   "before": "\"even after accounting for reward-hacking behavior\" flagged as claiming a control never run, with replacement sentences offered",
+   "after": "The clause refers to the multiple-choice nodes excluded for anecdotally observed reward hacking; noted in the markdown"
+  }
+ },
+ {
+  "theme": "Report run settings as the author states them (every model at high effort), not as inferred from lane configs or provider metadata; for models without an effort control report only the equivalent setting, never reasoning on/off toggles.",
+  "count": 3,
+  "max_severity": 2,
+  "ns": [
+   1142,
+   1153,
+   1154
+  ],
+  "quotes": [
+   "[1142] No they all ran at high, put high",
+   "[1153] the shipped lane configs are not right. We set high effort for all of the models that we could, I know that. I just want to know, for those that do not have an effort setting, what the equivalent setting was.",
+   "[1154] yeah but I do not want to report reasoning on/off for these"
+  ],
+  "before_after": {
+   "n": 1142,
+   "before": "Table E1 reasoning-effort column filled from the OpenRouter lookup with values other than High",
+   "after": "High for every model that has an effort setting"
+  }
+ },
+ {
+  "theme": "Give the color swatch and the mode number each their own unlabeled column, and drop count columns such as attempts from the mode tables.",
+  "count": 3,
+  "max_severity": 2,
+  "ns": [
+   933,
+   934,
+   938
+  ],
+  "quotes": [
+   "[933] get rid of the attempts column. You should have a distinct column for colors",
+   "[934] get rid of the attempts column. You should have a distinct column for colors. You should also have a distinct column for numbers for H2.",
+   "[938] Get rid of the color names for the color and mode, it should just be the index of the table unnamed"
+  ],
+  "before_after": {
+   "n": 934,
+   "before": "Table H2 with an attempts column and the swatch and mode number folded into the mode-name column, headed 'Color' and 'No.'",
+   "after": "Attempts column removed; distinct swatch and number columns with no header"
+  }
+ },
+ {
+  "theme": "Use identical column widths across parallel tables and size each column to its content, keeping swatch, name and group-label columns as narrow as their content allows so rows stay short.",
+  "count": 3,
+  "max_severity": 1,
+  "ns": [
+   940,
+   941,
+   959
+  ],
+  "quotes": [
+   "[940] The column sizes should be the same for both. Also I think you can make col2 and col1 much thinner to make the table less long",
+   "[941] Make the failure mode column for the first table even thinner",
+   "[959] The group column is too wide in the h2 table, narrow it"
+  ],
+  "before_after": {
+   "n": 940,
+   "before": "First column 1.4 cm in each table, then 4.4 cm in H1 and 5.6 cm in H2",
+   "after": "The same column sizes for both tables, with col1 and col2 much thinner"
+  }
+ },
+ {
+  "theme": "Check the rendered PDF yourself before reporting a layout fix as done; never attribute a reported rendering problem to a stale view.",
+  "count": 3,
+  "max_severity": 3,
+  "ns": [
+   945,
+   947,
+   950
+  ],
+  "quotes": [
+   "[945] The colors and symbols in those columns are clearly not centered vert or hor",
+   "[947] the color swatches are still not vert centered",
+   "[950] I am not, it did not work"
+  ],
+  "before_after": {
+   "n": 945,
+   "before": "Report that swatches and discs \"sit centered horizontally in the column and vertically against the full height of each row. Confirmed in the render\"",
+   "after": "The render showed them off-centre both ways; check the render before claiming the fix"
+  }
+ },
+ {
+  "theme": "Within a grouped categorical chart, check whether a singleton category belongs under an existing one, and pool the remaining singletons into an 'other <group>' bar.",
+  "count": 2,
+  "max_severity": 1,
+  "ns": [
+   138,
+   162
+  ],
+  "quotes": [
+   "[138] some of these may be combinable, for example does cripspr screen go under another one, does cut & tag?",
+   "[162] for the categories of 1 within the big three, you should lump them in under other transcriptomics, etc"
+  ],
+  "before_after": {
+   "n": 162,
+   "before": "Grouped modality bars listing singleton assays separately (snRNA-seq 1, MeRIP-seq 1, ubiquitinome 1, ...) within the three main layers",
+   "after": "Singletons within the big three lumped under 'other transcriptomics', 'other proteomics', etc."
+  }
+ },
+ {
+  "theme": "Do not compare against another benchmark's results, whether as correlations or as a side-by-side panel; drop such analyses from the results.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   1,
+   17
+  ],
+  "quotes": [
+   "[1] i dont believe it is standard to do these external benchark corrs. If it is not, right off the bat i propose we drop that entirely",
+   "[17] No we are not going to do a bixbench side by side at all. Yeah we can drop c0 absolutely"
+  ],
+  "before_after": {
+   "n": 17,
+   "before": "Proposed BixBench3 failure-mode side-by-side panel comparing per-mode shares against their Fig 5B",
+   "after": "No side-by-side against BixBench3 at all"
+  }
+ },
+ {
+  "theme": "Hold the population fixed on both sides of a comparison and across the panels of a figure: the same models when comparing spreads, the same node filter (e.g. closed-choice graders excluded) in every panel.",
+  "count": 2,
+  "max_severity": 1,
+  "ns": [
+   4,
+   256
+  ],
+  "quotes": [
+   "[4] yeah I meant spread on the same models",
+   "[256] first can you exclude from the tries bump figure the multi-choice graders, like the other figure?"
+  ],
+  "before_after": {
+   "n": 4,
+   "before": "Spread compared against BixBench3 over each benchmark's full model field (367-fold vs 76x)",
+   "after": "Spread computed on the same models in both benchmarks"
+  }
+ },
+ {
+  "theme": "Keep the statistical-methods text to what was actually used: explain the standard-error approach, independence and what counts as a replicate, cite the interval method's source instead of re-deriving it, and use one interval construction for every quantity.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   446,
+   1204
+  ],
+  "quotes": [
+   "[446] we never ended up using the Holm stuff, so you need to omit it from the methods section. We also did not do the perm tests or really any tests, so you mainly need to explain our approach to standard error and stuff which is super important, and how we approached what constitutes indpendent vs not independent, what is a replicate and stuff. We also never used the MDE stuff.",
+   "[1204] I want to drop the overall reasoning from this paper down to just citing miller. Also, since they are basically the same thing, just say the miller thing with the CI for everything"
+  ],
+  "before_after": {
+   "n": 1204,
+   "before": "4.5 draft with extended reasoning beyond Miller and a clause using \"the Student's t critical value in place of 1.96\" for cost, time, tool calls and tokens",
+   "after": "Just cite Miller, and use the Miller CI for everything"
+  }
+ },
+ {
+  "theme": "Compare models or harnesses only where the data carry it: no positive or negative claim about a factor observed on one or two models, and no argument that differences exceed interval widths without formal tests.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   38,
+   832
+  ],
+  "quotes": [
+   "[38] we really dont have enough data here to compare across harnesses, with only 1 model on 2 of the 3 harnesses, so i wouldnt make any pos or neg claims there",
+   "[832] the whole precision thing we are dropping, we would need to start talking about tests within tests to seriously compare models to each other like that"
+  ],
+  "before_after": {
+   "n": 832,
+   "before": "Sentence that the field's spread is \"several times the width of any single combination's 95% confidence interval\"",
+   "after": "The precision argument dropped entirely"
+  }
+ },
+ {
+  "theme": "Sanity-check every statistical construct against what it models: a p-value cannot be quoted beyond the resolution of the data (a permutation p is bounded by the permutation count), and a random-guess retry baseline must not resubmit an answer the model was told is wrong.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   65,
+   267
+  ],
+  "quotes": [
+   "[65] this does not seem right these p values are wayy too low",
+   "[267] This does not make sense. A model presumably would be smart enough to not just re-guess the same answer even if it was guessing"
+  ],
+  "before_after": {
+   "n": 65,
+   "before": "Friedman test p-values quoted as 2x10^-104 and 2x10^-144 from the asymptotic chi-square tail",
+   "after": "Permutation p-value bounded by the number of shuffles (p < 0.0003 at 3,000 permutations)"
+  }
+ },
+ {
+  "theme": "In every turns analysis distinguish a node that depends on another in the DAG from mere turn position: align on the first dependent node and restrict dependency claims to nodes that truly consume an upstream node's output.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   228,
+   234
+  ],
+  "quotes": [
+   "[228] No this seems fine. wdym the charter? Can we just do some kind of graph that starts at the dependent node? Also btw we need to distinguish between a node that is dependent in the DAG on another node and just multiturn",
+   "[234] this just does not make sense... Maybe you need to find some subpopulation of questions whose dependencies actually imply some kind of causal relationship, where the node needs as input another node's output?"
+  ],
+  "before_after": {
+   "n": 234,
+   "before": "c_carryover panel framing the decaying advantage of a good first node as session state over absolute turns",
+   "after": "A subpopulation of questions whose dependencies imply a causal relationship, where the node needs another node's output as input"
+  }
+ },
+ {
+  "theme": "Keep the clustering pipeline standard and automatic: one embedding method for both clustering and display, and no hand-merged clusters.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   319,
+   330
+  ],
+  "quotes": [
+   "[319] It does not sound like standard practice, that sounds very weird. I guess we should just stick with UMAP",
+   "[330] Do not want to do hand merges."
+  ],
+  "before_after": {
+   "n": 319,
+   "before": "Plan to cluster in a 5D UMAP embedding but display the clusters with t-SNE",
+   "after": "UMAP throughout"
+  }
+ },
+ {
+  "theme": "Keep or drop emergent clusters on scientific grounds: keep archetypes that expose a distinct, mechanically specific failure even when concentrated in few tasks, drop one that duplicates a deterministically measured category and explain why, and flag any archetype dominated by a single question.",
+  "count": 2,
+  "max_severity": 1,
+  "ns": [
+   338,
+   353
+  ],
+  "quotes": [
+   "[338] I think that #0 should be kept, because it is exactly the emergent kind of failure archetype we should focus on. Keep #5,3,#2,#12.",
+   "[353] I think we should just drop this cluster from the archetype and explain why, cuz these questions are all covered deterministically anyway. Btw can you name the archetypes we have that are only one question? It worries me a little"
+  ],
+  "before_after": {
+   "n": 338,
+   "before": "Recommendation to drop archetypes #0, #5, #3 and one of #2/#12 as task-bound or vague",
+   "after": "Keep #0 as exactly the emergent failure archetype to focus on, and keep #5, #3, #2, #12"
+  }
+ },
+ {
+  "theme": "Classify failures by graded outcome, not by how the turn ended; an end state whose answer file is graded like any other is not a failure mode and leaves the failure analysis entirely, with no edits to other figures.",
+  "count": 2,
+  "max_severity": 2,
+  "ns": [
+   290,
+   291
+  ],
+  "quotes": [
+   "[290] Ok wait. Why is edited till the time limit there as a failure mode? We grade the answer file regardless?",
+   "[291] just drop the keep editing thing entirely. For the purposes for this analysis do not treat it as a failure. you should not have to edit any of the other figures/sections"
+  ],
+  "before_after": {
+   "n": 290,
+   "before": "'answered, then edited until the time limit' counted as a failure class in the E1 end-state panels",
+   "after": "Dropped from the failure analysis, since the answer file is graded regardless"
+  }
+ },
+ {
+  "theme": "Set every table to the full text width, matching the paper's other tables, and re-check widths after any column change.",
+  "count": 2,
+  "max_severity": 3,
+  "ns": [
+   931,
+   939
+  ],
+  "quotes": [
+   "[931] the tables should be the same width as the rest of them, textwidth",
+   "[939] The tables are not the same width now?"
+  ],
+  "before_after": {
+   "n": 931,
+   "before": "Tables H1 and H2 narrower than the paper's other tables",
+   "after": "Every table at textwidth"
+  }
+ },
+ {
+  "theme": "When tightening the title block, scale the gap between the title and the rule beneath it in proportion to the other reduced spacing: neither a drastic cut nor the style default.",
+  "count": 2,
+  "max_severity": 1,
+  "ns": [
+   1246,
+   1248
+  ],
+  "quotes": [
+   "[1246] I did not want to change the space between that line below the title and the title too much",
+   "[1248] you can make that line a little closer to the title, now it is too far proportionally"
+  ],
+  "before_after": {
+   "n": 1246,
+   "before": "Title-to-rule gap in \\@bottomtitlebar cut from 0.29 in to 0.14 in, then restored to the style's 0.29 in",
+   "after": "A proportional reduction between the two"
+  }
+ },
+ {
+  "theme": "State how a constructed baseline is derived the first time it appears; never present it as if it were an experimental arm.",
+  "count": 1,
+  "max_severity": 2,
+  "ns": [
+   208
+  ],
+  "quotes": [
+   "[208] since when is there a blind second try though?"
+  ],
+  "before_after": {
+   "n": 208,
+   "before": "Gating designs using a 'blind second try' baseline without saying it is constructed from single-pass runs",
+   "after": "The derivation stated where the baseline first appears"
+  }
+ },
+ {
+  "theme": "State the gating lift as a percentage increase, with its range, computed from the numbers printed on the bars.",
+  "count": 1,
+  "max_severity": 1,
+  "ns": [
+   840
+  ],
+  "quotes": [
+   "[840] I want to say what percentage increase the boost is, the range of that. compute that from the numbers atop the bars"
+  ],
+  "before_after": {
+   "n": 840,
+   "before": "P2 plan stating the gating lift as absolute score gains",
+   "after": "The percentage increase and its range, computed from the numbers atop the bars"
+  }
+ },
+ {
+  "theme": "Format every section of a planning document the same way: a prose description with at most a small metadata table.",
+  "count": 1,
+  "max_severity": 2,
+  "ns": [
+   448
+  ],
+  "quotes": [
+   "[448] the main section description text should be like the others cuz now it is unreadable"
+  ],
+  "before_after": {
+   "n": 448,
+   "before": "Methods and appendix sections of the writing plan written as tables",
+   "after": "Prose section descriptions like the other sections"
+  }
+ },
+ {
+  "theme": "When asked to drop a style, use stock LaTeX with as little modification as possible rather than substituting a custom look.",
+  "count": 1,
+  "max_severity": 2,
+  "ns": [
+   495
+  ],
+  "quotes": [
+   "[495] can you just use the stock latex text, with as little modification as possible? I just want the regular latex formatting"
+  ],
+  "before_after": {
+   "n": 495,
+   "before": "Plain article build with Palatino, 11pt, authblk and other customisations",
+   "after": "Regular stock LaTeX formatting"
+  }
+ },
+ {
+  "theme": "Keep page margins modest so the text block is wide.",
+  "count": 1,
+  "max_severity": 1,
+  "ns": [
+   520
+  ],
+  "quotes": [
+   "[520] now I think you should probably reduce the margins a little"
+  ],
+  "before_after": {
+   "n": 520,
+   "before": "Page margins set at 0.75in a side",
+   "after": "Margins reduced a little"
+  }
+ },
+ {
+  "theme": "Place a section heading directly after the preceding section's text, never separated from it by a figure.",
+  "count": 1,
+  "max_severity": 1,
+  "ns": [
+   923
+  ],
+  "quotes": [
+   "[923] the 2.4 heading should come to rest directly under the text for 2.3"
+  ],
+  "before_after": {
+   "n": 923,
+   "before": "The 2.4 heading rendered before Figure 4 but not directly following the end of 2.3's text",
+   "after": "The 2.4 heading resting directly under the text for 2.3"
+  }
+ }
+]

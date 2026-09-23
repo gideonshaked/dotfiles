@@ -139,7 +139,8 @@ This covers prose only; code blocks, tables, lists and LaTeX environments keep t
 ## Never hand me a command to run
 
 Run it yourself.
-Do not print a command for me to copy, and do not put one on my clipboard.
+Unless I ask for a command, do not print one for me to copy, and do not put one on my clipboard.
+When I do ask for one, give it, copy it to my clipboard with `pbcopy` without being asked, and tell me you did.
 
 The sole exception is a command that cannot be driven from your side because the terminal needs me: an interactive prompt, a passphrase, a hardware key, a browser step only I can complete.
 Run those the way I would from my own terminal, so the browser opens on my machine; never switch to device-code or no-browser modes that leave me waiting on you.

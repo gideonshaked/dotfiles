@@ -84,6 +84,7 @@ zsh and bash are equal first-class citizens. **One file configures both.**
 | `terminal/starship.toml` | Prompt config, a different format. |
 | `terminal/ghostty.config` | Terminal rendering. cmux links libghostty and reads the Ghostty config rather than shipping its own, so this is cmux's renderer config. |
 | `terminal/cmux.json` | Everything cmux-specific: sidebar, notifications, automation. JSONC. cmux resolves symlinks before an atomic write, so a linked file survives being saved from its UI. |
+| `terminal/cmux-claude-launcher` | Linked to `~/.config/cmux/claude-launcher` and named by `automation.claudeBinaryPath` in `cmux.json`. See the cmux notifications section. |
 
 `shellrc` sets `$__shell` to `zsh` or `bash` once, near the top. That is what makes the tools section shared rather than duplicated: `starship init "$__shell"`, `atuin init "$__shell"`, and the fzf key-bindings path are each written once and work in both.
 
@@ -185,6 +186,20 @@ Locally, cmux's own Claude wrapper (`automation.claudeCodeIntegration` in
 injects its Stop, Notification, Feed and session-restore hooks and sets
 `preferredNotifChannel` to `notifications_disabled`. Nothing in this repository
 duplicates that; a Stop hook here would notify twice.
+
+That payload is a file the wrapper writes to `$TMPDIR/cmux-claude-settings.XXXXXX` on every launch and never removes.
+Claude Code background jobs record their launch flags, `--settings <that path>` included, as `respawnFlags` in `~/.claude/jobs/<id>/state.json` and reuse them on every respawn.
+macOS periodically deletes old files from `$TMPDIR`, so a job respawned days later exits before init with `Settings file not found`.
+`automation.claudeBinaryPath` therefore points the wrapper at `terminal/cmux-claude-launcher`, which copies the file to `~/.claude/cmux-settings/<sha256>.json`, substitutes that path, and execs `~/.local/bin/claude`.
+The name is a content hash because the payload is identical across launches until cmux changes it, so the directory holds one file per cmux hook version rather than one per launch.
+A job that already recorded a temp path is repaired by pointing its `respawnFlags` at the matching file in that directory.
+
+cmux reads `claudeBinaryPath` without expanding `~`, so the path in `cmux.json` is absolute and names this machine's home directory.
+On a machine where it does not exist, the wrapper ignores it and resolves `claude` from `PATH`, losing only this repair.
+The setting reaches a pane as `CMUX_CUSTOM_CLAUDE_PATH` when the pane is spawned, so panes open before the setting changed keep launching Claude without the launcher.
+
+The same `respawnFlags` also carry a `--mcp-config` for cmux's computer-use server, with an auth token and owner PID that belong to one cmux process.
+After cmux restarts, a respawned job's computer-use server fails to connect, though the session still starts.
 
 Over plain `ssh` no wrapper runs, so both profiles set `preferredNotifChannel`
 to `ghostty`. Claude Code then writes an OSC 777 `notify` sequence to its own

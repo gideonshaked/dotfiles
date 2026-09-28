@@ -128,6 +128,25 @@ install_beads() {
     chmod +x "$LOCAL_BIN/bd"
 }
 
+# agents/claude/CLAUDE.md routes Gmail, Calendar and Contacts through gog. Its
+# release assets carry the version in the file name, so it is read from the
+# release index with jq, like beads.
+install_gog() {
+    have gog && return 0
+    have jq || { echo "jq missing, skipping gog (non-fatal)"; return 0; }
+
+    local tag version
+    tag="$(curl -fsSL https://api.github.com/repos/openclaw/gogcli/releases/latest \
+        | jq -r .tag_name)" || return 0
+    version="${tag#v}"
+    [ -n "$version" ] && [ "$version" != null ] || { echo "could not resolve gog (non-fatal)"; return 0; }
+
+    curl -fsSL "https://github.com/openclaw/gogcli/releases/download/${tag}/gogcli_${version}_linux_${ARCH_GO}.tar.gz" \
+        | tar -xz -C "$LOCAL_BIN" ./gog 2>/dev/null \
+        || { echo "gog install failed (non-fatal)"; return 0; }
+    chmod +x "$LOCAL_BIN/gog"
+}
+
 install_dolt() {
     have dolt && return 0
     curl -fsSL "https://github.com/dolthub/dolt/releases/latest/download/dolt-linux-${ARCH_GO}.tar.gz" \
@@ -233,6 +252,7 @@ install_linux() {
     install_node
     install_dolt
     install_beads
+    install_gog
     install_awscli
     install_gcloud
 }

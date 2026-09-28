@@ -70,6 +70,18 @@ context7() {
     fi
 }
 
+# A Notion login covers one workspace, so each workspace is its own server
+# entry, and each is logged in separately through /mcp. Two entries with the
+# same URL coexist; they also hide the claude.ai Notion connector, which can
+# only ever reach one workspace.
+notion() {
+    local url="https://mcp.notion.com/mcp" workspace
+    for workspace in personal octant; do
+        registered_with "notion-$workspace" "URL: $url" && continue
+        register "notion-$workspace" --transport http "$url"
+    done
+}
+
 store_secret() {
     local name="$1" value="$2" tmp
 
@@ -109,5 +121,6 @@ exa
 gcloud_mcp
 ssh_mcp
 context7
+notion
 
 echo "MCPs OK"

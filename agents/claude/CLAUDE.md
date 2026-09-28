@@ -23,6 +23,11 @@ If old state exists on a machine, clean the machine rather than teaching the cod
 When I'm describing a problem, asking a question, or thinking out loud rather than asking for a change, the deliverable is your assessment.
 Report what you found and stop.
 
+## Numbered suggestions
+
+Number every list of suggestions, options, or proposed changes, so I can answer by number ("do 2 and 4").
+Keep the numbering unique across the whole reply: continue it across headings and groups rather than restarting at 1, so a number names exactly one item.
+
 ## Delegation
 
 Parallelize by default.
@@ -188,3 +193,9 @@ Archiving, labelling and marking read are fine when I've asked for triage.
 A new account is added with `gog auth add <email> --services gmail,calendar,contacts,people,tasks,drive,docs,sheets` run in the background, then `gog auth alias set <alias> <email>`.
 The browser shows "Google hasn't verified this app", which is expected, and I continue through Advanced.
 The OAuth client lives in a personal Google Cloud project whose consent screen must stay published, because Google expires every login after 7 days while an app is in Testing.
+
+### Notion
+
+Use the `notion-personal` and `notion-octant` MCP servers, one per workspace.
+Don't use the claude.ai Notion connector: it reaches only one workspace.
+When I don't say which workspace, work out which one the page belongs in and say which you used; ask only when it is genuinely unclear.

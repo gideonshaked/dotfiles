@@ -199,3 +199,13 @@ The OAuth client lives in a personal Google Cloud project whose consent screen m
 Use the `notion-personal` and `notion-octant` MCP servers, one per workspace.
 Don't use the claude.ai Notion connector: it reaches only one workspace.
 When I don't say which workspace, work out which one the page belongs in and say which you used; ask only when it is genuinely unclear.
+
+### 1Password
+
+Use the `op` CLI through Bash; there is no MCP server for it.
+It signs in through the 1Password app, so the first command in a session asks me for Touch ID.
+Two accounts are signed in, so pass `--account my.1password.com` for personal or `--account team-octantbio.1password.com` for Octant; personal items go in the Private vault.
+
+Never print a password, one-time code or other secret field into the conversation.
+Use `op item list`, `op item get` without `--reveal`, and `op read` only inside a command that consumes the value.
+Creating and editing items is fine when I've asked for it; deleting one needs my go-ahead for that item.

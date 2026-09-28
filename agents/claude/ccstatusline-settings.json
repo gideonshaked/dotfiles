@@ -36,24 +36,24 @@
       {
         "id": "785d542b-a495-4ef3-b604-412041384d17",
         "type": "reset-timer",
+        "numberFormat": {
+          "style": "compact"
+        },
         "rawValue": false,
         "metadata": {
           "display": "time",
           "absolute": "false"
-        },
-        "numberFormat": {
-          "style": "compact"
         }
       },
       {
         "id": "048e444f-8812-4699-8c9c-8b3dd7675c78",
         "type": "session-usage",
+        "numberFormat": {
+          "style": "compact"
+        },
         "merge": true,
         "metadata": {
           "invert": "true"
-        },
-        "numberFormat": {
-          "style": "compact"
         }
       },
       {
@@ -88,7 +88,10 @@
       {
         "id": "f7ed8293-71c9-4b68-bbaf-ff4cae09ecbf",
         "type": "current-working-dir",
-        "rawValue": true
+        "rawValue": true,
+        "metadata": {
+          "fishStyle": "true"
+        }
       }
     ],
     [],
@@ -102,6 +105,8 @@
   "inheritSeparatorColors": false,
   "globalBold": false,
   "gitCacheTtlSeconds": 5,
+  "terminalWidthCacheTtlSeconds": 5,
+  "customCommandCacheTtlSeconds": 0,
   "minimalistMode": false,
   "powerline": {
     "enabled": true,

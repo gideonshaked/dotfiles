@@ -115,10 +115,11 @@ is fetched as a released binary under `$HOME` instead.
 | `pyright` | the `pyright-lsp` Claude plugin, which ships no binary | `uv tool install` |
 | `pre-commit` | this repository's git hooks | `uv tool install` |
 | `bd`, `dolt` | the issue database in `.beads` | release tarballs |
+| `gog` | Gmail, Calendar and Contacts, per `agents/claude/CLAUDE.md` | release tarball |
 | `aws` | `aws sso login`, for the credentials the aws-core MCP server resolves | the bundled-runtime installer, into `~/.local/aws-cli` |
 | `gcloud` | the gcloud MCP server, which shells out to it | release tarball, into `~/google-cloud-sdk` |
 
-`jq` installs before `node` and `bd` because both resolve their version from a
+`jq` installs before `node`, `bd` and `gog` because each resolves its version from a
 release index read with it.
 
 Every Linux installer is guarded by `have <tool> && return 0`, so it installs
@@ -164,7 +165,7 @@ Claude Code round-trips the `hooks` subtree through its own schema, so a key it 
 Unknown keys at the top level do survive.
 That is why ccstatusline's `_tag` markers are not kept in these files: nothing here reads or regenerates them, and any `/config` or `/model` write strips them again.
 
-`install-mcps` holds one function per server: `exa` (HTTP), `gcloud` (npx through `bash -lc`), `ssh-mcp` (uvx) and `context7`. Each checks what is already registered and re-adds only when the stored command no longer matches, so an older definition is replaced rather than kept.
+`install-mcps` holds one function per server: `exa` (HTTP), `gcloud` (npx through `bash -lc`), `ssh-mcp` (uvx), `context7`, and `notion`, which registers `notion-personal` and `notion-octant`. Each checks what is already registered and re-adds only when the stored command no longer matches, so an older definition is replaced rather than kept.
 
 Context7 is registered directly over HTTP rather than through `ctx7 setup`,
 which opens an OAuth device flow and waits for a browser that a server does not
@@ -176,6 +177,12 @@ AWS reaches both profiles through the `aws-core` plugin rather than `install-mcp
 The plugin is the Agent Toolkit for AWS, which AWS made the successor to its awslabs MCP servers, and it ships both its skills and an `mcp.json` registering the managed AWS MCP server at `https://aws-mcp.us-east-1.api.aws/mcp` through `uvx mcp-proxy-for-aws-cli`.
 Registering that server here as well would run it twice.
 The proxy resolves credentials through the default chain even though the config passes `--skip-auth`, so a `~/.aws/config` whose `[default]` cannot authenticate fails the MCP handshake with `-32602 Invalid request parameters` rather than a credential error.
+
+A Notion login covers exactly one workspace, and the claude.ai connector can hold only one, so each workspace is its own server entry pointing at `https://mcp.notion.com/mcp`.
+Two entries with one URL coexist, and they hide the claude.ai Notion connector.
+Each is logged in once per machine through `/mcp`, picking the matching workspace on Notion's consent screen.
+
+Google is reached through `gog`, not an MCP server; `install-packages` installs it, but its OAuth client secret and every account login live in the keychain and are set up by hand on each machine (`gog auth credentials set`, then `gog auth add` and `gog auth alias set` per account).
 
 **Tool budget is a scarce shared resource.** Claude Code defers every MCP tool behind `ToolSearch` once tool definitions exceed 10% of the context window, which hides low-tool-count servers like exa behind higher-count ones. Adding an MCP server means checking afterwards whether deferral has kicked in.
 
@@ -279,7 +286,7 @@ host.
 ### The Homebrew manifest
 
 `manifest/Brewfile` lists dependencies of this repository's configuration and
-nothing else: 19 formulae, 5 casks, and the VS Code extensions. Every entry is
+nothing else: 20 formulae, 5 casks, and the VS Code extensions. Every entry is
 required by a file in this repo, and each carries a comment naming the file
 that needs it.
 

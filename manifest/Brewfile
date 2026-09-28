@@ -49,6 +49,9 @@ brew "beads"
 # git/gitconfig uses `gh auth git-credential` as the GitHub credential helper.
 brew "gh"
 
+# agents/claude/CLAUDE.md routes Gmail, Calendar and Contacts through gog.
+brew "openclaw/tap/gogcli"
+
 # ssh/private.d/umich reaches nubio through a Cloudflare tunnel.
 brew "cloudflared"
 

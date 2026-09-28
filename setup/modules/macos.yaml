@@ -12,6 +12,7 @@
     # cmux links libghostty and reads the Ghostty config rather than its own.
     ~/.config/ghostty/config: terminal/ghostty.config
     ~/.config/cmux/cmux.json: terminal/cmux.json
+    ~/.config/cmux/claude-launcher: terminal/cmux-claude-launcher
 
     ~/Library/Application Support/Code/User/settings.json: vscode/settings.json
     ~/Library/Application Support/Code/User/keybindings.json: vscode/keybindings.json

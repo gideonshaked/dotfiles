@@ -1,0 +1,38 @@
+#!/bin/sh
+# cmux's Claude wrapper execs this in place of claude (automation.claudeBinaryPath
+# in cmux.json). The wrapper passes its hook settings as
+# `--settings $TMPDIR/cmux-claude-settings.XXXXXX`, and Claude Code background
+# jobs store that argument in ~/.claude/jobs/*/state.json and reuse it on every
+# respawn. macOS periodically deletes old files from $TMPDIR, after which the
+# job exits with "Settings file not found". The file is therefore copied to a
+# content-addressed path under ~/.claude, which outlives any job that names it.
+# The temp file itself is left alone: the wrapper may still be handing it to
+# another surface.
+
+set -eu
+
+real_claude="$HOME/.local/bin/claude"
+store="$HOME/.claude/cmux-settings"
+
+n=$#
+prev=
+while [ "$n" -gt 0 ]; do
+    arg=$1
+    shift
+    n=$((n - 1))
+    if [ "$prev" = "--settings" ] && [ -f "$arg" ]; then
+        case ${arg##*/} in
+            cmux-claude-settings.*)
+                durable="$store/$(shasum -a 256 "$arg" | cut -d ' ' -f 1).json"
+                if [ ! -f "$durable" ]; then
+                    (umask 077 && mkdir -p "$store" && cp "$arg" "$durable")
+                fi
+                arg=$durable
+                ;;
+        esac
+    fi
+    set -- "$@" "$arg"
+    prev=$arg
+done
+
+exec "$real_claude" "$@"

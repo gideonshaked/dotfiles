@@ -68,6 +68,9 @@
 
   "automation": {
     "claudeCodeIntegration": true,
+    // cmux uses this path verbatim, without expanding ~. Where it does not
+    // exist, cmux's wrapper falls back to the claude found on PATH.
+    "claudeBinaryPath": "/Users/gideonshaked/.config/cmux/claude-launcher",
     // A subagent finishing is the orchestrator's business, not the user's.
     "suppressSubagentNotifications": true,
     "socketControlMode": "cmuxOnly",

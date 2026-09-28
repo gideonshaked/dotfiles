@@ -76,6 +76,10 @@ if OS.mac?
   # ssh/platform.d/01-macos points IdentityAgent at this app's agent socket.
   cask "1password"
 
+  # agents/claude/CLAUDE.md routes 1Password through op, which signs in through
+  # the app above once its Developer setting "Integrate with 1Password CLI" is on.
+  cask "1password-cli"
+
   # The terminal. Reads terminal/ghostty.config for rendering and terminal/cmux.json for
   # everything else, both linked by the macos module.
   cask "cmux"

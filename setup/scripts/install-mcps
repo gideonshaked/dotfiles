@@ -93,6 +93,15 @@ slack() {
     done
 }
 
+# Linear, like Notion, scopes a login to one workspace.
+linear() {
+    local url="https://mcp.linear.app/mcp" workspace
+    for workspace in personal octant; do
+        registered_with "linear-$workspace" "URL: $url" && continue
+        register "linear-$workspace" --transport http "$url"
+    done
+}
+
 store_secret() {
     local name="$1" value="$2" tmp
 
@@ -134,5 +143,6 @@ ssh_mcp
 context7
 notion
 slack
+linear
 
 echo "MCPs OK"

@@ -57,10 +57,6 @@
       force: true
     # settings.json names this by absolute path, so it needs a stable home
     # that does not depend on where the repo is cloned.
-    ~/.claude/hooks:
-      path: agents/claude/hooks
-      glob: false
-      force: true
 
 - shell:
     # ssh does not create the ControlPath directory, and multiplexing fails

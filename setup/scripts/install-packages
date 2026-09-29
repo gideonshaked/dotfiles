@@ -89,13 +89,6 @@ install_uv() {
         || echo "uv install failed (non-fatal)"
 }
 
-# The claude-validate hook checks edited Python with it. uv is already here,
-# and `uv tool` puts the shim in ~/.local/bin.
-install_ruff() {
-    have ruff && return 0
-    uv tool install ruff >/dev/null 2>&1 || echo "ruff install failed (non-fatal)"
-}
-
 # The pyright-lsp Claude plugin launches pyright-langserver from PATH and ships
 # no binary of its own.
 install_pyright() {
@@ -155,8 +148,7 @@ install_dolt() {
     chmod +x "$LOCAL_BIN/dolt"
 }
 
-# A single static binary. install-claude-plugins and the claude-validate hook
-# both parse JSON with it.
+# A single static binary. install-claude-plugins parses JSON with it.
 install_jq() {
     have jq && return 0
     curl -fsSL -o "$LOCAL_BIN/jq" \
@@ -245,7 +237,6 @@ install_linux() {
     install_fzf
     install_atuin
     install_uv
-    install_ruff
     install_pyright
     install_precommit
     install_jq

@@ -109,10 +109,9 @@ is fetched as a released binary under `$HOME` instead.
 | fzf | `terminal/shellrc` | cloned to `~/.fzf`, binary linked into `~/.local/bin` |
 | atuin | `terminal/shellrc` | release tarball, into `~/.local/bin` |
 | `uv` | `uvx`, which runs ssh-mcp | astral installer |
-| `jq` | `install-claude-plugins`, `claude-validate` | static binary from releases |
+| `jq` | `install-claude-plugins` | static binary from releases |
 | `node` | `npx`, for ccstatusline and the gcloud MCP | current LTS tarball, resolved from the release index |
 | `claude` | everything under `agents/claude/` | `claude.ai/install.sh`, both platforms |
-| `ruff` | `claude-validate`, for edited Python | `uv tool install` |
 | `pyright` | the `pyright-lsp` Claude plugin, which ships no binary | `uv tool install` |
 | `pre-commit` | this repository's git hooks | `uv tool install` |
 | `bd`, `dolt` | the issue database in `.beads` | release tarballs |
@@ -136,11 +135,7 @@ invisible.
 
 ### Agent provisioning
 
-`bin/` holds only commands meant to be typed: `dotfiles` and `s`. What
-`~/.claude/settings.json` names by absolute path is linked to a fixed `$HOME`
-location instead, since the repository's own path differs per machine: the
-`agents/claude/hooks/` directory to `~/.claude/hooks/`, which holds
-`claude-validate`.
+`bin/` holds only commands meant to be typed: `dotfiles` and `s`.
 
 npx comes from `node`: the manifest on macOS, the LTS tarball on Linux. There
 is no nvm wrapper. The statusLine, ccstatusline's two hooks and the gcloud MCP
@@ -289,7 +284,7 @@ host.
 ### The Homebrew manifest
 
 `manifest/Brewfile` lists dependencies of this repository's configuration and
-nothing else: 21 formulae, 6 casks, and the VS Code extensions. Every entry is
+nothing else: 20 formulae, 6 casks, and the VS Code extensions. Every entry is
 required by a file in this repo, and each carries a comment naming the file
 that needs it.
 

@@ -289,7 +289,7 @@ host.
 ### The Homebrew manifest
 
 `manifest/Brewfile` lists dependencies of this repository's configuration and
-nothing else: 20 formulae, 6 casks, and the VS Code extensions. Every entry is
+nothing else: 21 formulae, 6 casks, and the VS Code extensions. Every entry is
 required by a file in this repo, and each carries a comment naming the file
 that needs it.
 

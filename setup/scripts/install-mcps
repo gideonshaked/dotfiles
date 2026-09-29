@@ -83,15 +83,12 @@ notion() {
 }
 
 # Slack's MCP server does no dynamic client registration, so it needs a Slack
-# app's client id; this is the one Anthropic's own Slack plugin ships. Like
-# Notion, a login covers one workspace, so each workspace is its own entry.
+# app's client id; this is the one Anthropic's own Slack plugin ships.
 slack() {
-    local url="https://mcp.slack.com/mcp" workspace
-    for workspace in umich octant; do
-        registered_with "slack-$workspace" "URL: $url" && continue
-        register "slack-$workspace" --transport http "$url" \
-            --client-id 1601185624273.8899143856786 --callback-port 3118
-    done
+    local url="https://mcp.slack.com/mcp"
+    registered_with slack-octant "URL: $url" && return 0
+    register slack-octant --transport http "$url" \
+        --client-id 1601185624273.8899143856786 --callback-port 3118
 }
 
 store_secret() {

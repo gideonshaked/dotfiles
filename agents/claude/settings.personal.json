@@ -36,14 +36,13 @@
         ]
       },
       {
-        "_tag": "ccstatusline-managed",
+        "matcher": "Skill",
         "hooks": [
           {
             "type": "command",
             "command": "bash -lc 'exec npx -y ccstatusline@latest' --hook"
           }
-        ],
-        "matcher": "Skill"
+        ]
       }
     ],
     "UserPromptSubmit": [
@@ -56,7 +55,6 @@
         ]
       },
       {
-        "_tag": "ccstatusline-managed",
         "hooks": [
           {
             "type": "command",
@@ -121,7 +119,7 @@
       "effortLevel": "high"
     },
     "claude-opus-5-5": {
-      "effortLevel": "high"
+      "effortLevel": "xhigh"
     }
   },
   "advisorModel": "fable",
@@ -137,6 +135,7 @@
   "theme": "dark",
   "preferredNotifChannel": "ghostty",
   "autoCompactEnabled": true,
+  "switchModelsOnFlag": false,
   "remoteControlAtStartup": true,
   "crossSessionInbound": "accept",
   "inputNeededNotifEnabled": true,

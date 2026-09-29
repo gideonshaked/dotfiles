@@ -181,6 +181,7 @@ Each is logged in once per machine through `/mcp`, picking the matching workspac
 Slack's server does no dynamic client registration, so `slack-octant` carries the client id and callback port of the Slack app that Anthropic's own Slack plugin uses.
 
 Google is reached through `gog`, not an MCP server; `install-packages` installs it, but its OAuth client secret and every account login live in the keychain and are set up by hand on each machine (`gog auth credentials set`, then `gog auth add` and `gog auth alias set` per account).
+The OAuth client's id and secret are in the personal 1Password Private vault as "gog Google OAuth client", so a new machine reads them with `op` rather than downloading the client again.
 
 **Tool budget is a scarce shared resource.** Claude Code defers every MCP tool behind `ToolSearch` once tool definitions exceed 10% of the context window, which hides low-tool-count servers like exa behind higher-count ones. Adding an MCP server means checking afterwards whether deferral has kicked in.
 

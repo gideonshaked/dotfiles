@@ -209,3 +209,9 @@ Two accounts are signed in, so pass `--account my.1password.com` for personal or
 Never print a password, one-time code or other secret field into the conversation.
 Use `op item list`, `op item get` without `--reveal`, and `op read` only inside a command that consumes the value.
 Creating and editing items is fine when I've asked for it; deleting one needs my go-ahead for that item.
+
+### Slack
+
+Use the `slack-umich` and `slack-octant` MCP servers, one per workspace.
+Don't use the claude.ai Slack connector: it reaches only one workspace.
+Never send, post, react or edit a message without my go-ahead for that specific message; draft it and show me first.

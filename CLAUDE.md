@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Personal dotfiles using [Dotbot](https://github.com/anishathalye/dotbot) for symlink management. Configuration is grouped by tool and linked to where each tool expects it. Claude Code is the only agent this repository configures.
 
 Edit on `master`; do not use a git worktree here.
+`.claude/settings.json` sets `worktree.bgIsolation` to `none` so that background Claude Code sessions edit this checkout directly instead of refusing until they move into a worktree.
 Every tracked file is symlinked live from this checkout into `~`, so a change made in a worktree has no effect until the branch lands, and the repository is small enough that the isolation buys nothing.
 
 ## Commands
@@ -165,7 +166,7 @@ Claude Code round-trips the `hooks` subtree through its own schema, so a key it 
 Unknown keys at the top level do survive.
 That is why ccstatusline's `_tag` markers are not kept in these files: nothing here reads or regenerates them, and any `/config` or `/model` write strips them again.
 
-`install-mcps` holds one function per server: `exa` (HTTP), `gcloud` (npx through `bash -lc`), `ssh-mcp` (uvx), `context7`, and `notion`, which registers `notion-personal` and `notion-octant`. Each checks what is already registered and re-adds only when the stored command no longer matches, so an older definition is replaced rather than kept.
+`install-mcps` holds one function per server: `exa` (HTTP), `gcloud` (npx through `bash -lc`), `ssh-mcp` (uvx), `context7`, `notion`, which registers `notion-personal` and `notion-octant`, and `slack`, which registers `slack-umich` and `slack-octant`. Each checks what is already registered and re-adds only when the stored command no longer matches, so an older definition is replaced rather than kept.
 
 Context7 is registered directly over HTTP rather than through `ctx7 setup`,
 which opens an OAuth device flow and waits for a browser that a server does not
@@ -181,6 +182,7 @@ The proxy resolves credentials through the default chain even though the config 
 A Notion login covers exactly one workspace, and the claude.ai connector can hold only one, so each workspace is its own server entry pointing at `https://mcp.notion.com/mcp`.
 Two entries with one URL coexist, and they hide the claude.ai Notion connector.
 Each is logged in once per machine through `/mcp`, picking the matching workspace on Notion's consent screen.
+Slack works the same way, with one difference: its server does no dynamic client registration, so each entry carries the client id and callback port of the Slack app that Anthropic's own Slack plugin uses.
 
 Google is reached through `gog`, not an MCP server; `install-packages` installs it, but its OAuth client secret and every account login live in the keychain and are set up by hand on each machine (`gog auth credentials set`, then `gog auth add` and `gog auth alias set` per account).
 

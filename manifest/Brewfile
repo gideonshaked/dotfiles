@@ -52,6 +52,10 @@ brew "gh"
 # agents/claude/CLAUDE.md routes Gmail, Calendar and Contacts through gog.
 brew "openclaw/tap/gogcli"
 
+# agents/claude/CLAUDE.md routes iMessage and SMS through imsg. It reads
+# ~/Library/Messages, so the terminal running Claude needs Full Disk Access.
+brew "steipete/tap/imsg"
+
 # ssh/private.d/umich reaches nubio through a Cloudflare tunnel.
 brew "cloudflared"
 

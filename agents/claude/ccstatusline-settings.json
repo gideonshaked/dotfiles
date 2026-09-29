@@ -63,21 +63,8 @@
           "style": "compact"
         },
         "rawValue": false,
-        "merge": true,
         "metadata": {
           "invert": "true"
-        }
-      },
-      {
-        "id": "7be4fb11-3f82-431a-a8a1-7e63562ab9b6",
-        "type": "fable-weekly-usage",
-        "numberFormat": {
-          "style": "compact"
-        },
-        "rawValue": false,
-        "metadata": {
-          "invert": "true",
-          "display": "time"
         }
       },
       {

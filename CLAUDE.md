@@ -160,6 +160,7 @@ That script never reads settings.json, so there is nothing to gain from letting 
 Claude Code round-trips the `hooks` subtree through its own schema, so a key it does not recognise there does not survive any write.
 Unknown keys at the top level do survive.
 That is why ccstatusline's `_tag` markers are not kept in these files: nothing here reads or regenerates them, and any `/config` or `/model` write strips them again.
+Saving from ccstatusline's own TUI appends a second, tagged copy of both hooks to whichever profile is linked, with the quote closed before `--hook` so bash takes it as `$0` and ccstatusline prints a status line instead of running as a hook; delete that copy after every save.
 
 `install-mcps` holds one function per server: `exa` (HTTP), `gcloud` (npx through `bash -lc`), `ssh-mcp` (uvx), `context7`, `notion`, which registers `notion-personal` and `notion-octant`, and `slack`, which registers `slack-octant`. Each checks what is already registered and re-adds only when the stored command no longer matches, so an older definition is replaced rather than kept.
 

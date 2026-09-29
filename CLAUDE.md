@@ -284,12 +284,12 @@ host.
 ### The Homebrew manifest
 
 `manifest/Brewfile` lists dependencies of this repository's configuration and
-nothing else: 20 formulae, 6 casks, and the VS Code extensions. Every entry is
+nothing else. Every entry is
 required by a file in this repo, and each carries a comment naming the file
 that needs it.
 
 Nothing regenerates it. `brew bundle dump` writes the machine's full inventory,
-which was 52 formulae and 82 casks, so the `dotfiles brewfile` subcommand that
+so the `dotfiles brewfile` subcommand that
 called it is gone. `dotfiles brew` still installs from the manifest.
 
 That means the manifest is no longer a machine backup. Adding a package to a

@@ -179,7 +179,6 @@ A Notion or Linear login covers exactly one workspace, and each claude.ai connec
 Two entries with one URL coexist, and they hide the matching claude.ai connector.
 Each is logged in once per machine through `/mcp`, picking the matching workspace on the service's consent screen.
 Slack's server does no dynamic client registration, so `slack-octant` carries the client id and callback port of the Slack app that Anthropic's own Slack plugin uses.
-UMich's Slack is an Enterprise Grid, where that app needs an org admin's approval, so no UMich workspace is registered.
 
 Google is reached through `gog`, not an MCP server; `install-packages` installs it, but its OAuth client secret and every account login live in the keychain and are set up by hand on each machine (`gog auth credentials set`, then `gog auth add` and `gog auth alias set` per account).
 

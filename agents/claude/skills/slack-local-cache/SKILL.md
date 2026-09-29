@@ -23,7 +23,7 @@ It reads messages the desktop app has already loaded, so it needs no network and
 ```
 
 Output is one JSON object per line: `workspace`, `channel`, `user`, `time`, `ts`, `text`.
-Workspace is the subdomain in the app's cache (`enterprise` is UMich, `afterquery`, `afterqueryexperts`, `octantbio`, `v1community`).
+Workspace is the subdomain in the app's cache; an Enterprise Grid org appears as `enterprise`.
 Pipe through `jq` to filter or sort.
 Requires `uv`, which supplies `python-snappy` on the fly.
 

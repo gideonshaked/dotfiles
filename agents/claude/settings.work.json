@@ -102,7 +102,6 @@
     }
   },
   "advisorModel": "fable",
-  "pluginConfigs": {},
   "autoUpdatesChannel": "latest",
   "tui": "fullscreen",
   "voice": {
@@ -120,5 +119,6 @@
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "switchModelsOnFlag": true
 }

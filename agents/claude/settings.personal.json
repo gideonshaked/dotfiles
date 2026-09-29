@@ -103,7 +103,7 @@
   "theme": "dark",
   "preferredNotifChannel": "ghostty",
   "autoCompactEnabled": true,
-  "switchModelsOnFlag": false,
+  "switchModelsOnFlag": true,
   "remoteControlAtStartup": true,
   "crossSessionInbound": "accept",
   "inputNeededNotifEnabled": true,

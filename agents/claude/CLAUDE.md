@@ -212,6 +212,6 @@ Creating and editing items is fine when I've asked for it; deleting one needs my
 
 ### Slack
 
-Use the `slack-umich` and `slack-octant` MCP servers, one per workspace.
-Don't use the claude.ai Slack connector: it reaches only one workspace.
+Use the `slack-octant` MCP server for Octant's Slack.
+UMich's Slack is not connected.
 Never send, post, react or edit a message without my go-ahead for that specific message; draft it and show me first.

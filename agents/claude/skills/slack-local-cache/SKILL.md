@@ -1,6 +1,6 @@
 ---
 name: slack-local-cache
-description: Backup for reading Slack messages when the Slack MCP is unavailable, either because it is not authorized on that workspace (e.g. UMich) or not installed on this computer. Reads the Slack desktop app's local cache on macOS. Prefer the slack-octant / slack-afterquery MCP servers whenever they work.
+description: Backup for reading Slack messages when the Slack MCP is unavailable, either because it is not authorized on that workspace (UMich, AfterQuery) or not installed on this computer. Reads the Slack desktop app's local cache on macOS. Prefer the slack-octant MCP server whenever it works.
 ---
 
 # Slack local cache reader

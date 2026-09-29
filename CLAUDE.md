@@ -162,7 +162,7 @@ Unknown keys at the top level do survive.
 That is why ccstatusline's `_tag` markers are not kept in these files: nothing here reads or regenerates them, and any `/config` or `/model` write strips them again.
 Saving from ccstatusline's own TUI appends a second, tagged copy of both hooks to whichever profile is linked, with the quote closed before `--hook` so bash takes it as `$0` and ccstatusline prints a status line instead of running as a hook; delete that copy after every save.
 
-`install-mcps` holds one function per server: `exa` (HTTP), `gcloud` (npx through `bash -lc`), `ssh-mcp` (uvx), `context7`, `notion`, which registers `notion-personal` and `notion-octant`, `slack`, which registers `slack-octant` and `slack-afterquery`, and `linear`, which registers `linear-personal` and `linear-octant`. Each checks what is already registered and re-adds only when the stored command no longer matches, so an older definition is replaced rather than kept.
+`install-mcps` holds one function per server: `exa` (HTTP), `gcloud` (npx through `bash -lc`), `ssh-mcp` (uvx), `context7`, `notion`, which registers `notion-personal` and `notion-octant`, `slack`, which registers `slack-octant`, and `linear`, which registers `linear-personal` and `linear-octant`. Each checks what is already registered and re-adds only when the stored command no longer matches, so an older definition is replaced rather than kept.
 
 Context7 is registered directly over HTTP rather than through `ctx7 setup`,
 which opens an OAuth device flow and waits for a browser that a server does not
@@ -178,9 +178,8 @@ The proxy resolves credentials through the default chain even though the config 
 A Notion or Linear login covers exactly one workspace, and each claude.ai connector can hold only one, so each workspace is its own server entry pointing at the service's one URL (`https://mcp.notion.com/mcp`, `https://mcp.linear.app/mcp`).
 Two entries with one URL coexist, and they hide the matching claude.ai connector.
 Each is logged in once per machine through `/mcp`, picking the matching workspace on the service's consent screen.
-Slack's server does no dynamic client registration, so each Slack entry carries the client id and callback port of the Slack app that Anthropic's own Slack plugin uses.
-A Slack login covers one workspace, so each is logged in once per machine through `/mcp`, picking the matching workspace on Slack's consent screen.
-UMich's Slack is an Enterprise Grid, where that app needs an org admin's approval, so no UMich workspace is registered.
+Slack's server does no dynamic client registration, so `slack-octant` carries the client id and callback port of the Slack app that Anthropic's own Slack plugin uses.
+That app needs a workspace admin's approval wherever a workspace restricts app installs, so neither UMich's Enterprise Grid nor AfterQuery's workspace is registered; the `slack-local-cache` skill reads both from the Slack desktop app instead.
 
 Google is reached through `gog`, not an MCP server; `install-packages` installs it, but its OAuth client secret and every account login live in the keychain and are set up by hand on each machine (`gog auth credentials set`, then `gog auth add` and `gog auth alias set` per account).
 

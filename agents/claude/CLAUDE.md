@@ -200,6 +200,12 @@ Use the `notion-personal` and `notion-octant` MCP servers, one per workspace.
 Don't use the claude.ai Notion connector: it reaches only one workspace.
 When I don't say which workspace, work out which one the page belongs in and say which you used; ask only when it is genuinely unclear.
 
+### Linear
+
+Use the `linear-personal` and `linear-octant` MCP servers, one per workspace.
+Don't use the claude.ai Linear connector: it reaches only one workspace.
+When I don't say which workspace, work out which one the issue belongs in and say which you used.
+
 ### 1Password
 
 Use the `op` CLI through Bash; there is no MCP server for it.

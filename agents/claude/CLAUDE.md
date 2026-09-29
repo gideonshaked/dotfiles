@@ -219,7 +219,7 @@ Creating and editing items is fine when I've asked for it; deleting one needs my
 ### Slack
 
 Use the `slack-octant` MCP server for Octant's Slack.
-UMich's and AfterQuery's Slack are not connected; read them with the `slack-local-cache` skill.
+UMich's Slack is not connected.
 Never send, post, react or edit a message without my go-ahead for that specific message; draft it and show me first.
 
 ### Messages: iMessage and SMS

@@ -11,7 +11,7 @@ if ! command -v npx >/dev/null 2>&1; then
     exit 0
 fi
 
-if npx -y --package ccstatusline@latest node -e "process.exit(0)" 2>/dev/null; then
+if npx -y --package ccstatusline@2.2.30 node -e "process.exit(0)" 2>/dev/null; then
     echo "ccstatusline OK"
 else
     echo "ccstatusline install failed (non-fatal)"

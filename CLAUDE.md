@@ -147,6 +147,11 @@ writes bare `npx` commands, so wrap them again after running it.
 `install-ccstatusline` runs the package once through npx so it is cached before
 the first status line render.
 
+The statusLine and both hooks call `npx --prefer-offline -y ccstatusline@<version>` with an exact version, and `install-ccstatusline` caches that same version.
+npx revalidates the package metadata against the registry on every run, even for an exact version, so without `--prefer-offline` every prompt and every status line refresh waits on a network round trip and fails offline.
+A tag such as `@latest` can only be resolved online, so it cannot be used here.
+Upgrading means changing the version in both profiles and the install script together.
+
 `install-claude-plugins` reads `extraKnownMarketplaces` and `enabledPlugins` from the linked `~/.claude/settings.json` (via `jq`) and adds/installs each marketplace and plugin.
 It refreshes every marketplace, then runs `claude plugins update` on every plugin after `install`, because `install` exits 0 without changing anything when the plugin is already present.
 

@@ -19,7 +19,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -lc 'exec npx -y ccstatusline@latest --hook'"
+            "command": "bash -lc 'exec npx --prefer-offline -y ccstatusline@2.2.30 --hook'"
           }
         ]
       }
@@ -29,7 +29,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -lc 'exec npx -y ccstatusline@latest --hook'"
+            "command": "bash -lc 'exec npx --prefer-offline -y ccstatusline@2.2.30 --hook'"
           }
         ]
       }
@@ -37,7 +37,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bash -lc 'exec npx -y ccstatusline@latest'",
+    "command": "bash -lc 'exec npx --prefer-offline -y ccstatusline@2.2.30'",
     "padding": 0,
     "refreshInterval": 10
   },

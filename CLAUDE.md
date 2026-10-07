@@ -84,6 +84,7 @@ zsh and bash are equal first-class citizens. **One file configures both.**
 | `terminal/zshenv` | Loaded before `/etc/zshrc`, which is the only reason it is separate. Disables Apple Terminal session restore; sources `~/.cargo/env` because rustup writes that file directly. |
 | `terminal/starship.toml` | Prompt config, a different format. |
 | `terminal/ghostty.config` | Terminal rendering. cmux links libghostty and reads the Ghostty config rather than shipping its own, so this is cmux's renderer config. |
+| `terminal/cmux-ghostty.config` | Ghostty-syntax keys only cmux reads, such as the sidebar and tab-bar font sizes. Linked to `~/Library/Application Support/com.cmuxterm.app/config.ghostty`, which cmux loads after the Ghostty config. They cannot sit in `ghostty.config` because libghostty reports them as unknown fields and cmux shows every Ghostty diagnostic in an error card. cmux's Settings font-size controls and `cmux themes` also write to this file, so a change made from the UI lands in the repo. |
 | `terminal/cmux.json` | Everything cmux-specific: sidebar, notifications, automation. JSONC. cmux resolves symlinks before an atomic write, so a linked file survives being saved from its UI. |
 | `terminal/cmux-claude-launcher` | Linked to `~/.config/cmux/claude-launcher` and named by `automation.claudeBinaryPath` in `cmux.json`. See the cmux notifications section. |
 

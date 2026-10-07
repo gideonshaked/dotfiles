@@ -11,6 +11,7 @@
 
     # cmux links libghostty and reads the Ghostty config rather than its own.
     ~/.config/ghostty/config: terminal/ghostty.config
+    ~/Library/Application Support/com.cmuxterm.app/config.ghostty: terminal/cmux-ghostty.config
     ~/.config/cmux/cmux.json: terminal/cmux.json
     ~/.config/cmux/claude-launcher: terminal/cmux-claude-launcher
 

@@ -7,12 +7,13 @@ OUTDIR/prose.jsonl etc. hold full rows. OUTDIR/prose_rules.txt holds one
 line per correction: n, severity, rule, quote. That sheet is what the
 synthesis pass clusters.
 """
+
 import collections
 import json
 import os
 import sys
 
-rows = [json.loads(l) for l in open(sys.argv[1])]
+rows = [json.loads(line) for line in open(sys.argv[1])]
 out = sys.argv[2]
 os.makedirs(out, exist_ok=True)
 by = collections.defaultdict(list)

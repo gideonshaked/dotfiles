@@ -3,11 +3,12 @@
 
 Usage: report.py corrections.jsonl themes.json [themes_figure.json themes_analysis.json] > report.md
 """
+
 import collections
 import json
 import sys
 
-rows = [json.loads(l) for l in open(sys.argv[1])]
+rows = [json.loads(line) for line in open(sys.argv[1])]
 by_dom = collections.Counter(r["domain"] for r in rows)
 sev = collections.Counter(r["severity"] for r in rows)
 print("# Correction corpus report\n")

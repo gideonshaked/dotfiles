@@ -10,6 +10,7 @@ pair before the turn, so a terse "no" can be resolved to the prose it rejects.
 Tool results, compaction summaries, sidechains and interrupt markers are
 dropped: they are not the human speaking.
 """
+
 import json
 import re
 import sys
@@ -108,14 +109,19 @@ def main(paths):
                 if text == "[image]":
                     continue
                 n += 1
-                print(json.dumps({
-                    "session": session,
-                    "ts": d.get("timestamp"),
-                    "n": n,
-                    "user": text,
-                    "prior_assistant": prior_assistant[-2500:],
-                    "tool_context": tool_context,
-                }, ensure_ascii=False))
+                print(
+                    json.dumps(
+                        {
+                            "session": session,
+                            "ts": d.get("timestamp"),
+                            "n": n,
+                            "user": text,
+                            "prior_assistant": prior_assistant[-2500:],
+                            "tool_context": tool_context,
+                        },
+                        ensure_ascii=False,
+                    )
+                )
                 prior_assistant = ""
                 tool_context = None
     print(f"extracted {n} human turns", file=sys.stderr)

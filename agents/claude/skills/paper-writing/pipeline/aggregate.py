@@ -7,6 +7,7 @@ Writes counts to stderr. Each output row joins the label with the original
 turn so the synthesis stage sees the human's words, what they rejected, and
 the generic rule side by side.
 """
+
 import collections
 import glob
 import json
@@ -15,7 +16,7 @@ import sys
 KINDS = {"correction", "instruction", "question", "ack", "ops"}
 DOMAINS = {"prose", "figure", "analysis", "ops", "other"}
 
-turns = {json.loads(l)["n"]: json.loads(l) for l in open(sys.argv[1])}
+turns = {json.loads(line)["n"]: json.loads(line) for line in open(sys.argv[1])}
 labels = {}
 bad = 0
 for path in sorted(glob.glob(sys.argv[2].rstrip("/") + "/chunk_*.jsonl")):
@@ -34,9 +35,9 @@ for path in sorted(glob.glob(sys.argv[2].rstrip("/") + "/chunk_*.jsonl")):
         labels[lab["n"]] = lab
 
 missing = sorted(set(turns) - set(labels))
-kinds = collections.Counter(l["kind"] for l in labels.values())
-dom = collections.Counter((l["kind"], l["domain"]) for l in labels.values() if l["kind"] == "correction")
-sev = collections.Counter(l["severity"] for l in labels.values() if l["kind"] == "correction")
+kinds = collections.Counter(lab["kind"] for lab in labels.values())
+dom = collections.Counter((lab["kind"], lab["domain"]) for lab in labels.values() if lab["kind"] == "correction")
+sev = collections.Counter(lab["severity"] for lab in labels.values() if lab["kind"] == "correction")
 print(f"turns={len(turns)} labeled={len(labels)} missing={len(missing)} malformed={bad}", file=sys.stderr)
 print(f"kinds={dict(kinds)}", file=sys.stderr)
 print(f"corrections by domain={ {d: c for (_, d), c in dom.items()} }", file=sys.stderr)
@@ -59,12 +60,22 @@ for n in sorted(labels):
         dropped += 1
         continue
     seen_text.setdefault(key, t["session"])
-    print(json.dumps({
-        "n": n, "session": t["session"], "ts": t["ts"],
-        "domain": lab["domain"], "severity": lab["severity"],
-        "rule": lab["rule"], "target": lab["target"], "quote": lab["quote"],
-        "user": t["user"],
-        "prior_assistant": t["prior_assistant"][-1200:],
-        "tool_context": t["tool_context"],
-    }, ensure_ascii=False))
+    print(
+        json.dumps(
+            {
+                "n": n,
+                "session": t["session"],
+                "ts": t["ts"],
+                "domain": lab["domain"],
+                "severity": lab["severity"],
+                "rule": lab["rule"],
+                "target": lab["target"],
+                "quote": lab["quote"],
+                "user": t["user"],
+                "prior_assistant": t["prior_assistant"][-1200:],
+                "tool_context": t["tool_context"],
+            },
+            ensure_ascii=False,
+        )
+    )
 print(f"cross-session duplicates dropped={dropped}", file=sys.stderr)

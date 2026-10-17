@@ -306,6 +306,10 @@ Nothing in setup provisions it, and 1Password never shows the token again, so an
 The empty check matters because `-U` overwrites an existing entry, so a failed or cancelled `create` would otherwise replace a working token with nothing.
 The token does not expire; revoke it on 1Password.com under Developer, Service accounts.
 
+All of this is macOS-only.
+`op` and the 1Password app are Homebrew casks and the token lives in the macOS Keychain, so on Linux `op-agent` is still linked by `core` but fails because neither `security` nor `op` exists.
+That is accepted rather than worked around: a Linux host gets the secrets it needs piped from the Mac over `ssh`, never a service account token of its own.
+
 Two alternatives were rejected.
 Caching secrets in a per-session file costs one prompt per session but leaves plaintext on disk and depends on the agent following the rule.
 Disabling app integration for `op signin` session tokens means typing the account password, and those tokens still expire after 30 idle minutes.

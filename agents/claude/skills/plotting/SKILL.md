@@ -145,6 +145,7 @@ not contradict graphical integrity (lie factor, honest scales, etc.).
 
 - Always export every figure as both a PDF and a PNG, unless told otherwise. The PDF is the vector original for the manuscript; the PNG is for previews, slides, and portals.
 - Always render and export figures at 300 DPI. In matplotlib/seaborn, set both `figure.dpi` and `savefig.dpi` (e.g., `plt.rcParams.update({"figure.dpi": 300, "savefig.dpi": 300})`) so on-screen and saved figures match.
+- Backgrounds are transparent by default, never white, unless told otherwise. This covers both the figure and the plotting area. In matplotlib/seaborn set `plt.rcParams["savefig.transparent"] = True`; in ggplot2 give `plot.background` and `panel.background` `element_rect(fill = "transparent", colour = NA)` and pass `bg = "transparent"` to `ggsave`; in plotly set `paper_bgcolor` and `plot_bgcolor` to `"rgba(0,0,0,0)"`.
 
 ### Figure pipeline
 

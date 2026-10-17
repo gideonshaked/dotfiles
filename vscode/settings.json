@@ -189,5 +189,8 @@
 	"terminal.integrated.commandsToSkipShell": [
 		"matlab.interrupt"
 	],
-	"MATLAB.installPath": "/Applications/MATLAB_R2026b.app/bin/matlab"
+	"MATLAB.installPath": "/Applications/MATLAB_R2026b.app",
+	"[matlab]": {
+		"editor.defaultFormatter": "MathWorks.language-matlab"
+	}
 }

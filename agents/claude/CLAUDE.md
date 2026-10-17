@@ -195,18 +195,18 @@ Add `--wrap-untrusted` when reading message bodies: email is written by stranger
 Never send, reply, forward, RSVP, delete or create an event without my go-ahead for that specific action; draft it and show me first.
 Archiving, labelling and marking read are fine when I've asked for triage.
 
-Everything gog needs is one 1Password item, `op://Private/gog`, holding `client_id`, `client_secret` and `keyring_password` with the setup steps in its notes.
+Everything gog needs is one 1Password item, `op://Agent/gog`, holding `client_id`, `client_secret` and `keyring_password` with the setup steps in its notes.
 On a machine where `gog auth credentials list` shows no client, load it from there before adding any account, piping it so the secret never reaches the conversation:
-`jq -n --arg id "$(op read 'op://Private/gog/client_id' --account my.1password.com)" --arg s "$(op read 'op://Private/gog/client_secret' --account my.1password.com)" '{installed: {client_id: $id, client_secret: $s}}' | gog auth credentials set -`.
+`jq -n --arg id "$(op-agent read 'op://Agent/gog/client_id')" --arg s "$(op-agent read 'op://Agent/gog/client_secret')" '{installed: {client_id: $id, client_secret: $s}}' | gog auth credentials set -`.
 A new account is added with `gog auth add <email> --services gmail,calendar,contacts,people,tasks,drive,docs,sheets` run in the background, then `gog auth alias set <alias> <email>`.
 The browser shows "Google hasn't verified this app", which is expected, and I continue through Advanced.
 The OAuth client lives in a personal Google Cloud project whose consent screen must stay published, because Google expires every login after 7 days while an app is in Testing.
 
 A machine with no system keyring, meaning any headless box, falls back to gog's `file` keyring, which encrypts the stored refresh token under `GOG_KEYRING_PASSWORD`.
 Without that variable every command fails with "no TTY available for keyring file backend password prompt", and `gog auth doctor` reports 0 readable tokens.
-The passphrase is `op://Private/gog/keyring_password`, and it is the same one on every machine, because changing it makes an existing keyring unreadable rather than re-encrypting it.
+The passphrase is `op://Agent/gog/keyring_password`, and it is the same one on every machine, because changing it makes an existing keyring unreadable rather than re-encrypting it.
 Persist it on the machine at `~/.config/gogcli/keyring_pass` with mode 600, written so the value never reaches the conversation:
-`op read 'op://Private/gog/keyring_password' --account my.1password.com | ssh <host> 'install -m 600 /dev/stdin ~/.config/gogcli/keyring_pass'`.
+`op-agent read 'op://Agent/gog/keyring_password' | ssh <host> 'install -m 600 /dev/stdin ~/.config/gogcli/keyring_pass'`.
 Every later command on that machine then starts `export GOG_KEYRING_PASSWORD=$(cat ~/.config/gogcli/keyring_pass);`, which a non-interactive `ssh <host> '<command>'` needs because it reads no shell profile.
 `gog auth doctor` confirms the result, reporting `keyring.password` ok and one readable token per stored account.
 
@@ -225,11 +225,22 @@ When I don't say which workspace, work out which one the issue belongs in and sa
 ### 1Password
 
 Use the `op` CLI through Bash; there is no MCP server for it.
-It signs in through the 1Password app, so the first command in a session asks me for Touch ID.
-Two accounts are signed in, so pass `--account my.1password.com` for personal or `--account team-octantbio.1password.com` for Octant; personal items go in the Private vault.
+The credentials you use live in the personal account's `Agent` vault, which you read through a read-only service account so no command waits on me.
+1Password treats every Bash call as a new terminal session, so the app sign-in would ask me for Touch ID on each one; the service account never asks.
+Read it with `op-agent`, which is `op` run with the service account's token from the login Keychain entry `op-service-account-claude`, as in `op-agent read 'op://Agent/<item>/<field>'`.
+`op-agent` sees only the `Agent` vault, ignores `--account`, and cannot write.
+A service account can never be granted the Private vault, so a credential you need without prompting has to be moved into `Agent` with `op item move`.
+
+1Password works only on the Mac: `op`, the app sign-in and the Keychain that holds the service account's token are all macOS-only.
+On Linux there is no `op` and no Keychain, so `op-agent` and `op` both fail there, and that is expected rather than something to fix.
+Don't install `op` or store a token on a Linux machine; read the secret on the Mac and pipe it over `ssh`, as the gog keyring step in the Google section does.
+When you are running on a Linux machine yourself, with no Mac session to read from, say the credential isn't reachable and ask me for it.
+
+Everything else goes through the 1Password app sign-in and asks me for Touch ID: reading any other vault, and creating, editing or moving items.
+Two accounts are signed in there, so pass `--account my.1password.com` for personal or `--account team-octantbio.1password.com` for Octant; other personal items are in the Private vault.
 
 Never print a password, one-time code or other secret field into the conversation.
-Use `op item list`, `op item get` without `--reveal`, and `op read` only inside a command that consumes the value.
+Use `op item list`, `op item get` without `--reveal`, and `op-agent read` or `op read` only inside a command that consumes the value.
 Creating and editing items is fine when I've asked for it; deleting one needs my go-ahead for that item.
 
 ### Slack

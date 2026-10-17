@@ -1,0 +1,15 @@
+#!/bin/sh
+# Runs op as the read-only "Claude Code" service account, which sees only the
+# personal account's Agent vault and never asks for Touch ID.
+#
+# The 1Password app scopes its CLI authorization to a terminal session, and an
+# agent's every shell call is a fresh session with no TTY, so plain `op` would
+# prompt on each call. The token lives in the login Keychain rather than in a
+# shell profile because setting OP_SERVICE_ACCOUNT_TOKEN globally would take
+# over every interactive `op` and hide the Private vault.
+
+set -eu
+
+OP_SERVICE_ACCOUNT_TOKEN=$(security find-generic-password -s op-service-account-claude -w)
+export OP_SERVICE_ACCOUNT_TOKEN
+exec op "$@"

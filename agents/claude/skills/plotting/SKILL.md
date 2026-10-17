@@ -25,10 +25,9 @@ requirements bind next, because a figure that violates them is rejected
 regardless of taste. Everywhere else the personal preferences win over the
 Tufte material.
 
-One standing conflict: journal panel letters are lowercase **bold**, which the
-no-bold rule otherwise forbids. A panel letter is a submission requirement
-rather than emphasis, so it is exempt. Nothing else in a journal figure takes
-bold.
+Panel letters are the one exemption from the no-bold rule.
+A panel letter marks structure rather than emphasis, so it takes bold; nothing else in a figure does.
+Letters are uppercase by default (A, B, C), and a venue's own rule overrides that, such as Nature's lowercase.
 
 ---
 
@@ -91,7 +90,9 @@ not contradict graphical integrity (lie factor, honest scales, etc.).
 
 - **Titles are never bold.** This is the most common offender and the strictest version of the no-bold rule. Plot titles, axis titles, and facet/panel titles all stay at regular weight (e.g., in seaborn/matplotlib never pass `fontweight="bold"`; in ggplot2 do not set `face = "bold"` in `element_text` for titles, and override any theme default that does).
 - No bold anywhere else either: axis labels, tick labels, annotations, legend titles, captions. Use weight only when it carries information (e.g., highlighting one series among many), not for emphasis.
-- The one exception is a multi-panel figure's panel letters, which are lowercase bold. See Journal figures below.
+- The one exception is a multi-panel figure's panel letters, which are bold and uppercase by default (A, B, C) unless the venue specifies otherwise.
+- Every figure in a set draws its font and marker sizes from one shared table, with no per-figure exceptions.
+- Use the terms of the document the figure is for. Axis titles, legend entries, and panel titles use the same words as the text and captions ("Attempts", not "Tries"), and a rename in the text reaches every figure, supplement included.
 - No stacked subtitles or stat-strips on the plot itself for things like Pearson r, Spearman rho, n, p-values, R^2. Those belong in the figure caption or accompanying slide bullets, not as a subtitle.
 
 ### Axes, grids, frames
@@ -99,10 +100,17 @@ not contradict graphical integrity (lie factor, honest scales, etc.).
 - Drop the top and right spines on regression plots, dot plots, line plots, and similar Cartesian plots. Keep only the bottom and left spines.
 - No horizontal or vertical rules across the plotting area unless they genuinely enhance viewer clarity (e.g., a reference line at y=0, a meaningful threshold, a date marker that the reader needs to locate). Default is no rules.
 - Logarithmic axes: major ticks at the decades only, no minor ticks. Labels are either plain magnitudes (100, 1K, 10K, 1M) or powers of ten (10^3, 10^6); both are acceptable and the choice is mine per figure, so ask which one is wanted when it has not been stated. The axis title names the quantity; the labels carry the scale.
+  - Exception: an axis that spans only one or two decades gets 1-2-5 ticks within each decade (0.1, 0.2, 0.5, 1, ...), since decade ticks alone leave it nearly unlabeled.
+- Tune tick density per axis rather than accepting the library default, and run a value axis to one tick above its tallest bar or point.
+- Connect points with lines only when the x axis is ordered (time, turn, dose, rank). Points over unordered categories stay unconnected.
 
 ### Chart-type defaults
 
 - Barplots: always print the exact value of each bar on top of (or just above) the bar. This is a specific exception to the general "no on-plot text" rule; bar height is hard to read precisely, so the number earns its ink.
+  - A segment of a stacked bar gets its value only above a stated size threshold (about 6% of the bar); smaller segments stay unlabeled.
+  - Distributions (box, violin, histogram, strip) never carry printed values.
+  - Where values would crowd, drop them and quote them in the text instead; never shrink them below the legibility floor.
+  - Paired comparisons (before and after, mode A and mode B) print their gain once per pair, in one aligned row above the bars.
 
 ### Annotation and labeling
 
@@ -112,10 +120,43 @@ not contradict graphical integrity (lie factor, honest scales, etc.).
   - Exception: in many-paneled / faceted plots, per-facet stats on the panel can be the cleanest place for them, since the caption cannot speak to each panel individually.
 - Prefer direct labels on series over a separate legend when there are few series.
 - Statistical summaries (r, rho, n, p, R^2) live in the figure caption or surrounding prose by default.
+- Legends sit in one horizontal strip below the panels, centered as a group, with each key's title on a shared baseline and its entries under it. Every key has a title. A key that explains a single panel sits beside that panel instead.
+
+### Color and encoding
+
+- An element with a distinct role (a reference, a highlighted series, a threshold) gets a color unlike anything else in the figure.
+- An entity keeps one color across every figure in a set, so a model, condition, or group is recognizable at a glance in any panel.
+- A secondary factor is encoded by marker shape, and a binary condition by hatching or fill (solid versus tinted), never by a second hue.
+
+### Captions
+
+- A caption opens with a bold noun-phrase title, then gives one short description per panel, each led by its bold letter in parentheses: "**(A)** Mean score per combination."
+- Say what is plotted and define every error bar and interval. Do not repeat the body text, and do not point to other figures.
+- State any truncation in the caption: a dropped category, a cut axis, or strata too thin to plot ("through turn 7, as later turns hold too few subtasks"). Never ghost or fade data that is not being fit.
+- Table captions follow the same pattern as figure captions.
+
+### Layout and sizing
+
+- Figure height is a page-budget variable. Cut dead space, do not force square panels, and shrink a figure before cutting one.
+- Shrinking never crowds printed values or hides a difference: cut the gaps between panels and blocks before shortening an axis.
+- A layout fix never changes what the plot shows.
 
 ### Output and sizing
 
+- Always export every figure as both a PDF and a PNG, unless told otherwise. The PDF is the vector original for the manuscript; the PNG is for previews, slides, and portals.
 - Always render and export figures at 300 DPI. In matplotlib/seaborn, set both `figure.dpi` and `savefig.dpi` (e.g., `plt.rcParams.update({"figure.dpi": 300, "savefig.dpi": 300})`) so on-screen and saved figures match.
+
+### Figure pipeline
+
+A figure that will be kept, shared, or published is built in three parts:
+
+1. An analysis step computes the plotted values and writes them to a CSV beside the figure, named like it (`fig4_leaderboard.csv` beside `fig4_leaderboard.pdf`).
+2. A figure script reads only that CSV and writes the PDF and the PNG. It does no computation of its own, so restyling a figure can never change a number in it, and panels can be recombined without rerunning the analysis.
+3. A markdown note beside the figure records what it shows (panels, encodings, data source, n, any truncation) and the scientific takeaways it supports. The caption and the results text are written from that note.
+
+Renders are deterministic: fixed seeds and fixed ordering, so rerunning a script reproduces the figure exactly.
+
+Exploratory figures that may be thrown away can skip the pipeline, but every time, offer in one line to promote the figure to it. The house style and the PDF-and-PNG export apply to exploratory figures too.
 
 ### Anti-preferences
 
@@ -180,13 +221,15 @@ or bands.
 
 ### Physical and typographic specs
 
+These are Nature's values, used for Nature-family submissions; elsewhere the house style above governs.
+
 | Spec | Value |
 |------|-------|
 | Single-column width | about 89 mm |
 | Double-column width | about 183 mm |
 | Minimum rendered glyph | 5 pt, no exceptions |
 | Body, tick and legend text | 7-9 pt for dense multi-panel at publication width |
-| Panel letters | about 8 pt, lowercase, bold, top left |
+| Panel letters | about 8 pt, lowercase (Nature's rule), bold, top left |
 | Axis line width | 0.8-1.2 pt |
 | Plot line width | 2-3 pt |
 | Marker size | 8-12 pt |
@@ -236,7 +279,7 @@ visible whenever it changes the figure-level claim.
 Panel letters mark reading order only and carry no fixed function: panel `a`
 need not be a schematic.
 
-**Legends** follow a fixed skeleton: `Fig. N |`, then a bold noun-phrase title,
+**Legends** for Nature-family venues follow a fixed skeleton: `Fig. N |`, then a bold noun-phrase title,
 then per-panel descriptions in present-tense telegraphic style, then the
 statistics (`n =`, error type, test, correction), then data availability.
 Present tense for what is shown, past tense for how it was made.

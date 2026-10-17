@@ -186,8 +186,13 @@ Two entries with one URL coexist, and they hide the matching claude.ai connector
 Each is logged in once per machine through `/mcp`, picking the matching workspace on the service's consent screen.
 Slack's server does no dynamic client registration, so `slack-octant` carries the client id and callback port of the Slack app that Anthropic's own Slack plugin uses.
 
-Google is reached through `gog`, not an MCP server; `install-packages` installs it, but its OAuth client secret and every account login live in the keychain and are set up by hand on each machine (`gog auth credentials set`, then `gog auth add` and `gog auth alias set` per account).
-The OAuth client's id and secret are in the personal 1Password Private vault as "gog Google OAuth client", so a new machine reads them with `op` rather than downloading the client again.
+Google is reached through `gog`, not an MCP server; `install-packages` installs it, but its OAuth client secret and every account login live in a keyring and are set up by hand on each machine (`gog auth credentials set`, then `gog auth add` and `gog auth alias set` per account).
+One item in the personal 1Password Private vault, `op://Private/gog`, holds the OAuth client's id and secret plus the keyring passphrase and the setup steps, so a new machine reads them with `op` rather than downloading the client again.
+
+Which keyring depends on the machine. macOS uses the login keychain, which needs nothing beyond being logged in, so `keyring_backend` resolves to `auto`.
+A headless machine has none, falls back to gog's `file` backend, and then every command needs `GOG_KEYRING_PASSWORD` or fails with "no TTY available for keyring file backend password prompt".
+That passphrase is the `keyring_password` field of the same item, and it has to be the same value everywhere, since changing it leaves an existing keyring undecryptable.
+Write it to `~/.config/gogcli/keyring_pass` at mode 600 on each headless machine and export it from there, because a non-interactive `ssh host 'command'` reads no shell profile.
 
 **Tool budget is a scarce shared resource.** Claude Code defers every MCP tool behind `ToolSearch` once tool definitions exceed 10% of the context window, which hides low-tool-count servers like exa behind higher-count ones. Adding an MCP server means checking afterwards whether deferral has kicked in.
 

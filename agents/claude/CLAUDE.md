@@ -231,6 +231,11 @@ Read it with `op-agent`, which is `op` run with the service account's token from
 `op-agent` sees only the `Agent` vault, ignores `--account`, and cannot write.
 A service account can never be granted the Private vault, so a credential you need without prompting has to be moved into `Agent` with `op item move`.
 
+1Password works only on the Mac: `op`, the app sign-in and the Keychain that holds the service account's token are all macOS-only.
+On Linux there is no `op` and no Keychain, so `op-agent` and `op` both fail there, and that is expected rather than something to fix.
+Don't install `op` or store a token on a Linux machine; read the secret on the Mac and pipe it over `ssh`, as the gog keyring step in the Google section does.
+When you are running on a Linux machine yourself, with no Mac session to read from, say the credential isn't reachable and ask me for it.
+
 Everything else goes through the 1Password app sign-in and asks me for Touch ID: reading any other vault, and creating, editing or moving items.
 Two accounts are signed in there, so pass `--account my.1password.com` for personal or `--account team-octantbio.1password.com` for Octant; other personal items are in the Private vault.
 

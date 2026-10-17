@@ -136,7 +136,7 @@ invisible.
 
 ### Agent provisioning
 
-`bin/` holds only commands meant to be typed: `dotfiles` and `s`.
+`bin/` holds `dotfiles` and `s`, which are typed by hand, and `spr` and `op-agent`, which wrap a tool to supply its secret on each call.
 
 npx comes from `node`: the manifest on macOS, the LTS tarball on Linux. There
 is no nvm wrapper. The statusLine, ccstatusline's two hooks and the gcloud MCP
@@ -187,7 +187,7 @@ Each is logged in once per machine through `/mcp`, picking the matching workspac
 Slack's server does no dynamic client registration, so `slack-octant` carries the client id and callback port of the Slack app that Anthropic's own Slack plugin uses.
 
 Google is reached through `gog`, not an MCP server; `install-packages` installs it, but its OAuth client secret and every account login live in a keyring and are set up by hand on each machine (`gog auth credentials set`, then `gog auth add` and `gog auth alias set` per account).
-One item in the personal 1Password Private vault, `op://Private/gog`, holds the OAuth client's id and secret plus the keyring passphrase and the setup steps, so a new machine reads them with `op` rather than downloading the client again.
+One item in the personal 1Password `Agent` vault, `op://Agent/gog`, holds the OAuth client's id and secret plus the keyring passphrase and the setup steps, so a new machine reads them with `op-agent` rather than downloading the client again.
 
 Which keyring depends on the machine. macOS uses the login keychain, which needs nothing beyond being logged in, so `keyring_backend` resolves to `auto`.
 A headless machine has none, falls back to gog's `file` backend, and then every command needs `GOG_KEYRING_PASSWORD` or fails with "no TTY available for keyring file backend password prompt".
@@ -292,6 +292,23 @@ reach for a per-connection wrapper such as the Kitty SSH kitten to do it,
 because those only fire when wrapping the literal `ssh` command and are
 bypassed by `gcloud compute ssh`, a cloudflared `ProxyCommand` and any jump
 host.
+
+### 1Password for agents (`bin/op-agent`)
+
+Claude Code runs each Bash call as a new process session with no TTY, and the 1Password app scopes CLI authorization to a terminal session, so every `op` call from an agent asked for Touch ID.
+`op-agent` runs `op` as the service account "Claude Code", which holds `read_items` on the personal account's `Agent` vault and nothing else, so its reads never prompt.
+Service accounts cannot be granted Private, Personal or Employee vaults, which is why `Agent` exists and why `gog` was moved there out of Private; anything else an agent should read without prompting moves there too.
+Read-only is the whole grant because a service account's permissions cannot be changed after creation; widening it means creating a new one and replacing the Keychain entry.
+
+The token is a login Keychain generic password with service `op-service-account-claude`, created by `security add-generic-password`, so `security find-generic-password` reads it back without a dialog.
+It is not in a shell profile because a global `OP_SERVICE_ACCOUNT_TOKEN` overrides app sign-in for every `op` call and hides the Private vault from interactive use.
+Nothing in setup provisions it, and 1Password never shows the token again, so another Mac gets its own service account from `t=$(op service-account create "Claude Code" --vault Agent:read_items --raw --account my.1password.com) && [ -n "$t" ] && security add-generic-password -U -a "$USER" -s op-service-account-claude -w "$t"`.
+The empty check matters because `-U` overwrites an existing entry, so a failed or cancelled `create` would otherwise replace a working token with nothing.
+The token does not expire; revoke it on 1Password.com under Developer, Service accounts.
+
+Two alternatives were rejected.
+Caching secrets in a per-session file costs one prompt per session but leaves plaintext on disk and depends on the agent following the rule.
+Disabling app integration for `op signin` session tokens means typing the account password, and those tokens still expire after 30 idle minutes.
 
 ### The Homebrew manifest
 

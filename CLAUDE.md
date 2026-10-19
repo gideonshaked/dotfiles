@@ -30,9 +30,10 @@ dotfiles brew                # Install everything in the manifest
 dotfiles dotbot              # Update Dotbot submodule
 ```
 
-`update` pulls with `--ff-only --autostash`. Several tracked files are symlinked
-live into Claude Code and VS Code, which rewrite them in place, so this tree is
-often dirty and a plain `--ff-only` pull aborts before the install ever runs.
+`update` pulls with `--ff-only --autostash`.
+Several tracked files are symlinked live into Claude Code and VS Code, which rewrite them in place, so this tree is often dirty and a plain `--ff-only` pull aborts before the install ever runs.
+When `update` still fails because the pull cannot fast-forward, `master` has been rewritten on GitHub, so force pull instead: `git fetch origin && git reset --hard origin/master`, then `./install`.
+The reset discards local commits and uncommitted edits, so check `git log origin/master..master` and `git status` first and carry over anything that is not already on GitHub.
 
 **Lint:**
 ```bash

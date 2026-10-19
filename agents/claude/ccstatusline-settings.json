@@ -3,12 +3,8 @@
   "lines": [
     [
       {
-        "id": "3",
-        "type": "context-percentage-usable",
-        "color": "brightBlack",
-        "numberFormat": {
-          "style": "whole"
-        },
+        "id": "bdefbde7-08e7-4d83-acb3-62d75833bafb",
+        "type": "context-percentage",
         "rawValue": true,
         "metadata": {
           "inverse": "true"
@@ -42,7 +38,8 @@
         "rawValue": false,
         "metadata": {
           "display": "time",
-          "absolute": "false"
+          "absolute": "false",
+          "compact": "true"
         }
       },
       {

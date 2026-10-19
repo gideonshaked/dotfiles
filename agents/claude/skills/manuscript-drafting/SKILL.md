@@ -9,6 +9,8 @@ when_to_use: "Use whenever touching manuscript prose: drafting, filling brackete
 Rules learned from one author correcting Claude across many turns of manuscript work.
 Most were enforced more than once.
 The ones marked (repeat) are rules the author had to state again because Claude broke them after being told.
+Apply the writing skill to every sentence.
+This skill adds only what is specific to a manuscript and to working with its author.
 
 ## Your role
 
@@ -18,12 +20,19 @@ The author's verdict on Claude drafting from scratch was that a style rule set "
 Behave accordingly.
 
 - Change only the span you were asked to change (repeat). If asked to fix one word, fix one word. If asked to fix flow, change the connectives and nothing else. Do not re-word neighbouring sentences, merge or split the author's paragraphs, or rewrite their topic sentence while filling in brackets.
-- Never reintroduce wording the author removed or banned (repeat). Keep a running list of banned words for the manuscript and search the draft for them before every hand-back.
+- Never reintroduce wording the author removed or banned (repeat).
 - Once the author rules on a phrase, a fact, or a number, write it as ruled. Do not relitigate it, soften it, or swap in a "more precise" alternative. "I want to say performance degrades over the course of the session" ends the discussion.
 - When a word, title, or opening is contested, offer several options in chat and let the author pick. Do not apply one. If they reject the set, the next set must be more varied, not more of the same.
 - Propose new paragraphs in chat before touching the file. Paragraphs you did draft into the file are placeholders. Mark them for the author to rephrase.
 - Before restating something the author already wrote elsewhere, reuse their copy. Do not compose fresh copy for a point that exists in their words.
 - Read the author's current draft before describing what a section contains. It has changed since you last looked.
+
+## Manuscript glossary
+
+Every manuscript keeps a glossary file in its own repository listing its fixed terms, its banned words, and the layout decisions the author has ruled on.
+Read it before the first edit and grep the draft for banned words before handing anything back.
+When the author bans a word or fixes a term mid-session, add it to the glossary in the same turn.
+If the manuscript has none yet, create one beside the manuscript source.
 
 ## Verify before you write
 
@@ -38,7 +47,7 @@ Behave accordingly.
 
 ## Terminology
 
-- Keep one glossary for the manuscript and use its terms in the body, titles, captions, figure labels, abstract and appendix alike. Never coin a second name for something a figure or an earlier section already named.
+- Use one name per thing across the body, titles, captions, figure labels, abstract and appendix alike. Never coin a second name for something a figure or an earlier section already named.
 - Define a term inline, inside a working sentence, the first time it appears. Never write a standalone definition sentence. Expand an acronym at first mention and use the acronym after.
 - Write for a reader with no context. Internal words from the project's tooling do not appear unless defined in plain language first. Internal code organisation never appears at all.
 - Describe a category or a procedure in one plain clause at the level of what it did. Not an enumeration of every mechanism behind it, and not implementation details that carry no meaning for the reader (an embedding width, the count of items embedded, the length of a model's output).
@@ -66,7 +75,7 @@ Behave accordingly.
 
 - The topic sentence states the point the paragraph argues, and the sentences after it must follow from it. Do not restate the topic sentence later in the paragraph. Each sentence adds something.
 - One job per paragraph. Do not restate a fact established earlier, and move quickly past notions the introduction already covered. A minor point is folded into an existing paragraph as one quick sentence, not given a paragraph of its own.
-- Short. A results subsection is two or three paragraphs. An introduction is three or four short ones. Seven paragraphs is a plan to cut. When asked to shorten, keep every claim, citation and detail and cut words. If a point gets crowded out, restore it as its own short clause.
+- Short. A results subsection is two or three paragraphs. Seven paragraphs is a plan to cut. When asked to shorten, keep every claim, citation and detail and cut words. If a point gets crowded out, restore it as its own short clause.
 - Each subsection stands alone. Do not lean on a concept a later section introduces, and do not introduce a detail before the paragraph that covers it.
 - Open a section by introducing the concept it depends on, in the register of the preceding paragraph, and lead into the method gently. Do not open on a procedure, a methodological exclusion, or an ordinal ("a second pass") that makes the reader recall an earlier step.
 - Lead with the positive finding and add the nuance after it. The opener says things get better, not what was lost.
@@ -75,7 +84,7 @@ Behave accordingly.
 - Prefer the straightforward conclusion. A plain list with the most relevant item first beats a clever second-order claim. Leave complexity for the Discussion.
 - Place an exception directly after the claim it qualifies, with its numbers. Place a new sentence where it follows from its neighbours, never in front of a paragraph's closing sentence.
 - End on the evidence sentence with its figure citation. No summary cap, no new numbers or comparisons in a concluding sentence, and do not reuse a closing construction ("taken together") from the previous paragraph.
-- Put each thing where it belongs. Caveats go in the caption. Implementation parameters and the provenance of borrowed methods go in Methods. Cross-section summaries go in the Discussion. Run counts and figure citations stay out of the introduction.
+- Put each thing where it belongs. Caveats go in the caption. Implementation parameters and the provenance of borrowed methods go in Methods. Cross-section summaries go in the Discussion.
 - When a paragraph is meant to parallel a passage in a reference paper, read that passage first and mirror its structure and length.
 - State what you did and the argument behind it in your own words, then attach the citation. Never write "we follow X" in place of the method. Cite a source once and keep the reasoning it supports in one contiguous span.
 - Make an abstract claim concrete with one worked example, marked as an example, rather than a catalogue of instances. Explain why a design exists and give one case.
@@ -91,7 +100,7 @@ Behave accordingly.
 
 ## Section titles
 
-- One short simple sentence stating the section's argument. No colon, no two clauses joined by a comma, at most a compound subject or object.
+- One short simple sentence stating the section's argument. No two clauses joined by a comma, at most a compound subject or object.
 - Lead with the primary claim and let the secondary claim follow. Open with the subject making the claim ("Frontier models do not saturate").
 - Name the axes and the direction. "X varies" is not specific enough, and a title that reports one narrow finding instead of the section's point is too specific.
 - No project or tool name in a section title. No "all", no "any", no unexplained jargon, no compressed compound modifiers.
@@ -105,25 +114,21 @@ Behave accordingly.
 - Read the paper's other captions first and match their length.
 - Say what each panel measures, one parenthetical per panel, caveats in one brief clause. Never describe visual encodings the reader can see.
 - Open by naming what the plot is ("A UMAP of ..."), not how marks were placed.
-- Do not add a table that repeats labels legible on the plot, or an appendix section that duplicates a figure.
 
 ## Sentences
 
-- No colons except before a list or a verbatim block. No semicolons. Join clauses with "so", "which caused", or a full stop.
 - Coordinated clauses are grammatically parallel, and the second half of a coordinated sentence is an independent clause with its own verb and its subject restated. An aside goes where it does not split the subject from its verb.
 - "Instead" only where a real contrast precedes it. "Even" never joins two compatible claims. "But" where the second clause opposes the first. "For example" or "as an example" marks an example.
 - No dangling referents. "Another" must have an antecedent the reader holds.
-- No vague or figurative words where a plain one exists. "Nothing to open" is vague. "Later-turn" is unclear. Saying the work ran "over" a dataset hides how the dataset enters the workflow. Say the plain fact.
 - Say exactly what is meant. "Often has more than one name" and "rarely has only one name" are different claims. "Many", not "most", when the majority is not established.
 - Do not repeat a distinctive verb within a paragraph, and never twice in one sentence.
 - Fix an awkward sentence as one sentence. Do not split it into two choppy ones. Short sentences that carry one idea between them become one sentence.
 - No conversational transitions ("whichever way that ends"). No narrated history ("X began ..."). No rhetorical contrast wrapped round a plain fact.
-- No pairings where the verb already carries the adverbial ("predicted in advance" was rejected as an oxymoron).
 - Soften absolutes about the literature ("no prior work") to defensible claims. Do not speculate about future behaviour. Do not claim wide variation when the spread is modest.
 
 ## Tables and typesetting
 
-- Tables default to the main text beside the figures they support. Do not add a table that repeats labels legible on a plot, and do not add columns the author did not ask for even when the source note has them.
+- Tables default to the main text beside the figures they support. Do not add a table that repeats labels legible on a plot, or an appendix section that duplicates a figure, and do not add columns the author did not ask for even when the source note has them.
 - Reproduce a table from its source note as it stands. Do not regroup flat rows into sections. Where rows are grouped, repeat the group value on every row rather than spanning cells.
 - Every table is set to the full text width with identical widths across parallel tables, body in small type, caption at the size of the other captions with only the "Table X:" label bold. Re-check widths after any column change.
 - Align cells with the package's own facilities, never hand-tuned offsets.
@@ -131,20 +136,11 @@ Behave accordingly.
 - When one factual claim proves wrong, re-verify every other claim in the section independently rather than patching the one.
 - Look at the rendered PDF before reporting a layout fix as done. Never attribute a reported rendering problem to a stale view.
 
-## Manuscript glossary
-
-Every manuscript keeps a glossary file in its own repository listing its fixed terms, its banned words, and the layout decisions the author has ruled on.
-Read it before the first edit and grep the draft for banned words before handing anything back.
-When the author bans a word or fixes a term mid-session, add it to the glossary in the same turn.
-If the manuscript has none yet, create one beside the manuscript source.
-
 ## Before you hand back an edit
 
 - Did I change anything I was not asked to change?
 - Did any banned or removed word come back?
 - Does every number say what it is a number of, and can the reader find it on the cited panel at that precision?
 - Does every panel letter match what the panel shows?
-- Is every term in the glossary, defined inline at first use?
-- Any colon that is not before a list? Any semicolon?
+- Is every term defined inline at first use?
 - Does the paragraph open with its point and end on evidence with a citation?
-- Did I re-read the full sentence and paragraph after the edit?

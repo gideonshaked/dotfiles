@@ -62,7 +62,7 @@ Working notes leak habits into prose that a reader cannot decode.
 
 - No arrow chains such as "parse -> validate -> store". Write the sentence that says what happens.
 - No stacked hyphen compounds such as "per-session token-cache fix". Unpack them into a phrase.
-- No labels invented while working. The reader has never seen "option B" or "the phase 2 fix", so describe the thing itself.
+- Introduce a label before you use it. A name coined while working, such as "option B" or "the phase 2 fix", is fine once the text has said plainly what it names, but never drop one in as if the reader already knew it.
 
 Before handing a draft back, reread it once against each section above.
 

@@ -131,7 +131,7 @@ Each destination takes what only it can hold, so put a fact in the narrowest pla
 ## Reporting after unattended work
 
 When I have not been watching, your final message is my first look at the work, so write it as a re-grounding rather than a continuation.
-Drop the shorthand you built up while working: no arrow chains, no hyphen-stacked compounds, no labels you invented earlier.
+Drop the shorthand you built up while working: no arrow chains, no hyphen-stacked compounds, and no label you coined unless you introduce it to me explicitly before using it.
 Give each file, flag or commit its own plain clause.
 
 ## Markdown heading hierarchy

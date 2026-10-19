@@ -97,7 +97,6 @@
       "effortLevel": "high"
     }
   },
-  "advisorModel": "fable",
   "autoUpdatesChannel": "latest",
   "tui": "fullscreen",
   "voice": {

@@ -47,18 +47,6 @@ For verification specifically, a subagent starting from a clean context beats se
 The exception is cost.
 When I say to conserve usage, or to keep it cheap or light, do the work inline instead.
 
-## Asking the advisor
-
-Ask sparingly, and never as the opening move of a conversation.
-Reaching for a second model before you have done anything is the pattern I want gone: there is no result to judge yet, so the answer is generic and the call buys nothing.
-
-Ask once you have done the work and are unsure of the result, and only when the doubt is specific enough to state in a sentence.
-The strongest case is significance: whether a finding is real, whether an effect is large enough to matter, whether the analysis actually supports the claim I would draw from it.
-A judgement call between two defensible options, where you have laid both out and cannot break the tie, is the other good case.
-
-Do not ask for permission, for approval of a plan, or to confirm a choice you are already confident in.
-The reply is one opinion; evidence you have gathered yourself outranks it.
-
 ## Comments
 
 Write for someone reading the file a year from now who has no idea it was ever changed.

@@ -45,6 +45,8 @@ Step in when a subagent goes off track or is missing context it needed.
 Size a fan-out from measurement, never from a round number picked in advance.
 Find what actually binds, whether the cores, memory or disk of the machine the jobs run on, an API's rate limit, or the machine running the sessions, measure what one job takes of it, and run as many jobs at once as that leaves room for.
 Keep watching the limit while they run and adjust the number when it moves, rather than holding to the figure you started with.
+The machine you are running on is always one of those limits, even when the work itself runs elsewhere: every session and subagent you launch takes its own memory and CPU here, and launching more than this machine can hold freezes it and kills every job at once.
+When the work needs more sessions than this machine can carry, run the sessions on a bigger machine rather than here.
 
 For verification specifically, a subagent starting from a clean context beats self-critique, because it cannot inherit the assumption that produced the bug.
 

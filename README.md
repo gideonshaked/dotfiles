@@ -58,4 +58,4 @@ dotfiles dotbot              # Update Dotbot submodule
 
 ## Credits
 
-These dotfiles were inspired by [Anish Athalye's dotfiles](https://github.com/anishathalye/dotfiles), and this repository uses [Dotbot](https://github.com/anishathalye/dotbot) for installation.
+These dotfiles were inspired by [Anish Athalye's dotfiles](https://github.com/anishathalye/dotfiles).

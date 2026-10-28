@@ -209,6 +209,8 @@ Every later command on that machine then starts `export GOG_KEYRING_PASSWORD=$(c
 Use the `notion-personal` and `notion-octant` MCP servers, one per workspace.
 Don't use the claude.ai Notion connector: it reaches only one workspace.
 When I don't say which workspace, work out which one the page belongs in and say which you used; ask only when it is genuinely unclear.
+Every page you create goes into the existing page hierarchy under the parent it belongs with, and into the matching section of that parent's content rather than wherever Notion appends it.
+A page left at the workspace top level is lost to me.
 
 ### Linear
 

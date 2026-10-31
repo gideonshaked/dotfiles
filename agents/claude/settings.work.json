@@ -51,7 +51,8 @@
     "octant-app-store@octant-agent-plugin-marketplace": true,
     "octant-chem-utils@octant-agent-plugin-marketplace": true,
     "octant-comp-chem@octant-agent-plugin-marketplace": true,
-    "databricks@claude-plugins-official": true
+    "databricks@claude-plugins-official": true,
+    "cc-plugin-you-should-know@builtin": true
   },
   "extraKnownMarketplaces": {
     "beads-marketplace": {

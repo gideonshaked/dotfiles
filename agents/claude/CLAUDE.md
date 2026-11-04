@@ -190,7 +190,7 @@ Never send, reply, forward, RSVP, delete or create an event without my go-ahead 
 Archiving, labelling and marking read are fine when I've asked for triage.
 
 Everything gog needs is one 1Password item, `op://Agent/gog`, holding `client_id`, `client_secret` and `keyring_password` with the setup steps in its notes.
-On a machine where `gog auth credentials list` shows no client, load it from there before adding any account, piping it so the secret never reaches the conversation:
+On a machine where `gog auth credentials list` shows no client, load it from there before adding any account, piping it so the secret never reaches the conversation (`op-agent read` on the Mac, `op read` in a session signed in elsewhere):
 `jq -n --arg id "$(op-agent read 'op://Agent/gog/client_id')" --arg s "$(op-agent read 'op://Agent/gog/client_secret')" '{installed: {client_id: $id, client_secret: $s}}' | gog auth credentials set -`.
 A new account is added with `gog auth add <email> --services gmail,calendar,contacts,people,tasks,drive,docs,sheets` run in the background, then `gog auth alias set <alias> <email>`.
 The browser shows "Google hasn't verified this app", which is expected, and I continue through Advanced.
@@ -199,8 +199,9 @@ The OAuth client lives in a personal Google Cloud project whose consent screen m
 A machine with no system keyring, meaning any headless box, falls back to gog's `file` keyring, which encrypts the stored refresh token under `GOG_KEYRING_PASSWORD`.
 Without that variable every command fails with "no TTY available for keyring file backend password prompt", and `gog auth doctor` reports 0 readable tokens.
 The passphrase is `op://Agent/gog/keyring_password`, and it is the same one on every machine, because changing it makes an existing keyring unreadable rather than re-encrypting it.
-Persist it on the machine at `~/.config/gogcli/keyring_pass` with mode 600, written so the value never reaches the conversation:
-`op-agent read 'op://Agent/gog/keyring_password' | ssh <host> 'install -m 600 /dev/stdin ~/.config/gogcli/keyring_pass'`.
+Persist it on the machine at `~/.config/gogcli/keyring_pass` with mode 600, written so the value never reaches the conversation, from the Mac with
+`op-agent read 'op://Agent/gog/keyring_password' | ssh <host> 'install -m 600 /dev/stdin ~/.config/gogcli/keyring_pass'`, or in a session running on that machine with
+`op read 'op://Agent/gog/keyring_password' | install -D -m 600 /dev/stdin ~/.config/gogcli/keyring_pass`.
 Every later command on that machine then starts `export GOG_KEYRING_PASSWORD=$(cat ~/.config/gogcli/keyring_pass);`, which a non-interactive `ssh <host> '<command>'` needs because it reads no shell profile.
 `gog auth doctor` confirms the result, reporting `keyring.password` ok and one readable token per stored account.
 
@@ -227,12 +228,13 @@ Read it with `op-agent`, which is `op` run with the service account's token from
 `op-agent` sees only the `Agent` vault, ignores `--account`, and cannot write.
 A service account can never be granted the Private vault, so a credential you need without prompting has to be moved into `Agent` with `op item move`.
 
-1Password works only on the Mac: `op`, the app sign-in and the Keychain that holds the service account's token are all macOS-only.
-On Linux there is no `op` and no Keychain, so `op-agent` and `op` both fail there, and that is expected rather than something to fix.
-Don't install `op` or store a token on a Linux machine; read the secret on the Mac and pipe it over `ssh`, as the gog keyring step in the Google section does.
-When you are running on a Linux machine yourself, with no Mac session to read from, say the credential isn't reachable and ask me for it.
+Where the session runs decides where 1Password is read.
+A session on the Mac that reaches another machine over `ssh` reads the secret on the Mac and pipes it over `ssh`, as the gog keyring step in the Google section does, so the remote machine never needs `op`.
+A session running natively on a machine, whatever its OS, reads 1Password on that machine: install `op` there if it is missing and sign in with `op signin`.
+Sign in only to the 1Password account the task needs, never to one it does not.
+`op-agent` exists only on the Mac, because the service account's token lives in the macOS Keychain; elsewhere use `op` with the signed-in session.
 
-Everything else goes through the 1Password app sign-in and asks me for Touch ID: reading any other vault, and creating, editing or moving items.
+On the Mac, everything else goes through the 1Password app sign-in and asks me for Touch ID: reading any other vault, and creating, editing or moving items.
 Two accounts are signed in there, so pass `--account my.1password.com` for personal or `--account team-octantbio.1password.com` for Octant; other personal items are in the Private vault.
 
 Never print a password, one-time code or other secret field into the conversation.

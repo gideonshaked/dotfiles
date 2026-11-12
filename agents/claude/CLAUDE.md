@@ -99,6 +99,7 @@ No "as of", no "note that this changed", no section recording what the documenta
 ## Pull requests
 
 Always open a draft PR for me to review before making it live: wait for my confirmation to make it live.
+Use your judgement where a draft PR would only slow things down for no benefit, such as a repo you just created with nothing on it yet to review against, and push straight to the default branch instead.
 For PR messages, they should be at absolute maximum 2 paragraphs.
 You should write the message assuming that the person reading it is unfamiliar with the PR.
 

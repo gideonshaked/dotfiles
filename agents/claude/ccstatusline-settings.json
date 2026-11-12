@@ -38,6 +38,19 @@
         "rawValue": false,
         "metadata": {
           "invert": "true"
+        },
+        "merge": true
+      },
+      {
+        "id": "40005b35-20f6-4ead-821c-98eb703c9996",
+        "type": "fable-weekly-usage",
+        "rawValue": false,
+        "numberFormat": {
+          "style": "compact"
+        },
+        "metadata": {
+          "invert": "true",
+          "display": "time"
         }
       },
       {
@@ -57,8 +70,6 @@
     [],
     []
   ],
-  "flexMode": "full-minus-40",
-  "compactThreshold": 60,
   "colorLevel": 3,
   "defaultPadding": " ",
   "defaultPaddingSide": "both",

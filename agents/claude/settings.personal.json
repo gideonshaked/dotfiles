@@ -10,6 +10,7 @@
   },
   "model": "claude-opus-5-5",
   "fallbackModel": [
+    "claude-opus-5-5",
     "claude-opus-5"
   ],
   "hooks": {
@@ -19,7 +20,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -lc 'exec npx --prefer-offline -y ccstatusline@2.2.33 --hook'"
+            "command": "bash -lc 'exec npx --prefer-offline -y ccstatusline@2.2.34 --hook'"
           }
         ]
       }
@@ -29,7 +30,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -lc 'exec npx --prefer-offline -y ccstatusline@2.2.33 --hook'"
+            "command": "bash -lc 'exec npx --prefer-offline -y ccstatusline@2.2.34 --hook'"
           }
         ]
       }
@@ -37,7 +38,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bash -lc 'exec npx --prefer-offline -y ccstatusline@2.2.33'",
+    "command": "bash -lc 'exec npx --prefer-offline -y ccstatusline@2.2.34'",
     "padding": 0,
     "refreshInterval": 10
   },

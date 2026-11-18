@@ -113,7 +113,7 @@ is fetched as a released binary under `$HOME` instead.
 | `uv` | `uvx`, which runs ssh-mcp | astral installer |
 | `jq` | `install-claude-plugins` | static binary from releases |
 | `node` | `npx`, for ccstatusline and the gcloud MCP | newest LTS tarball that runs on the machine, resolved from the release index (Node 26 needs `libatomic.so.1`, absent from minimal images) |
-| `claude` | everything under `agents/claude/` | `claude.ai/install.sh stable`, both platforms; without a target it installs the latest channel |
+| `claude` | everything under `agents/claude/` | `claude.ai/install.sh latest`, both platforms, matching `autoUpdatesChannel` in both profiles |
 | `pyright` | the `pyright-lsp` Claude plugin, which ships no binary | `uv tool install` |
 | `pre-commit` | this repository's git hooks | `uv tool install` |
 | `bd`, `dolt` | the issue database in `.beads` | release tarballs |

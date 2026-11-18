@@ -273,12 +273,12 @@ install_linux() {
 ## Both ──────────────────────────────────────────────────────────────────────
 
 # Nothing else installs Claude Code, and the profile links its settings, skills,
-# hooks and commands regardless. Without a target the installer takes the
-# latest channel, so stable is named explicitly.
+# hooks and commands regardless. The channel matches autoUpdatesChannel in both
+# profiles, so the updater never moves the install to a different channel.
 install_claude_code() {
     have claude && return 0
     have curl || return 0
-    curl -fsSL https://claude.ai/install.sh | bash -s stable >/dev/null 2>&1 \
+    curl -fsSL https://claude.ai/install.sh | bash -s latest >/dev/null 2>&1 \
         || echo "Claude Code install failed (non-fatal)"
 }
 

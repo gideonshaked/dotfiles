@@ -208,3 +208,9 @@ unset _fzf
 command -v atuin >/dev/null 2>&1 && eval "$(atuin init "$__shell" --disable-up-arrow)"
 
 unset __shell __brew _p
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<

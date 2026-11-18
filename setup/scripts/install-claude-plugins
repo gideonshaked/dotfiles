@@ -40,6 +40,10 @@ add_marketplaces() {
 # so update has to run after it every time or an existing install never moves
 # off its old version. Neither is fatal: one unreachable marketplace should not
 # stop the rest.
+#
+# @builtin plugins ship inside Claude Code and are switched on by the
+# enabledPlugins entry alone; `claude plugins install` cannot find them in any
+# marketplace and fails.
 install_plugins() {
     local plugin
     while read -r plugin; do
@@ -48,7 +52,7 @@ install_plugins() {
             || { echo "  ${plugin} install failed (non-fatal)"; continue; }
         claude plugins update "$plugin" >/dev/null 2>&1 \
             || echo "  ${plugin} update failed (non-fatal)"
-    done < <(jq -r '.enabledPlugins // {} | to_entries[] | select(.value == true) | .key' "$SETTINGS")
+    done < <(jq -r '.enabledPlugins // {} | to_entries[] | select(.value == true) | .key | select(endswith("@builtin") | not)' "$SETTINGS")
 }
 
 prerequisites_met || exit 0

@@ -1,4 +1,7 @@
 {
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_CODE_MODE": "1"
+  },
   "skillListingBudgetFraction": 0.015,
   "attribution": {
     "commit": "",

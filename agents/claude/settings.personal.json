@@ -8,7 +8,7 @@
   "permissions": {
     "defaultMode": "bypassPermissions"
   },
-  "model": "claude-opus-5-5",
+  "model": "opus",
   "fallbackModel": [
     "claude-opus-5-5",
     "claude-opus-5"
@@ -96,7 +96,7 @@
   },
   "modelSettings": {
     "claude-opus-5-5": {
-      "effortLevel": "high"
+      "effortLevel": "medium"
     }
   },
   "autoUpdatesChannel": "latest",

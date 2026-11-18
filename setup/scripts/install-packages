@@ -172,34 +172,56 @@ node_new_enough() {
     [ -n "$major" ] && [ "$major" -ge "$NODE_MINIMUM_MAJOR" ]
 }
 
+# Node 26 links libatomic.so.1, which minimal images such as Ubuntu's EC2 AMI
+# lack and only root can add. Each LTS line is therefore tried newest first,
+# and the first build that actually runs is kept.
 install_node() {
     node_new_enough && return 0
     have jq || { echo "jq missing, skipping node (non-fatal)"; return 0; }
 
-    local version url
-    version="$(curl -fsSL https://nodejs.org/dist/index.json \
-        | jq -r '[.[] | select(.lts != false)][0].version')" || return 0
-    [ -n "$version" ] && [ "$version" != null ] || { echo "could not resolve node LTS (non-fatal)"; return 0; }
+    local versions version dir="$HOME/.local/node"
+    versions="$(curl -fsSL https://nodejs.org/dist/index.json | jq -r --argjson min "$NODE_MINIMUM_MAJOR" '
+        [.[] | select(.lts != false) | {version, major: (.version | ltrimstr("v") | split(".")[0] | tonumber)}]
+        | group_by(.major) | map(.[0]) | map(select(.major >= $min)) | sort_by(-.major) | .[].version')" || return 0
+    [ -n "$versions" ] || { echo "could not resolve node LTS (non-fatal)"; return 0; }
 
-    url="https://nodejs.org/dist/${version}/node-${version}-linux-${ARCH_NODE}.tar.xz"
-    mkdir -p "$HOME/.local/node"
-    curl -fsSL "$url" | tar -xJ -C "$HOME/.local/node" --strip-components=1 2>/dev/null \
-        || { echo "node install failed (non-fatal)"; return 0; }
-    ln -sf "$HOME/.local/node/bin/node" "$HOME/.local/node/bin/npm" \
-        "$HOME/.local/node/bin/npx" "$LOCAL_BIN/"
+    for version in $versions; do
+        rm -rf "$dir" && mkdir -p "$dir"
+        curl -fsSL "https://nodejs.org/dist/${version}/node-${version}-linux-${ARCH_NODE}.tar.xz" \
+            | tar -xJ -C "$dir" --strip-components=1 2>/dev/null || continue
+        "$dir/bin/node" --version >/dev/null 2>&1 && break
+    done
+    "$dir/bin/node" --version >/dev/null 2>&1 || { echo "node install failed (non-fatal)"; return 0; }
+    ln -sf "$dir/bin/node" "$dir/bin/npm" "$dir/bin/npx" "$LOCAL_BIN/"
 }
 
 # The AWS CLI ships its own bundled runtime, so the installer only needs a
 # writable prefix. -i and -b keep both out of /usr/local, which needs root.
+#
+# Minimal images such as Ubuntu's EC2 AMI have no unzip, so the archive is
+# unpacked with python3, which the install already requires. Python's zipfile
+# drops Unix modes, and the bundled installer and runtime must stay executable,
+# so each entry's mode is restored from the archive.
+unzip_with_modes() {
+    python3 - "$1" "$2" <<'EOF'
+import os, sys, zipfile
+with zipfile.ZipFile(sys.argv[1]) as z:
+    for info in z.infolist():
+        path = z.extract(info, sys.argv[2])
+        mode = info.external_attr >> 16
+        if mode:
+            os.chmod(path, mode & 0o7777)
+EOF
+}
+
 install_awscli() {
     have aws && return 0
-    have unzip || { echo "unzip missing, skipping awscli (non-fatal)"; return 0; }
 
     local tmp
     tmp="$(mktemp -d)" || return 0
     curl -fsSL -o "$tmp/awscli.zip" \
         "https://awscli.amazonaws.com/awscli-exe-linux-${ARCH_RUST}.zip" 2>/dev/null \
-        && unzip -q "$tmp/awscli.zip" -d "$tmp" \
+        && unzip_with_modes "$tmp/awscli.zip" "$tmp" \
         && "$tmp/aws/install" -i "$HOME/.local/aws-cli" -b "$LOCAL_BIN" >/dev/null 2>&1 \
         || echo "awscli install failed (non-fatal)"
     rm -rf "$tmp"

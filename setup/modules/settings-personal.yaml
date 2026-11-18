@@ -1,9 +1,11 @@
 # Personal Claude settings: no work plugins.
 #
 # Listed first in the profile so the link exists before core's install steps
-# read it.
+# read it. core's link defaults do not reach this file, so create is set here
+# for a fresh machine that has no ~/.claude yet.
 
 - link:
     ~/.claude/settings.json:
       path: agents/claude/settings.personal.json
+      create: true
       force: true

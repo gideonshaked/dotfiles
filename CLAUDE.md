@@ -112,13 +112,13 @@ is fetched as a released binary under `$HOME` instead.
 | atuin | `terminal/shellrc` | release tarball, into `~/.local/bin` |
 | `uv` | `uvx`, which runs ssh-mcp | astral installer |
 | `jq` | `install-claude-plugins` | static binary from releases |
-| `node` | `npx`, for ccstatusline and the gcloud MCP | current LTS tarball, resolved from the release index |
+| `node` | `npx`, for ccstatusline and the gcloud MCP | newest LTS tarball that runs on the machine, resolved from the release index (Node 26 needs `libatomic.so.1`, absent from minimal images) |
 | `claude` | everything under `agents/claude/` | `claude.ai/install.sh`, both platforms |
 | `pyright` | the `pyright-lsp` Claude plugin, which ships no binary | `uv tool install` |
 | `pre-commit` | this repository's git hooks | `uv tool install` |
 | `bd`, `dolt` | the issue database in `.beads` | release tarballs |
 | `gog` | Gmail, Calendar and Contacts, per `agents/claude/CLAUDE.md` | release tarball |
-| `aws` | `aws sso login`, for the credentials the aws-core MCP server resolves | the bundled-runtime installer, into `~/.local/aws-cli` |
+| `aws` | `aws sso login`, for the credentials the aws-core MCP server resolves | the bundled-runtime installer, into `~/.local/aws-cli`, unpacked with python3 because minimal images have no `unzip` |
 | `gcloud` | the gcloud MCP server, which shells out to it | release tarball, into `~/google-cloud-sdk` |
 
 `jq` installs before `node`, `bd` and `gog` because each resolves its version from a

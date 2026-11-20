@@ -136,8 +136,8 @@ When I say to conserve usage, or to keep it cheap or light, do the work inline i
 
 ### Pull requests
 
-Always open a draft PR for me to review before making it live: wait for my confirmation to make it live.
-Use your judgement where a draft PR would only slow things down for no benefit, such as a repo you just created with nothing on it yet to review against, and push straight to the default branch instead.
+Open a draft PR for me to review when a change needs review, and wait for my confirmation to make it live.
+Skip the PR and commit straight to the default branch for a basic change, where a PR would only slow things down: an edit to my own configuration or instructions such as this file, a wording or documentation fix, or a repo you just created with nothing on it yet to review against.
 For PR messages, they should be at absolute maximum 2 paragraphs.
 You should write the message assuming that the person reading it is unfamiliar with the PR.
 

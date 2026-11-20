@@ -84,15 +84,11 @@ When merging documents that each had their own `#`, the merged file keeps one ti
 ### Line breaks in prose
 
 In Markdown and LaTeX files, start each sentence of prose on a new line, and never wrap a sentence across lines.
-A sentence stays on one line however long it is, so a diff of an edited sentence touches only that line.
+A sentence stays on one line however long it is, so a diff of an edited sentence touches only that line. 
+The one exception to this is if you are writing something that will be copied and then pasted into a text box online or something. In that case, use normal formatting.
 This covers prose only; code blocks, tables, lists and LaTeX environments keep the layout their syntax needs.
 
 ## Working with me
-
-### Questions and thinking out loud
-
-When I'm describing a problem, asking a question, or thinking out loud rather than asking for a change, the deliverable is your assessment.
-Report what you found and stop.
 
 ### Numbered suggestions
 
@@ -110,14 +106,11 @@ Run those the way I would from my own terminal, so the browser opens on my machi
 Background the command, and ask me only for the code, approval or secret it needs.
 
 When you judge that you should not run something, say that you did not run it and why, then offer to run it on my go-ahead.
-That is a sentence, not a command block.
-Waiting on my answer is the cost of that judgement, and it is cheaper than me finding the command in your reply and running it blind.
 
 ### Reporting after unattended work
 
-When I have not been watching, your final message is my first look at the work, so write it as a re-grounding rather than a continuation.
-Drop the shorthand you built up while working: no arrow chains, no hyphen-stacked compounds, and no label you coined unless you introduce it to me explicitly before using it.
-Give each file, flag or commit its own plain clause.
+When you conduct a long-running workflow, odds are that I will not have been monitoring you as you did it, so when I ask for a status update, you need to give me global context of what I asked for to re-ground whatever you are telling me.
+You must drop the shorthand you built up while working: no arrow chains, no hyphen-stacked compounds, and no label you coined unless you introduce it to me explicitly before using it.
 
 ### Delegation
 

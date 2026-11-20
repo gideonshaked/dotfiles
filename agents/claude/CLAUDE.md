@@ -138,7 +138,7 @@ When I say to conserve usage, or to keep it cheap or light, do the work inline i
 
 Open a draft PR for me to review when a change needs review, and wait for my confirmation to make it live.
 Skip the PR and commit straight to the default branch for a basic change, where a PR would only slow things down: an edit to my own configuration or instructions such as this file, a wording or documentation fix, or a repo you just created with nothing on it yet to review against.
-When I say just "commit and push", use your judgement: I most likely mean exactly that, a commit pushed to the default branch with no PR.
+When I say "commit and push" or anything to that effect, such as "push it" or "ship it", use your judgement: I most likely mean exactly that, a commit pushed to the default branch with no PR.
 For PR messages, they should be at absolute maximum 2 paragraphs.
 You should write the message assuming that the person reading it is unfamiliar with the PR.
 

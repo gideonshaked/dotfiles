@@ -35,6 +35,9 @@
   },
 
   "sidebar": {
+    // One row per agent, so the sidebar reads slightly larger than the panes
+    // it indexes.
+    "fontSize": 14,
     "showAgentActivity": true,
     "showNotificationMessage": true,
     "notificationMessageLineLimit": 12,

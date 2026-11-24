@@ -9,7 +9,7 @@
     "claudeAgents": {
       "type": "agent",
       "agent": "claude",
-      "args": ["agents", "--dangerously-skip-permissions"],
+      "args": "agents --dangerously-skip-permissions",
       "title": "Claude agents",
       "newWorkspaceMenu": true
     }
